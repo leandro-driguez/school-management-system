@@ -8,13 +8,10 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class SchoolMember : Entity
     {
-        public int IDCardNo { get; set; }
         public string Name { get; set; }
         public string LastNames { get; set; }
         public int PhoneNumber{ get; set; }
         public string Address { get; set; }
         public DateTime DateBecomedMeber { get; set; }
-
-
     }
 }

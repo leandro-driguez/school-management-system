@@ -8,10 +8,9 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class Student_Group_Relation : Entity
     {
-        public Student Student { get; set; }
-        public CourseGroup Group { get; set; }
+        public Guid StudentId { get; set; }
+        public Guid CourseGroupId { get; set; }
         public DateTime StartDate{ get; set; }
         public DateTime EndDate{ get; set; }
-
     }
 }
