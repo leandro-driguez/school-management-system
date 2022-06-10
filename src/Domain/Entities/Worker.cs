@@ -15,10 +15,10 @@ namespace SchoolManagementSystem.Domain.Entities
 
     public class Worker : SchoolMember
     {
-        public List<Position> Positions{ get; set; }
+        // public List<Position> Positions{ get; set; }
 
-        public int FixNetSalary{ get; set; }
+        // public int FixNetSalary{ get; set; }
 
-        public Dictionary<Position, int>  FixSalaryPerPosition{ get; set; }
+        // public Dictionary<Position, int>  FixSalaryPerPosition{ get; set; }
     }
 }
