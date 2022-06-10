@@ -31,12 +31,12 @@
     </tr>
     <tr>
         <td></td>
-        <td>Last Names</td>
+        <td>Last names</td>
         <td>string</td>
     </tr>
     <tr>
         <td></td>
-        <td>Phone Number</td>
+        <td>Phone number</td>
         <td>int</td>
     </tr>
     <tr>
@@ -46,7 +46,7 @@
     </tr>
     <tr>
         <td></td>
-        <td>Date Becommed Member</td>
+        <td>Date becommed member</td>
         <td>DateTime</td>
     </tr>  
 </table>
@@ -66,8 +66,8 @@
     </tr>
     <tr>
         <td>Foreign</td>
-        <td>Tuitor</td>
-        <td>Tuitor</td>
+        <td>Tuitor Id</td>
+        <td>Guid</td>
     </tr>  
     <tr>
         <td></td>
@@ -76,12 +76,12 @@
     </tr>
     <tr>
         <td></td>
-        <td>Last Names</td>
+        <td>Last names</td>
         <td>string</td>
     </tr>
     <tr>
         <td></td>
-        <td>Phone Number</td>
+        <td>Phone number</td>
         <td>int</td>
     </tr>
     <tr>
@@ -91,7 +91,7 @@
     </tr>
     <tr>
         <td></td>
-        <td>Date Becommed Member</td>
+        <td>Date becommed member</td>
         <td>DateTime</td>
     </tr>  
     <tr>
@@ -101,9 +101,34 @@
     </tr>
     <tr>
         <td></td>
-        <td>Scholarity Level</td>
+        <td>Scholarity level</td>
         <td>Education</td>
     </tr>  
+</table>
+
+### Tuitor
+
+<table>
+    <tr>
+        <th>Key</th>
+        <th>Name</th>
+        <th>Type</th>
+    </tr>
+    <tr>
+        <td>Private</td>
+        <td>Id</td>
+        <td>Guid</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Name</td>
+        <td>string</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Phone number</td>
+        <td>int</td>
+    </tr>
 </table>
 
 ### Worker
@@ -126,12 +151,12 @@
     </tr>
     <tr>
         <td></td>
-        <td>Last Names</td>
+        <td>Last names</td>
         <td>string</td>
     </tr>
     <tr>
         <td></td>
-        <td>Phone Number</td>
+        <td>Phone number</td>
         <td>int</td>
     </tr>
     <tr>
@@ -141,9 +166,39 @@
     </tr>
     <tr>
         <td></td>
-        <td>Date Becommed Member</td>
+        <td>Date becommed member</td>
         <td>DateTime</td>
     </tr>  
+</table>
+
+### Resource
+
+<table>
+    <tr>
+        <th>Key</th>
+        <th>Name</th>
+        <th>Type</th>
+    </tr>
+    <tr>
+        <td>Private</td>
+        <td>Id</td>
+        <td>Guid</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Name</td>
+        <td>string</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Category</td>
+        <td>string</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Price</td>
+        <td>int</td>
+    </tr>
 </table>
 
 ## App Layout Outline
