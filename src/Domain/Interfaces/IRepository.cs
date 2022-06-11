@@ -9,4 +9,6 @@ public interface IRepository<TEntity> where TEntity : Entity
     TEntity Read(Guid entityId);
     void Update(TEntity entity);
     void Delete(Guid entityId);
+    
+    // Save
 }

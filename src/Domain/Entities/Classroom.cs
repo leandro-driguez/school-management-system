@@ -10,5 +10,6 @@ public class Classroom : Entity
     public string Name {get; set;}
 
     [Required]
+    [Range(5, 30)]
     public int Capacity { get; set; }
 }

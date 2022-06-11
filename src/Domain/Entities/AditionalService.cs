@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
     public class AditionalService : Entity
     {
+        [Required]
         public Worker Worker { get; set; }
+        
+        [Required]
         public Resource Resource { get; set; }
-        public int WorkerPorcentageProfits { get; set; }
 
+        [Required]
+        [Range(0, 100)]
+        public int WorkerPorcentageProfits { get; set; }
     }
 }
