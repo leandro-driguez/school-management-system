@@ -3432,7 +3432,7 @@ function createOptions( options ) {
  * Create a callback list using the following parameters:
  *
  *	options: an optional list of space-separated options that will change how
- *			the callback list behaves or a more traditional option object
+ *			the callback list behaves or a more trAdditional option object
  *
  * By default a callback list will act like an event callback list and can be
  * "fired" multiple times.
@@ -8882,14 +8882,14 @@ var
 	rsubmitterTypes = /^(?:submit|button|image|reset|file)$/i,
 	rsubmittable = /^(?:input|select|textarea|keygen)/i;
 
-function buildParams( prefix, obj, traditional, add ) {
+function buildParams( prefix, obj, trAdditional, add ) {
 	var name;
 
 	if ( Array.isArray( obj ) ) {
 
 		// Serialize array item.
 		jQuery.each( obj, function( i, v ) {
-			if ( traditional || rbracket.test( prefix ) ) {
+			if ( trAdditional || rbracket.test( prefix ) ) {
 
 				// Treat each array item as a scalar.
 				add( prefix, v );
@@ -8900,17 +8900,17 @@ function buildParams( prefix, obj, traditional, add ) {
 				buildParams(
 					prefix + "[" + ( typeof v === "object" && v != null ? i : "" ) + "]",
 					v,
-					traditional,
+					trAdditional,
 					add
 				);
 			}
 		} );
 
-	} else if ( !traditional && toType( obj ) === "object" ) {
+	} else if ( !trAdditional && toType( obj ) === "object" ) {
 
 		// Serialize object item.
 		for ( name in obj ) {
-			buildParams( prefix + "[" + name + "]", obj[ name ], traditional, add );
+			buildParams( prefix + "[" + name + "]", obj[ name ], trAdditional, add );
 		}
 
 	} else {
@@ -8922,7 +8922,7 @@ function buildParams( prefix, obj, traditional, add ) {
 
 // Serialize an array of form elements or a set of
 // key/values into a query string
-jQuery.param = function( a, traditional ) {
+jQuery.param = function( a, trAdditional ) {
 	var prefix,
 		s = [],
 		add = function( key, valueOrFunction ) {
@@ -8950,10 +8950,10 @@ jQuery.param = function( a, traditional ) {
 
 	} else {
 
-		// If traditional, encode the "old" way (the way 1.3.2 or older
+		// If trAdditional, encode the "old" way (the way 1.3.2 or older
 		// did it), otherwise encode params recursively.
 		for ( prefix in a ) {
-			buildParams( prefix, a[ prefix ], traditional, add );
+			buildParams( prefix, a[ prefix ], trAdditional, add );
 		}
 	}
 
@@ -9299,7 +9299,7 @@ jQuery.extend( {
 		password: null,
 		cache: null,
 		throws: false,
-		traditional: false,
+		trAdditional: false,
 		headers: {},
 		*/
 
@@ -9545,7 +9545,7 @@ jQuery.extend( {
 
 		// Convert data if not already a string
 		if ( s.data && s.processData && typeof s.data !== "string" ) {
-			s.data = jQuery.param( s.data, s.traditional );
+			s.data = jQuery.param( s.data, s.trAdditional );
 		}
 
 		// Apply prefilters

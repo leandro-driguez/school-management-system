@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
-    public class AditionalService : Entity
+    public class AdditionalService : Entity
     {
         [Required]
         public Worker Worker { get; set; }
