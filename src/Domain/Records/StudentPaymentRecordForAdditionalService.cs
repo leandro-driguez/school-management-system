@@ -10,7 +10,7 @@ namespace SchoolManagementSystem.Domain.Records
         public Student Student { get; set; }
         
         [Required]
-        public AditionalService Service { get; set; }
+        public AdditionalService Service { get; set; }
         
         [Required]
         [DataType(DataType.Date)]
