@@ -6,5 +6,5 @@ namespace SchoolManagementSystem.Domain.Entities;
 public class Entity
 {
     [Key]
-    public virtual Guid Id { get; set; }
+    public virtual Guid Id { get; set; } = Guid.NewGuid();
 }

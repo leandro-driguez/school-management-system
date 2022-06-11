@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.ComponentModel.DataAnnotations;
+using SchoolManagementSystem.Domain.Enums;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
-    public enum Education
-    {
-        Preuniversitario,
-        Secundaria,
-        Primaria,
-        Tecnico_Medio,
-        Escuela_Oficios,
-        Universitario,
-        Posgrado
-
-    }
-
     public class Student : SchoolMember
     {
+        [Required]
+        [Range(0,999999)]
         public int Founds { get; set; }
+        
+        [Required]
         public Education ScholarityLevel{ get; set; }
-
+        
+        [Required]
         public Tuitor Tuitor { get; set; }
+
+        [Required]
+        public IList<CourseGroup> Groups { get; set; }
     }
 }

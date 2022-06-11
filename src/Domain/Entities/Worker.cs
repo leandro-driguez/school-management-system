@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
-    public enum Position
-    {
-        Administrador,
-        Jefe,
-        Secretario
-    }
-
     public class Worker : SchoolMember
     {
-        public List<Position> Positions{ get; set; }
+        [Required]
+        public IList<CourseGroup> Groups { get; set; }
 
-        public int FixNetSalary{ get; set; }
+        [Required] 
+        public IList<Resource> ResourcesItProvides { get; set; }
 
-        public Dictionary<Position, int>  FixSalaryPerPosition{ get; set; }
+        [Required]
+        public IList<Position> Positions { get; set; }
     }
 }

@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
-    public enum DayOfWeek
-    {
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,   
-        Sunday
-    }
     public class Schedule : Entity
     {
-        public int Duration { get; set; }
-        public DateTime StartDate{ get; set; }
-        public DayOfWeek DayOfWeek { get; set; }    
+        [Required]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh-mm-ss}",
+            ApplyFormatInEditMode = true)]
+        public TimeOnly Duration { get; set; }
+
+        [Required]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh-mm-ss}",
+            ApplyFormatInEditMode = true)]
+        public TimeOnly StartDate{ get; set; }
+        
+        [Required]
+        public DayOfWeek DayOfWeek { get; set; }
     }
 }
