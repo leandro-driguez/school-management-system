@@ -9,6 +9,6 @@ public class Position : Entity
     [MaxLength(20)]
     public string Name { get; set; }
 
-    [Required]
-    public IList<Worker> Workers { get; set; }
+    // [Required]
+    // public IList<Worker> Workers { get; set; }
 }

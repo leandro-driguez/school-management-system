@@ -26,11 +26,11 @@ namespace SchoolManagementSystem.Domain.Entities
         
         [Required]
         public Worker CurrentTeacher{ get; set; }
-        
-        [Required]
-        public ICollection<Student> Students { get; set; }
 
         [Required]
         public IList<Shift> Shifts { get; set; }
+        
+        // [Required]
+        // public ICollection<Student> Students { get; set; }
     }
 }
