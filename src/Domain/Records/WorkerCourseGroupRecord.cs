@@ -4,7 +4,7 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Records
 {
-    public class TeacherGroupRecord : Entity
+    public class WorkerCourseGroupRecord : Entity
     {
         [Required]
         public Worker Teacher{ get; set; }

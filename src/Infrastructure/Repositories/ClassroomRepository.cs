@@ -14,24 +14,34 @@ public class ClassroomRepository : IRepository<Classroom>
         _context = context;
     }
 
-    public void Create(Classroom entity)
+    public IList<Classroom> GetAll()
     {
-        _context.Classrooms.AddRangeAsync(entity);
-        _context.SaveChangesAsync();
+        throw new NotImplementedException();
     }
 
-    public Classroom Read(Guid entityId)
+    public void Save()
     {
-        return _context.Classrooms.FirstOrDefault(c => c.Id.Equals(entityId));
+        throw new NotImplementedException();
     }
 
-    public void Update(Classroom entity)
-    {
-        _context.Classrooms.UpdateRange(entity);
-    }
+    // public void Create(Classroom entity)
+    // {
+    //     _context.Classrooms.AddRangeAsync(entity);
+    //     _context.SaveChangesAsync();
+    // }
 
-    public void Delete(Guid entityId)
-    {
-        _context.Classrooms.RemoveRange(Read(entityId));
-    }
+    // public Classroom Read(Guid entityId)
+    // {
+    //     return _context.Classrooms.FirstOrDefault(c => c.Id.Equals(entityId));
+    // }
+
+    // public void Update(Classroom entity)
+    // {
+    //     _context.Classrooms.UpdateRange(entity);
+    // }
+
+    // public void Delete(Guid entityId)
+    // {
+    //     _context.Classrooms.RemoveRange(Read(entityId));
+    // }
 }

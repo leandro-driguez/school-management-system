@@ -5,15 +5,15 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Relations
 {
-    public class StudentGroupRelation : Entity
+    public class StudentCourseGroupRelation : Entity
     {
         [Required]
-        [ForeignKey("StudentForeignKey")]
+        [ForeignKey("StudentFK")]
         public Student Student { get; set; }
         
         [Required]
-        [ForeignKey("CourseGroupForeignKey")]
-        public CourseGroup CourseGroup { get; set; }
+        [ForeignKey("GroupFK")]
+        public CourseGroup Group { get; set; }
         
         [Required]
         [DataType(DataType.Date)]

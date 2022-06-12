@@ -15,7 +15,7 @@ namespace SchoolManagementSystem.Domain.Entities
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh-mm-ss}",
             ApplyFormatInEditMode = true)]
-        public TimeOnly StartDate{ get; set; }
+        public TimeOnly StartTime{ get; set; }
         
         [Required]
         public DayOfWeek DayOfWeek { get; set; }
