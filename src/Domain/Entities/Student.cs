@@ -16,7 +16,7 @@ namespace SchoolManagementSystem.Domain.Entities
         [Required]
         public Tuitor Tuitor { get; set; }
 
-        [Required]
-        public IList<CourseGroup> Groups { get; set; }
+        // [Required]
+        // public IList<CourseGroup> Groups { get; set; }
     }
 }

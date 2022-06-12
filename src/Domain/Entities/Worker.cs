@@ -11,7 +11,7 @@ namespace SchoolManagementSystem.Domain.Entities
         [Required] 
         public IList<Resource> ResourcesItProvides { get; set; }
 
-        [Required]
-        public IList<Position> Positions { get; set; }
+        // [Required]
+        // public IList<Position> Positions { get; set; }
     }
 }
