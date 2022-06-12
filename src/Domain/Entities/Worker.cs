@@ -5,11 +5,11 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class Worker : SchoolMember
     {
-        public Worker(string cardId, string name, string lastName, int phoneNumber, 
-            string address, DateTime dateBecomedMember) 
-            : base(cardId, name, lastName, phoneNumber, address, dateBecomedMember)
-        {
-        }
+        // public Worker(string cardId, string name, string lastName, int phoneNumber, 
+        //     string address, DateTime dateBecomedMember) 
+        //     : base(cardId, name, lastName, phoneNumber, address, dateBecomedMember)
+        // {
+        // }
 
         // [Required]
         // public IList<CourseGroup> Groups { get; set; }
