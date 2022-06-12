@@ -145,8 +145,8 @@
 | Atributes                         | Name                  | Type    |
 |-----------------------------------|-----------------------|---------|
 | Primary 🔑                                           | Id                    | text    |
-| Primary 🔑 -----> Foreign 🔑 (to ***Student***)      | StudentForeignKey     | text    |
-|             +----> Foreign 🔑 (to ***CourseGroup***) | CourseGroupForeignKey | text    |
+| Foreign 🔑 (to ***Student***)      | StudentForeignKey     | text    |
+| Foreign 🔑 (to ***CourseGroup***) | CourseGroupForeignKey | text    |
 |                                   | StartDate             | text    |
 |                                   | EndDate               | text    |
 
@@ -211,6 +211,34 @@
 |------------------------------------------------|------------------------|---------|
 | Primary and foreign 🔑 (to ***SchoolMember***) | SchoolMemberForeignKey | text    |
 
+### 📋 **WorkerPayRecordPerPosition**
+
+| Atributes                      | Name               | Type  |
+|--------------------------------|--------------------|-------|
+| Primary 🔑                     | Id                 | text  |
+| Foreign 🔑 (to ***Worker***)   | WorkerForeignKey   | text  |
+| Foreign 🔑 (to ***Position***) | PositionForeignKey | text  |
+|                                | Payment            | money |
+|                                | Date               | text  |
+
+### 📋 **WorkerPositionRelation**
+
+| Atributes                      | Name               | Type  |
+|--------------------------------|--------------------|-------|
+| Primary 🔑                     | Id                 | text  |
+| Foreign 🔑 (to ***Worker***)   | WorkerForeignKey   | text  |
+| Foreign 🔑 (to ***Position***) | PositionForeignKey | text  |
+|                                | FixedSalary        | money |
+
+### 📋 **WorkerResourceRelation**
+
+| Atributes                      | Name                    | Type  |
+|--------------------------------|-------------------------|-------|
+| Primary 🔑                     | Id                      | text  |
+| Foreign 🔑 (to ***Worker***)   | WorkerForeignKey        | text  |
+| Foreign 🔑 (to ***Resource***) | ResourceForeignKey      | text  |
+|                                | CorrespondingPorcentage | money |
+
 ## App Layout Outline
 
 jfladsjlfksd
@@ -229,4 +257,3 @@ stateDiagram
         second --> [*]
     }
 ```
-

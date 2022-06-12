@@ -20,7 +20,8 @@ namespace SchoolManagementSystem.Domain.Entities
         [Column(TypeName = "money")]
         public int Price{ get; set; }
 
-        [Required]
-        public IList<Worker> Providers { get; set; }
+        // [Required]
+        // [MinLength(1)]
+        // public IList<Worker> Providers { get; set; }
     }
 }

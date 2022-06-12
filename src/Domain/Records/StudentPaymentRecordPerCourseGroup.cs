@@ -4,13 +4,13 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Records
 {
-    public class StudentPaymentRecordPerGroup : Entity
+    public class StudentPaymentRecordPerCourseGroup : Entity
     {
         [Required]
         public Student Student { get; set; }
         
         [Required]
-        public CourseGroup PaidCourseGroup { get; set; }
+        public CourseGroup PaidGroup { get; set; }
         
         [Required]
         [DataType(DataType.Date)]

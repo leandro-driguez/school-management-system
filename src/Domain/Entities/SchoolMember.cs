@@ -5,8 +5,25 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class SchoolMember : Entity
     {
+        public SchoolMember(string cardId, string name, string lastName, int phoneNumber, string address, DateTime dateBecomedMember) 
+            : base(new Guid(cardId))
+        {
+            CardId = cardId;
+            Name = name;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Address = address;
+            DateBecomedMember = dateBecomedMember;
+        }
+
         [Required]
-        public string CardId { get; set; }
+        public string CardId 
+        { 
+            get => CardId;
+            
+            // is value a valid input?
+            set => Id = new Guid(value);
+        }
 
         [Required]
         [MaxLength(20)]
