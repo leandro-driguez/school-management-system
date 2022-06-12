@@ -16,8 +16,8 @@
 | Atributes                      | Name                    | Type    |
 |--------------------------------|-------------------------|---------|
 | Primary 🔑                     | Id                      | text    |
-| Foreign 🔑 (to ***Worker***)   | WorkerId                | text    |
-| Foreign 🔑 (to ***Resource***) | ResourceId              | text    |
+| Foreign 🔑 (to ***Worker***)   | WorkerFK                | text    |
+| Foreign 🔑 (to ***Resource***) | ResourceFK              | text    |
 |                                | WorkerPorcentageProfits | integer |
 
 ### 📋 **BasicMean**
@@ -46,8 +46,8 @@
 |-------------|-------|-------|
 | Primary 🔑  | Id    | text  |
 |             | Name  | text  |
-|             | Price | money |
 |             | Type  | text  |
+|             | Price | money |
 
 ### 📋 **CourseGroup**
 

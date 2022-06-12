@@ -6,13 +6,13 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class AdditionalService : Entity
     {
-        public AdditionalService(Worker provider, Resource resource, int workerPorcentageProfits) 
-            : base(new Guid((string)provider.ToString().Concat(resource.ToString())))
-        {
-            Provider = provider;
-            Resource = resource;
-            WorkerPorcentageProfits = workerPorcentageProfits;
-        }
+        // public AdditionalService(Worker provider, Resource resource, int workerPorcentageProfits) 
+        //     : base(new Guid((string)provider.ToString().Concat(resource.ToString())))
+        // {
+        //     Provider = provider;
+        //     Resource = resource;
+        //     WorkerPorcentageProfits = workerPorcentageProfits;
+        // }
 
         // public override Guid Id { 
         //     get{
