@@ -1,11 +1,15 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
     public class BasicMean : Entity
     {
         [Required]
+        [Range(1,99999)]
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
         public int Price { get; set; }
         
         [Required]
