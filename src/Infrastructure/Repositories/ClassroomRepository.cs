@@ -1,4 +1,5 @@
 
+using System.ComponentModel;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
@@ -16,12 +17,12 @@ public class ClassroomRepository : IRepository<Classroom>
 
     public IList<Classroom> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Classrooms.ToList();
     }
 
     public void Save()
     {
-        throw new NotImplementedException();
+        _context.SaveChangesAsync();
     }
 
     // public void Create(Classroom entity)

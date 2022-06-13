@@ -212,7 +212,7 @@ public static class DbInitializer
                 Capacity = 16,
                 StartDate = new DateTime(2022,3,12),
                 EndDate = new DateTime(2022,5,12),
-                Teacher = new Worker{ CardId = "0052267123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081, Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020,5,14) },
+                Teacher = new Worker("00522627123", "marcos", "tirador", 76444081, "Calle Cotilla", new DateTime(2020,5,14)),
                 Shifts = new List<Shift>(),
             }
         };
@@ -255,14 +255,18 @@ public static class DbInitializer
     }
     private static SchoolMember[] GetSchoolMembers()
     {
+        var schoolMember = new SchoolMember ("98012134289", "Leandro", "Rodriguez Llosa", 
+            52813412, "Espada No.404 e/ San Benito y Esperanza", new DateTime(2015, 9, 5));        
+        
+        schoolMember.UpdateKey();
+
         return new SchoolMember[]
         {
-            new SchoolMember { CardId = "98012134289", Name = "Leandro", LastName = "Rodriguez Llosa", 
-                PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", DateBecomedMember = new DateTime(2015, 9, 5)},
-            new SchoolMember { CardId = "98012134289", Name = "Leandro", LastName = "Rodriguez Llosa", 
-                PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", DateBecomedMember = new DateTime(2015, 9, 5)},
-            new SchoolMember { CardId = "98012134289", Name = "Leandro", LastName = "Rodriguez Llosa", 
-                PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", DateBecomedMember = new DateTime(2015, 9, 5)}
+            schoolMember,
+            new SchoolMember ("98022134289",  "Leandro", "Rodriguez Llosa", 
+                52813412, "Espada No.404 e/ San Benito y Esperanza", new DateTime(2015, 9, 5)),
+            new SchoolMember ("98012334289",  "Leandro", "Rodriguez Llosa", 
+                52813412, "Espada No.404 e/ San Benito y Esperanza", new DateTime(2015, 9, 5))
         };
     }
     private static Shift[] GetShifts()
@@ -276,7 +280,10 @@ public static class DbInitializer
     }
     private static Student[] GetStudents()
     {
-        return new Student[2];
+        return new Student[2]{
+            new Student("123456784012", "Pablo", "Curbelo Paez", 56784392, "Pocitos No.23 e/ Czda de Vento y ALmendares",new DateTime(2020,2,1),new Tuitor{Name="Elena", PhoneNumber=54637721},3,Domain.Enums.Education.Posgrado),
+            new Student("123456789012", "Pablo", "Curbelo Paez", 56784392, "Pocitos No.23 e/ Czda de Vento y ALmendares",new DateTime(2020,2,1),new Tuitor{Name="Elena", PhoneNumber=54637721},3,Domain.Enums.Education.Primaria),
+        };
     }
     private static Tuitor[] GetTuitors()
     {
@@ -284,7 +291,12 @@ public static class DbInitializer
     }
     private static Worker[] GetWorkers()
     {
-        return new Worker[2];
+        return new Worker[]{
+            new Worker ("98012137289", "Leandro", "Rodriguez Llosa", 
+                52813412, "Espada No.404 e/ San Benito y Esperanza", new DateTime(2015, 9, 5)),
+            new Worker ("98012139289", "Leandro", "Rodriguez Llosa", 
+                52813412, "Espada No.404 e/ San Benito y Esperanza", new DateTime(2015, 9, 5))
+        };
     }
     private static ExpenseRecord[] GetExpenseRecords()
     {
