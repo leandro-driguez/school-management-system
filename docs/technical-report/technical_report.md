@@ -547,6 +547,8 @@ class ClassroomsController : Controller
 
     // Other func ...
 }
+
+
 ```
 <!-- ```mermaid
 classDiagram
