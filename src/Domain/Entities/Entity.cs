@@ -1,19 +1,10 @@
 
 using System.ComponentModel.DataAnnotations;
-
+using SchoolManagementSystem.Domain.Interfaces;
 namespace SchoolManagementSystem.Domain.Entities;
 
-public class Entity
+public class Entity : Identifiable<string>
 {
-    // public Entity(Guid id) { Id = id; }
-
-    // public Entity() { Id = Guid.NewGuid(); }
-
     [Key]
-    public Guid Id { get; private protected set; } = Guid.NewGuid(); 
-
-    // public override string ToString()
-    // {
-    //     return Id.ToString();
-    // }
+    public string Id { get; set; } = Guid.NewGuid().ToString(); 
 }

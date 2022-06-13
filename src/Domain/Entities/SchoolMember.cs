@@ -5,16 +5,19 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class SchoolMember : Entity
     {
-        // public SchoolMember(string cardId, string name, string lastName, int phoneNumber, string address, DateTime dateBecomedMember) 
-        //     : base(new Guid(cardId))
-        // {
-        //     CardId = cardId;
-        //     Name = name;
-        //     LastName = lastName;
-        //     PhoneNumber = phoneNumber;
-        //     Address = address;
-        //     DateBecomedMember = dateBecomedMember;
-        // }
+        public SchoolMember(string cardId, string name, string lastName, 
+            int phoneNumber, string address, DateTime dateBecomedMember)
+        {
+            CardId = cardId;
+            Name = name;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Address = address;
+            DateBecomedMember = dateBecomedMember;
+            Id = "";
+
+            UpdateKey();
+        }
 
         [Required]
         public string CardId { get; set; }
@@ -40,5 +43,15 @@ namespace SchoolManagementSystem.Domain.Entities
                        ApplyFormatInEditMode = true)]
         [Display(Name = "Date Becomed Member")]
         public DateTime DateBecomedMember { get; set; }
+
+        public void UpdateKey(){
+            string id = CardId;
+              
+            while (id.Length < 32){
+                id = "0" + id;
+            }
+
+            Id = new Guid(id).ToString();
+        }
     }
 }
