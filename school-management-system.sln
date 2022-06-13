@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D316A149-323D-4238-9A9E-1EB109B44BD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{634DE6D6-CD26-4894-A448-86E7D2F9FFEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.Domain", "src\SchoolManagementSystem.Domain\SchoolManagementSystem.Domain.csproj", "{634DE6D6-CD26-4894-A448-86E7D2F9FFEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{C8C8D58C-4837-408F-9416-D784EE89A836}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "src\UI\UI.csproj", "{733E8831-D8C1-4589-A29A-D8FF6AB873B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.Infrastructure", "src\SchoolManagementSystem.Infrastructure\SchoolManagementSystem.Infrastructure.csproj", "{C8C8D58C-4837-408F-9416-D784EE89A836}"
+EndProject11
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.UI", "src\SchoolManagementSystem.UI\SchoolManagementSystem.UI.csproj", "{733E8831-D8C1-4589-A29A-D8FF6AB873B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
