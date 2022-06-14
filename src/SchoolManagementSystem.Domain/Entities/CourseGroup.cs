@@ -9,6 +9,7 @@ namespace SchoolManagementSystem.Domain.Entities
         // [Key]
         // [Required]
         // [ForeignKey("CourseFK")]
+        public string CourseId { get; set; }
         public Course Course { get; set; }
 
         // [Key]

@@ -8,7 +8,7 @@ public class CourseGroupConfiguration : IEntityTypeConfiguration<CourseGroup>
 {
     public void Configure(EntityTypeBuilder<CourseGroup> builder)
     {
-        builder.HasKey(p => p.Id);
+        builder.HasKey(p => new { p.Id, p.CourseId });
 
         builder.HasOne(cg => cg.Teacher)
             .WithMany(t => t.CourseGroups);
