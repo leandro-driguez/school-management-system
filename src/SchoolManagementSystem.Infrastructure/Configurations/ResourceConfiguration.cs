@@ -8,6 +8,18 @@ public class ResourceConfiguration : IEntityTypeConfiguration<Resource>
 {
     public void Configure(EntityTypeBuilder<Resource> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(r => r.Id);
+        
+        builder.Property(r => r.Name)
+            .IsRequired();
+        
+        builder.Property(r => r.Category)
+            .IsRequired();
+        
+        builder.Property(r => r.Price)
+            .IsRequired();
+
+        builder.HasMany(r => r.Providers)
+            .WithMany(w => w.Services);
     }
 }

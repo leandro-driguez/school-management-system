@@ -23,14 +23,13 @@ public class SchoolContext : DbContext
     // public DbSet<CourseGroup> CourseGroups { get; set; }
     public DbSet<Expense> Expenses { get; set; }
     // public DbSet<Position> Positions { get; set; }
-    // public DbSet<Resource> Resources { get; set; }
+    public DbSet<Resource> Resources { get; set; }
     // public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolMember> SchoolMembers { get; set; }
     // public DbSet<Shift> Shifts { get; set; }
     public DbSet<Tuitor> Tuitors { get; set; }
     public DbSet<Student> Students { get; set; }
-    
-    // public DbSet<Worker> Workers { get; set; }
+    public DbSet<Worker> Workers { get; set; }
     
     // Records
     // public DbSet<ExpenseRecord> ExpenseRecords { get; set; }
@@ -59,7 +58,10 @@ public class SchoolContext : DbContext
 
 
         // modelBuilder.Entity<Position>().ToTable("Position");
+        
+        modelBuilder.ApplyConfiguration(new ResourceConfiguration());
         // modelBuilder.Entity<Resource>().ToTable("Resource");
+        
         // modelBuilder.Entity<Schedule>().ToTable("Schedule");
         
         modelBuilder.ApplyConfiguration(new SchoolMemberConfiguration());
@@ -74,7 +76,7 @@ public class SchoolContext : DbContext
         // modelBuilder.Entity<Student>().ToTable("Student");
         // modelBuilder.Entity<Tuitor>().ToTable("Tuitor"); 
         
-        
+        modelBuilder.ApplyConfiguration(new WorkerConfiguration());
         // modelBuilder.Entity<Worker>().ToTable("Worker");
 
         // Records

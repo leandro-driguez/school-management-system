@@ -61,13 +61,15 @@ public static class DbInitializer
         //                 GetPositions()
         //             );
         //     }
-        //     if (!context.Resources.Any())
-        //     {
-        //         context.Resources
-        //             .AddRangeAsync(
-        //                 GetResources()
-        //             );
-        //     }
+        if (!context.Resources.Any())
+        {
+            var resources = GetResources();
+            
+            context.Resources
+                .AddRangeAsync(
+                    resources
+                );
+        }
         //     if (!context.Schedules.Any())
         //     {
         //         context.Schedules
@@ -103,13 +105,13 @@ public static class DbInitializer
                     GetTuitors()
                 );
         }
-        // if (!context.Workers.Any())
-        //     {
-        //         context.Workers
-        //             .AddRangeAsync(
-        //                 GetWorkers()
-        //             );
-        //     }
+        if (!context.Workers.Any())
+        {
+            context.Workers
+                .AddRangeAsync(
+                    GetWorkers()
+                );
+        }
         //     
         // Records
         // if (!context.ExpenseRecords.Any())
@@ -257,12 +259,30 @@ public static class DbInitializer
     }
     
     private static Resource[] GetResources()
-    {
-        return new Resource[3]
+    {   
+        return new Resource[]
         {
-            new Resource { Name = "libro de mates", Category = "Libros", Price = 100 },
-            new Resource { Name = "libro de ingles", Category = "Libros", Price = 100 },
-            new Resource { Name = "libro de historia", Category = "Libros", Price = 100 }
+            new Resource { Name = "libro de mates", Category = "Libros", Price = 100, 
+                Providers = new List<Worker>() /* {
+                new Worker { Id = "99123100221", Name = "Dario", LastName = "Rodriguez Llosa",
+                PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                DateBecomedMember = new DateTime(2015, 9, 5) }
+                } */
+            },
+            new Resource { Name = "libro de ingles", Category = "Libros", Price = 100, 
+                Providers = new List<Worker>() /* {
+                new Worker { Id = "99123149221", Name = "Dario", LastName = "Rodriguez Llosa",
+                PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                DateBecomedMember = new DateTime(2015, 9, 5) }
+                } */
+            },
+            new Resource { Name = "libro de historia", Category = "Libros", Price = 100, 
+                Providers = new List<Worker>() /* {
+                new Worker { Id = "99123102721", Name = "Dario", LastName = "Rodriguez Llosa",
+                PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                DateBecomedMember = new DateTime(2015, 9, 5) }
+                } */
+            }
         };
     }
     
@@ -353,10 +373,10 @@ public static class DbInitializer
     {
         return new Worker[]
         {
-            new Worker { Id = "98012137289", Name = "Leandro", LastName = "Rodriguez Llosa",
+            new Worker { Id = "99123100221", Name = "Dario", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2015, 9, 5) },
-            new Worker { Id = "98012139289", Name = "Leandro", LastName = "Rodriguez Llosa",
+            new Worker { Id = "99123160221", Name = "Dario", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2015, 9, 5) }
         };

@@ -8,6 +8,11 @@ public class WorkerConfiguration : IEntityTypeConfiguration<Worker>
 {
     public void Configure(EntityTypeBuilder<Worker> builder)
     {
-        throw new NotImplementedException();
+        builder.ToTable("Workers");
+        
+        builder.HasBaseType<SchoolMember>();
+
+        builder.HasMany(w => w.Services)
+            .WithMany(r => r.Providers);
     }
 }
