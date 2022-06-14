@@ -54,13 +54,13 @@ public static class DbInitializer
                 );
             Console.WriteLine(expenses[0].Id);
         }
-        //     if (!context.Positions.Any())
-        //     {
-        //         context.Positions
-        //             .AddRangeAsync(
-        //                 GetPositions()
-        //             );
-        //     }
+        if (!context.Positions.Any())
+        {
+            context.Positions
+                .AddRangeAsync(
+                    GetPositions()
+                );
+        }
         if (!context.Resources.Any())
         {
             var resources = GetResources();
@@ -265,9 +265,9 @@ public static class DbInitializer
     {
         return new Position[]
         {
-            new Position { Name = "director" },
-            new Position { Name = "secretaria" },
-            new Position { Name = "asistente" }
+            new Position { Name = "director", Workers = new List<Worker>()},
+            new Position { Name = "secretaria", Workers = new List<Worker>() },
+            new Position { Name = "asistente", Workers = new List<Worker>() }
         };
     }
     

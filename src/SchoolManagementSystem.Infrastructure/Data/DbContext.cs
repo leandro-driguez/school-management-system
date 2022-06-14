@@ -16,17 +16,24 @@ public class SchoolContext : DbContext
     }
 
     // Entities
+    
     // public DbSet<AdditionalService> AdditionalServices { get; set; }
+    
     public DbSet<BasicMean> BasicMeans { get; set; }
     public DbSet<Classroom> Classrooms { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<CourseGroup> CourseGroups { get; set; }
     public DbSet<Expense> Expenses { get; set; }
-    // public DbSet<Position> Positions { get; set; }
+    
+    public DbSet<Position> Positions { get; set; }
+    
     public DbSet<Resource> Resources { get; set; }
+    
     // public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolMember> SchoolMembers { get; set; }
+    
     // public DbSet<Shift> Shifts { get; set; }
+    
     public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Tuitor> Tuitors { get; set; }
     public DbSet<Student> Students { get; set; }
@@ -65,7 +72,7 @@ public class SchoolContext : DbContext
         modelBuilder.ApplyConfiguration(new ExpenseConfiguration());
         // modelBuilder.Entity<Expense>().ToTable("Expense");
 
-
+        modelBuilder.ApplyConfiguration(new PositionConfiguration());
         // modelBuilder.Entity<Position>().ToTable("Position");
         
         modelBuilder.ApplyConfiguration(new ResourceConfiguration());

@@ -14,5 +14,8 @@ public class WorkerConfiguration : IEntityTypeConfiguration<Worker>
 
         builder.HasMany(w => w.Services)
             .WithMany(r => r.Providers);
+        
+        builder.HasMany(w => w.Positions)
+            .WithMany(p => p.Workers);
     }
 }

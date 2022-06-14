@@ -8,6 +8,12 @@ public class PositionConfiguration : IEntityTypeConfiguration<Position>
 {
     public void Configure(EntityTypeBuilder<Position> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(p => p.Id);
+
+        builder.HasMany(p => p.Workers)
+            .WithMany(w => w.Positions);
+        
+        builder.Property(p => p.Name)
+            .IsRequired();
     }
 }
