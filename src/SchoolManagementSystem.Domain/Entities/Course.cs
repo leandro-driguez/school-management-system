@@ -20,5 +20,7 @@ namespace SchoolManagementSystem.Domain.Entities
         // [MaxLength(20)]
         public string Name { get; set; }
 
+        
+        public IList<CourseGroup> CourseGroups { get; set; }
     }
 }

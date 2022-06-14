@@ -38,13 +38,13 @@ public static class DbInitializer
                     GetCourses()
                 );
         }
-        //     if (!context.CourseGroups.Any())
-        //     {
-        //         context.CourseGroups
-        //             .AddRangeAsync(
-        //                 GetCourseGroups()
-        //             );
-        //     }
+        if (!context.CourseGroups.Any())
+        {
+            context.CourseGroups
+                .AddRangeAsync(
+                    GetCourseGroups()
+                );
+        }
         if (!context.Expenses.Any())
         {
             var expenses = GetExpenses();
@@ -96,6 +96,13 @@ public static class DbInitializer
             context.Students
                 .AddRangeAsync(
                     GetStudents()
+                );
+        }
+        if (!context.Teachers.Any())
+        {
+            context.Teachers
+                .AddRangeAsync(
+                    GetTeachers()
                 );
         }
         if (!context.Tuitors.Any())
@@ -183,7 +190,7 @@ public static class DbInitializer
         //
         context.SaveChangesAsync();
     }
-    
+
     #region Seed Database
 
     /// <summary>
@@ -235,9 +242,10 @@ public static class DbInitializer
                 Capacity = 16,
                 StartDate = new DateTime(2022, 3, 12),
                 EndDate = new DateTime(2022, 5, 12),
-                Teacher = new Worker{ Id="00522627123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
-                    Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14) },
-                Shifts = new List<Shift>(),
+                Teacher = new Teacher{ Id="00522627123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                    Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
+                    CourseGroups = new List<CourseGroup>() }
+                // Shifts = new List<Shift>(),
             }
         };
     }
@@ -371,6 +379,16 @@ public static class DbInitializer
         {
             new Tuitor { Name = "Josefa", PhoneNumber = 54674982 }, 
             new Tuitor { Name = "Mari", PhoneNumber = 54637121 },
+        };
+    }
+    
+    private static Teacher[] GetTeachers()
+    {
+        return  new Teacher[]
+        {
+            new Teacher { Id = "71022200221", Name = "Teresa", LastName = "Graveran",
+                PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                DateBecomedMember = new DateTime(2008, 9, 5), CourseGroups  = new List<CourseGroup>()}
         };
     }
     

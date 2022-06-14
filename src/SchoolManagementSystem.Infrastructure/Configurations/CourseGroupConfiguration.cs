@@ -8,6 +8,18 @@ public class CourseGroupConfiguration : IEntityTypeConfiguration<CourseGroup>
 {
     public void Configure(EntityTypeBuilder<CourseGroup> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(p => p.Id);
+
+        builder.HasOne(cg => cg.Teacher)
+            .WithMany(t => t.CourseGroups);
+
+        builder.Property(cg => cg.Capacity)
+            .IsRequired();
+        
+        builder.Property(cg => cg.StartDate)
+            .IsRequired();
+        
+        builder.Property(cg => cg.EndDate);
+
     }
 }
