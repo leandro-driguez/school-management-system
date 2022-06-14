@@ -31,13 +31,13 @@ public static class DbInitializer
                     GetClassrooms()
                 );
         }
-        //     if (!context.Courses.Any())
-        //     {
-        //         context.Courses
-        //             .AddRangeAsync(
-        //                 GetCourses()
-        //             );
-        //     }
+        if (!context.Courses.Any())
+        {
+            context.Courses
+                .AddRangeAsync(
+                    GetCourses()
+                );
+        }
         //     if (!context.CourseGroups.Any())
         //     {
         //         context.CourseGroups

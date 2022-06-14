@@ -8,6 +8,15 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 {
     public void Configure(EntityTypeBuilder<Course> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(c => c.Id);
+        
+        builder.Property(c => c.Name)
+            .IsRequired();
+        
+        builder.Property(c => c.Type)
+            .IsRequired();
+        
+        builder.Property(c => c.Price)
+            .IsRequired();
     }
 }

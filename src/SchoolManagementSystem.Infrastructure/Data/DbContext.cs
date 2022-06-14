@@ -19,7 +19,7 @@ public class SchoolContext : DbContext
     // public DbSet<AdditionalService> AdditionalServices { get; set; }
     public DbSet<BasicMean> BasicMeans { get; set; }
     public DbSet<Classroom> Classrooms { get; set; }
-    // public DbSet<Course> Courses { get; set; }
+    public DbSet<Course> Courses { get; set; }
     // public DbSet<CourseGroup> CourseGroups { get; set; }
     public DbSet<Expense> Expenses { get; set; }
     // public DbSet<Position> Positions { get; set; }
@@ -54,8 +54,10 @@ public class SchoolContext : DbContext
 
         modelBuilder.ApplyConfiguration(new ClassroomConfiguration());
         // modelBuilder.Entity<Classroom>().ToTable("Classroom");
-        
+
+        modelBuilder.ApplyConfiguration(new CourseConfiguration());
         // modelBuilder.Entity<Course>().ToTable("Course");
+        
         // modelBuilder.Entity<CourseGroup>().ToTable("CourseGroup");
 
         modelBuilder.ApplyConfiguration(new ExpenseConfiguration());
