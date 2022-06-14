@@ -7,5 +7,5 @@ build:
 .PHONY: dev
 
 dev:
-	dotnet watch run --project src/UI
+	dotnet watch run --project src/SchoolManagementSystem.UI
 	

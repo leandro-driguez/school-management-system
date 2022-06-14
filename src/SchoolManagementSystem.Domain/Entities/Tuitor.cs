@@ -5,11 +5,14 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class Tuitor : Entity
     {
-        [Required]
-        [MaxLength(20)]
+        // [Required]
+        // [MaxLength(20)]
         public string Name { get; set; }
         
-        [Required]
+        // [Required]
         public int PhoneNumber { get; set; }
+        
+        // [Required]
+        public  IList<Student> Students { get; set; }
     }
 }

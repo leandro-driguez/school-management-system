@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using SchoolManagementSystem.Domain.Entities;
 
-namespace SchoolManagementSystem.Domain.Records
+namespace SchoolManagementSystem.Domain.Relations
 {
-    public class WorkerCourseGroupRecord : Entity
+    public class WorkerCourseGroupRelation
     {
         [Required]
         public Worker Teacher{ get; set; }

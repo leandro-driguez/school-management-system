@@ -5,12 +5,12 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class Expense : Entity
     {
-        [Required]
-        [MaxLength(20)]
+        // [Required]
+        // [MaxLength(20)]
         public string Category { get; set; }  
 
-        [Required]
-        [MaxLength(100)]
+        // [Required]
+        // [MaxLength(100)]
         public string Description { get; set; }
     }
 }
