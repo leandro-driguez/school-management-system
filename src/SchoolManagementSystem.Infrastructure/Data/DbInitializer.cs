@@ -24,13 +24,13 @@ public static class DbInitializer
                     GetBasicMeans()
                 );
         }
-        // if (!context.Classrooms.Any())
-        // {
-        //     context.Classrooms
-        //         .AddRangeAsync(
-        //             GetClassrooms()
-        //         );
-        // }
+        if (!context.Classrooms.Any())
+        {
+            context.Classrooms
+                .AddRangeAsync(
+                    GetClassrooms()
+                );
+        }
         //     if (!context.Courses.Any())
         //     {
         //         context.Courses

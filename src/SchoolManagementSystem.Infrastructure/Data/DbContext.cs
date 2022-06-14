@@ -18,7 +18,7 @@ public class SchoolContext : DbContext
     // Entities
     // public DbSet<AdditionalService> AdditionalServices { get; set; }
     public DbSet<BasicMean> BasicMeans { get; set; }
-    // public DbSet<Classroom> Classrooms { get; set; }
+    public DbSet<Classroom> Classrooms { get; set; }
     // public DbSet<Course> Courses { get; set; }
     // public DbSet<CourseGroup> CourseGroups { get; set; }
     public DbSet<Expense> Expenses { get; set; }
@@ -51,8 +51,10 @@ public class SchoolContext : DbContext
 
         modelBuilder.ApplyConfiguration(new BasicMeanConfiguration());
         // modelBuilder.Entity<BasicMean>().ToTable("BasicMean");
-        
+
+        modelBuilder.ApplyConfiguration(new ClassroomConfiguration());
         // modelBuilder.Entity<Classroom>().ToTable("Classroom");
+        
         // modelBuilder.Entity<Course>().ToTable("Course");
         // modelBuilder.Entity<CourseGroup>().ToTable("CourseGroup");
 
