@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<SchoolManagementSystem.Domain.Entities.Classroom>
+@model IList<SchoolManagementSystem.Domain.Entities.Classroom>
 
 @{
     ViewData["Title"] = "Classrooms";
@@ -17,10 +17,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Capacity)
+                Name
+            </th>
+            <th>
+                Capacity
             </th>
         </tr>
     </thead>
@@ -31,12 +34,15 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Capacity)
             </td>
             <td>
-                @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
-                @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
-                @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
     }

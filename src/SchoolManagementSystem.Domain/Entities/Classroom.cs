@@ -12,4 +12,6 @@ public class Classroom : Entity
     // [Required]
     // [Range(5, 30)]
     public int Capacity { get; set; }
+    
+    public IList<Shift> Shifts { get; set; }
 }

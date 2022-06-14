@@ -9,19 +9,34 @@ namespace SchoolManagementSystem.UI.Controllers;
 
 public class ClassroomsController : Controller
 {
-    private readonly IRepository<Classroom> _repository;
+    private readonly SchoolContext _context;
 
-    public ClassroomsController(IRepository<Classroom> repository)
+    public ClassroomsController(SchoolContext context)
     {
-        _repository = repository;
+        _context = context;
     }
 
     public IActionResult Index()
     {
-        return View(_repository.GetAll());
+        return View(_context.Classrooms.ToList());
     }
 
     public IActionResult Create()
+    {
+        return View();
+    } 
+    
+    public IActionResult Edit()
+    {
+        return View();
+    } 
+    
+    public IActionResult Details()
+    {
+        return View();
+    } 
+    
+    public IActionResult Delete()
     {
         return View();
     } 

@@ -32,7 +32,7 @@ public class SchoolContext : DbContext
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolMember> SchoolMembers { get; set; }
     
-    // public DbSet<Shift> Shifts { get; set; }
+    public DbSet<Shift> Shifts { get; set; }
     
     public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Tuitor> Tuitors { get; set; }
@@ -83,8 +83,8 @@ public class SchoolContext : DbContext
         
         modelBuilder.ApplyConfiguration(new SchoolMemberConfiguration());
         // modelBuilder.Entity<SchoolMember>().ToTable("SchoolMember");
-        
-        
+
+        modelBuilder.ApplyConfiguration(new ShiftConfiguration());
         // modelBuilder.Entity<Shift>().ToTable("Shift");
 
         modelBuilder.ApplyConfiguration(new TeacherConfiguration());
@@ -100,8 +100,10 @@ public class SchoolContext : DbContext
 
         // Records
         // modelBuilder.Entity<ExpenseRecord>().ToTable("ExpenseRecord");
-        // modelBuilder.Entity<StudentPaymentRecordForAdditionalService>().ToTable("StudentPaymentRecordForAdditionalService");
-        // modelBuilder.Entity<StudentPaymentRecordPerCourseGroup>().ToTable("StudentPaymentRecordPerCourseGroup");
+        // modelBuilder.Entity<StudentPaymentRecordForAdditionalService>()
+            // .ToTable("StudentPaymentRecordForAdditionalService");
+        // modelBuilder.Entity<StudentPaymentRecordPerCourseGroup>()
+            // .ToTable("StudentPaymentRecordPerCourseGroup");
         // modelBuilder.Entity<WorkerCourseGroupRecord>().ToTable("WorkerCourseGroupRecord");
         // modelBuilder.Entity<WorkerPayRecordByPosition>().ToTable("WorkerPayRecordByPosition");
         // modelBuilder.Entity<WorkerPayRecordPerCourse>().ToTable("WorkerPayRecordPerCourse");

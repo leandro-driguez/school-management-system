@@ -84,13 +84,13 @@ public static class DbInitializer
                     GetSchoolMembers()
                 );
         }
-        //     if (!context.Shifts.Any())
-        //     {
-        //         context.Shifts
-        //             .AddRangeAsync(
-        //                 GetShifts()
-        //             );
-        //     }
+        if (!context.Shifts.Any())
+        {
+            context.Shifts
+                .AddRangeAsync(
+                    GetShifts()
+                );
+        }
         if (!context.Students.Any())
         {
             context.Students
@@ -336,20 +336,17 @@ public static class DbInitializer
         {
             new Shift
             {
-                ShiftClassroom = new Classroom { Name = "Aula 1", Capacity = 30 },
-                ShiftSchedule = new Schedule
+                Classroom = new Classroom { Name = "Aula 1", Capacity = 30 }, Schedule = new Schedule
                     { Duration = new TimeOnly(12), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Friday }
             },
             new Shift
             {
-                ShiftClassroom = new Classroom { Name = "Aula 2", Capacity = 20 },
-                ShiftSchedule = new Schedule
+                Classroom = new Classroom { Name = "Aula 2", Capacity = 20 }, Schedule = new Schedule
                     { Duration = new TimeOnly(14), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Monday }
             },
             new Shift
             {
-                ShiftClassroom = new Classroom { Name = "Aula 3", Capacity = 16 },
-                ShiftSchedule = new Schedule
+                Classroom = new Classroom { Name = "Aula 3", Capacity = 16 }, Schedule = new Schedule
                     { Duration = new TimeOnly(15), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Tuesday }
             }
     

@@ -19,5 +19,7 @@ namespace SchoolManagementSystem.Domain.Entities
         
         // [Required]
         public DayOfWeek DayOfWeek { get; set; }
+        
+        public IList<Shift> Shifts { get; set; }
     }
 }

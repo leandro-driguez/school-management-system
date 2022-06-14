@@ -8,6 +8,6 @@ public class ShiftConfiguration: IEntityTypeConfiguration<Shift>
 {
     public void Configure(EntityTypeBuilder<Shift> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(s => new { s.ClassroomId, s.ScheduleId });
     }
 }

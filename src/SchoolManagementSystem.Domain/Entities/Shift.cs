@@ -3,12 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
-    public class Shift : Entity
+    public class Shift 
     {
-        [Required]
-        public Classroom ShiftClassroom { get; set; }
+        public string ClassroomId { get; set; }
         
-        [Required]
-        public Schedule ShiftSchedule { get; set; }
+        public Classroom Classroom { get; set; }
+        
+        public string ScheduleId { get; set; }
+        
+        public Schedule Schedule { get; set; }
     }
 }
