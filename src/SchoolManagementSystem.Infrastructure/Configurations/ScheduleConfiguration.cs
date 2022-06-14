@@ -8,6 +8,15 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
 {
     public void Configure(EntityTypeBuilder<Schedule> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(s => s.Id);
+
+        builder.Property(s => s.StartTime)
+            .IsRequired();
+        
+        builder.Property(s => s.DayOfWeek)
+            .IsRequired();
+        
+        builder.Property(s => s.Duration)
+            .IsRequired();
     }
 }

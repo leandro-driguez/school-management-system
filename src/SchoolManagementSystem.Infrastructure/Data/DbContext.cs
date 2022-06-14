@@ -29,7 +29,7 @@ public class SchoolContext : DbContext
     
     public DbSet<Resource> Resources { get; set; }
     
-    // public DbSet<Schedule> Schedules { get; set; }
+    public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolMember> SchoolMembers { get; set; }
     
     // public DbSet<Shift> Shifts { get; set; }
@@ -77,7 +77,8 @@ public class SchoolContext : DbContext
         
         modelBuilder.ApplyConfiguration(new ResourceConfiguration());
         // modelBuilder.Entity<Resource>().ToTable("Resource");
-        
+
+        modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
         // modelBuilder.Entity<Schedule>().ToTable("Schedule");
         
         modelBuilder.ApplyConfiguration(new SchoolMemberConfiguration());

@@ -70,13 +70,13 @@ public static class DbInitializer
                     resources
                 );
         }
-        //     if (!context.Schedules.Any())
-        //     {
-        //         context.Schedules
-        //             .AddRangeAsync(
-        //                 GetSchedules()
-        //             );
-        //     }
+        if (!context.Schedules.Any())
+        {
+            context.Schedules
+                .AddRangeAsync(
+                    GetSchedules()
+                );
+        }
         if (!context.SchoolMembers.Any())
         {
             context.SchoolMembers
