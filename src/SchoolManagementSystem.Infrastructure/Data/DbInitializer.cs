@@ -17,13 +17,13 @@ public static class DbInitializer
         //             GetAdditionalServices()
         //         );
         // }
-        // if (!context.BasicMeans.Any())
-        // {
-        //     context.BasicMeans
-        //         .AddRangeAsync(
-        //             GetBasicMeans()
-        //         );
-        // }
+        if (!context.BasicMeans.Any())
+        {
+            context.BasicMeans
+                .AddRangeAsync(
+                    GetBasicMeans()
+                );
+        }
         // if (!context.Classrooms.Any())
         // {
         //     context.Classrooms
@@ -197,7 +197,12 @@ public static class DbInitializer
     
     private static BasicMean[] GetBasicMeans()
     {
-        return new BasicMean[2];
+        return new BasicMean[]
+        {
+            new BasicMean{ Type="Sofa", Origin = "MLC", Price = 200 , DevaluationInTime = 10,
+                Description = "Sofa para la entrada, de color carmelita" , 
+                InaugurationDate = new DateTime(2021,1,4) }
+        };
     }
     
     private static Classroom[] GetClassrooms()
