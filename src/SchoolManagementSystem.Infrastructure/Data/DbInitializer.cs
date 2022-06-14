@@ -10,13 +10,13 @@ public static class DbInitializer
     public static void Initialize(SchoolContext context)
     {
         // // Entities
-        // if (!context.AdditionalServices.Any())
-        // {
-        //     context.AdditionalServices
-        //         .AddRangeAsync(
-        //             GetAdditionalServices()
-        //         );
-        // }
+        if (!context.AdditionalServices.Any())
+        {
+            context.AdditionalServices
+                .AddRangeAsync(
+                    GetAdditionalServices()
+                );
+        }
         if (!context.BasicMeans.Any())
         {
             context.BasicMeans
@@ -199,7 +199,15 @@ public static class DbInitializer
     /// <returns></returns>
     private static AdditionalService[] GetAdditionalServices()
     {
-        return new AdditionalService[2];
+        return new AdditionalService[]
+        {
+            new AdditionalService {Worker = new Worker { Id = "99122104222", Name = "Luis",
+                LastName = "Guerrero", PhoneNumber = 52372293, 
+                Address = "Espada No.404 e/ San Benito y Esperanza", 
+                DateBecomedMember = new DateTime(2015, 9, 5) }, 
+                Resource = new Resource { Name = "libro de Ingles basico", Category = "Cuaderno", Price = 1000, 
+                Providers = new List<Worker>() } , WorkerPorcentageProfits = 15}
+        };
     }
     
     private static BasicMean[] GetBasicMeans()
