@@ -1,0 +1,173 @@
+   /* ------------------ TABLE ------------------- */
+   table {
+    margin: 0 auto;
+    margin-top: 2%;
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    background-color: #ffb5b53b;
+    width: 90%;
+    align-items: center;
+  }
+
+  td,
+  th {
+    border: 1px solid #ffffff;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr {
+    border-color: 1px solid #000000;
+  }
+
+  #myTable tr > *:nth-child(1) {
+    display: none;
+  }
+
+  #myTable.show tr > *:nth-child(1) {
+    display: block;
+  }
+
+  table .chkb {
+    border: none;
+    margin-top: 12px;
+  }
+
+  .chkb > input {
+    margin-top: 2%;
+  }
+
+  .table_options {
+    float: right;
+    margin-top: 2.3%;
+    align-items: center;
+    margin-right: 6px;
+  }
+
+  .table_options > i {
+    font-size: 20px;
+  }
+
+  .table_title {
+    margin-left: 0.5px;
+    float: left;
+  }
+
+  /* ------------------ LINKS ------------------- */
+  a:link,
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #c90000;
+    text-decoration: none;
+  }
+
+  /* ------------------ BOXES ------------------- */
+  .box {
+    margin-left: 0.3%;
+    margin-top: 1%;
+    height: 0.5px;
+    background-color: #ffd2d251;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding: 13px;
+    float: right;
+  }
+
+  .box > i {
+    font-size: 16px;
+    color: #777;
+  }
+
+  .box > input {
+    width: 130px;
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding-left: 10px;
+  }
+
+  /* ------------------ POP UP ------------------- */
+
+  /* Button used to open the contact form - fixed at the bottom of the page */
+  .open-button {
+    background-color: #555;
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    width: 5%;
+    border-radius: 10px;
+    float: right;
+    margin-top: 0.5%;
+    margin-left: 0.3%;
+  }
+
+  .ac_buttons,
+  .ac_buttons1 {
+    display: none;
+    margin-right: 5%;
+  }
+  /* The popup form - hidden by default */
+  .form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border: 3px solid #f1f1f1;
+    border-radius: 5px;
+    z-index: 9;
+    height: 100%;
+    width: 350px;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+
+  /* Add styles to the form container */
+  .form-container {
+    height: 100%;
+    max-width: 354px;
+    padding: 10px;
+    background-color: white;
+  }
+
+  /* Full-width input fields */
+  .form-container input[type="text"] {
+    width: 90%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    border-radius: 5px;
+    background: #f1f1f1;
+  }
+
+  /* Set a style for the submit/login button */
+  .form-container .btn {
+    background-color: #04aa6d;
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    width: 49%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    border-radius: 5px;
+  }
+
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover,
+  .open-button:hover {
+    opacity: 1;
+  }

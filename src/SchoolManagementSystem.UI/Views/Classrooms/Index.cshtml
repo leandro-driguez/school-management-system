@@ -1,50 +1,138 @@
-﻿
-@model IList<SchoolManagementSystem.Domain.Entities.Classroom>
+﻿<!DOCTYPE html>
+<html lang="en">
 
-@{
-    ViewData["Title"] = "Classrooms";
-}
+<head>
+    <title>Aulas</title>
 
-<div class="text-center">
-    <h1 class="display-4">Classrooms</h1>
-</div>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <link rel="stylesheet" href="css/Table.css" asp-append-version="true" />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Capacity
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+    <!-- ------------------ SCRIPTS ------------------- -->
+    <script src="js\my.js"></script>
+    <script src="js\search.js"></script>
+    <script src="js\chkbx.js"></script>
+    <script src="js\popup.js"></script>
+</head>
+
+<body>
+    @model IList<SchoolManagementSystem.Domain.Entities.Classroom>
+    <table id="myTable">
+        <caption>
+            <!-- ------------------ NAME ------------------- -->
+            <p class="table_title"><strong>Aulas</strong></p>
+
+            <!-- ------------------ SEARCH ------------------- -->
+            <div class="box">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input type="search" id="myInput" onkeyup="myFunction('myInput', 'myTable')" placeholder="Buscar" />
+            </div>
+
+            <!-- ------------------ OPTIONS ------------------- -->
+
+            <!-- -------- Add -------- -->
+            <div class="box">
+                <a class="table_options" onclick="openForm('myForm')"><i class="fa fa-plus-square-o"
+                        aria-hidden="true"></i></a>
+
+                <!-- -------- Delete -------- -->
+                <a class="table_options"
+                    onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); openForm('ac_buttons1')"><i
+                        class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+
+                <!-- -------- Edit -------- -->
+                <a class="table_options"
+                    onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); openForm('ac_buttons')"><i
+                        class="fa fa-edit" aria-hidden="true"></i></a>
+
+                <!-- -------- Download -------- -->
+                <a class="table_options" href="index.html"><i class="fa fa-download" aria-hidden="true"></i></a>
+
+                <!-- -------- Filter -------- -->
+                <a class="table_options" href="index.html"><i class="fa fa-filter" aria-hidden="true"></i></a>
+
+                <!-- -------- Sort -------- -->
+                <a class="table_options" href="index.html"><i class="fa fa-sort" aria-hidden="true"></i></a>
+            </div>
+
+            <!-- ------------------ NO. ELEMENTOS ------------------- -->
+            <div class="box">
+                <p><strong>Total:</strong> @Model.Count</p>
+            </div>
+        </caption>
+
+        <!-- ------------------ HEADERS ------------------- -->
+        <thead>
+            <tr>
+                <th class="chkb"></th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Capacidad</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 1; i <= Model.Count; i++)
+            {
+                <tr>
+                    <td class="chkb" align="right">
+                        <input type="checkbox" id=@i.ToString() onclick='uncheckOthers(@i.ToString())' />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i-1].Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i-1].Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i-1].Capacity)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- ------------------ BUTTONS ------------------- -->
+    <div class="ac_buttons" id="ac_buttons">
+        <button class="open-button"
+            onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); closeForm('ac_buttons')">
+            Cancelar
+        </button>
+
+        <button class="open-button" onclick=" openForm('myForm')">Aceptar</button>
+    </div>
+
+    <div class="ac_buttons1" id="ac_buttons1">
+        <button class="open-button"
+            onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); closeForm('ac_buttons1')">
+            Cancelar
+        </button>
+
+        <button class="open-button">Aceptar</button>
+    </div>
+
+    <!-- ------------------ POPUP ------------------- -->
+    <div class="form-popup" id="myForm">
+        <form action="closeForm('myForm')" class="form-container">
+            <h2>Añadir aula</h2>
+
+            <label for="nombre"><b>Nombre</b></label>
+            <input type="text" placeholder="nombre" name="nombre" required />
+
+            <label for="capacidad"><b>Capacidad</b></label>
+            <input type="text" placeholder="capacidad" name="capacidad" required />
+
+            <button type="submit" class="btn"
+                onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); closeForm('ac_buttons')">
+                Aceptar
+            </button>
+
+            <button type="button" class="btn cancel" onclick="closeForm('myForm')">
+                Cerrar
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>
