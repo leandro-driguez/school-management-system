@@ -35,7 +35,7 @@ public class SchoolContext : DbContext
     
     // Records
     public DbSet<ExpenseRecord> ExpenseRecords { get; set; }
-    // public DbSet<StudentPaymentRecordForAdditionalService> StudentPaymentRecordForAdditionalServices { get; set; }
+    public DbSet<StudentPaymentRecordForAdditionalService> StudentPaymentRecordForAdditionalServices { get; set; }
     // public DbSet<StudentPaymentRecordPerCourseGroup> StudentPaymentRecordPerCourseGroups { get; set; }
     // public DbSet<WorkerCourseGroupRecord> WorkerCourseGroupRecords { get; set; }
     // public DbSet<WorkerPayRecordByPosition> WorkerPayRecordByPositions { get; set; }
@@ -67,9 +67,9 @@ public class SchoolContext : DbContext
         
         // Records
         modelBuilder.ApplyConfiguration(new ExpenseRecordConfiguration());
+        modelBuilder.ApplyConfiguration(new StudentPaymentRecordForAdditionalServiceConfiguration());
+
         
-        // modelBuilder.Entity<StudentPaymentRecordForAdditionalService>()
-        // .ToTable("StudentPaymentRecordForAdditionalService");
         // modelBuilder.Entity<StudentPaymentRecordPerCourseGroup>()
         // .ToTable("StudentPaymentRecordPerCourseGroup");
         // modelBuilder.Entity<WorkerCourseGroupRecord>().ToTable("WorkerCourseGroupRecord");

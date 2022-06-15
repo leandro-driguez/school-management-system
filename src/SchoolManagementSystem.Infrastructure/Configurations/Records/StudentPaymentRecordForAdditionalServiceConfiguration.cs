@@ -9,6 +9,8 @@ public class StudentPaymentRecordForAdditionalServiceConfiguration
 {
     public void Configure(EntityTypeBuilder<StudentPaymentRecordForAdditionalService> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(adds 
+            => new { adds.StudentId, adds.AdditionalServiceResourceId, 
+                adds.AdditionalServiceWorkerId, adds.Date });
     }
 }

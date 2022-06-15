@@ -128,13 +128,13 @@ public static class DbInitializer
                     GetExpenseRecords()
                 );
         }
-        //     if (!context.StudentPaymentRecordForAdditionalServices.Any())
-        //     {
-        //         context.StudentPaymentRecordForAdditionalServices
-        //             .AddRangeAsync(
-        //                 GetStudentPaymentRecordForAdditionalServices()
-        //             );
-        //     }
+        if (!context.StudentPaymentRecordForAdditionalServices.Any())
+        {
+            context.StudentPaymentRecordForAdditionalServices
+                .AddRangeAsync(
+                    GetStudentPaymentRecordForAdditionalServices()
+                );
+        }
         //     if (!context.StudentPaymentRecordPerCourseGroups.Any())
         //     {
         //         context.StudentPaymentRecordPerCourseGroups
@@ -418,7 +418,45 @@ public static class DbInitializer
     
     private static StudentPaymentRecordForAdditionalService[] GetStudentPaymentRecordForAdditionalServices()
     {
-        return new StudentPaymentRecordForAdditionalService[2];
+        var worker = new Worker
+        {
+            Id = "99197504222", Name = "Luis",
+            LastName = "Guerrero", PhoneNumber = 52372293,
+            Address = "Espada No.404 e/ San Benito y Esperanza",
+            DateBecomedMember = new DateTime(2015, 9, 5)
+        };
+        var resource = new Resource
+        {
+            Name = "libro de Ingles basico", Category = "Cuaderno", Price = 1000,
+            Providers = new List<Worker>()
+        };
+        
+        return new StudentPaymentRecordForAdditionalService[]
+        {
+            new StudentPaymentRecordForAdditionalService
+            {
+                AdditionalService = new AdditionalService
+                {
+                    Worker = worker,
+                    Resource = resource,
+                    WorkerPorcentageProfits = 15
+                },
+                AdditionalServiceResourceId = resource.Id,
+                AdditionalServiceWorkerId = worker.Id,
+                Student = new Student 
+                {
+                    Id = "0998765432158", Name = "Pablo", LastName = "Curbelo Paez", 
+                    PhoneNumber = 56784392, Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
+                    DateBecomedMember = new DateTime(2020, 2, 1), Founds = 3,
+                    Tuitor = new Tuitor
+                    {
+                        Name = "Elena", PhoneNumber = 54637721
+                    },  
+                    ScholarityLevel = Domain.Enums.Education.Primaria 
+                },
+                Date = new DateTime(2018,12,02)
+            }
+        };
     }
     
     private static StudentPaymentRecordPerCourseGroup[] GetStudentPaymentRecordPerCourseGroups()
