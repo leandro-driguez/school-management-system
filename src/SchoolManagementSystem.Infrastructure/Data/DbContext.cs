@@ -56,53 +56,26 @@ public class SchoolContext : DbContext
     {
         // Entities
         modelBuilder.ApplyConfiguration(new AdditionalServiceConfiguration());
-
         modelBuilder.ApplyConfiguration(new BasicMeanConfiguration());
-        // modelBuilder.Entity<BasicMean>().ToTable("BasicMean");
-
         modelBuilder.ApplyConfiguration(new ClassroomConfiguration());
-        // modelBuilder.Entity<Classroom>().ToTable("Classroom");
-
         modelBuilder.ApplyConfiguration(new CourseConfiguration());
-        // modelBuilder.Entity<Course>().ToTable("Course");
-
         modelBuilder.ApplyConfiguration(new CourseGroupConfiguration());
-        // modelBuilder.Entity<CourseGroup>().ToTable("CourseGroup");
-
         modelBuilder.ApplyConfiguration(new ExpenseConfiguration());
-        // modelBuilder.Entity<Expense>().ToTable("Expense");
-
         modelBuilder.ApplyConfiguration(new PositionConfiguration());
-        // modelBuilder.Entity<Position>().ToTable("Position");
-        
         modelBuilder.ApplyConfiguration(new ResourceConfiguration());
-        // modelBuilder.Entity<Resource>().ToTable("Resource");
-
         modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
-        // modelBuilder.Entity<Schedule>().ToTable("Schedule");
-        
         modelBuilder.ApplyConfiguration(new SchoolMemberConfiguration());
-        // modelBuilder.Entity<SchoolMember>().ToTable("SchoolMember");
-
         modelBuilder.ApplyConfiguration(new ShiftConfiguration());
-        // modelBuilder.Entity<Shift>().ToTable("Shift");
-
-        modelBuilder.ApplyConfiguration(new TeacherConfiguration());
-        
-        modelBuilder.ApplyConfiguration(new TuitorConfiguration());
-        
         modelBuilder.ApplyConfiguration(new StudentConfiguration());
-        // modelBuilder.Entity<Student>().ToTable("Student");
-        // modelBuilder.Entity<Tuitor>().ToTable("Tuitor"); 
-        
+        modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+        modelBuilder.ApplyConfiguration(new TuitorConfiguration());
         modelBuilder.ApplyConfiguration(new WorkerConfiguration());
-        // modelBuilder.Entity<Worker>().ToTable("Worker");
 
+        // Records
         modelBuilder.ApplyConfiguration(new ExpenseRecordConfiguration());
         modelBuilder.ApplyConfiguration(new StudentPaymentRecordForAdditionalServiceConfiguration());
         modelBuilder.ApplyConfiguration(new StudentPaymentRecordPerCourseGroupConfiguration());
 
-        // Records
         // modelBuilder.Entity<ExpenseRecord>().ToTable("ExpenseRecord");
         // modelBuilder.Entity<StudentPaymentRecordForAdditionalService>()
         // .ToTable("StudentPaymentRecordForAdditionalService");
