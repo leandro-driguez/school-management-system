@@ -8,6 +8,7 @@ public class StudentCourseGroupRelationConfiguration : IEntityTypeConfiguration<
 {
     public void Configure(EntityTypeBuilder<StudentCourseGroupRelation> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(s 
+            => new { s.StudentId, s.CourseGroupId, s.CourseGroupCourseId, s.StartDate });
     }
 }

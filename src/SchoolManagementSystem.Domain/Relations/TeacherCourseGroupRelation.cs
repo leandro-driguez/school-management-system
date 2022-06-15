@@ -6,21 +6,21 @@ namespace SchoolManagementSystem.Domain.Relations
 {
     public class TeacherCourseGroupRelation
     {
-        [Required]
+        // [Required]
         public Teacher Teacher { get; set; }
         
-        [Required]
+        // [Required]
         public CourseGroup CourseGroup { get; set; }
         
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-            ApplyFormatInEditMode = true)]
+        // [Required]
+        // [DataType(DataType.Date)]
+        // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
+        //     ApplyFormatInEditMode = true)]
         public DateTime StartDate{ get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-            ApplyFormatInEditMode = true)]
+        // [DataType(DataType.Date)]
+        // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
+        //     ApplyFormatInEditMode = true)]
         public DateTime EndDate{ get; set; }
     }
 }
