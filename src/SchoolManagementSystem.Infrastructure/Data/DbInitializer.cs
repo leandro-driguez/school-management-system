@@ -497,9 +497,9 @@ public static class DbInitializer
         };
     }
     
-    private static WorkerCourseGroupRelation[] GetWorkerCourseGroupRelations()
+    private static TeacherCourseGroupRelation[] GetWorkerCourseGroupRelations()
     {
-        return new WorkerCourseGroupRelation[2];
+        return new TeacherCourseGroupRelation[2];
     }
     
     private static WorkerPayRecordByPosition[] GetWorkerPayRecordByPositions()
@@ -545,9 +545,9 @@ public static class DbInitializer
         return new StudentCourseGroupRelation[2];
     }
     
-    private static WorkerCourseRelation[] GetWorkerCourseRelations()
+    private static TeacherCourseRelation[] GetWorkerCourseRelations()
     {
-        return new WorkerCourseRelation[2];
+        return new TeacherCourseRelation[2];
     }
     
     private static WorkerPositionRelation[] GetWorkerPositionRelations()

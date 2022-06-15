@@ -4,13 +4,13 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Relations
 {
-    public class WorkerCourseGroupRelation
+    public class TeacherCourseGroupRelation
     {
         [Required]
-        public Worker Teacher{ get; set; }
+        public Teacher Teacher { get; set; }
         
         [Required]
-        public CourseGroup Group { get; set; }
+        public CourseGroup CourseGroup { get; set; }
         
         [Required]
         [DataType(DataType.Date)]

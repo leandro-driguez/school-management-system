@@ -6,6 +6,7 @@ using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
 using SchoolManagementSystem.Infrastructure.Configurations;
 using SchoolManagementSystem.Infrastructure.Configurations.Records;
+using SchoolManagementSystem.Infrastructure.Configurations.Relations;
 
 namespace SchoolManagementSystem.Infrastructure.Data;
 
@@ -46,11 +47,8 @@ public class SchoolContext : DbContext
     public DbSet<WorkerPayRecordByPosition> WorkerPayRecordByPositions { get; set; }
     public DbSet<TeacherPayRecordPerCourse> TeacherPayRecordPerCourses { get; set; }
     
-    // public DbSet<WorkerCourseGroupRecord> WorkerCourseGroupRecords { get; set; }
-    //
-    
     // // Relations
-    // public DbSet<StudentCourseGroupRelation> StudentCourseGroupRelations { get; set; }
+    public DbSet<StudentCourseGroupRelation> StudentCourseGroupRelations { get; set; }
     // public DbSet<WorkerCourseRelation> WorkerCourseRelations { get; set; }
     // public DbSet<WorkerPositionRelation> WorkerPositionRelations { get; set; }
 
@@ -80,7 +78,9 @@ public class SchoolContext : DbContext
         modelBuilder.ApplyConfiguration(new WorkerPayRecordByPositionConfiguration());
         modelBuilder.ApplyConfiguration(new TeacherPayRecordPerCourseConfiguration());
 
-        // // Relations
+        // Relations
+        modelBuilder.ApplyConfiguration(new StudentCourseGroupRelationConfiguration());
+
         // modelBuilder.Entity<StudentCourseGroupRelation>().ToTable("StudentCourseGroupRelation");
         // modelBuilder.Entity<WorkerCourseRelation>().ToTable("WorkerCourseRelation");
         // modelBuilder.Entity<WorkerPositionRelation>().ToTable("WorkerPositionRelation");
