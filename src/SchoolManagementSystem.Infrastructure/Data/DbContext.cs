@@ -5,6 +5,7 @@ using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
 using SchoolManagementSystem.Infrastructure.Configurations;
+using SchoolManagementSystem.Infrastructure.Configurations.Records;
 
 namespace SchoolManagementSystem.Infrastructure.Data;
 
@@ -17,8 +18,7 @@ public class SchoolContext : DbContext
 
     // Entities
     
-    // public DbSet<AdditionalService> AdditionalServices { get; set; }
-    
+    public DbSet<AdditionalService> AdditionalServices { get; set; }
     public DbSet<BasicMean> BasicMeans { get; set; }
     public DbSet<Classroom> Classrooms { get; set; }
     public DbSet<Course> Courses { get; set; }
@@ -40,9 +40,9 @@ public class SchoolContext : DbContext
     public DbSet<Worker> Workers { get; set; }
     
     // Records
-    // public DbSet<ExpenseRecord> ExpenseRecords { get; set; }
-    // public DbSet<StudentPaymentRecordForAdditionalService> StudentPaymentRecordForAdditionalServices { get; set; }
-    // public DbSet<StudentPaymentRecordPerCourseGroup> StudentPaymentRecordPerCourseGroups { get; set; }
+    public DbSet<ExpenseRecord> ExpenseRecords { get; set; }
+    public DbSet<StudentPaymentRecordForAdditionalService> StudentPaymentRecordForAdditionalServices { get; set; }
+    public DbSet<StudentPaymentRecordPerCourseGroup> StudentPaymentRecordPerCourseGroups { get; set; }
     // public DbSet<WorkerCourseGroupRecord> WorkerCourseGroupRecords { get; set; }
     // public DbSet<WorkerPayRecordByPosition> WorkerPayRecordByPositions { get; set; }
     // public DbSet<WorkerPayRecordPerCourse> WorkerPayRecordPerCourses { get; set; }
@@ -55,7 +55,7 @@ public class SchoolContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Entities
-        // modelBuilder.ApplyConfiguration(new AdditionalServiceConfiguration());
+        modelBuilder.ApplyConfiguration(new AdditionalServiceConfiguration());
 
         modelBuilder.ApplyConfiguration(new BasicMeanConfiguration());
         // modelBuilder.Entity<BasicMean>().ToTable("BasicMean");
@@ -98,12 +98,16 @@ public class SchoolContext : DbContext
         modelBuilder.ApplyConfiguration(new WorkerConfiguration());
         // modelBuilder.Entity<Worker>().ToTable("Worker");
 
+        modelBuilder.ApplyConfiguration(new ExpenseRecordConfiguration());
+        modelBuilder.ApplyConfiguration(new StudentPaymentRecordForAdditionalServiceConfiguration());
+        modelBuilder.ApplyConfiguration(new StudentPaymentRecordPerCourseGroupConfiguration());
+
         // Records
         // modelBuilder.Entity<ExpenseRecord>().ToTable("ExpenseRecord");
         // modelBuilder.Entity<StudentPaymentRecordForAdditionalService>()
-            // .ToTable("StudentPaymentRecordForAdditionalService");
+        // .ToTable("StudentPaymentRecordForAdditionalService");
         // modelBuilder.Entity<StudentPaymentRecordPerCourseGroup>()
-            // .ToTable("StudentPaymentRecordPerCourseGroup");
+        // .ToTable("StudentPaymentRecordPerCourseGroup");
         // modelBuilder.Entity<WorkerCourseGroupRecord>().ToTable("WorkerCourseGroupRecord");
         // modelBuilder.Entity<WorkerPayRecordByPosition>().ToTable("WorkerPayRecordByPosition");
         // modelBuilder.Entity<WorkerPayRecordPerCourse>().ToTable("WorkerPayRecordPerCourse");
