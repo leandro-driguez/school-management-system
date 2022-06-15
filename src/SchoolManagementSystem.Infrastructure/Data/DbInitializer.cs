@@ -142,18 +142,18 @@ public static class DbInitializer
                     GetStudentPaymentRecordPerCourseGroups()
                 );
         }
+        if (!context.WorkerPayRecordByPositions.Any())
+        {
+            context.WorkerPayRecordByPositions
+                .AddRangeAsync(
+                    GetWorkerPayRecordByPositions()
+                );
+        }
         //     if (!context.WorkerCourseGroupRecords.Any())
         //     {
         //         context.WorkerCourseGroupRecords
         //             .AddRangeAsync(
         //                 GetWorkerCourseGroupRecords()
-        //             );
-        //     }
-        //     if (!context.WorkerPayRecordByPositions.Any())
-        //     {
-        //         context.WorkerPayRecordByPositions
-        //             .AddRangeAsync(
-        //                 GetWorkerPayRecordByPositions()
         //             );
         //     }
         //     if (!context.WorkerPayRecordPerCourses.Any())
@@ -504,7 +504,17 @@ public static class DbInitializer
     
     private static WorkerPayRecordByPosition[] GetWorkerPayRecordByPositions()
     {
-        return new WorkerPayRecordByPosition[2];
+        return new []
+        {
+            new WorkerPayRecordByPosition
+            {
+                Worker = new Worker { Id = "99124297421", Name = "Alfredo", LastName = "Perez",
+                    PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                    DateBecomedMember = new DateTime(2015, 9, 5) }, 
+                Position = new Position { Name = "director", Workers = new List<Worker>()}, 
+                Date = new DateTime(2017,2,1), Payment = 1500 
+            }
+        };
     }
     
     private static WorkerPayRecordPerCourse[] GetWorkerPayRecordPerCourses()

@@ -9,6 +9,8 @@ public class WorkerPayRecordByPositionConfiguration
 {
     public void Configure(EntityTypeBuilder<WorkerPayRecordByPosition> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(w => new { w.PositionId, w.WorkerId, w.Date });
+
+        builder.Property(w => w.Payment);
     }
 }
