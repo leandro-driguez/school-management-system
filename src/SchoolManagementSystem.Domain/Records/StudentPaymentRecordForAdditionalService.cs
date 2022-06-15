@@ -6,9 +6,12 @@ namespace SchoolManagementSystem.Domain.Records;
 
 public class StudentPaymentRecordForAdditionalService : Record
 {
-    [Required]
+    // [Required]
+    public string StudentId { get; set; }
     public Student Student { get; set; }
     
-    [Required]
-    public AdditionalService Service { get; set; }
+    // [Required]
+    public string AdditionalServiceWorkerId { get; set; }
+    public string AdditionalServiceResourceId { get; set; }
+    public AdditionalService AdditionalService { get; set; }
 }

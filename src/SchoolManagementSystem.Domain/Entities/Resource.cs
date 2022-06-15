@@ -23,5 +23,7 @@ namespace SchoolManagementSystem.Domain.Entities
         // [Required]
         // [MinLength(1)]
         public IList<Worker> Providers { get; set; }
+        
+        public  IList<AdditionalService> AdditionalServices { get; set; }
     }
 }

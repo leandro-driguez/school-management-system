@@ -6,9 +6,10 @@ namespace SchoolManagementSystem.Domain.Records;
 
 public class StudentPaymentRecordPerCourseGroup : Record
 {
-    [Required]
+    public string StudentId { get; set; }
     public Student Student { get; set; }
     
-    [Required]
-    public CourseGroup PaidGroup { get; set; }
+    public string CourseGroupId { get; set; }
+    public string CourseGroupCourseId { get; set; }
+    public CourseGroup CourseGroup { get; set; }
 }

@@ -8,6 +8,8 @@ public class AdditionalServiceConfiguration : IEntityTypeConfiguration<Additiona
 {
     public void Configure(EntityTypeBuilder<AdditionalService> builder)
     {
-        // ...
+        builder.HasKey(adds => new { adds.WorkerId, adds.ResourceId });
+
+        builder.Property(adds => adds.WorkerPorcentageProfits);
     }
 }
