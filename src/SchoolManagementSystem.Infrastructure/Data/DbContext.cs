@@ -44,9 +44,11 @@ public class SchoolContext : DbContext
     public DbSet<StudentPaymentRecordForAdditionalService> StudentPaymentRecordForAdditionalServices { get; set; }
     public DbSet<StudentPaymentRecordPerCourseGroup> StudentPaymentRecordPerCourseGroups { get; set; }
     public DbSet<WorkerPayRecordByPosition> WorkerPayRecordByPositions { get; set; }
+    public DbSet<TeacherPayRecordPerCourse> TeacherPayRecordPerCourses { get; set; }
+    
     // public DbSet<WorkerCourseGroupRecord> WorkerCourseGroupRecords { get; set; }
-    // public DbSet<WorkerPayRecordPerCourse> WorkerPayRecordPerCourses { get; set; }
     //
+    
     // // Relations
     // public DbSet<StudentCourseGroupRelation> StudentCourseGroupRelations { get; set; }
     // public DbSet<WorkerCourseRelation> WorkerCourseRelations { get; set; }
@@ -76,9 +78,7 @@ public class SchoolContext : DbContext
         modelBuilder.ApplyConfiguration(new StudentPaymentRecordForAdditionalServiceConfiguration());
         modelBuilder.ApplyConfiguration(new StudentPaymentRecordPerCourseGroupConfiguration());
         modelBuilder.ApplyConfiguration(new WorkerPayRecordByPositionConfiguration());
-
-        // modelBuilder.Entity<WorkerPayRecordByPosition>().ToTable("WorkerPayRecordByPosition");
-        // modelBuilder.Entity<WorkerPayRecordPerCourse>().ToTable("WorkerPayRecordPerCourse");
+        modelBuilder.ApplyConfiguration(new TeacherPayRecordPerCourseConfiguration());
 
         // // Relations
         // modelBuilder.Entity<StudentCourseGroupRelation>().ToTable("StudentCourseGroupRelation");

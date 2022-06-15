@@ -149,18 +149,18 @@ public static class DbInitializer
                     GetWorkerPayRecordByPositions()
                 );
         }
+        if (!context.TeacherPayRecordPerCourses.Any())
+        {
+            context.TeacherPayRecordPerCourses
+                .AddRangeAsync(
+                    GetTeacherPayRecordPerCourses()
+                );
+        }
         //     if (!context.WorkerCourseGroupRecords.Any())
         //     {
         //         context.WorkerCourseGroupRecords
         //             .AddRangeAsync(
         //                 GetWorkerCourseGroupRecords()
-        //             );
-        //     }
-        //     if (!context.WorkerPayRecordPerCourses.Any())
-        //     {
-        //         context.WorkerPayRecordPerCourses
-        //             .AddRangeAsync(
-        //                 GetWorkerPayRecordPerCourses()
         //             );
         //     }
         //
@@ -517,9 +517,27 @@ public static class DbInitializer
         };
     }
     
-    private static WorkerPayRecordPerCourse[] GetWorkerPayRecordPerCourses()
+    private static TeacherPayRecordPerCourse[] GetTeacherPayRecordPerCourses()
     {
-        return new WorkerPayRecordPerCourse[2];
+        return new []
+        {
+            new TeacherPayRecordPerCourse
+            {
+                Course = new Course
+                {
+                    Name = "Transito 101", Price = 16, Type = "Transito"
+                },
+                Teacher =new Teacher 
+                { 
+                    Id = "95012393872", Name = "Rebeca", LastName = "Portales",
+                    PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                    DateBecomedMember = new DateTime(2008, 9, 5), 
+                    CourseGroups  = new List<CourseGroup>()
+                },
+                Date = new DateTime(2018,5,23),
+                PaidPorcentage =  40
+            }
+        };
     }
     
     private static StudentCourseGroupRelation[] GetStudentCourseGroupRelations()
