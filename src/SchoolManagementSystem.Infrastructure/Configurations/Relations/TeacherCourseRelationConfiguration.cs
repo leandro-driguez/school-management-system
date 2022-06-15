@@ -8,6 +8,12 @@ public class TeacherCourseRelationConfiguration : IEntityTypeConfiguration<Teach
 {
     public void Configure(EntityTypeBuilder<TeacherCourseRelation> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(t => new { t.TeacherId, t.CourseId });
+
+        builder.HasOne(t => t.Course)
+            .WithMany(c => c.TeacherCourseRelations);
+        
+        builder.HasOne(t => t.Teacher)
+            .WithMany(c => c.TeacherCourseRelations);
     }
 }

@@ -1,3 +1,4 @@
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SchoolManagementSystem.Domain.Relations;
@@ -8,6 +9,7 @@ public class TeacherCourseGroupRelationConfiguration : IEntityTypeConfiguration<
 {
     public void Configure(EntityTypeBuilder<TeacherCourseGroupRelation> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(t 
+            => new { t.TeacherId, t.CourseGroupId, t.CourseGroupCourseId, t.StartDate });
     }
 }
