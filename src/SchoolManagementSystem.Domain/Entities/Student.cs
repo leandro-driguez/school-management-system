@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using SchoolManagementSystem.Domain.Enums;
+using SchoolManagementSystem.Domain.Relations;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
@@ -9,8 +10,6 @@ namespace SchoolManagementSystem.Domain.Entities
         public Tuitor Tuitor { get; set; }
         public int Founds { get; set; }   
         public Education ScholarityLevel{ get; set; }
-        
-        // [Required]
-        // public IList<CourseGroup> Groups { get; set; }
+        public IList<StudentCourseGroupRelation> StudentCourseGroupRelations { get; set; }
     }
 }

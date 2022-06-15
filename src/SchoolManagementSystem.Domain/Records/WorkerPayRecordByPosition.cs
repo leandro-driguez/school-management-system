@@ -7,15 +7,17 @@ namespace SchoolManagementSystem.Domain.Records;
 
 public class WorkerPayRecordByPosition : Record
 {
-    [Required]
+    // [Required]
+    public string WorkerId { get; set; }
     public Worker Worker { get; set; }
 
-    [Required]
+    // [Required]
+    public string PositionId { get; set; }
     public Position Position { get; set; }
 
-    [Required]
-    [Range(1,99999)]
-    [DataType(DataType.Currency)]
-    [Column(TypeName = "money")]
+    // [Required]
+    // [Range(1,99999)]
+    // [DataType(DataType.Currency)]
+    // [Column(TypeName = "money")]
     public int Payment { get; set; }
 }

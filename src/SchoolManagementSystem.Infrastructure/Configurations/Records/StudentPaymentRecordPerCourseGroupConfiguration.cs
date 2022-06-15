@@ -9,6 +9,7 @@ public class StudentPaymentRecordPerCourseGroupConfiguration
 {
     public void Configure(EntityTypeBuilder<StudentPaymentRecordPerCourseGroup> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(s 
+            => new { s.StudentId, s.CourseGroupId, s.CourseGroupCourseId, s.Date });
     }
 }

@@ -128,64 +128,65 @@ public static class DbInitializer
                     GetExpenseRecords()
                 );
         }
-        //     if (!context.StudentPaymentRecordForAdditionalServices.Any())
-        //     {
-        //         context.StudentPaymentRecordForAdditionalServices
-        //             .AddRangeAsync(
-        //                 GetStudentPaymentRecordForAdditionalServices()
-        //             );
-        //     }
-        //     if (!context.StudentPaymentRecordPerCourseGroups.Any())
-        //     {
-        //         context.StudentPaymentRecordPerCourseGroups
-        //             .AddRangeAsync(
-        //                 GetStudentPaymentRecordPerCourseGroups()
-        //             );
-        //     }
-        //     if (!context.WorkerCourseGroupRecords.Any())
-        //     {
-        //         context.WorkerCourseGroupRecords
-        //             .AddRangeAsync(
-        //                 GetWorkerCourseGroupRecords()
-        //             );
-        //     }
-        //     if (!context.WorkerPayRecordByPositions.Any())
-        //     {
-        //         context.WorkerPayRecordByPositions
-        //             .AddRangeAsync(
-        //                 GetWorkerPayRecordByPositions()
-        //             );
-        //     }
-        //     if (!context.WorkerPayRecordPerCourses.Any())
-        //     {
-        //         context.WorkerPayRecordPerCourses
-        //             .AddRangeAsync(
-        //                 GetWorkerPayRecordPerCourses()
-        //             );
-        //     }
-        //
-        //     // Relations  
-        //     if (!context.StudentCourseGroupRelations.Any())
-        //     {
-        //         context.StudentCourseGroupRelations
-        //             .AddRangeAsync(
-        //                 GetStudentCourseGroupRelations()
-        //             );
-        //     }
-        //     if (!context.WorkerCourseRelations.Any())
-        //     {
-        //         context.WorkerCourseRelations
-        //             .AddRangeAsync(
-        //                 GetWorkerCourseRelations()
-        //             );
-        //     }if (!context.WorkerPositionRelations.Any())
-        //     {
-        //         context.WorkerPositionRelations
-        //             .AddRangeAsync(
-        //                 GetWorkerPositionRelations()
-        //             );
-        //     }
-        //
+        if (!context.StudentPaymentRecordForAdditionalServices.Any())
+        {
+            context.StudentPaymentRecordForAdditionalServices
+                .AddRangeAsync(
+                    GetStudentPaymentRecordForAdditionalServices()
+                );
+        }
+        if (!context.StudentPaymentRecordPerCourseGroups.Any())
+        {
+            context.StudentPaymentRecordPerCourseGroups
+                .AddRangeAsync(
+                    GetStudentPaymentRecordPerCourseGroups()
+                );
+        }
+        if (!context.WorkerPayRecordByPositions.Any())
+        {
+            context.WorkerPayRecordByPositions
+                .AddRangeAsync(
+                    GetWorkerPayRecordByPositions()
+                );
+        }
+        if (!context.TeacherPayRecordPerCourses.Any())
+        {
+            context.TeacherPayRecordPerCourses
+                .AddRangeAsync(
+                    GetTeacherPayRecordPerCourses()
+                );
+        }
+        // Relations  
+        if (!context.StudentCourseGroupRelations.Any())
+        {
+            context.StudentCourseGroupRelations
+                .AddRangeAsync(
+                    GetStudentCourseGroupRelations()
+                );
+        }
+        if (!context.TeacherCourseGroupRelations.Any())
+        {
+            context.TeacherCourseGroupRelations
+                .AddRangeAsync(
+                    GetTeacherCourseGroupRelations()
+                );
+        }
+
+        if (!context.TeacherCourseRelations.Any())
+        {
+            context.TeacherCourseRelations
+                .AddRangeAsync(
+                    GetTeacherCourseRelations()
+                );
+        }
+        if (!context.WorkerPositionRelations.Any())
+        {
+            context.WorkerPositionRelations
+                .AddRangeAsync(
+                    GetWorkerPositionRelations()
+                );
+        }
+        
         context.SaveChangesAsync();
     }
 
@@ -197,7 +198,7 @@ public static class DbInitializer
     /// <returns></returns>
     private static AdditionalService[] GetAdditionalServices()
     {
-        return new AdditionalService[]
+        return new []
         {
             new AdditionalService {Worker = new Worker { Id = "99122104222", Name = "Luis",
                 LastName = "Guerrero", PhoneNumber = 52372293, 
@@ -210,7 +211,7 @@ public static class DbInitializer
     
     private static BasicMean[] GetBasicMeans()
     {
-        return new BasicMean[]
+        return new []
         {
             new BasicMean{ Type="Sofa", Origin = "MLC", Price = 200 , DevaluationInTime = 10,
                 Description = "Sofa para la entrada, de color carmelita" , 
@@ -418,42 +419,239 @@ public static class DbInitializer
     
     private static StudentPaymentRecordForAdditionalService[] GetStudentPaymentRecordForAdditionalServices()
     {
-        return new StudentPaymentRecordForAdditionalService[2];
+        var worker = new Worker
+        {
+            Id = "99197504222", Name = "Luis",
+            LastName = "Guerrero", PhoneNumber = 52372293,
+            Address = "Espada No.404 e/ San Benito y Esperanza",
+            DateBecomedMember = new DateTime(2015, 9, 5)
+        };
+        var resource = new Resource
+        {
+            Name = "libro de Ingles basico", Category = "Cuaderno", Price = 1000,
+            Providers = new List<Worker>()
+        };
+        
+        return new StudentPaymentRecordForAdditionalService[]
+        {
+            new StudentPaymentRecordForAdditionalService
+            {
+                AdditionalService = new AdditionalService
+                {
+                    Worker = worker,
+                    Resource = resource,
+                    WorkerPorcentageProfits = 15
+                },
+                AdditionalServiceResourceId = resource.Id,
+                AdditionalServiceWorkerId = worker.Id,
+                Student = new Student 
+                {
+                    Id = "0998765432158", Name = "Pablo", LastName = "Curbelo Paez", 
+                    PhoneNumber = 56784392, Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
+                    DateBecomedMember = new DateTime(2020, 2, 1), Founds = 3,
+                    Tuitor = new Tuitor
+                    {
+                        Name = "Elena", PhoneNumber = 54637721
+                    },  
+                    ScholarityLevel = Domain.Enums.Education.Primaria 
+                },
+                Date = new DateTime(2018,12,02)
+            }
+        };
     }
     
     private static StudentPaymentRecordPerCourseGroup[] GetStudentPaymentRecordPerCourseGroups()
     {
-        return new StudentPaymentRecordPerCourseGroup[2];
+        var course = new Course { Name = "Transito 101", Price = 16, Type = "Transito" };
+        
+        var courseGroup = new CourseGroup
+        {
+            Course = course,
+            Capacity = 16,
+            StartDate = new DateTime(2022, 3, 12),
+            EndDate = new DateTime(2022, 5, 12),
+            Teacher = new Teacher{ Id="00523573123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
+                CourseGroups = new List<CourseGroup>() }
+        };
+
+        var student = new Student 
+        { 
+            Id = "93084574542", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+            Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
+            DateBecomedMember = new DateTime(2020, 2, 1),
+            Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
+            ScholarityLevel = Domain.Enums.Education.Posgrado 
+        };
+        
+        return new []
+        {
+            new StudentPaymentRecordPerCourseGroup
+            {
+                CourseGroup = courseGroup, 
+                CourseGroupCourseId = course.Id, 
+                CourseGroupId = courseGroup.Id, 
+                Date = new DateTime(2017,8,12), 
+                StudentId = student.Id, 
+                Student = student
+            }
+        };
     }
-    
-    private static WorkerCourseGroupRelation[] GetWorkerCourseGroupRelations()
-    {
-        return new WorkerCourseGroupRelation[2];
-    }
-    
+
     private static WorkerPayRecordByPosition[] GetWorkerPayRecordByPositions()
     {
-        return new WorkerPayRecordByPosition[2];
+        return new []
+        {
+            new WorkerPayRecordByPosition
+            {
+                Worker = new Worker { Id = "99124297421", Name = "Alfredo", LastName = "Perez",
+                    PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                    DateBecomedMember = new DateTime(2015, 9, 5) }, 
+                Position = new Position { Name = "director", Workers = new List<Worker>()}, 
+                Date = new DateTime(2017,2,1), Payment = 1500 
+            }
+        };
     }
     
-    private static WorkerPayRecordPerCourse[] GetWorkerPayRecordPerCourses()
+    private static TeacherPayRecordPerCourse[] GetTeacherPayRecordPerCourses()
     {
-        return new WorkerPayRecordPerCourse[2];
+        return new []
+        {
+            new TeacherPayRecordPerCourse
+            {
+                Course = new Course
+                {
+                    Name = "Transito 101", Price = 16, Type = "Transito"
+                },
+                Teacher =new Teacher 
+                { 
+                    Id = "95012393872", Name = "Rebeca", LastName = "Portales",
+                    PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                    DateBecomedMember = new DateTime(2008, 9, 5), 
+                    CourseGroups  = new List<CourseGroup>()
+                },
+                Date = new DateTime(2018,5,23),
+                PaidPorcentage =  40
+            }
+        };
     }
     
     private static StudentCourseGroupRelation[] GetStudentCourseGroupRelations()
     {
-        return new StudentCourseGroupRelation[2];
+        var courseGroup = new CourseGroup
+        {
+            Course = new Course { Name = "Transito 101", Price = 16, Type = "Transito" },
+            Capacity = 16,
+            StartDate = new DateTime(2022, 3, 12),
+            EndDate = new DateTime(2022, 5, 12),
+            Teacher = new Teacher
+            { 
+                Id="00032834123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
+                CourseGroups = new List<CourseGroup>() 
+            }
+        };
+        var student = new Student
+        {
+            Id = "08490438573", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+            Address = "Pocitos No.23 e/ Czda de Vento y ALmendares",
+            DateBecomedMember = new DateTime(2020, 2, 1),
+            Tuitor = new Tuitor
+            {
+                Name = "Elena", PhoneNumber = 54637721
+            },
+            Founds = 3, ScholarityLevel = Domain.Enums.Education.Posgrado
+        };
+        return new []
+        {
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = courseGroup, 
+                CourseGroupId = courseGroup.Id, 
+                CourseGroupCourseId = courseGroup.Course.Id, 
+                StartDate = new DateTime(2019,4,12), 
+                Student = student,
+                StudentId = student.Id
+            }
+        };
     }
     
-    private static WorkerCourseRelation[] GetWorkerCourseRelations()
+    private static TeacherCourseGroupRelation[] GetTeacherCourseGroupRelations()
     {
-        return new WorkerCourseRelation[2];
+        var courseGroup = new CourseGroup
+        {
+            Course = new Course { Name = "Transito 101", Price = 1000, Type = "Transito" },
+            Capacity = 16,
+            StartDate = new DateTime(2022, 3, 12),
+            EndDate = new DateTime(2022, 5, 12),
+            Teacher = new Teacher
+            { 
+                Id="65423476345", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
+                CourseGroups = new List<CourseGroup>() 
+            }
+        };
+        var teacher = new Teacher
+        {
+            Id = "78493402348", Name = "Teresa", LastName = "Graveran",
+            PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza",
+            DateBecomedMember = new DateTime(2008, 9, 5),
+            CourseGroups = new List<CourseGroup>()
+
+        };
+        return new []
+        {
+            new TeacherCourseGroupRelation
+            {
+                CourseGroup = courseGroup,
+                CourseGroupId = courseGroup.Id,
+                CourseGroupCourseId = courseGroup.Course.Id,
+                Teacher = teacher,
+                StartDate = new DateTime(2022,3,21)
+            }
+        };
+    }
+    
+    private static TeacherCourseRelation[] GetTeacherCourseRelations()
+    {
+        var teacher = new Teacher
+        {
+            Id = "75934499884", Name = "Teresa", LastName = "Graveran",
+            PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza",
+            DateBecomedMember = new DateTime(2008, 9, 5),
+            CourseGroups = new List<CourseGroup>()
+
+        };
+        var course = new Course { Name = "Mat PI", Price = 1200, Type = "Matematica" };
+        return new []
+        {
+            new TeacherCourseRelation
+            {
+                Teacher = teacher,
+                TeacherId = teacher.Id,
+                Course = course,
+                CourseId = course.Id,
+                CorrespondingPorcentage = 40
+            }
+        };
     }
     
     private static WorkerPositionRelation[] GetWorkerPositionRelations()
     {
-        return new WorkerPositionRelation[2];
+        return new WorkerPositionRelation[]
+        {
+            new WorkerPositionRelation
+            {
+                Position = new Position { Name = "Secretaria", Workers = new List<Worker>()},
+                Worker = new Worker 
+                { 
+                    Id = "83403899900", Name = "Martha", LastName = "Garcia",
+                    PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                    DateBecomedMember = new DateTime(2015, 9, 5) 
+                },
+                FixedSalary = 2000
+            }
+        };
     }
     
 #endregion
