@@ -364,22 +364,16 @@ public static class DbInitializer
     {
         return new Student[2]
         {
-            new Student 
-            { 
-                Id = "123456784012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+            new Student { Id = "123456784012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
                 Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
                 DateBecomedMember = new DateTime(2020, 2, 1),
                 Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
-                ScholarityLevel = Domain.Enums.Education.Posgrado 
-            },
-            new Student 
-            { 
-                Id = "123456789012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+                ScholarityLevel = Domain.Enums.Education.Posgrado },
+            new Student { Id = "123456789012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
                 Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
                 DateBecomedMember = new DateTime(2020, 2, 1),
                 Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
-                ScholarityLevel = Domain.Enums.Education.Primaria 
-            },
+                ScholarityLevel = Domain.Enums.Education.Primaria },
         };
     }
     
@@ -396,14 +390,9 @@ public static class DbInitializer
     {
         return  new Teacher[]
         {
-            new Teacher 
-            { 
-                Id = "71022200221", Name = "Teresa", LastName = "Graveran",
+            new Teacher { Id = "71022200221", Name = "Teresa", LastName = "Graveran",
                 PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza", 
-                DateBecomedMember = new DateTime(2008, 9, 5), 
-                CourseGroups  = new List<CourseGroup>()
-                
-            }
+                DateBecomedMember = new DateTime(2008, 9, 5), CourseGroups  = new List<CourseGroup>()}
         };
     }
     
@@ -411,29 +400,20 @@ public static class DbInitializer
     {
         return new Worker[]
         {
-            new Worker 
-            { 
-                Id = "99123100221", Name = "Dario", LastName = "Rodriguez Llosa",
+            new Worker { Id = "99123100221", Name = "Dario", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
-                DateBecomedMember = new DateTime(2015, 9, 5) 
-            },
-            new Worker 
-            { 
-                Id = "99123160221", Name = "Dario", LastName = "Rodriguez Llosa",
+                DateBecomedMember = new DateTime(2015, 9, 5) },
+            new Worker { Id = "99123160221", Name = "Dario", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
-                DateBecomedMember = new DateTime(2015, 9, 5) 
-            }
+                DateBecomedMember = new DateTime(2015, 9, 5) }
         };
     }
     
     private static ExpenseRecord[] GetExpenseRecords()
     {
         return new ExpenseRecord[]{
-            new ExpenseRecord 
-            { 
-                Expense = new Expense { Category = "inmueble", Description = "empty" }, 
-                Date = new DateTime(2020), Amount = 1, Value = 200
-            },
+            new ExpenseRecord { Expense = new Expense { Category = "inmueble", Description = "empty" }, 
+                Date = new DateTime(2020), Amount = 1, Value = 200},
         };
     }
     
@@ -490,12 +470,9 @@ public static class DbInitializer
             Capacity = 16,
             StartDate = new DateTime(2022, 3, 12),
             EndDate = new DateTime(2022, 5, 12),
-            Teacher = new Teacher
-            { 
-                Id="00523573123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+            Teacher = new Teacher{ Id="00523573123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
                 Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
-                CourseGroups = new List<CourseGroup>() 
-            }
+                CourseGroups = new List<CourseGroup>() }
         };
 
         var student = new Student 
@@ -677,6 +654,6 @@ public static class DbInitializer
         };
     }
     
-    #endregion
+#endregion
         
 }
