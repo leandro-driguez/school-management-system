@@ -5,6 +5,7 @@ using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
 using SchoolManagementSystem.Infrastructure.Configurations;
+using SchoolManagementSystem.Infrastructure.Configurations.Records;
 
 namespace SchoolManagementSystem.Infrastructure.Data;
 
@@ -33,7 +34,7 @@ public class SchoolContext : DbContext
     public DbSet<Worker> Workers { get; set; }
     
     // Records
-    // public DbSet<ExpenseRecord> ExpenseRecords { get; set; }
+    public DbSet<ExpenseRecord> ExpenseRecords { get; set; }
     // public DbSet<StudentPaymentRecordForAdditionalService> StudentPaymentRecordForAdditionalServices { get; set; }
     // public DbSet<StudentPaymentRecordPerCourseGroup> StudentPaymentRecordPerCourseGroups { get; set; }
     // public DbSet<WorkerCourseGroupRecord> WorkerCourseGroupRecords { get; set; }
@@ -65,11 +66,12 @@ public class SchoolContext : DbContext
         modelBuilder.ApplyConfiguration(new WorkerConfiguration());
         
         // Records
-        modelBuilder.Entity<ExpenseRecord>().ToTable("ExpenseRecord");
+        modelBuilder.ApplyConfiguration(new ExpenseRecordConfiguration());
+        
         // modelBuilder.Entity<StudentPaymentRecordForAdditionalService>()
-            // .ToTable("StudentPaymentRecordForAdditionalService");
+        // .ToTable("StudentPaymentRecordForAdditionalService");
         // modelBuilder.Entity<StudentPaymentRecordPerCourseGroup>()
-            // .ToTable("StudentPaymentRecordPerCourseGroup");
+        // .ToTable("StudentPaymentRecordPerCourseGroup");
         // modelBuilder.Entity<WorkerCourseGroupRecord>().ToTable("WorkerCourseGroupRecord");
         // modelBuilder.Entity<WorkerPayRecordByPosition>().ToTable("WorkerPayRecordByPosition");
         // modelBuilder.Entity<WorkerPayRecordPerCourse>().ToTable("WorkerPayRecordPerCourse");

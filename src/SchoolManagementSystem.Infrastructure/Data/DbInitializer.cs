@@ -121,15 +121,13 @@ public static class DbInitializer
         }
         //     
         // Records
-        // if (!context.ExpenseRecords.Any())
-        // {
-        //     var expensesRecord = GetExpenseRecords();
-        //     context.ExpenseRecords
-        //         .AddRangeAsync(
-        //             expensesRecord
-        //         );
-        //     Console.WriteLine(expensesRecord[0].Expense.Id);
-        // }
+        if (!context.ExpenseRecords.Any())
+        {
+            context.ExpenseRecords
+                .AddRangeAsync(
+                    GetExpenseRecords()
+                );
+        }
         //     if (!context.StudentPaymentRecordForAdditionalServices.Any())
         //     {
         //         context.StudentPaymentRecordForAdditionalServices
