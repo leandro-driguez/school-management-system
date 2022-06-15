@@ -65,7 +65,7 @@ public class SchoolContext : DbContext
         modelBuilder.ApplyConfiguration(new WorkerConfiguration());
         
         // Records
-        // modelBuilder.Entity<ExpenseRecord>().ToTable("ExpenseRecord");
+        modelBuilder.Entity<ExpenseRecord>().ToTable("ExpenseRecord");
         // modelBuilder.Entity<StudentPaymentRecordForAdditionalService>()
             // .ToTable("StudentPaymentRecordForAdditionalService");
         // modelBuilder.Entity<StudentPaymentRecordPerCourseGroup>()

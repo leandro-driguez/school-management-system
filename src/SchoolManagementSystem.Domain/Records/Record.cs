@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.Domain.Records;
 
-public class Record
+public abstract class Record
 {
     [Required]
     [DataType(DataType.Date)]
