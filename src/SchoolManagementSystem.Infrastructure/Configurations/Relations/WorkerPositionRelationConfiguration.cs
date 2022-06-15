@@ -1,3 +1,4 @@
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SchoolManagementSystem.Domain.Relations;
@@ -8,6 +9,6 @@ public class WorkerPositionRelationConfiguration : IEntityTypeConfiguration<Work
 {
     public void Configure(EntityTypeBuilder<WorkerPositionRelation> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(w => new { w.WorkerId, w.PositionId });
     }
 }

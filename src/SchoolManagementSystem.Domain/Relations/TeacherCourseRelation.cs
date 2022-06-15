@@ -1,18 +1,13 @@
 
-using System.ComponentModel.DataAnnotations;
 using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Relations;
 
-public class TeacherCourseRelation : Entity
+public class TeacherCourseRelation
 {
-    // [Required]
+    public string TeacherId { get; set; }
     public Teacher Teacher { get; set; }
-    
-    // [Required]
-    public Course Course{ get; set; }
-    
-    // [Required]
-    // [Range(1,100)]
+    public string CourseId { get; set; }
+    public Course Course { get; set; }
     public int CorrespondingPorcentage { get; set; }
 }

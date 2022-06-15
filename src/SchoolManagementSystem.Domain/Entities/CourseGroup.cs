@@ -14,5 +14,6 @@ namespace SchoolManagementSystem.Domain.Entities
         public DateTime StartDate { get; set; } //= DateTime.Now();
         public DateTime EndDate { get; set; }
         public IList<StudentCourseGroupRelation> StudentCourseGroupRelations { get; set; }
+        public IList<TeacherCourseGroupRelation> TeacherCourseGroupRelations { get; set; }
     }
 }

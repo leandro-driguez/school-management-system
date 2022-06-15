@@ -5,17 +5,11 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Relations;
 
-public class WorkerPositionRelation : Entity
+public class WorkerPositionRelation
 {
-    [Required]
+    public string WorkerId { get; set; }
     public Worker Worker { get; set; }
-
-    [Required]
+    public string PositionId { get; set; }
     public Position Position { get; set; }
-
-    [Required]
-    [Range(1, 99999)]
-    [DataType(DataType.Currency)]
-    [Column(TypeName = "money")]
     public int FixedSalary { get; set; }
 }

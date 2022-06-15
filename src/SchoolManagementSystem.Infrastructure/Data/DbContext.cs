@@ -1,6 +1,5 @@
 
 using Microsoft.EntityFrameworkCore;
-using System.Data.Entity.ModelConfiguration;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
@@ -18,23 +17,17 @@ public class SchoolContext : DbContext
     }
 
     // Entities
-    
     public DbSet<AdditionalService> AdditionalServices { get; set; }
     public DbSet<BasicMean> BasicMeans { get; set; }
     public DbSet<Classroom> Classrooms { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<CourseGroup> CourseGroups { get; set; }
     public DbSet<Expense> Expenses { get; set; }
-    
     public DbSet<Position> Positions { get; set; }
-    
     public DbSet<Resource> Resources { get; set; }
-    
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolMember> SchoolMembers { get; set; }
-    
     public DbSet<Shift> Shifts { get; set; }
-    
     public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Tuitor> Tuitors { get; set; }
     public DbSet<Student> Students { get; set; }
@@ -47,10 +40,11 @@ public class SchoolContext : DbContext
     public DbSet<WorkerPayRecordByPosition> WorkerPayRecordByPositions { get; set; }
     public DbSet<TeacherPayRecordPerCourse> TeacherPayRecordPerCourses { get; set; }
     
-    // // Relations
+    // Relations
     public DbSet<StudentCourseGroupRelation> StudentCourseGroupRelations { get; set; }
-    // public DbSet<WorkerCourseRelation> WorkerCourseRelations { get; set; }
-    // public DbSet<WorkerPositionRelation> WorkerPositionRelations { get; set; }
+    public DbSet<TeacherCourseGroupRelation> TeacherCourseGroupRelations { get; set; }
+    public DbSet<TeacherCourseRelation> TeacherCourseRelations { get; set; }
+    public DbSet<WorkerPositionRelation> WorkerPositionRelations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -80,13 +74,8 @@ public class SchoolContext : DbContext
 
         // Relations
         modelBuilder.ApplyConfiguration(new StudentCourseGroupRelationConfiguration());
-
-        // modelBuilder.Entity<StudentCourseGroupRelation>().ToTable("StudentCourseGroupRelation");
-        // modelBuilder.Entity<WorkerCourseRelation>().ToTable("WorkerCourseRelation");
-        // modelBuilder.Entity<WorkerPositionRelation>().ToTable("WorkerPositionRelation");
-
-        // modelBuilder.Entity<Student>()
-        //         .HasMany<CourseGroup>(s => s.Groups)
-        //         .WithMany(c => c.Students).Map();
+        modelBuilder.ApplyConfiguration(new TeacherCourseGroupRelationConfiguration());
+        modelBuilder.ApplyConfiguration(new TeacherCourseRelationConfiguration());
+        modelBuilder.ApplyConfiguration(new WorkerPositionRelationConfiguration());
     }
 }

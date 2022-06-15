@@ -1,26 +1,16 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
 using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Relations
 {
     public class TeacherCourseGroupRelation
     {
-        // [Required]
+        public string TeacherId { get; set; }
         public Teacher Teacher { get; set; }
-        
-        // [Required]
+        public string CourseGroupId { get; set; }
+        public string CourseGroupCourseId { get; set; }
         public CourseGroup CourseGroup { get; set; }
-        
-        // [Required]
-        // [DataType(DataType.Date)]
-        // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-        //     ApplyFormatInEditMode = true)]
         public DateTime StartDate{ get; set; }
-
-        // [DataType(DataType.Date)]
-        // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-        //     ApplyFormatInEditMode = true)]
         public DateTime EndDate{ get; set; }
     }
 }
