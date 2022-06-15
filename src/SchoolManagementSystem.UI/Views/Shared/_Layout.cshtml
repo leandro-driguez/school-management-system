@@ -7,7 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="D'Clase School Management" />
     <link rel="icon" href="/images/icon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="~/_Layout.cshtml.css" asp-append-version="true" />
+    <link rel="stylesheet" href="css/index.css" asp-append-version="true" />
+
+
+    <title>@ViewData["Title"] - UI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UI.styles.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -24,6 +30,11 @@
             <hr />
         </nav>
     </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 </body>
 
 </html>
