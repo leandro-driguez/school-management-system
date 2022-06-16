@@ -26,41 +26,9 @@ public class Startup
             options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
         
         services.AddDatabaseDeveloperPageExceptionFilter();
+
+        services.AddRazorPages();
     }
-    
-    // public void Configure(WebApplication app)
-    // {
-        // if (app.Environment.IsDevelopment())
-        // {
-        //     app.UseDeveloperExceptionPage();
-        // }
-    //     if (!app.Environment.IsDevelopment())
-    //     {
-    //         app.UseExceptionHandler("/Home/Error");
-    //         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    //         app.UseHsts();
-    //     }
-    //
-    //     using (var scope = app.Services.CreateScope())
-    //     {
-    //         var services = scope.ServiceProvider;
-    //
-    //         var context = services.GetRequiredService<SchoolContext>();
-    //         context.Database.EnsureCreated();
-    //         DbInitializer.Initialize(context);
-    //     }
-    //
-    //     app.UseHttpsRedirection();
-    //     app.UseStaticFiles();
-    //
-    //     app.UseRouting();
-    //
-    //     app.UseAuthorization();
-    //
-    //     app.MapControllerRoute(
-    //         name: "default",
-    //         pattern: "{controller=Home}/{action=Index}/{id?}");
-    // }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
@@ -90,14 +58,12 @@ public class Startup
         app.UseRouting();
 
         app.UseAuthorization();
-
+        
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapRazorPages();
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
         });
-        
-        // app.MapControllerRoute(
-        //     name: "default",
-        //     pattern: "{controller=Home}/{action=Index}/{id?}");
     }
 }
