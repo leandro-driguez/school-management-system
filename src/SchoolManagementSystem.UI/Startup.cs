@@ -28,23 +28,57 @@ public class Startup
         services.AddDatabaseDeveloperPageExceptionFilter();
     }
     
-    public void Configure(WebApplication app)
+    // public void Configure(WebApplication app)
+    // {
+        // if (app.Environment.IsDevelopment())
+        // {
+        //     app.UseDeveloperExceptionPage();
+        // }
+    //     if (!app.Environment.IsDevelopment())
+    //     {
+    //         app.UseExceptionHandler("/Home/Error");
+    //         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    //         app.UseHsts();
+    //     }
+    //
+    //     using (var scope = app.Services.CreateScope())
+    //     {
+    //         var services = scope.ServiceProvider;
+    //
+    //         var context = services.GetRequiredService<SchoolContext>();
+    //         context.Database.EnsureCreated();
+    //         DbInitializer.Initialize(context);
+    //     }
+    //
+    //     app.UseHttpsRedirection();
+    //     app.UseStaticFiles();
+    //
+    //     app.UseRouting();
+    //
+    //     app.UseAuthorization();
+    //
+    //     app.MapControllerRoute(
+    //         name: "default",
+    //         pattern: "{controller=Home}/{action=Index}/{id?}");
+    // }
+    
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if (app.Environment.IsDevelopment())
+        if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
         }
         else
         {
-            app.UseExceptionHandler("/Home/Error");
+            app.UseExceptionHandler("/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-
-        using (var scope = app.Services.CreateScope())
+        
+        using (var scope = app.ApplicationServices.CreateScope())
         {
             var services = scope.ServiceProvider;
-
+        
             var context = services.GetRequiredService<SchoolContext>();
             context.Database.EnsureCreated();
             DbInitializer.Initialize(context);
@@ -57,8 +91,13 @@ public class Startup
 
         app.UseAuthorization();
 
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapRazorPages();
+        });
+        
+        // app.MapControllerRoute(
+        //     name: "default",
+        //     pattern: "{controller=Home}/{action=Index}/{id?}");
     }
 }
