@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/Table.css" asp-append-version="true" />
 
     <!-- ------------------ SCRIPTS ------------------- -->
-    <script src="js\my.js"></script>
+    <script src="js\table_rows_func.js"></script>
     <script src="js\search.js"></script>
     <script src="js\chkbx.js"></script>
     <script src="js\popup.js"></script>
@@ -58,7 +58,8 @@
 
             <!-- ------------------ NO. ELEMENTOS ------------------- -->
             <div class="box">
-                <p><strong>Total:</strong> @Model.Count</p>
+                <p><strong>Total:</strong> @Model.Count </p>
+
             </div>
         </caption>
 
@@ -66,7 +67,6 @@
         <thead>
             <tr>
                 <th class="chkb"></th>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Capacidad</th>
             </tr>
@@ -75,12 +75,10 @@
 
             @for (int i = 1; i <= Model.Count; i++)
             {
-                <tr>
+                <tr id=@(Model.Count+i) onMouseOver='ResaltarFila(@(Model.Count+i))'
+                onMouseOut='RestablecerFila(@(Model.Count+i))'>
                     <td class="chkb" align="right">
                         <input type="checkbox" id=@i.ToString() onclick='uncheckOthers(@i.ToString())' />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => Model[i-1].Id)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => Model[i-1].Name)
