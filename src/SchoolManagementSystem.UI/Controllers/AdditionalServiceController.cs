@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
+using SchoolManagementSystem.UI.Models;
 
 namespace SchoolManagementSystem.UI.Controllers
 {
@@ -11,6 +15,7 @@ namespace SchoolManagementSystem.UI.Controllers
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
             return View();

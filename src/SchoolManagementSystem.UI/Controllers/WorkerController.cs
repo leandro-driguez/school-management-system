@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
+using SchoolManagementSystem.UI.Models;
 
 namespace SchoolManagementSystem.UI.Controllers
 {
     public class WorkerController : Controller
     {
-        private readonly SchoolContext _context;
+        private readonly IRepository<Worker> _repository;
 
-        public WorkerController(SchoolContext context)
+        public WorkerController(IRepository<Worker> repository)
         {
-            _context = context;
+            _repository = repository;
         }
         public IActionResult Index()
         {

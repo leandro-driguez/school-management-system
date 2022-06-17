@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
+using SchoolManagementSystem.UI.Models;
 
 namespace SchoolManagementSystem.UI.Controllers
 {
     public class PositionController : Controller
     {
-        private readonly SchoolContext _context;
+        private readonly IRepository<Position> _repository;
 
-        public PositionController(SchoolContext context)
+        public PositionController(IRepository<Position> repository)
         {
-            _context = context;
+            _repository = repository;
         }
         public IActionResult Index()
         {
