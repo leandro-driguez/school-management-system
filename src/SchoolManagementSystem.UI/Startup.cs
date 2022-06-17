@@ -18,8 +18,18 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddScoped<IRepository<BasicMean>, BasicMeanRepository>();
         services.AddScoped<IRepository<Classroom>, ClassroomRepository>();
-        
+        services.AddScoped<IRepository<Course>, CourseRepository>();
+        services.AddScoped<IRepository<CourseGroup>, CourseGroupRepository>();
+        services.AddScoped<IRepository<Expense>, ExpenseRepository>();
+        services.AddScoped<IRepository<Position>, PositionRepository>();
+        services.AddScoped<IRepository<Resource>, ResourceRepository>();
+        services.AddScoped<IRepository<Student>, StudentRepository>();
+        services.AddScoped<IRepository<Teacher>, TeacherRepository>();
+        services.AddScoped<IRepository<Tuitor>, TuitorRepository>();
+        services.AddScoped<IRepository<Worker>, WorkerRepository>();
+
         services.AddControllersWithViews();
         
         services.AddDbContext<SchoolContext>(options =>
