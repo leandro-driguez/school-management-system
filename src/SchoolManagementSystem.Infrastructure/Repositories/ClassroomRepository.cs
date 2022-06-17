@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
@@ -13,35 +14,29 @@ public class ClassroomRepository : IRepository<Classroom>
     {
         _context = context;
     }
-
-    public IList<Classroom> GetAll()
+    
+    public IQueryable<Classroom> Query()
     {
-        return _context.Classrooms.ToList();
+        return _context.Classrooms;
     }
 
-    public void Save()
+    public void AddAsync(Classroom entity)
+    {
+        _context.Classrooms.AddAsync(entity);
+    }
+
+    public void Update(Classroom entity)
+    {
+        _context.Classrooms.Update(entity);
+    }
+
+    public void Remove(Classroom entity)
+    {
+        _context.Classrooms.Remove(entity);
+    }
+
+    public void SaveAsync()
     {
         _context.SaveChangesAsync();
     }
-
-    // public void Create(Classroom entity)
-    // {
-    //     _context.Classrooms.AddRangeAsync(entity);
-    //     _context.SaveChangesAsync();
-    // }
-
-    // public Classroom Read(Guid entityId)
-    // {
-    //     return _context.Classrooms.FirstOrDefault(c => c.Id.Equals(entityId));
-    // }
-
-    // public void Update(Classroom entity)
-    // {
-    //     _context.Classrooms.UpdateRange(entity);
-    // }
-
-    // public void Delete(Guid entityId)
-    // {
-    //     _context.Classrooms.RemoveRange(Read(entityId));
-    // }
 }

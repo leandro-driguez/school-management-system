@@ -1,9 +1,9 @@
+
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.UI.Models;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
-using SchoolManagementSystem.Infrastructure.Data;
-using SchoolManagementSystem.UI.Models;
 
 namespace SchoolManagementSystem.UI.Controllers;
 
