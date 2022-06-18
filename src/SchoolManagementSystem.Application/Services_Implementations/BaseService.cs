@@ -3,7 +3,7 @@ using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Application;
 
-namespace SchoolManagementSystem.Application.Services;
+namespace SchoolManagementSystem.Application.Services_Implementations;
 
 public class BaseService<TEntity> : IService<TEntity> where TEntity : class
 {

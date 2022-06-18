@@ -3,16 +3,18 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.UI.Models;
+using SchoolManagementSystem.Domain.Services;
+using SchoolManagementSystem.Application.Services_Implementations;
 
 namespace SchoolManagementSystem.UI.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly SchoolContext _context;
+    // private readonly IService<> _service;
     
-    public HomeController(SchoolContext context)
+    public HomeController()
     {
-        _context = context;
+        // _service = service;
     }
 
     public IActionResult Index()

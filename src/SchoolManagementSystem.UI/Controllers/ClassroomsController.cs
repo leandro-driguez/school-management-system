@@ -3,23 +3,24 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.UI.Models;
 using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Domain.Interfaces;
 
 namespace SchoolManagementSystem.UI.Controllers;
 
 public class ClassroomsController : Controller
 {
-    private readonly IRepository<Classroom> _repository;
+    private readonly IService<Classroom> _service;
 
-    public ClassroomsController(IRepository<Classroom> repository)
+    public ClassroomsController(IService<Classroom> service)
     {
-        _repository = repository;
+        _service = service;
     }
 
     public IActionResult Index()
     {
-        // return View(_repository.GetAll());
-        throw new NotImplementedException();
+        return View(_service.Query());
+        // throw new NotImplementedException();
     }
 
     public IActionResult Create()

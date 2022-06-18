@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
+using SchoolManagementSystem.Domain.Services;
+using SchoolManagementSystem.Application.Services_Implementations;
+using SchoolManagementSystem.Application.Repositories_Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Infrastructure.Repositories;
 
@@ -19,9 +22,12 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // services.AddScoped<IRepository<BasicMean>, BasicMeanRepository>();
-        services.AddScoped<IRepository<Classroom>, ClassroomRepository>();
+        services.AddScoped<IClassroomRepository, ClassroomRepository>();
+        services.AddScoped<IService<Classroom>, ClassroomService>();
+        services.AddScoped<IObjectContext, SchoolContext>();
         // services.AddScoped<IRepository<Course>, CourseRepository>();
         // services.AddScoped<IRepository<CourseGroup>, CourseGroupRepository>();
+        // services.AddScoped<IRepository<Expense>, ExpenseRepository>();
         // services.AddScoped<IRepository<Expense>, ExpenseRepository>();
         // services.AddScoped<IRepository<Position>, PositionRepository>();
         // services.AddScoped<IRepository<Resource>, ResourceRepository>();
