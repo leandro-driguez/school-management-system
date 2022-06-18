@@ -1,7 +1,6 @@
 using SchoolManagementSystem.Domain.Interfaces;
 
-namespace Gateways.Data.Implementations.Repositories;
-
+namespace SchoolManagementSystem.Infrastructure.Repositories
 public class CrudRepository<TEntity> : IRepository<TEntity> where TEntity : class
 {
     public CrudRepository(IObjectContext context)
