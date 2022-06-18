@@ -4,22 +4,22 @@ using SchoolManagementSystem.Infrastructure.Data;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class ExpenseRepository : IRepository<Expense>
-{
-    SchoolContext _context;
+// public class ExpenseRepository : IRepository<Expense>
+// {
+//     SchoolContext _context;
 
-    public ExpenseRepository(SchoolContext context)
-    {
-        _context = context;
-    }
+//     public ExpenseRepository(SchoolContext context)
+//     {
+//         _context = context;
+//     }
 
-    public IList<Expense> GetAll()
-    {
-        return _context.Expenses.ToList();
-    }
+//     public IList<Expense> GetAll()
+//     {
+//         return _context.Expenses.ToList();
+//     }
 
-    public void Save()
-    {
-        _context.SaveChangesAsync();
-    }
-}
+//     public void Save()
+//     {
+//         _context.SaveChangesAsync();
+//     }
+// }

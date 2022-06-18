@@ -4,22 +4,22 @@ using SchoolManagementSystem.Infrastructure.Data;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class WorkerRepository : IRepository<Worker>
-{
-    SchoolContext _context;
+// public class WorkerRepository : IRepository<Worker>
+// {
+//     SchoolContext _context;
 
-    public WorkerRepository(SchoolContext context)
-    {
-        _context = context;
-    }
+//     public WorkerRepository(SchoolContext context)
+//     {
+//         _context = context;
+//     }
 
-    public IList<Worker> GetAll()
-    {
-        return _context.Workers.ToList();
-    }
+//     public IList<Worker> GetAll()
+//     {
+//         return _context.Workers.ToList();
+//     }
 
-    public void Save()
-    {
-        _context.SaveChangesAsync();
-    }
-}
+//     public void Save()
+//     {
+//         _context.SaveChangesAsync();
+//     }
+// }

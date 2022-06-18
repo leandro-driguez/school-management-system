@@ -18,7 +18,8 @@ public class ClassroomsController : Controller
 
     public IActionResult Index()
     {
-        return View(_repository.GetAll());
+        // return View(_repository.GetAll());
+        throw new NotImplementedException();
     }
 
     public IActionResult Create()

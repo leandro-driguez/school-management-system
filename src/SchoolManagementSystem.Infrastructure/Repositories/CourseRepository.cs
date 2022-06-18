@@ -4,22 +4,22 @@ using SchoolManagementSystem.Infrastructure.Data;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class CourseRepository : IRepository<Course>
-{
-    SchoolContext _context;
+// public class CourseRepository : IRepository<Course>
+// {
+//     SchoolContext _context;
 
-    public CourseRepository(SchoolContext context)
-    {
-        _context = context;
-    }
+//     public CourseRepository(SchoolContext context)
+//     {
+//         _context = context;
+//     }
 
-    public IList<Course> GetAll()
-    {
-        return _context.Courses.ToList();
-    }
+//     public IList<Course> GetAll()
+//     {
+//         return _context.Courses.ToList();
+//     }
 
-    public void Save()
-    {
-        _context.SaveChangesAsync();
-    }
-}
+//     public void Save()
+//     {
+//         _context.SaveChangesAsync();
+//     }
+// }
