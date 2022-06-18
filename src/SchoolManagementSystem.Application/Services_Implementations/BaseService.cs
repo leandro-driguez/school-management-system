@@ -1,5 +1,6 @@
 
 using SchoolManagementSystem.Domain.Interfaces;
+using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Application;
 
 namespace SchoolManagementSystem.Application.Services;
