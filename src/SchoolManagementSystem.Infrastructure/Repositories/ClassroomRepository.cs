@@ -6,7 +6,7 @@ using SchoolManagementSystem.Infrastructure.Data;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class ClassroomRepository : IRepository<Classroom>
+public class ClassroomRepository : Crudrep
 {
     SchoolContext _context;
 

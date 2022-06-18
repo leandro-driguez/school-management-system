@@ -3,18 +3,38 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
+using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Configurations;
 using SchoolManagementSystem.Infrastructure.Configurations.Records;
 using SchoolManagementSystem.Infrastructure.Configurations.Relations;
 
 namespace SchoolManagementSystem.Infrastructure.Data;
 
-public class SchoolContext : DbContext
+public class SchoolContext : DbContext, IObjectContext
 {
     public SchoolContext (DbContextOptions<SchoolContext> options)
         : base(options)
     {
     }
+
+    #region Methods and Properties
+
+    IQueryable<TEntity> IObjectContext.Query<TEntity>() => Set<TEntity>();
+
+    void IObjectContext.Add<TEntity>(TEntity entity) => Set<TEntity>().Add(entity);
+
+    void IObjectContext.Update<TEntity>(TEntity entity) => Set<TEntity>().Update(entity);
+
+    void IObjectContext.Remove<TEntity>(TEntity entity) => Set<TEntity>().Remove(entity);
+
+    void IObjectContext.Commit() => SaveChanges();
+
+    Task IObjectContext.CommitAsync() => SaveChangesAsync();
+
+    #endregion
+
+
+    #region Databases
 
     // Entities
     public DbSet<AdditionalService> AdditionalServices { get; set; }
@@ -45,6 +65,8 @@ public class SchoolContext : DbContext
     public DbSet<TeacherCourseGroupRelation> TeacherCourseGroupRelations { get; set; }
     public DbSet<TeacherCourseRelation> TeacherCourseRelations { get; set; }
     public DbSet<WorkerPositionRelation> WorkerPositionRelations { get; set; }
+
+    #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
