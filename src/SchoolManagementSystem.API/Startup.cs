@@ -7,6 +7,7 @@ using SchoolManagementSystem.Application.Services_Implementations;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Infrastructure.Repositories;
+using System.Text.Json.Serialization;
 
 namespace SchoolManagementSystem.API;
 
@@ -22,6 +23,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
+        services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
         services.AddDbContext<SchoolContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
