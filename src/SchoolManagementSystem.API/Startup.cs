@@ -37,7 +37,7 @@ public class Startup
         services.AddScoped<IService<Position>, PositionService>();
         // Workers
         services.AddScoped<IWorkerRepository, WorkerRepository>();
-        services.AddScoped<IService<Worker>, WorkerService>();
+        services.AddScoped<IWorkerService, WorkerService>();
         // Expenses
         services.AddScoped<IExpenseRepository, ExpenseRepository>();
         services.AddScoped<IService<Expense>, ExpenseService>();

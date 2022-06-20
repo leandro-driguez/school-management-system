@@ -10,9 +10,9 @@ namespace SchoolManagementSystem.API.Controllers;
 [Route("api/[controller]")]
 public class WorkersController : Controller
 {
-    private readonly IService<Worker> _service;
+    private readonly IWorkerService _service;
 
-    public WorkersController(IService<Worker> service)
+    public WorkersController(IWorkerService service)
     {
         _service = service;
     }
@@ -21,5 +21,16 @@ public class WorkersController : Controller
     public IActionResult GetWorkers()
     {
         return Ok(_service.Query().ToList());
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetWorker(string id)
+    {
+        var worker = _service.GetWorker(id);
+        if (worker == null)
+        {
+            return NotFound();
+        }
+        return Ok(worker);
     }
 }

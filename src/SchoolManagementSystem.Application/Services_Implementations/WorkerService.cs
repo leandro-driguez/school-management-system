@@ -13,6 +13,13 @@ public class WorkerService : BaseService<Worker>, IWorkerService
 
     }
 
+    public Worker GetWorker(string id)
+    {
+        return Query().Include(w => w.Services)
+            .Include(w => w.AdditionalServices)
+            .FirstOrDefault(w => w.Id==id);
+    }
+
     public override IQueryable<Worker> Query()
     {
         return base.Query().Include(w => w.Positions);
