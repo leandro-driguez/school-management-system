@@ -18,10 +18,8 @@ public class ClassroomsController : Controller
     }
 
     [HttpGet]
-    public IActionResult GetTop10()
+    public IActionResult GetClassrooms()
     {
         return Ok(_service.Query().ToList<Classroom>());
     }
 }
-
-// git commit -m "Add API and remove UI without errors"

@@ -21,33 +21,38 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        // services.AddScoped<IRepository<BasicMean>, BasicMeanRepository>();
+        services.AddControllers();
+
+        services.AddDbContext<SchoolContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
+
         services.AddScoped<IClassroomRepository, ClassroomRepository>();
         services.AddScoped<IService<Classroom>, ClassroomService>();
         services.AddScoped<IObjectContext, SchoolContext>();
-        // services.AddScoped<IRepository<Course>, CourseRepository>();
-        // services.AddScoped<IRepository<CourseGroup>, CourseGroupRepository>();
-        // services.AddScoped<IRepository<Expense>, ExpenseRepository>();
-        // services.AddScoped<IRepository<Expense>, ExpenseRepository>();
-        // services.AddScoped<IRepository<Position>, PositionRepository>();
-        // services.AddScoped<IRepository<Resource>, ResourceRepository>();
-        // services.AddScoped<IRepository<Student>, StudentRepository>();
-        // services.AddScoped<IRepository<Teacher>, TeacherRepository>();
-        // services.AddScoped<IRepository<Tuitor>, TuitorRepository>();
-        // services.AddScoped<IRepository<Worker>, WorkerRepository>();
         
-        services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-        
-        services.AddDbContext<SchoolContext>(options =>
-            options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
+
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(
+                builder =>
+                {
+                    builder.
+                    AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+        });
         
         // services.AddDatabaseDeveloperPageExceptionFilter();
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        // app.UseCors(options =>
+        //     options.WithOrigins("http://localhost:3000")
+        //     .AllowAnyHeader()
+        //     .AllowAnyMethod());
+
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -79,9 +84,7 @@ public class Startup
         
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapControllers();
         });
     } 
 }
