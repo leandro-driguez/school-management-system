@@ -13,7 +13,7 @@ public class BaseService<TEntity> : IService<TEntity> where TEntity : class
 
     protected IRepository<TEntity> BaseRepository { get; }
     
-    public IQueryable<TEntity> Query() => BaseRepository.Query();
+    public virtual IQueryable<TEntity> Query() => BaseRepository.Query();
     
     public void Add(TEntity entity) => BaseRepository.Add(entity);
 
