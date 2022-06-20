@@ -26,10 +26,16 @@ public class Startup
         services.AddDbContext<SchoolContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
 
+        // ClassRooms
         services.AddScoped<IClassroomRepository, ClassroomRepository>();
         services.AddScoped<IService<Classroom>, ClassroomService>();
+        // BasicMeans
         services.AddScoped<IBasicMeanRepository, BasicMeanRepository>();
         services.AddScoped<IService<BasicMean>, BasicMeanService>();
+        // Positions
+        services.AddScoped<IPositionRepository, PositionRepository>();
+        services.AddScoped<IService<Position>, PositionService>();
+
         services.AddScoped<IObjectContext, SchoolContext>();
         
         services.AddEndpointsApiExplorer();
