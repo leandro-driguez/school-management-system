@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aulas</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="/images/icon.ico" type="image/x-icon" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="css/classroom.css" asp-append-version="true" />
+
+    <!-- ------------------ SCRIPTS ------------------- -->
+    <script src="js\my.js"></script>
+    <script src="js\search.js"></script>
+    <script src="js\chkbx.js"></script>
+    <script src="js\popup.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <img
+        class="navb_left"
+        src="images\logo.jpg"
+        alt="Logo y nombre D'Clase"
+      />
+
+      <a href="students.html"
+        ><img class="navb_right" src="images\FAQ.jpg" alt="Ayuda"
+      /></a>
+
+      <a href="students.html"
+        ><img
+          class="navb_right"
+          src="images\notification.jpg"
+          alt="Notificaciones"
+      /></a>
+
+      <a href="students.html"
+        ><img class="navb_right" src="images\user.jpg" alt="Mi cuenta"
+      /></a>
+
+      <hr />
+    </nav>
+
+    <table id="myTable">
+      <caption>
+        <!-- ------------------ NAME ------------------- -->
+        <p class="table_title"><strong>Aulas</strong></p>
+
+        <!-- ------------------ SEARCH ------------------- -->
+        <div class="box">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="myInput"
+            onkeyup="myFunction('myInput', 'myTable')"
+            placeholder="Buscar"
+          />
+        </div>
+
+        <!-- ------------------ OPTIONS ------------------- -->
+
+        <!-- -------- Add -------- -->
+        <div class="box">
+          <a class="table_options" onclick="openForm('myForm')"
+            ><i class="fa fa-plus-square-o" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Delete -------- -->
+          <a
+            class="table_options"
+            onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); openForm('ac_buttons1')"
+            ><i class="fa fa-minus-square-o" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Edit -------- -->
+          <a
+            class="table_options"
+            onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); openForm('ac_buttons')"
+            ><i class="fa fa-edit" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Download -------- -->
+          <a class="table_options" href="index.html"
+            ><i class="fa fa-download" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Filter -------- -->
+          <a class="table_options" href="index.html"
+            ><i class="fa fa-filter" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Sort -------- -->
+          <a class="table_options" href="index.html"
+            ><i class="fa fa-sort" aria-hidden="true"></i
+          ></a>
+        </div>
+
+        <!-- ------------------ NO. ELEMENTOS ------------------- -->
+        <div class="box">
+          <p><strong>Total:</strong> 3</p>
+        </div>
+      </caption>
+
+      <!-- ------------------ HEADERS ------------------- -->
+      <thead>
+        <tr>
+          <th class="chkb"></th>
+          <th>Nombre</th>
+          <th>Capacidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          id="fila_1"
+          onMouseOver="ResaltarFila('fila_1');"
+          onMouseOut="RestablecerFila('fila_1')"
+        >
+          <td class="chkb" align="right">
+            <input type="checkbox" id="1" onclick="uncheckOthers('1')" />
+          </td>
+          <td>Amelia</td>
+          <td>Cruz Trujillo</td>
+        </tr>
+        <tr
+          id="fila_2"
+          onMouseOver="ResaltarFila('fila_2');"
+          onMouseOut="RestablecerFila('fila_2')"
+        >
+          <td class="chkb" align="right">
+            <input type="checkbox" id="2" onclick="uncheckOthers('2')" />
+          </td>
+          <td>Luis</td>
+          <td>Fuentes Molina</td>
+        </tr>
+        <tr
+          id="fila_3"
+          onMouseOver="ResaltarFila('fila_3');"
+          onMouseOut="RestablecerFila('fila_3')"
+        >
+          <td class="chkb" align="right">
+            <input type="checkbox" id="3" onclick="uncheckOthers('3')" />
+          </td>
+          <td>Isabela</td>
+          <td>Alvarado Ojeda</td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+
+    <!-- ------------------ BUTTONS ------------------- -->
+    <div class="ac_buttons" id="ac_buttons">
+      <button
+        class="open-button"
+        onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); closeForm('ac_buttons')"
+      >
+        Cancelar
+      </button>
+
+      <button class="open-button" onclick=" openForm('myForm')">Aceptar</button>
+    </div>
+
+    <div class="ac_buttons1" id="ac_buttons1">
+      <button
+        class="open-button"
+        onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); closeForm('ac_buttons1')"
+      >
+        Cancelar
+      </button>
+
+      <button class="open-button">Aceptar</button>
+    </div>
+
+    <!-- ------------------ POPUP ------------------- -->
+    <div class="form-popup" id="myForm">
+      <form action="closeForm('myForm')" class="form-container">
+        <h2>Inscribir estudiante</h2>
+
+        <label for="nombre"><b>Nombre</b></label>
+        <input type="text" placeholder="nombre" name="nombre" required />
+
+        <label for="apellidos"><b>Apellidos</b></label>
+        <input type="text" placeholder="apellidos" name="apellidos" required />
+
+        <label for="CI"><b>Carnet de Identidad</b></label>
+        <input type="text" placeholder="CI" name="CI" required />
+
+        <label for="telefono"><b>Teléfono</b></label>
+        <input type="text" placeholder="teléfono" name="telefono" required />
+
+        <label for="direccion"><b>Dirección</b></label>
+        <input type="text" placeholder="dirección" name="direccion" required />
+
+        <label for="fecha"><b>Fecha de Inicio en la Sede</b></label>
+        <input
+          type="text"
+          placeholder="fecha de inicio en la sede"
+          name="fecha"
+          required
+        />
+
+        <label for="nivel_escolar"><b>Nivel Escolar</b></label>
+        <input
+          type="text"
+          placeholder="nivel escolar"
+          name="nivel_escolar"
+          required
+        />
+
+        <label for="representante"><b>Representante</b></label>
+        <input type="text" placeholder="representante" name="representante" />
+
+        <button
+          type="submit"
+          class="btn"
+          onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); closeForm('ac_buttons')"
+        >
+          Aceptar
+        </button>
+
+        <button type="button" class="btn cancel" onclick="closeForm('myForm')">
+          Cerrar
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

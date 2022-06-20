@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Histórico de Pago por Estudiante</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="/images/icon.ico" type="image/x-icon" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="css/table.css" asp-append-version="true" />
+
+    <script src="js\my.js"></script>
+    <script src="js\search.js"></script>
+    <script src="js\chkbx.js"></script>
+    <script src="js\popup.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <img
+        class="navb_left"
+        src="images\logo.jpg"
+        alt="Logo y nombre D'Clase"
+      />
+
+      <a href="students.html"
+        ><img class="navb_right" src="images\FAQ.jpg" alt="Ayuda"
+      /></a>
+
+      <a href="students.html"
+        ><img
+          class="navb_right"
+          src="images\notification.jpg"
+          alt="Notificaciones"
+      /></a>
+
+      <a href="students.html"
+        ><img class="navb_right" src="images\user.jpg" alt="Mi cuenta"
+      /></a>
+
+      <hr />
+    </nav>
+    <nav>
+      <p class="data">Amelia</p>
+      
+      <p class="data">Cruz Trujillo</p>
+
+      <p class="data">00112234011</p>
+
+      <p class="data">+53 52040171</p>
+
+      <p class="data">Calle Cristina esq. Arroyo, Habana Vieja, La Habana</p>
+      
+      <p class="data">01/05/2021</p>
+
+      <p class="data">Universitario</p>
+
+      <p class="data">-</p>
+
+      <!-- -------- Delete -------- -->
+      <a class="data"
+      onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); show_hide_element('ac_buttons')"
+      ><i class="fa fa-minus-square-o" aria-hidden="true"></i
+    ></a>
+
+    <!-- -------- Edit -------- -->
+    <a class="data"
+      onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); show_hide_element('ac_buttons')"
+      ><i class="fa fa-edit" aria-hidden="true"></i
+    ></a>
+    </nav>
+
+    <table id="myTable">
+      <caption>
+        <!-- ------------------ NOMBRE ------------------- -->
+        <p class="table_title"><strong>Cursos activos</strong></p>
+
+        <!-- ------------------ BUSCAR ------------------- -->
+        <div class="box">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="myInput"
+            onkeyup="myFunction('myInput', 'myTable')"
+            placeholder="Buscar"
+          />
+        </div>
+
+        <!-- ------------------ OPTIONS ------------------- -->
+
+        <!-- -------- Add -------- -->
+        <div class="box">
+          <a class="table_options" onclick="show_hide_element('myForm')"
+            ><i class="fa fa-plus-square-o" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Delete -------- -->
+          <a
+            class="table_options"
+            onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); show_hide_element('ac_buttons')"
+            ><i class="fa fa-minus-square-o" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Edit -------- -->
+          <a
+            class="table_options"
+            onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); show_hide_element('ac_buttons')"
+            ><i class="fa fa-edit" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Download -------- -->
+          <a class="table_options" href="index.html"
+            ><i class="fa fa-download" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Filter -------- -->
+          <a class="table_options" href="index.html"
+            ><i class="fa fa-filter" aria-hidden="true"></i
+          ></a>
+
+          <!-- -------- Sort -------- -->
+          <a class="table_options" href="index.html"
+            ><i class="fa fa-sort" aria-hidden="true"></i
+          ></a>
+        </div>
+
+        <!-- ------------------ NO. ELEMENTOS ------------------- -->
+        <div class="box">
+          <p><strong>Total:</strong> 7</p>
+        </div>
+      </caption>
+
+      <!-- ------------------ HEADERS ------------------- -->
+      <thead>
+        <tr>
+          <th class="chkb"></th>
+          <th>Nombre</th>
+          <th>Grupo</th>
+          <th>Fecha de inscripción</th>
+        </tr>
+      </thead>
+
+      <!-- ------------------ FILAS ------------------- -->
+      <tbody>
+        <tr
+          id="fila_1"
+          onMouseOver="ResaltarFila('fila_1');"
+          onMouseOut="RestablecerFila('fila_1')"
+          ondblclick="CrearEnlace('student_payments.html');"
+        >
+          <td class="chkb" align="right">
+            <input type="checkbox" id="1" onclick="uncheckOthers('1')" />
+          </td>
+          <td>Historia de Cuba</td>
+          <td>Historia-C14</td>
+          <td>00112234011</td>
+        </tr>
+        <tr
+          id="fila_2"
+          onMouseOver="ResaltarFila('fila_2');"
+          onMouseOut="RestablecerFila('fila_2')"
+          ondblclick="CrearEnlace('student_payments.html');"
+        >
+          <td class="chkb">
+            <input type="checkbox" id="2" onclick="uncheckOthers('2')" />
+          </td>
+          <td>Álgebra Lineal</td>
+          <td>Álgebra-L11</td>
+          <td>02121534052</td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+
+    <!-- ------------------ BUTTONS ------------------- -->
+    <div class="ac_buttons" id="ac_buttons">
+      <button
+        class="open-button"
+        onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); show_hide_element('ac_buttons')"
+      >
+        Cancelar
+      </button>
+
+      <button class="open-button" onclick=" show_hide_element('myForm')">Aceptar</button>
+    </div>
+
+    <!-- ------------------ POPUP ------------------- -->
+    <div class="form-popup" id="myForm">
+      <form action="show_hide_element('myForm')" class="form-container">
+        <h2>Inscribir estudiante</h2>
+
+        <label for="nombre"><b>Nombre</b></label>
+        <input type="text" placeholder="nombre" name="nombre" required />
+
+        <label for="apellidos"><b>Apellidos</b></label>
+        <input type="text" placeholder="apellidos" name="apellidos" required />
+
+        <label for="CI"><b>Carnet de Identidad</b></label>
+        <input type="text" placeholder="CI" name="CI" required />
+
+        <label for="telefono"><b>Teléfono</b></label>
+        <input type="text" placeholder="teléfono" name="telefono" required />
+
+        <label for="direccion"><b>Dirección</b></label>
+        <input type="text" placeholder="dirección" name="direccion" required />
+
+        <label for="fecha"><b>Fecha de Inicio en la Sede</b></label>
+        <input
+          type="text"
+          placeholder="fecha de inicio en la sede"
+          name="fecha"
+          required
+        />
+
+        <label for="nivel_escolar"><b>Nivel Escolar</b></label>
+        <input
+          type="text"
+          placeholder="nivel escolar"
+          name="nivel_escolar"
+          required
+        />
+
+        <label for="representante"><b>Representante</b></label>
+        <input type="text" placeholder="representante" name="representante" />
+
+        <button
+          type="submit"
+          class="btn"
+          onclick="uncheckOthers('0'); document.getElementById('myTable').classList.toggle('show'); show_hide_element('ac_buttons')"
+        >
+          Aceptar
+        </button>
+
+        <button type="button" class="btn cancel" onclick="show_hide_element('myForm')">
+          Cerrar
+        </button>
+      </form>
+    </div>
+
+    <table id="myTable1">
+      <caption>
+        <caption>
+          <!-- ------------------ NOMBRE ------------------- -->
+          <p class="table_title"><strong>Histórico de Pago</strong></p>
+
+          <!-- ------------------ BUSCAR ------------------- -->
+          <div class="box">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="myInput1"
+              onkeyup="myFunction('myInput1', 'myTable1')"
+              placeholder="Buscar"
+            />
+          </div>
+
+          <!-- ------------------ OPTIONS ------------------- -->
+
+          <!-- -------- Add -------- -->
+          <div class="box">
+            <a class="table_options" onclick="show_hide_element('myForm1')"
+              ><i class="fa fa-plus-square-o" aria-hidden="true"></i
+            ></a>
+
+            <!-- -------- Delete -------- -->
+            <a
+              class="table_options"
+              onclick="uncheckOthers('0'); document.getElementById('myTable1').classList.toggle('show'); show_hide_element('ac_buttons1')"
+              ><i class="fa fa-minus-square-o" aria-hidden="true"></i
+            ></a>
+
+            <!-- -------- Edit -------- -->
+            <a
+              class="table_options"
+              onclick="uncheckOthers('0'); document.getElementById('myTable1').classList.toggle('show'); show_hide_element('ac_buttons1')"
+              ><i class="fa fa-edit" aria-hidden="true"></i
+            ></a>
+
+            <!-- -------- Download -------- -->
+            <a class="table_options" href="index.html"
+              ><i class="fa fa-download" aria-hidden="true"></i
+            ></a>
+
+            <!-- -------- Filter -------- -->
+            <a class="table_options" href="index.html"
+              ><i class="fa fa-filter" aria-hidden="true"></i
+            ></a>
+
+            <!-- -------- Sort -------- -->
+            <a class="table_options" href="index.html"
+              ><i class="fa fa-sort" aria-hidden="true"></i
+            ></a>
+          </div>
+
+          <!-- ------------------ NO. ELEMENTOS ------------------- -->
+          <div class="box">
+            <p><strong>Total:</strong> 6</p>
+          </div>
+        </caption>
+
+      <thead>
+        <tr>
+          <th class="chkb"></th>
+          <th>Fecha</th>
+          <th>Pago</th>
+          <th>Grupo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          id="fila_21"
+          onMouseOver="ResaltarFila('fila_21');"
+          onMouseOut="RestablecerFila('fila_21')"
+        >
+        <td class="chkb">
+          <input type="checkbox" id="21" onclick="uncheckOthers('21')" />
+        </td>
+          <td>07/04/2022</td>
+          <td>500</td>
+          <td>Álgebra-L11</td>
+        </tr>
+        <tr
+          id="fila_22"
+          onMouseOver="ResaltarFila('fila_22');"
+          onMouseOut="RestablecerFila('fila_22')"
+        >
+        <td class="chkb">
+          <input type="checkbox" id="22" onclick="uncheckOthers('22')" />
+        </td>
+          <td>10/05/2022</td>
+          <td>750</td>
+          <td>Álgebra-L11</td>
+        </tr>
+        <tr
+          id="fila_23"
+          onMouseOver="ResaltarFila('fila_23');"
+          onMouseOut="RestablecerFila('fila_23')"
+        >
+        <td class="chkb">
+          <input type="checkbox" id="23" onclick="uncheckOthers('23')" />
+        </td>
+        <td>05/06/2022</td>
+        <td>500</td>
+        <td>Álgebra-L11</td>
+      </tr>
+        <tr
+          id="fila_24"
+          onMouseOver="ResaltarFila('fila_24');"
+          onMouseOut="RestablecerFila('fila_24')"
+        >
+        <td class="chkb">
+          <input type="checkbox" id="24" onclick="uncheckOthers('24')" />
+        </td>
+          <td>24/03/2016</td>
+          <td>150</td>
+          <td>Biología-M14</td>
+        </tr>
+        <tr
+          id="fila_25"
+          onMouseOver="ResaltarFila('fila_25');"
+          onMouseOut="RestablecerFila('fila_25')"
+        >
+        <td class="chkb">
+          <input type="checkbox" id="25" onclick="uncheckOthers('25')" />
+        </td>
+          <td>30/08/2021</td>
+          <td>600</td>
+          <td>Programación-B11</td>
+        </tr>
+        <tr
+          id="fila_26"
+          onMouseOver="ResaltarFila('fila_26');"
+          onMouseOut="RestablecerFila('fila_26')"
+        >
+        <td class="chkb">
+          <input type="checkbox" id="26" onclick="uncheckOthers('26')" />
+        </td>
+          <td>14/06/2022</td>
+          <td>50</td>
+          <td>Historia-C14</td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+
+    <!-- ------------------ BUTTONS ------------------- -->
+    <div class="ac_buttons" id="ac_buttons1">
+      <button
+        class="open-button"
+        onclick="uncheckOthers('0'); document.getElementById('myTable1').classList.toggle('show'); show_hide_element('ac_buttons1')"
+      >
+        Cancelar
+      </button>
+
+      <button class="open-button" onclick=" show_hide_element('myForm1')">
+        Aceptar
+      </button>
+    </div>
+
+    <!-- ------------------ POPUP ------------------- -->
+    <div class="form-popup" id="myForm1">
+      <form action="closeForm('myForm1')" class="form-container">
+        <h2>Inscribir estudiante</h2>
+
+        <label for="nombre"><b>Nombre</b></label>
+        <input type="text" placeholder="nombre" name="nombre" required />
+
+        <label for="apellidos"><b>Apellidos</b></label>
+        <input type="text" placeholder="apellidos" name="apellidos" required />
+
+        <label for="CI"><b>Carnet de Identidad</b></label>
+        <input type="text" placeholder="CI" name="CI" required />
+
+        <label for="telefono"><b>Teléfono</b></label>
+        <input type="text" placeholder="teléfono" name="telefono" required />
+
+        <label for="direccion"><b>Dirección</b></label>
+        <input type="text" placeholder="dirección" name="direccion" required />
+
+        <label for="fecha"><b>Fecha de Inicio en la Sede</b></label>
+        <input
+          type="text"
+          placeholder="fecha de inicio en la sede"
+          name="fecha"
+          required
+        />
+
+        <label for="nivel_escolar"><b>Nivel Escolar</b></label>
+        <input
+          type="text"
+          placeholder="nivel escolar"
+          name="nivel_escolar"
+          required
+        />
+
+        <label for="representante"><b>Representante</b></label>
+        <input type="text" placeholder="representante" name="representante" />
+
+        <button
+          type="submit"
+          class="btn"
+          onclick="uncheckOthers('0'); document.getElementById('myTable1').classList.toggle('show'); show_hide_element('ac_buttons1')"
+        >
+          Aceptar
+        </button>
+
+        <button type="button" class="btn cancel" onclick="show_hide_element('myForm1')">
+          Cerrar
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
