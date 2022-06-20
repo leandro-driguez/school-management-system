@@ -20,6 +20,6 @@ public class PositionsController : Controller
     [HttpGet]
     public IActionResult GetPositions()
     {
-        return Ok(_service.Query().ToList<Position>());
+        return Ok(_service.Query().ToList());
     }
 }

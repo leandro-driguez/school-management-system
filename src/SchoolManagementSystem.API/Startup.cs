@@ -35,6 +35,9 @@ public class Startup
         // Positions
         services.AddScoped<IPositionRepository, PositionRepository>();
         services.AddScoped<IService<Position>, PositionService>();
+        // Workers
+        services.AddScoped<IWorkerRepository, WorkerRepository>();
+        services.AddScoped<IService<Worker>, WorkerService>();
 
         services.AddScoped<IObjectContext, SchoolContext>();
         
