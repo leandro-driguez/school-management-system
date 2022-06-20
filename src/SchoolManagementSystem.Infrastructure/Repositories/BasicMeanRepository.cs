@@ -1,25 +1,14 @@
 ﻿using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
+using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-// public class BasicMeanRepository : IRepository<BasicMean>
-// {
-//     SchoolContext _context;
+public class BasicMeanRepository : CrudRepository<BasicMean>, IBasicMeanRepository
+{
+    public BasicMeanRepository(IObjectContext context) : base(context)
+    {
 
-//     public BasicMeanRepository(SchoolContext context)
-//     {
-//         _context = context;
-//     }
-
-//     public IList<BasicMean> GetAll()
-//     {
-//         return _context.BasicMeans.ToList();
-//     }
-
-//     public void Save()
-//     {
-//         _context.SaveChangesAsync();
-//     }
-// }
+    }
+}

@@ -28,6 +28,8 @@ public class Startup
 
         services.AddScoped<IClassroomRepository, ClassroomRepository>();
         services.AddScoped<IService<Classroom>, ClassroomService>();
+        services.AddScoped<IBasicMeanRepository, BasicMeanRepository>();
+        services.AddScoped<IService<BasicMean>, BasicMeanService>();
         services.AddScoped<IObjectContext, SchoolContext>();
         
         services.AddEndpointsApiExplorer();
