@@ -53,6 +53,9 @@ public class Startup
         // CourseGroups
         services.AddScoped<ICourseGroupRepository, CourseGroupRepository>();
         services.AddScoped<ICourseGroupService, CourseGroupService>();
+        // Teachers
+        services.AddScoped<ITeacherRepository, TeacherRepository>();
+        services.AddScoped<ITeacherService, TeacherService>();
 
         services.AddScoped<IObjectContext, SchoolContext>();
         
