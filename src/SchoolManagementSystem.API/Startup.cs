@@ -36,7 +36,7 @@ public class Startup
 
         // ClassRooms
         services.AddScoped<IClassroomRepository, ClassroomRepository>();
-        services.AddScoped<IService<Classroom>, ClassroomService>();
+        services.AddScoped<IClassroomService, ClassroomService>();
         
         // BasicMeans
         services.AddScoped<IBasicMeanRepository, BasicMeanRepository>();

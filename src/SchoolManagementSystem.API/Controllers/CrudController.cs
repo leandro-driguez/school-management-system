@@ -9,12 +9,12 @@ using AutoMapper;
 
 namespace SchoolManagementSystem.API.Controllers;
 
-// [ApiController]
-// [Route("api/[controller]")]
+[ApiController]
+[Route("api/[controller]")]
 public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
 {
-    public readonly IService<TEntity> _service;
-    public readonly IMapper _mapperToDto;
+    private readonly IService<TEntity> _service;
+    private readonly IMapper _mapperToDto;
     
     public CrudControlller(IService<TEntity> service, 
         IMapper mapperToDto)
@@ -23,7 +23,7 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
         _mapperToDto = mapperToDto;
     }
 
-    // // [HttpGet]
+    [HttpGet]
     public IActionResult GetAll()
     {
         return Ok
@@ -34,7 +34,7 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
         );
     }
     
-    // [HttpGet("{id}")]
+    [HttpGet("{id}")]
     public IActionResult GetItemById(string id)
     {
         var entities = _service.Query().AsNoTrackingWithIdentityResolution();
@@ -42,8 +42,8 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
         return Ok(entity);
     }
 
-    // [HttpPost]
-    public IActionResult Post([FromForm] TDTO dto_model)
+    [HttpPost]
+    public virtual IActionResult Post([FromForm] TDTO dto_model)
     {   
 
         var entity = _mapperToDto.Map<TEntity>(dto_model);
@@ -52,8 +52,8 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
         return Ok();
     }
 
-    // [HttpPut("{id}")]
-    public IActionResult Put(string id, [FromForm] TDTO dto_model)
+    [HttpPut("{id}")]
+    public virtual IActionResult Put(string id, [FromForm] TDTO dto_model)
     {
         var entities = _service.Query().AsNoTrackingWithIdentityResolution();
         var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
@@ -66,8 +66,8 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
         return Ok();
     }
 
-    // [HttpDelete("{id}")]
-    public IActionResult Delete(string id)
+    [HttpDelete("{id}")]
+    public virtual IActionResult Delete(string id)
     {
         var entities = _service.Query().AsNoTrackingWithIdentityResolution();
         var entity = entities.FirstOrDefault(c => Equals(c.Id, id));

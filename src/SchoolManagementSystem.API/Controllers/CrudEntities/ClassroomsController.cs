@@ -9,34 +9,34 @@ using SchoolManagementSystem.API.Controllers;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-[ApiController]
-[Route("api/[controller]")]
+// [ApiController]
+// [Route("api/[controller]")]
 public class ClassroomsController : CrudControlller<Classroom, ClassroomDto>
 {
-    // private readonly IService<Classroom> _service;
-    // private readonly IMapper _mapperToDto;
+    private readonly IService<Classroom> _service;
+    private readonly IMapper _mapperToDto;
     
     public ClassroomsController(IClassroomService service, 
-        IMapper mapperToDto) : base(service ,mapperToDto)
+        IMapper mapper) : base(service ,mapper)
     {
-        // _service = service;
-        // _mapperToDto = mapperToDto;
+        _service = service;
+        _mapperToDto = mapper;
     }
 
-    [HttpGet]
-    public IActionResult GetClassrooms()
-    {
-        return base.GetAll();
-    }
+    // [HttpGet]
+    // public IActionResult GetClassrooms()
+    // {
+    //     return base.GetAll();
+    // }
     
-    [HttpGet("{id}")]
-    public IActionResult GetClassroomById(string id)
-    {
-        return base.GetItemById(id);
-    }
+    // [HttpGet("{id}")]
+    // public IActionResult GetClassroomById(string id)
+    // {
+    //     return base.GetItemById(id);
+    // }
 
     [HttpPost]
-    public IActionResult PostClassroom([FromForm] ClassroomDto classroomDto)
+    public override IActionResult Post([FromForm] ClassroomDto classroomDto)
     {   
         _service.Add(new Classroom
         {
@@ -51,13 +51,13 @@ public class ClassroomsController : CrudControlller<Classroom, ClassroomDto>
     }
 
      [HttpPut("{id}")]
-    public IActionResult PutClassroom(string id, [FromForm] ClassroomDto classroomDto)
+    public override IActionResult Put(string id, [FromForm] ClassroomDto classroomDto)
     {
         return base.Put(id,classroomDto);
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteClassroom(string id)
+    public override IActionResult Delete(string id)
     {
         return base.Delete(id);
     }
