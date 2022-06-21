@@ -59,6 +59,9 @@ public class Startup
         // Tuitors
         services.AddScoped<ITuitorRepository, TuitorRepository>();
         services.AddScoped<ITuitorService, TuitorService>();
+        // Resources
+        services.AddScoped<IResourceRepository, ResourceRepository>();
+        services.AddScoped<IResourceService, ResourceService>();
 
         services.AddScoped<IObjectContext, SchoolContext>();
         
