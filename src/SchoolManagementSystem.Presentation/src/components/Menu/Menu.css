@@ -1,0 +1,92 @@
+/* ------------------ BACKGROUNG ------------------- */
+body {
+    background-image: url("../Menu/images/bckgrd.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+/* ------------------ MENU ------------------- */
+.container {
+    position: relative;
+    margin-top: 100px;
+    margin-left: 9%;
+    margin-right: 9%;
+}
+
+img {
+    width: 250px;
+}
+
+/* ------------------ DROPDOWN ------------------- */
+button {
+    background-color: #ffffff;
+    border: none;
+    margin: 0px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1rem;
+}
+
+.dropdown {
+    display: grid;
+    position: -webkit-sticky;
+    margin: 10px;
+    height: auto;
+    width: auto;
+    float: left;
+    padding: 10px 10px 20px 10px;
+    border: 1px solid #ffffff;
+    background-color: white;
+    box-shadow: 5px 5px 5px #aaaaaa;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-scrolling: unset;
+    font-family: "Times New Roman", Times, serif;
+    font-size: medium;
+}
+
+.dropdown-content {
+    display: none;
+    width: inherit;
+    overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: alternate-reverse;
+}
+
+.dropdown-content a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.dropdown-content a:hover {
+    color: #f76262;
+}
+
+.dropdown-sec {
+    display: none;
+    width: inherit;
+    overflow: auto;
+}
+
+.dropdown-content:hover .dropdown-sec {
+    display: block;
+    animation: alternate-reverse;
+    margin-left: 20px;
+}
+
+.dropdown-sec a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.dropdown-sec a:hover {
+    color: #f76262;
+}
