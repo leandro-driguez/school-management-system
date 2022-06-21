@@ -1,4 +1,4 @@
-﻿
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
@@ -32,10 +32,12 @@ public class Startup
         services.AddDbContext<SchoolContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
 
+        services.AddAutoMapper(typeof(Program));
+
         // ClassRooms
         services.AddScoped<IClassroomRepository, ClassroomRepository>();
         services.AddScoped<IService<Classroom>, ClassroomService>();
-        services.AddScoped<IMapper<Classroom, ClassroomDto>, ClassroomMapper>();
+        
         // BasicMeans
         services.AddScoped<IBasicMeanRepository, BasicMeanRepository>();
         services.AddScoped<IService<BasicMean>, BasicMeanService>();

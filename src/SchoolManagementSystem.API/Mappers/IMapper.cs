@@ -1,6 +1,6 @@
 namespace SchoolManagementSystem.API.Mappers;
 
-public interface IMapper<T, K>
-{
-    Func<T, K> Mapper();
-}
+// public interface IMapper<T, K>
+// {
+//     Func<T, K> Mapper();
+// }

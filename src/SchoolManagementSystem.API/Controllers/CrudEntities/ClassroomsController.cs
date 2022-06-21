@@ -4,6 +4,7 @@ using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
+using AutoMapper;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
@@ -12,13 +13,13 @@ namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 public class ClassroomsController : Controller
 {
     private readonly IService<Classroom> _service;
-    private readonly Func<Classroom, ClassroomDto> _mapperToDto;
+    private readonly IMapper _mapperToDto;
     
     public ClassroomsController(IService<Classroom> service, 
-        IMapper<Classroom, ClassroomDto> mapperToDto)
+        IMapper mapperToDto)
     {
         _service = service;
-        _mapperToDto = mapperToDto.Mapper();
+        _mapperToDto = mapperToDto;
     }
 
     [HttpGet]
@@ -27,7 +28,7 @@ public class ClassroomsController : Controller
         return Ok
         (
             _service.Query()
-                .Select(_mapperToDto)
+                .Select(_mapperToDto.Map<Classroom,ClassroomDto>)
                 .ToList()
         );
     }

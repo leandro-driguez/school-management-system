@@ -1,20 +1,38 @@
+
+using AutoMapper;
 using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Mappers;
 
-public class ClassroomMapper : IMapper<Classroom, ClassroomDto>
+public class ClassroomProfile : Profile
 {
-    Func<Classroom, ClassroomDto> IMapper<Classroom, ClassroomDto>.Mapper()
+    public ClassroomProfile()
     {
-        return delegate(Classroom classroom)
-        {
-            return new ClassroomDto
-            {
-                Id = classroom.Id,
-                Name = classroom.Name,
-                Capacity = classroom.Capacity
-            };
-        };
+        CreateMap<Classroom, ClassroomDto>();
+        CreateMap<ClassroomDto, Classroom>();
+        // CreateMap<DevicePostModel, Device>();
+        // CreateMap<DevicePutModel, Device>();
     }
 }
+
+// using SchoolManagementSystem.API.Dtos;
+// using SchoolManagementSystem.Domain.Entities;
+
+// namespace SchoolManagementSystem.API.Mappers;
+
+// public class ClassroomMapper : IMapper<Classroom, ClassroomDto>
+// {
+//     Func<Classroom, ClassroomDto> IMapper<Classroom, ClassroomDto>.Mapper()
+//     {
+//         return delegate(Classroom classroom)
+//         {
+//             return new ClassroomDto
+//             {
+//                 Id = classroom.Id,
+//                 Name = classroom.Name,
+//                 Capacity = classroom.Capacity
+//             };
+//         };
+//     }
+// }
