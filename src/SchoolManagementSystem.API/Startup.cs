@@ -44,6 +44,9 @@ public class Startup
         // Expenses
         services.AddScoped<IExpenseRepository, ExpenseRepository>();
         services.AddScoped<IService<Expense>, ExpenseService>();
+        // Students
+        services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<IStudentService, StudentService>();
 
         services.AddScoped<IObjectContext, SchoolContext>();
         
