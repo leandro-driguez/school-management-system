@@ -1,3 +1,6 @@
+using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Interfaces;
+
 namespace SchoolManagementSystem.Domain.Services;
 
 public interface IService<TEntity> where TEntity : class
@@ -6,6 +9,8 @@ public interface IService<TEntity> where TEntity : class
     void Add(TEntity entity);
     void Update(TEntity entity);
     void Remove(TEntity entity);
+    // void SaveAsync();
     void Commit();
     Task CommitAsync();
+    IEnumerable<TEntity> FilterBy(Func<TEntity, bool> filter);
 }

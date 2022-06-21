@@ -12,7 +12,7 @@ public class BaseService<TEntity> : IService<TEntity> where TEntity : class
     }
 
     protected IRepository<TEntity> BaseRepository { get; }
-    
+
     public virtual IQueryable<TEntity> Query() => BaseRepository.Query();
     
     public void Add(TEntity entity) => BaseRepository.Add(entity);
@@ -25,4 +25,6 @@ public class BaseService<TEntity> : IService<TEntity> where TEntity : class
 
     public Task CommitAsync() => BaseRepository.CommitAsync();
 
+    public IEnumerable<TEntity> FilterBy(Func<TEntity, bool> filter)
+        => BaseRepository.Query().Where(filter);
 }

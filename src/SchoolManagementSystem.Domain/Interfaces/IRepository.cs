@@ -3,7 +3,6 @@ namespace SchoolManagementSystem.Domain.Interfaces;
 
 public interface IRepository<TEntity> where TEntity : class
 {
-
     IObjectContext Context {get; }
 
     IQueryable<TEntity> Query();

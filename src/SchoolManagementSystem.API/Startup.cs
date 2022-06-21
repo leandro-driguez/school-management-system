@@ -9,6 +9,8 @@ using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Infrastructure.Repositories;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
+using SchoolManagementSystem.API.Dtos;
+using SchoolManagementSystem.API.Mappers;
 
 namespace SchoolManagementSystem.API;
 
@@ -33,6 +35,8 @@ public class Startup
         // ClassRooms
         services.AddScoped<IClassroomRepository, ClassroomRepository>();
         services.AddScoped<IService<Classroom>, ClassroomService>();
+        services.AddScoped<IMapper<ClassroomDto, Classroom>, ClassroomMapper>();
+        services.AddScoped<IMapper<Classroom, ClassroomDto>, ClassroomMapper>();
         // BasicMeans
         services.AddScoped<IBasicMeanRepository, BasicMeanRepository>();
         services.AddScoped<IService<BasicMean>, BasicMeanService>();
