@@ -3,23 +3,16 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
+using SchoolManagementSystem.API.Dtos;
+using AutoMapper;
 
-namespace SchoolManagementSystem.API.Controllers;
+namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ExpensesController : Controller
+public class ExpensesController : CrudControlller<Expense, ExpenseDto>
 {
-    private readonly IService<Expense> _service;
 
-    public ExpensesController(IService<Expense> service)
+    public ExpensesController(IExpenseService service, IMapper mapper) : base(service, mapper)
     {
-        _service = service;
-    }
-
-    [HttpGet]
-    public IActionResult GetExpenses()
-    {
-        return Ok(_service.Query().ToList());
     }
 }
+

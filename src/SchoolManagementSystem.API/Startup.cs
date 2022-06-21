@@ -40,7 +40,7 @@ public class Startup
         
         // BasicMeans
         services.AddScoped<IBasicMeanRepository, BasicMeanRepository>();
-        services.AddScoped<IService<BasicMean>, BasicMeanService>();
+        services.AddScoped<IBasicMeanService, BasicMeanService>();
         // Positions
         services.AddScoped<IPositionRepository, PositionRepository>();
         services.AddScoped<IService<Position>, PositionService>();
@@ -49,7 +49,7 @@ public class Startup
         services.AddScoped<IWorkerService, WorkerService>();
         // Expenses
         services.AddScoped<IExpenseRepository, ExpenseRepository>();
-        services.AddScoped<IService<Expense>, ExpenseService>();
+        services.AddScoped<IExpenseService, ExpenseService>();
         // Students
         services.AddScoped<IStudentRepository, StudentRepository>();
         services.AddScoped<IStudentService, StudentService>();

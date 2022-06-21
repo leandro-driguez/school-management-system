@@ -9,45 +9,22 @@ using SchoolManagementSystem.API.Controllers;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-// [ApiController]
-// [Route("api/[controller]")]
 public class ClassroomsController : CrudControlller<Classroom, ClassroomDto>
 {
-    private readonly IService<Classroom> _service;
-    private readonly IMapper _mapperToDto;
+    // public readonly new IService<Classroom> _service;
+    // public readonly IMapper _mapper;
     
     public ClassroomsController(IClassroomService service, 
         IMapper mapper) : base(service ,mapper)
     {
-        _service = service;
-        _mapperToDto = mapper;
+        // _service = service;
+        // _mapper = mapper;
     }
-
-    // [HttpGet]
-    // public IActionResult GetClassrooms()
-    // {
-    //     return base.GetAll();
-    // }
-    
-    // [HttpGet("{id}")]
-    // public IActionResult GetClassroomById(string id)
-    // {
-    //     return base.GetItemById(id);
-    // }
 
     [HttpPost]
     public override IActionResult Post([FromForm] ClassroomDto classroomDto)
     {   
-        _service.Add(new Classroom
-        {
-            Name = classroomDto.Name,
-            Capacity = classroomDto.Capacity,
-            Shifts = new List<Shift>()
-        });
-        
-        _service.CommitAsync();
-        
-        return Ok();
+        return base.Post(classroomDto);
     }
 
      [HttpPut("{id}")]

@@ -13,8 +13,8 @@ namespace SchoolManagementSystem.API.Controllers;
 [Route("api/[controller]")]
 public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
 {
-    private readonly IService<TEntity> _service;
-    private readonly IMapper _mapperToDto;
+    public readonly IService<TEntity> _service;
+    public readonly IMapper _mapperToDto;
     
     public CrudControlller(IService<TEntity> service, 
         IMapper mapperToDto)
