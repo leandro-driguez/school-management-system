@@ -5,7 +5,7 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Dtos;
 
-public class ExpenseDto
+public class ExpenseDto : IDto
 {
     public string Id { get; set; }
 

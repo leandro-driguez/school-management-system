@@ -4,7 +4,7 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Dtos;
 
-public class ClassroomDto
+public class ClassroomDto : IDto
 {
     public string Id { get; set; }
     

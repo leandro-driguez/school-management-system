@@ -11,7 +11,7 @@ namespace SchoolManagementSystem.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
+public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity where TDTO : IDto
 {
     public readonly IService<TEntity> _service;
     public readonly IMapper _mapperToDto;
@@ -52,11 +52,11 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
         return Ok();
     }
 
-    [HttpPut("{id}")]
-    public virtual IActionResult Put(string id, [FromForm] TDTO dto_model)
+    [HttpPut]
+    public virtual IActionResult Put( [FromForm] TDTO dto_model)
     {
         var entities = _service.Query().AsNoTrackingWithIdentityResolution();
-        var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
+        var entity = entities.FirstOrDefault(c => Equals(c.Id, dto_model.Id));
 
         if(entity == null)
             throw new NotImplementedException();
