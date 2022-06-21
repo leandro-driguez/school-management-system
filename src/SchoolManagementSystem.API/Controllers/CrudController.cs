@@ -11,12 +11,12 @@ namespace SchoolManagementSystem.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
+public class CrudController<TEntity, TDto> : Controller where TEntity :  Entity
 {
     public readonly IService<TEntity> _service;
     public readonly IMapper _mapperToDto;
     
-    public CrudControlller(IService<TEntity> service, 
+    public CrudController(IService<TEntity> service, 
         IMapper mapperToDto)
     {
         _service = service;
@@ -29,7 +29,7 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
         return Ok
         (
             _service.Query()
-                .Select(_mapperToDto.Map<TEntity,TDTO>)
+                .Select(_mapperToDto.Map<TEntity,TDto>)
                 .ToList()
         );
     }
@@ -37,44 +37,57 @@ public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
     [HttpGet("{id}")]
     public IActionResult GetItemById(string id)
     {
-        var entities = _service.Query().AsNoTrackingWithIdentityResolution();
-        var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
+        var entities = _service.Query()
+            .AsNoTrackingWithIdentityResolution();
+        
+        var entity = entities
+            .FirstOrDefault(c => Equals(c.Id, id));
+        
         return Ok(entity);
     }
 
     [HttpPost]
-    public virtual IActionResult Post([FromForm] TDTO dto_model)
-    {   
-
+    public virtual IActionResult Post([FromForm] TDto dto_model)
+    {
         var entity = _mapperToDto.Map<TEntity>(dto_model);
+        
         _service.Add(entity);
         _service.CommitAsync();
+        
         return Ok();
     }
 
     [HttpPut("{id}")]
-    public virtual IActionResult Put(string id, [FromForm] TDTO dto_model)
+    public virtual IActionResult Put(string id, [FromForm] TDto dto_model)
     {
-        var entities = _service.Query().AsNoTrackingWithIdentityResolution();
+        var entities = _service.Query()
+            .AsNoTrackingWithIdentityResolution();
         var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
 
         if(entity == null)
             throw new NotImplementedException();
+        
         _mapperToDto.Map(dto_model,entity);
         _service.Update(entity);
         _service.CommitAsync();
+        
         return Ok();
     }
 
     [HttpDelete("{id}")]
     public virtual IActionResult Delete(string id)
     {
-        var entities = _service.Query().AsNoTrackingWithIdentityResolution();
+        var entities = _service.Query()
+            .AsNoTrackingWithIdentityResolution();
+        
         var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
+        
         if(entity == null)
             throw new NotImplementedException();
+        
         _service.Remove(entity);
         _service.CommitAsync();
+        
         return Ok();
     }
 }
