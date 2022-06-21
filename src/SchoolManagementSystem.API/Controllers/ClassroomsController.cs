@@ -23,9 +23,9 @@ public class ClassroomsController : Controller
         return Ok(_service.Query().ToList<Classroom>());
     }
     
-    // [HttpGet]
-    // public IActionResult GetClassroomById(string id)
-    // {
-    //     return Ok(_service.Query().ToList<Classroom>());
-    // }
+    [HttpGet("{id}")]
+    public IActionResult GetClassroomById(string id)
+    {
+        return Ok(_service.Query().ToList<Classroom>());
+    }
 }
