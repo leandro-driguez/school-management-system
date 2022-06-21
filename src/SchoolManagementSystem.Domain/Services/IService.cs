@@ -12,5 +12,4 @@ public interface IService<TEntity> where TEntity : class
     // void SaveAsync();
     void Commit();
     Task CommitAsync();
-    IEnumerable<TEntity> FilterBy(Func<TEntity, bool> filter);
 }

@@ -24,7 +24,4 @@ public class BaseService<TEntity> : IService<TEntity> where TEntity : class
     public void Commit() => BaseRepository.Commit();
 
     public Task CommitAsync() => BaseRepository.CommitAsync();
-
-    public IEnumerable<TEntity> FilterBy(Func<TEntity, bool> filter)
-        => BaseRepository.Query().Where(filter);
 }
