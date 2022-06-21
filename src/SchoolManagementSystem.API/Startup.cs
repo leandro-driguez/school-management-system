@@ -8,6 +8,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Infrastructure.Repositories;
 using System.Text.Json.Serialization;
+using Microsoft.OpenApi.Models;
 
 namespace SchoolManagementSystem.API;
 
@@ -64,18 +65,23 @@ public class Startup
         services.AddScoped<IResourceService, ResourceService>();
 
         services.AddScoped<IObjectContext, SchoolContext>();
-        
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
 
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(
                 builder =>
                 {
-                    builder.
-                    AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                    builder.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
                 });
+        });
+        
+        
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "School Management System", Version = "v1" });
         });
         
         // services.AddDatabaseDeveloperPageExceptionFilter();
@@ -85,14 +91,15 @@ public class Startup
     {
         app.UseCors(options =>
             options.WithOrigins("http://localhost:3000")
-            .AllowAnyHeader()
-            .AllowAnyMethod());
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c => 
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "School Management System v1"));
         }
         else
         {
