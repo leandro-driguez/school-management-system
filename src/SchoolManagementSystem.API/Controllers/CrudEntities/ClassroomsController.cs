@@ -5,7 +5,7 @@ using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
 
-namespace SchoolManagementSystem.API.Controllers.CrudEntities;
+namespace SchoolManagementSystem.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
