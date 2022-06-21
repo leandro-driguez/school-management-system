@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
-using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Application.Services_Implementations;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
@@ -82,6 +81,9 @@ public class Startup
                 });
         });
         
+        // services.AddDefaultIdentity<IdentityUser>(options =>
+        //         options.SignIn.RequireConfirmedAccount = false)
+        //     .AddEntityFrameworkStores<SchoolContext>();
         
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>

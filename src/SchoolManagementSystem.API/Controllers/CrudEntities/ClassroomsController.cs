@@ -9,7 +9,7 @@ using SchoolManagementSystem.API.Controllers;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-public class ClassroomsController : CrudControlller<Classroom, ClassroomDto>
+public class ClassroomsController : CrudController<Classroom, ClassroomDto>
 {
     
     public ClassroomsController(IClassroomService service, 

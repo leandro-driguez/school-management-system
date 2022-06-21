@@ -8,10 +8,10 @@ using AutoMapper;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-public class ExpensesController : CrudControlller<Expense, ExpenseDto>
+public class ExpensesController : CrudController<Expense, ExpenseDto>
 {
-
-    public ExpensesController(IExpenseService service, IMapper mapper) : base(service, mapper)
+    public ExpensesController(IExpenseService service, IMapper mapper) 
+        : base(service, mapper)
     {
     }
 }
