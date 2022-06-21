@@ -1,25 +1,14 @@
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
+using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-// public class TuitorRepository : IRepository<Tuitor>
-// {
-//     SchoolContext _context;
+public class TuitorRepository : CrudRepository<Tuitor>, ITuitorRepository
+{
+    public TuitorRepository(IObjectContext context) : base(context)
+    {
 
-//     public TuitorRepository(SchoolContext context)
-//     {
-//         _context = context;
-//     }
-
-//     public IList<Tuitor> GetAll()
-//     {
-//         return _context.Tuitors.ToList();
-//     }
-
-//     public void Save()
-//     {
-//         _context.SaveChangesAsync();
-//     }
-// }
+    }
+}
