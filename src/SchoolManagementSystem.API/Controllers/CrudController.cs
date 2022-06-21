@@ -1,102 +1,80 @@
 
-// using Microsoft.AspNetCore.Mvc;
-// using SchoolManagementSystem.API.Dtos;
-// using SchoolManagementSystem.API.Mappers;
-// using SchoolManagementSystem.Domain.Entities;
-// using SchoolManagementSystem.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.API.Dtos;
+using SchoolManagementSystem.API.Mappers;
+using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Services;
+using Microsoft.EntityFrameworkCore; 
+using AutoMapper;
 
-// namespace SchoolManagementSystem.API.Controllers.CrudEntities;
+namespace SchoolManagementSystem.API.Controllers;
 
 // [ApiController]
 // [Route("api/[controller]")]
-// public class CrudControlller<TEntity> : Controller where TEntity : class
-// {
-//     private readonly IService<TEntity> _service;
-//     private readonly Func<Classroom, ClassroomDto> _mapperToDto;
+public class CrudControlller<TEntity, TDTO> : Controller where TEntity :  Entity
+{
+    public readonly IService<TEntity> _service;
+    public readonly IMapper _mapperToDto;
     
-//     public CrudControlller(IService<TEntity> service, 
-//         IMapper<Classroom, ClassroomDto> mapperToDto)
-//     {
-//         _service = service;
-//         _mapperToDto = mapperToDto.Mapper();
-//     }
+    public CrudControlller(IService<TEntity> service, 
+        IMapper mapperToDto)
+    {
+        _service = service;
+        _mapperToDto = mapperToDto;
+    }
 
-//     [HttpGet]
-//     public IActionResult GetClassrooms()
-//     {
-//         return Ok
-//         (
-//             _service.Query()
-//                 .Select(_mapperToDto)
-//                 .ToList()
-//         );
-//     }
+    // // [HttpGet]
+    public IActionResult GetAll()
+    {
+        return Ok
+        (
+            _service.Query()
+                .Select(_mapperToDto.Map<TEntity,TDTO>)
+                .ToList()
+        );
+    }
     
-//     [HttpGet("{id}")]
-//     public IActionResult GetClassroomById(string id)
-//     {
-//         var classrooms = _service.Query()
-//             .Where(c => c.Id == id);
+    // [HttpGet("{id}")]
+    public IActionResult GetItemById(string id)
+    {
+        var entities = _service.Query().AsNoTrackingWithIdentityResolution();
+        var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
+        return Ok(entity);
+    }
 
-//         foreach (var classroom in classrooms)
-//         {
-//             return Ok(classroom);
-//         }
+    // [HttpPost]
+    public IActionResult Post([FromForm] TDTO dto_model)
+    {   
 
-//         return BadRequest();
-//     }
+        var entity = _mapperToDto.Map<TEntity>(dto_model);
+        _service.Add(entity);
+        _service.CommitAsync();
+        return Ok();
+    }
 
-//     [HttpPost]
-//     public IActionResult PostClassroom([FromForm] ClassroomDto classroomDto)
-//     {   
-//         _service.Add(new Classroom
-//         {
-//             Name = classroomDto.Name,
-//             Capacity = classroomDto.Capacity,
-//             Shifts = new List<Shift>()
-//         });
-        
-//         _service.CommitAsync();
-        
-//         return Ok();
-//     }
+    // [HttpPut("{id}")]
+    public IActionResult Put(string id, [FromForm] TDTO dto_model)
+    {
+        var entities = _service.Query().AsNoTrackingWithIdentityResolution();
+        var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
 
-//     [HttpPut]
-//     public IActionResult PutClassroom([FromForm] ClassroomDto classroomDto)
-//     {
-//         var classrooms = _service.Query()
-//             .Where(c => c.Id == classroomDto.Id);
+        if(entity == null)
+            throw new NotImplementedException();
+        _mapperToDto.Map(dto_model,entity);
+        _service.Update(entity);
+        _service.CommitAsync();
+        return Ok();
+    }
 
-//         foreach (var classroom in classrooms.Take(1))
-//         {
-//             classroom.Name = classroomDto.Name;
-//             classroom.Capacity = classroomDto.Capacity;
-            
-//             _service.Update(classroom);
-    
-//             _service.CommitAsync();
-    
-//             return GetClassroomById(classroomDto.Id);
-//         }
-
-//         return BadRequest();
-//     }
-
-//     [HttpDelete("{id}")]
-//     public IActionResult DeleteClassroom(string id)
-//     {
-//         var classrooms = _service.Query()
-//             .Where(c => c.Id == id);
-
-//         foreach (var classroom in classrooms.Take(1))
-//         {
-//             _service.Remove(classroom);
-
-//             _service.CommitAsync();
-
-//             return Ok();
-//         }
-        
-//         return BadRequest();
-//     }
-// }
+    // [HttpDelete("{id}")]
+    public IActionResult Delete(string id)
+    {
+        var entities = _service.Query().AsNoTrackingWithIdentityResolution();
+        var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
+        if(entity == null)
+            throw new NotImplementedException();
+        _service.Remove(entity);
+        _service.CommitAsync();
+        return Ok();
+    }
+}

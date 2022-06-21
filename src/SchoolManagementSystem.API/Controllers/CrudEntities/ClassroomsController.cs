@@ -5,46 +5,34 @@ using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
 using AutoMapper;
+using SchoolManagementSystem.API.Controllers;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ClassroomsController : Controller
+public class ClassroomsController : CrudControlller<Classroom, ClassroomDto>
 {
-    private readonly IService<Classroom> _service;
-    private readonly IMapper _mapperToDto;
+    // private readonly IService<Classroom> _service;
+    // private readonly IMapper _mapperToDto;
     
-    public ClassroomsController(IService<Classroom> service, 
-        IMapper mapperToDto)
+    public ClassroomsController(IClassroomService service, 
+        IMapper mapperToDto) : base(service ,mapperToDto)
     {
-        _service = service;
-        _mapperToDto = mapperToDto;
+        // _service = service;
+        // _mapperToDto = mapperToDto;
     }
 
     [HttpGet]
     public IActionResult GetClassrooms()
     {
-        return Ok
-        (
-            _service.Query()
-                .Select(_mapperToDto.Map<Classroom,ClassroomDto>)
-                .ToList()
-        );
+        return base.GetAll();
     }
     
     [HttpGet("{id}")]
     public IActionResult GetClassroomById(string id)
     {
-        var classrooms = _service.Query()
-            .Where(c => c.Id == id);
-
-        foreach (var classroom in classrooms)
-        {
-            return Ok(classroom);
-        }
-
-        return BadRequest();
+        return base.GetItemById(id);
     }
 
     [HttpPost]
@@ -62,42 +50,15 @@ public class ClassroomsController : Controller
         return Ok();
     }
 
-    [HttpPut]
-    public IActionResult PutClassroom([FromForm] ClassroomDto classroomDto)
+     [HttpPut("{id}")]
+    public IActionResult PutClassroom(string id, [FromForm] ClassroomDto classroomDto)
     {
-        var classrooms = _service.Query()
-            .Where(c => c.Id == classroomDto.Id);
-
-        foreach (var classroom in classrooms.Take(1))
-        {
-            classroom.Name = classroomDto.Name;
-            classroom.Capacity = classroomDto.Capacity;
-            
-            _service.Update(classroom);
-    
-            _service.CommitAsync();
-    
-            return GetClassroomById(classroomDto.Id);
-        }
-
-        return BadRequest();
+        return base.Put(id,classroomDto);
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeleteClassroom(string id)
     {
-        var classrooms = _service.Query()
-            .Where(c => c.Id == id);
-
-        foreach (var classroom in classrooms.Take(1))
-        {
-            _service.Remove(classroom);
-
-            _service.CommitAsync();
-
-            return Ok();
-        }
-        
-        return BadRequest();
+        return base.Delete(id);
     }
 }
