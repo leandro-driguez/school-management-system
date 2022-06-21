@@ -26,7 +26,7 @@ public class WorkersController : Controller
     [HttpGet("{id}")]
     public IActionResult GetWorker(string id)
     {
-        var worker = _service.GetWorker(id);
+        var worker = _service.GetWorkerById(id);
         if (worker == null)
         {
             return NotFound();
