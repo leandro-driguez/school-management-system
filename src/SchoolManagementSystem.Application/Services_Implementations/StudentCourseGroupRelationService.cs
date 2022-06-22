@@ -7,10 +7,10 @@ using SchoolManagementSystem.Domain.Relations;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class StudentCourseGroupRelationService : BaseService<StudentPaymentRecordPerCourseGroup>, IStudentCourseGroupRelationService
+public class StudentCourseGroupRelationService : BaseService<StudentCourseGroupRelation>, IStudentCourseGroupRelationService
 {
     public StudentCourseGroupRelationService(IStudentCourseGroupRelationRepository repository) : base(repository)
     {
-
+        
     }
 }
