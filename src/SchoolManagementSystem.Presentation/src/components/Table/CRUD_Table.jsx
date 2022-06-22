@@ -18,7 +18,7 @@ const EditableCell = ({
         ...restProps
     }) => {
     
-    const inputNode = inputType === 'int' ? <InputNumber/> : <Input/>;
+    const inputNode = inputType === 'number' ? <InputNumber/> : <Input/>;
     
     return (
         <td {...restProps}>
@@ -63,7 +63,7 @@ const CRUD_Table = (
                         <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
                                     okText={"Aceptar"} onConfirm={() => Delete(record.id)}
                                     icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-                            <DeleteTwoTone/>
+                            <DeleteTwoTone />
                         </Popconfirm>
                     ) : null,
             },
@@ -97,24 +97,15 @@ const CRUD_Table = (
         ];
 
         var output = [];
-                    
-        for (let i = 0; i < props.headers.length; i++) {
-            output.push({
-                title: props.headers[i]['title'],
-                dataIndex: props.headers[i]['dataIndex'],
-                width: props.headers[i]['width'],
-                editable: props.headers[i]['editable'],
-                sorter: {
-                    compare: props.headers[i]['dataType'] == 'text' ? 
-                    (a, b) => a[props.headers[i]['title']].localeCompare(b[props.headers[i]['title']]) :
-                    (a, b) => a[props.headers[i]['title']] - b[props.headers[i]['title']]
-                },
-                dataType: props.headers[i]['dataType']
-            });
+
+        // columns = props.headers;
+
+        for (let index = 0; index < props.headers.length; index++) {
+           output.push(props.headers[index]); 
         }
         
         output.push(operations[0]);
-        output.push(operations[1]);
+        output.push(operations[1]); 
         
         console.log(output);
 
@@ -127,8 +118,7 @@ const CRUD_Table = (
     const edit = (record) => {
         form.setFieldsValue({
             name: '',
-            age: '',
-            address: '',
+            capacity: '',
             ...record,
         });
         setEditingId(record.id);
