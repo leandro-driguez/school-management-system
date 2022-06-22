@@ -9,8 +9,4 @@
     <ProjectReference Include="..\SchoolManagementSystem.Domain\SchoolManagementSystem.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services_Implementations\Entities\" />
-  </ItemGroup>
-
 </Project>
