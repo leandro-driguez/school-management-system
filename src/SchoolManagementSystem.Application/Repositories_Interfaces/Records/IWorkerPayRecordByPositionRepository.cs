@@ -9,5 +9,4 @@ namespace SchoolManagementSystem.Application.Repositories_Interfaces.Records;
 
 public interface IWorkerPayRecordByPositionRepository : IRecordRepository<WorkerPayRecordByPosition>
 {
-    // public Dictionary<Position, int> GetWorkerFixSalaries();
 }

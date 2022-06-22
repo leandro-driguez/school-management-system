@@ -14,8 +14,7 @@ namespace SchoolManagementSystem.API.Controllers.Records;
 public class ConsultWorkerSalaryController : Controller
 {   
     IConsultWorkerSalaryService _service;
-    public ConsultWorkerSalaryController(IConsultWorkerSalaryService service)//, 
-        /*IMapper mapper*/ 
+    public ConsultWorkerSalaryController(IConsultWorkerSalaryService service)
     {
         _service = service;
     }
@@ -80,9 +79,6 @@ public class ConsultWorkerSalaryController : Controller
                     }
             }
         }
-
-                // TotalFixSalary = _service.GetTotalWorkerFixSalaries(id),
-                // TotalCoursesPorcentualPayment = _service.GetTotalWorkerCoursePorcentualSalaries(id)
         return Ok(dto);
     }
 }

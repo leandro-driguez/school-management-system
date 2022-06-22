@@ -13,15 +13,9 @@ namespace SchoolManagementSystem.Infrastructure.Repositories.Records
 {
     public class WorkerPayRecordByPositionRepository :  RecordRepository<WorkerPayRecordByPosition>, IWorkerPayRecordByPositionRepository
     {
-        // SchoolContext _context;
         public WorkerPayRecordByPositionRepository(IObjectContext context) : base(context)
         {
-            // _context = (SchoolContext)context;
         }
-        // public Dictionary<Position, int> GetWorkerFixSalaries()
-        // {
-        //     throw new NotImplementedException();
-        // }
     }
 
 }
