@@ -23,6 +23,6 @@ public class ConsultWorkerSalaryController : Controller
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
-        return Ok(_service.GetWorkerFixSalaries(id));
+        return Ok(_service.GetWorkerCoursePorcentualSalaries(id));
     }
 }
