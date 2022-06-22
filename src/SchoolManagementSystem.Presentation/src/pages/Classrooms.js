@@ -7,16 +7,18 @@ const Classrooms = () => {
 
     var json = [
         {
-            title: 'name',
+            title: 'Name',
+            dataIndex: 'name',
             width: '15%',
             editable: true,
             dataType: 'text'
         },
         {
-            title: 'capacity',
+            title: 'Capacity',
+            dataIndex: 'capacity',
             width: '15%',
             editable: true,
-            dataType: 'int'
+            dataType: 'text'
         }
     ];
 

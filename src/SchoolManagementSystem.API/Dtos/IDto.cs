@@ -1,5 +1,4 @@
 
-
 namespace SchoolManagementSystem.API.Dtos;
 
 public interface IDto
