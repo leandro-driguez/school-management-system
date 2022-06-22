@@ -4,6 +4,7 @@ using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Application.Services_Implementations;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
+using SchoolManagementSystem.Application.Repositories_Interfaces.Entities;
 using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Infrastructure.Repositories.Entities;
 using System.Text.Json.Serialization;
