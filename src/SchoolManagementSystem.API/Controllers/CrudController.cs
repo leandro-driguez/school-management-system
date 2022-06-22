@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
-using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
 using Microsoft.EntityFrameworkCore; 
 using AutoMapper;
 
@@ -42,7 +42,10 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         
         var entity = entities
             .FirstOrDefault(c => Equals(c.Id, id));
-        
+        if (entity == null)
+        {
+            return NotFound(id);
+        }        
         return Ok(entity);
     }
 
@@ -64,7 +67,7 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         var entity = entities.FirstOrDefault(c => Equals(c.Id, dto_model.Id));
 
         if(entity == null)
-            throw new NotImplementedException();
+            return NotFound(dto_model);
         
         _mapperToDto.Map(dto_model,entity);
         _service.Update(entity);
@@ -82,7 +85,7 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         var entity = entities.FirstOrDefault(c => Equals(c.Id, id));
         
         if(entity == null)
-            throw new NotImplementedException();
+            return NotFound(id);
         
         _service.Remove(entity);
         _service.CommitAsync();

@@ -1,10 +1,10 @@
 
-using SchoolManagementSystem.Application.Repositories_Interfaces.Entities;
-using SchoolManagementSystem.Application.Services_Implementations.Entities;
+using SchoolManagementSystem.Application.Repositories_Interfaces;
+using SchoolManagementSystem.Application.Services_Implementations;
 using SchoolManagementSystem.Domain.Entities;
-using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
 
-namespace SchoolManagementSystem.Application.Services_Implementations.Entities;
+namespace SchoolManagementSystem.Application.Services_Implementations;
 
 public class BasicMeanService : BaseService<BasicMean>, IBasicMeanService
 {

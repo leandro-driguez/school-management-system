@@ -1,8 +1,8 @@
 
 using SchoolManagementSystem.Domain.Interfaces;
-using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
 
-namespace SchoolManagementSystem.Application.Services_Implementations.Entities;
+namespace SchoolManagementSystem.Application.Services_Implementations;
 
 public class BaseService<TEntity> : IService<TEntity> where TEntity : class
 {
