@@ -1,73 +1,48 @@
-// import logo from './logo.svg';
-import './App.css';
 import React from 'react';
-import axios from 'axios';
-import {
-    Table,
-    // Row,
-  } from "react-bootstrap";
+import './App.css';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Home from './pages/Home';
+import Students from './pages/Students';
+import StudentDetails from './pages/StudentDetails';
+import Workers from './pages/Workers';
+import WorkerDetails from './pages/WorkerDetails';
+import CoursesInformation from './pages/CoursesInformation';
+import CourseDetails from './pages/CourseDetails';
+import Schedules from './pages/Schedules';
+import Income from './pages/Income';
+import CoursesPayment from './pages/CoursesPayment';
+import SalaryPayment from './pages/SalaryPayment';
+import Expenses from './pages/Expenses';
+import Debtors from './pages/Debtors'
+import Users from './pages/Users';
+import BasicAssets from './pages/BasicAssets';
+import Positions from './pages/Positions';
+import Classrooms from './pages/Classrooms';
 
-function App(){
-    return(
-        <Classrooms />
+function App() {
+    return (
+        <Router>
+            <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/Students' element={<Students/>}/>
+                <Route path='/Students/StudentDetails' element={<StudentDetails/>}/>
+                <Route path='/Workers' element={<Workers/>}/>
+                <Route path='/Workers/WorkerDetails' element={<WorkerDetails/>}/>
+                <Route path='/CoursesInformation' element={<CoursesInformation/>}/>
+                <Route path='/CoursesInformation/CourseDetails' element={<CourseDetails/>}/>
+                <Route path='/Schedules' element={<Schedules/>}/>
+                <Route path='/Income' element={<Income/>}/>
+                <Route path='/CoursesPayment' element={<CoursesPayment/>}/>
+                <Route path='/SalaryPayment' element={<SalaryPayment/>}/>
+                <Route path='/Expenses' element={<Expenses/>}/>
+                <Route path='/Debtors' element={<Debtors/>}/>
+                <Route path='/Users' element={<Users/>}/>
+                <Route path='/Positions' element={<Positions/>}/>
+                <Route path='/BasicAssets' element={<BasicAssets/>}/>
+                <Route path='/Classrooms' element={<Classrooms/>}/>
+            </Routes>
+        </Router>
     );
 }
 
 export default App;
-
-
-class Classrooms extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            Rows: []
-        };
-    }
-    
-    componentDidMount() {
-        axios.get("https://localhost:5001/api/Classrooms")
-            .then(resp=>{
-                this.setState({
-                    Rows: resp.data
-                }); 
-            });
-    }
-
-    render() {
-        return(
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Capacity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.Rows.map(row =>
-                        <RowClassroom
-                            key={row.id} 
-                            name={row.name} 
-                            capacity={row.capacity}
-                        />)}
-                </tbody>
-            </Table>
-        );
-    }
-}
-
-class RowClassroom extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        return (
-            <tr
-                id={this.props.id}
-            >
-                <td>{this.props.name}</td>
-                <td>{this.props.capacity}</td>
-            </tr>
-        );
-    }
-}

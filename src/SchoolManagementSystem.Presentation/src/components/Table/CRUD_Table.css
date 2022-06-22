@@ -1,0 +1,11 @@
+@import '~antd/dist/antd.css';
+
+.ant-table{
+    margin: 10px;
+}
+
+.editable-row .ant-form-item-explain {
+    position: absolute;
+    top: 100%;
+    font-size: 12px;
+}

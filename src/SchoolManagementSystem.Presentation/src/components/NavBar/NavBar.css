@@ -1,0 +1,19 @@
+.navb_left {
+    height: 40px;
+    width: auto;
+    margin: 10px;
+    float: left;
+}
+
+.navb_right {
+    height: 40px;
+    width: auto;
+    margin: 10px;
+    float: right;
+}
+
+hr {
+    clear: both;
+    color: #c50000;
+    border: 1px solid #c50000;
+}
