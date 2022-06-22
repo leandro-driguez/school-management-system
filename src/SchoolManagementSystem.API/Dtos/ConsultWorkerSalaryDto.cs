@@ -12,8 +12,8 @@ public class ConsultWorkerSalaryGetSingleDto : IDto
     [DataType(DataType.Currency)]
     public int TotalFixSalary { get; set; }
 
-    public int TotalCoursesPorcentualPayment { get; set; }
-    public int Total { get
+    public double TotalCoursesPorcentualPayment { get; set; }
+    public double Total { get
         {
             return TotalFixSalary + TotalCoursesPorcentualPayment;
         } 

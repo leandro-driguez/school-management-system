@@ -23,6 +23,17 @@ public class ConsultWorkerSalaryController : Controller
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
-        return Ok(_service.GetWorkerCoursePorcentualSalaries(id));
+        var worker = _service.Query().SingleOrDefault(c => c.Id == id);
+        if( worker == null)
+            NotFound();
+
+        var dto = new ConsultWorkerSalaryGetSingleDto
+            {
+                Id = id,
+                WorkerName = worker.Name,
+                TotalFixSalary = _service.GetTotalWorkerFixSalaries(id),
+                TotalCoursesPorcentualPayment = _service.GetTotalWorkerCoursePorcentualSalaries(id)
+            };
+        return Ok(dto);
     }
 }

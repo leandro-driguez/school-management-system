@@ -2,16 +2,17 @@
 using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Application.Repositories_Interfaces.Records;
+using SchoolManagementSystem.Application.Repositories_Interfaces;
 // using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class ConsultWorkerSalaryService : IConsultWorkerSalaryService
+public class ConsultWorkerSalaryService : BaseRecordService<Worker>, IConsultWorkerSalaryService
 {
     IWorkerPayRecordByPositionRepository repoPositionPayments;
     ITeacherPayRecordPerCourseRepository repoTeacherPayments;
-    public ConsultWorkerSalaryService(IWorkerPayRecordByPositionRepository repo_1, ITeacherPayRecordPerCourseRepository repo_2)
+    public ConsultWorkerSalaryService(IWorkerPayRecordByPositionRepository repo_1, ITeacherPayRecordPerCourseRepository repo_2, IWorkerRepository base_repo) : base(base_repo)
     {
         repoPositionPayments = repo_1;
         repoTeacherPayments = repo_2;
