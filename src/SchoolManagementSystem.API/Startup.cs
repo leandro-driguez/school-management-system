@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
-using SchoolManagementSystem.Domain.Services;
+using SchoolManagementSystem.Domain.Services.Entities;
 using SchoolManagementSystem.Application.Services_Implementations.Entities;
-using SchoolManagementSystem.Application.Repositories_Interfaces;
 using SchoolManagementSystem.Application.Repositories_Interfaces.Entities;
 using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Infrastructure.Repositories.Entities;

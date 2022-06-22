@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.Domain.Entities;
-using SchoolManagementSystem.Domain.Services;
+using SchoolManagementSystem.Domain.Services.Entities;
 
 namespace SchoolManagementSystem.API.Controllers;
 

@@ -1,7 +1,7 @@
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Interfaces;
 
-namespace SchoolManagementSystem.Domain.Services;
+namespace SchoolManagementSystem.Domain.Services.Entities;
 
 public interface IService<TEntity> where TEntity : class
 {
