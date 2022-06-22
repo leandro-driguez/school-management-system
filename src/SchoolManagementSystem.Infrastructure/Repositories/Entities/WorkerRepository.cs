@@ -3,11 +3,11 @@ using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
 
-namespace SchoolManagementSystem.Infrastructure.Repositories;
+namespace SchoolManagementSystem.Infrastructure.Repositories.Entities;
 
-public class CourseRepository : CrudRepository<Course>, ICourseRepository
+public class WorkerRepository : CrudRepository<Worker>, IWorkerRepository
 {
-    public CourseRepository(IObjectContext context) : base(context)
+    public WorkerRepository(IObjectContext context) : base(context)
     {
 
     }

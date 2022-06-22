@@ -5,7 +5,7 @@ using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
 // using SchoolManagementSystem.Infrastructure.Data;
 
-namespace SchoolManagementSystem.Infrastructure.Repositories;
+namespace SchoolManagementSystem.Infrastructure.Repositories.Entities;
 
 public class ClassroomRepository : CrudRepository<Classroom>, IClassroomRepository
 {

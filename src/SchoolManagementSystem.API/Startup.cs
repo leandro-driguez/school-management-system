@@ -5,7 +5,7 @@ using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Application.Services_Implementations;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
 using SchoolManagementSystem.Infrastructure.Data;
-using SchoolManagementSystem.Infrastructure.Repositories;
+using SchoolManagementSystem.Infrastructure.Repositories.Entities;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using SchoolManagementSystem.API.Dtos;

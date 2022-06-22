@@ -1,6 +1,6 @@
 using SchoolManagementSystem.Domain.Interfaces;
 
-namespace SchoolManagementSystem.Infrastructure.Repositories
+namespace SchoolManagementSystem.Infrastructure.Repositories.Entities
 {
     public class CrudRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
