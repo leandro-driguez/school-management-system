@@ -5,7 +5,7 @@ import CRUD_Table from "../components/Table/CRUD_Table";
 
 const Classrooms = () => {
 
-    var json = [
+    var headers = [
         {
             title: 'Name',
             dataIndex: 'name',
@@ -34,7 +34,7 @@ const Classrooms = () => {
             <NavBar></NavBar>
             <CRUD_Table
                 url={"https://localhost:5001/api/Classrooms"}
-                headers={json}
+                headers={headers}
             > </CRUD_Table>
         </div>
     );

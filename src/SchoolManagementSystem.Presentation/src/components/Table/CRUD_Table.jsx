@@ -96,12 +96,18 @@ const CRUD_Table = (
             }
         ];
 
-        var output = props.headers;
+        var output = [];
+
+        // columns = props.headers;
+
+        for (let index = 0; index < props.headers.length; index++) {
+           output.push(props.headers[index]); 
+        }
         
         output.push(operations[0]);
-        output.push(operations[1]);
+        output.push(operations[1]); 
         
-        // console.log(output);
+        console.log(output);
 
         return output;
     });
@@ -112,8 +118,7 @@ const CRUD_Table = (
     const edit = (record) => {
         form.setFieldsValue({
             name: '',
-            age: '',
-            address: '',
+            capacity: '',
             ...record,
         });
         setEditingId(record.id);
