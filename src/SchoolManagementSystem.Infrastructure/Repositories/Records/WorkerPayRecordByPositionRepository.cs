@@ -11,17 +11,17 @@ using SchoolManagementSystem.Infrastructure.Configurations.Relations;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories.Records
 {
-    public class ConsultWorkerSalaryRepository : IConsultWorkerSalaryRepository
+    public class ConsultWorkerSalaryRepository :  RecordRepository<Worker>, IConsultWorkerSalaryRepository
     {
-        SchoolContext _context;
-        public ConsultWorkerSalaryRepository(IObjectContext context)
+        // SchoolContext _context;
+        public ConsultWorkerSalaryRepository(IObjectContext context) : base(context)
         {
-            _context = (SchoolContext)context;
+            // _context = (SchoolContext)context;
         }
-        public Dictionary<Position, int> GetWorkerFixSalaries()
-        {
-            throw new NotImplementedException();
-        }
+        // public Dictionary<Position, int> GetWorkerFixSalaries()
+        // {
+        //     throw new NotImplementedException();
+        // }
     }
 
 }
