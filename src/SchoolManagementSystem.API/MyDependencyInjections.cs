@@ -1,4 +1,3 @@
-// using Gateways.Data.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace SchoolManagementSystem.API;
 
 
-public static class DependencyInjections
+public static class MyDependencyInjections
 {
     public static void SetUpMyServicesDependencyInjections(this IServiceCollection services, IConfiguration configuration)
     {

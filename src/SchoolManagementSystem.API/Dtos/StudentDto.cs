@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations;
 using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Dtos;
-public enum Education
-{
-    Primaria,
-    Secundaria,
-    EscuelaOficios,
-    TecnicoMedio,
-    Preuniversitario,
-    Universidad,
-    Posgrado
-}
+// public enum Education
+// {
+//     Primaria,
+//     Secundaria,
+//     EscuelaOficios,
+//     TecnicoMedio,
+//     Preuniversitario,
+//     Universidad,
+//     Posgrado
+// }
 
 public class StudentDto : IDto
 {
@@ -23,6 +23,6 @@ public class StudentDto : IDto
     [Required]
     public int Founds { get; set; }
     [Required]
-    public Education ScholarityLevel { get; set; }
+    public string ScholarityLevel { get; set; }
 
 }
