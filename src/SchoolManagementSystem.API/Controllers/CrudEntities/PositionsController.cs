@@ -9,10 +9,10 @@ using SchoolManagementSystem.API.Controllers;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-public class ExpensesController : CrudController<Expense, ExpenseDto>
+public class PositionsController : CrudController<Position, PositionDto>
 {
     
-    public ExpensesController(IExpenseService service, 
+    public PositionsController(IPositionService service, 
         IMapper mapper) : base(service ,mapper)
     {
     }
