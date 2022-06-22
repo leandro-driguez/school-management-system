@@ -4,15 +4,14 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Dtos;
 
-public class ClassroomDto : IDto
+public class TuitorDto : IDto
 {
     public string Id { get; set; }
 
     [Required]
-    [MaxLength(10)]
-    public string Name {get; set;}
+    [MaxLength(20)]
+    public string Name { get; set; }
 
     [Required]
-    [Range(5, 30)]
-    public int Capacity { get; set; }
+    public int PhoneNumber { get; set; }
 }

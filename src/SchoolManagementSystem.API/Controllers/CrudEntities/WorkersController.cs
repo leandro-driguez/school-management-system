@@ -1,36 +1,20 @@
 
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.API.Dtos;
+using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
+using AutoMapper;
+using SchoolManagementSystem.API.Controllers;
 
-namespace SchoolManagementSystem.API.Controllers;
+namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-[ApiController]
-[Route("api/[controller]")]
-public class WorkersController : Controller
+public class WorkersController : CrudController<Worker, WorkerDto>
 {
-    private readonly IWorkerService _service;
-
-    public WorkersController(IWorkerService service)
+    
+    public WorkersController(IWorkerService service, 
+        IMapper mapper) : base(service ,mapper)
     {
-        _service = service;
-    }
-
-    [HttpGet]
-    public IActionResult GetWorkers()
-    {
-        return Ok(_service.Query().ToList());
-    }
-
-    [HttpGet("{id}")]
-    public IActionResult GetWorker(string id)
-    {
-        var worker = _service.GetWorkerById(id);
-        if (worker == null)
-        {
-            return NotFound();
-        }
-        return Ok(worker);
     }
 }

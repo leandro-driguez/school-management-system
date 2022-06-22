@@ -1,36 +1,20 @@
 
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.API.Dtos;
+using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
+using AutoMapper;
+using SchoolManagementSystem.API.Controllers;
 
-namespace SchoolManagementSystem.API.Controllers;
+namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ResourcesController : Controller
+public class ResourcesController : CrudController<Resource, ResourceDto>
 {
-    private readonly IResourceService _service;
-
-    public ResourcesController(IResourceService service)
+    
+    public ResourcesController(IResourceService service, 
+        IMapper mapper) : base(service ,mapper)
     {
-        _service = service;
-    }
-
-    [HttpGet]
-    public IActionResult GetResources()
-    {
-        return Ok(_service.Query().ToList());
-    }
-
-    [HttpGet("{id}")]
-    public IActionResult GetResource(string id)
-    {
-        var resource = _service.GetResourceById(id);
-        if (resource == null)
-        {
-            return NotFound();
-        }
-        return Ok(resource);
     }
 }

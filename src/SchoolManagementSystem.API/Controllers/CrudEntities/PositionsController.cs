@@ -1,25 +1,20 @@
 
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.API.Dtos;
+using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
+using AutoMapper;
+using SchoolManagementSystem.API.Controllers;
 
-namespace SchoolManagementSystem.API.Controllers;
+namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-[ApiController]
-[Route("api/[controller]")]
-public class PositionsController : Controller
+public class PositionsController : CrudController<Position, PositionDto>
 {
-    private readonly IService<Position> _service;
-
-    public PositionsController(IService<Position> service)
+    
+    public PositionsController(IPositionService service, 
+        IMapper mapper) : base(service ,mapper)
     {
-        _service = service;
-    }
-
-    [HttpGet]
-    public IActionResult GetPositions()
-    {
-        return Ok(_service.Query().ToList());
     }
 }

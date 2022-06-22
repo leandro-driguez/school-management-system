@@ -33,40 +33,9 @@ public class Startup
 
         services.AddAutoMapper(typeof(Program));
 
-        // ClassRooms
-        services.AddScoped<IClassroomRepository, ClassroomRepository>();
-        services.AddScoped<IClassroomService, ClassroomService>();
-        
-        // BasicMeans
-        services.AddScoped<IBasicMeanRepository, BasicMeanRepository>();
-        services.AddScoped<IBasicMeanService, BasicMeanService>();
-        // Positions
-        services.AddScoped<IPositionRepository, PositionRepository>();
-        services.AddScoped<IService<Position>, PositionService>();
-        // Workers
-        services.AddScoped<IWorkerRepository, WorkerRepository>();
-        services.AddScoped<IWorkerService, WorkerService>();
-        // Expenses
-        services.AddScoped<IExpenseRepository, ExpenseRepository>();
-        services.AddScoped<IExpenseService, ExpenseService>();
-        // Students
-        services.AddScoped<IStudentRepository, StudentRepository>();
-        services.AddScoped<IStudentService, StudentService>();
-        // Courses
-        services.AddScoped<ICourseRepository, CourseRepository>();
-        services.AddScoped<ICourseService, CourseService>();
-        // CourseGroups
-        services.AddScoped<ICourseGroupRepository, CourseGroupRepository>();
-        services.AddScoped<ICourseGroupService, CourseGroupService>();
-        // Teachers
-        services.AddScoped<ITeacherRepository, TeacherRepository>();
-        services.AddScoped<ITeacherService, TeacherService>();
-        // Tuitors
-        services.AddScoped<ITuitorRepository, TuitorRepository>();
-        services.AddScoped<ITuitorService, TuitorService>();
-        // Resources
-        services.AddScoped<IResourceRepository, ResourceRepository>();
-        services.AddScoped<IResourceService, ResourceService>();
+        //Injection of deendencies with reflection
+        MyDependencyInjections.SetUpMyServicesDependencyInjections(services, Configuration);
+
 
         services.AddScoped<IObjectContext, SchoolContext>();
 

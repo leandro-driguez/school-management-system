@@ -1,36 +1,20 @@
 
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.API.Dtos;
+using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
+using AutoMapper;
+using SchoolManagementSystem.API.Controllers;
 
-namespace SchoolManagementSystem.API.Controllers;
+namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-[ApiController]
-[Route("api/[controller]")]
-public class CourseGroupsController : Controller
+public class CourseGroupsController : CrudController<CourseGroup, CourseGroupDto>
 {
-    private readonly ICourseGroupService _service;
-
-    public CourseGroupsController(ICourseGroupService service)
+    
+    public CourseGroupsController(ICourseGroupService service, 
+        IMapper mapper) : base(service ,mapper)
     {
-        _service = service;
-    }
-
-    [HttpGet]
-    public IActionResult GetCourseGroups()
-    {
-        return Ok(_service.Query().ToList());
-    }
-
-    [HttpGet("{id}")]
-    public IActionResult GetCourseGroup(string id)
-    {
-        var courseGroup = _service.GetCourseGroupById(id);
-        if (courseGroup == null)
-        {
-            return NotFound();
-        }
-        return Ok(courseGroup);
     }
 }

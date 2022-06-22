@@ -1,36 +1,20 @@
 
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.API.Dtos;
+using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Domain.Services;
+using AutoMapper;
+using SchoolManagementSystem.API.Controllers;
 
-namespace SchoolManagementSystem.API.Controllers;
+namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
-[ApiController]
-[Route("api/[controller]")]
-public class TuitorsController : Controller
+public class TuitorsController : CrudController<Tuitor, TuitorDto>
 {
-    private readonly ITuitorService _service;
-
-    public TuitorsController(ITuitorService service)
+    
+    public TuitorsController(ITuitorService service, 
+        IMapper mapper) : base(service ,mapper)
     {
-        _service = service;
-    }
-
-    [HttpGet]
-    public IActionResult GetTuitors()
-    {
-        return Ok(_service.Query().ToList());
-    }
-
-    [HttpGet("{id}")]
-    public IActionResult GetTuitor(string id)
-    {
-        var tuitor = _service.GetTuitorById(id);
-        if (tuitor == null)
-        {
-            return NotFound();
-        }
-        return Ok(tuitor);
     }
 }
