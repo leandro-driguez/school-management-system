@@ -31,9 +31,58 @@ public class ConsultWorkerSalaryController : Controller
             {
                 Id = id,
                 WorkerName = worker.Name,
-                TotalFixSalary = _service.GetTotalWorkerFixSalaries(id),
-                TotalCoursesPorcentualPayment = _service.GetTotalWorkerCoursePorcentualSalaries(id)
+                InfoByDate = new List<InfoByDateDto>(),
             };
+            
+        foreach(var date in _service.GetAllPaymentDates(id))
+            dto.InfoByDate.Add(
+                    new InfoByDateDto{
+                        Date = date,
+                        InfoByPosition =  new List<InfoByPositionDto>(),
+                        InfoByCourse = new List<InfoByCourseDto>()
+                    });
+
+        foreach(var info in dto.InfoByDate)
+        {
+            var _query = _service.GetWorkerFixSalariesByDate(id,info.Date);
+            foreach (var row in _query)
+            {
+                info.InfoByPosition.Add(
+                    new InfoByPositionDto{
+                        Position = row.Position.Name,
+                        PositionId = row.PositionId,
+                        FixSalaryPosition = row.Payment
+                    }
+                );
+            }
+        }
+        foreach(var info in dto.InfoByDate)
+        {
+            var _query = _service.GetWorkerCoursePorcentualSalaries(id,info.Date);
+            foreach (var row in _query)
+            {
+                var course = new InfoByCourseDto{
+                        CourseId = row.CourseId,
+                        CourseName = row.Course.Name,
+                        Porcentage = row.PaidPorcentage,
+                        InfoByCourseGroup = new List<InfoByCourseGroupDto>()
+                    };
+                
+                    foreach (var cgroup in row.Course.CourseGroups)
+                    {
+                        course.InfoByCourseGroup.Add(
+                            new InfoByCourseGroupDto{
+                                CourseGroupId = cgroup.Id,
+                                CourseGroupIncome = cgroup.StudentCourseGroupRelations.Count() * row.Course.Price,
+                                CourseGroupWorkerPayment = row.PaidPorcentage * (cgroup.StudentCourseGroupRelations.Count() * row.Course.Price)
+                            }
+                        );
+                    }
+            }
+        }
+
+                // TotalFixSalary = _service.GetTotalWorkerFixSalaries(id),
+                // TotalCoursesPorcentualPayment = _service.GetTotalWorkerCoursePorcentualSalaries(id)
         return Ok(dto);
     }
 }

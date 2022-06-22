@@ -14,7 +14,7 @@ public class InfoByPositionDto
 public class InfoByCourseGroupDto
 {
     public string CourseGroupId { get; set; }
-    public string CourseGroupName { get; set; }
+    // public string CourseGroupName { get; set; }
 
     public double CourseGroupIncome { get; set; }
     public double CourseGroupWorkerPayment { get; set; }
