@@ -1,11 +1,51 @@
 @import '~antd/dist/antd.css';
 
-.ant-table{
-    margin: 10px;
+.ant-table-thead > tr > th {
+    background: #ffb5b53b !important;
+    border-color: white;
+}
+
+.ant-table-tbody > tr > th {
+    background: #ffb5b53b !important;
+    border-color: white;
+}
+
+.ant-table-tbody > tr > td {
+    background: #ffb5b53b !important;
+    border-color: white;
+}
+
+.ant-table-tbody > tr:hover {
+    background: rgba(255, 217, 217, 0.38) !important;
+    border-color: white;
+}
+
+.ant-table {
+    margin: 0 auto;
+    margin-top: 2%;
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    width: 90%;
+    align-items: center;
+}
+
+.ant-table > td, th {
+    text-align: left;
+    padding: 8px;
+    border-color: white;
+}
+
+.ant-table > tr {
+    border-color: white;
+    text-align: left;
+    padding: 8px;
+}
+
+.ant-table-pagination > .ant-pagination-item-active{
+    color: #c50000;
 }
 
 .editable-row .ant-form-item-explain {
-    position: absolute;
-    top: 100%;
     font-size: 12px;
 }

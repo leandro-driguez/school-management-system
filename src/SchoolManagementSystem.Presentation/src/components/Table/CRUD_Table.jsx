@@ -1,6 +1,10 @@
-import { Form, InputNumber, Input, Popconfirm, Table, Typography } from 'antd';
-import { useState } from 'react';
+import {Button, Modal, Form, InputNumber, Input, Popconfirm, Table, Typography} from 'antd';
+import {DeleteTwoTone, EditTwoTone, SaveTwoTone, CloseSquareTwoTone, ExclamationCircleTwoTone } from "@ant-design/icons";
+import {useContext, useEffect, useRef, createContext, useState} from 'react';
 import "./CRUD_Table.css";
+
+const EditableContext = createContext(null);
+
 const originData = [];
 
 for (let i = 0; i < 100; i++) {
@@ -22,7 +26,7 @@ const EditableCell = ({
                           children,
                           ...restProps
                       }) => {
-    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+    const inputNode = inputType === 'number' ? <InputNumber/> : <Input/>;
     return (
         <td {...restProps}>
             {editing ? (
@@ -76,7 +80,7 @@ const CRUD_Table = () => {
 
             if (index > -1) {
                 const item = newData[index];
-                newData.splice(index, 1, { ...item, ...row });
+                newData.splice(index, 1, {...item, ...row});
                 setData(newData);
                 setEditingKey('');
             } else {
@@ -89,24 +93,50 @@ const CRUD_Table = () => {
         }
     };
 
+
+    const Delete = (key) => {
+        const newData = data.filter((item) => item.key !== key);
+        setData(newData);
+    };
+
     const columns = [
         {
             title: 'name',
             dataIndex: 'name',
             width: '25%',
             editable: true,
+            sorter: {
+                compare: (a, b) => a.name.localeCompare(b.name),
+            },
         },
         {
             title: 'age',
             dataIndex: 'age',
             width: '15%',
             editable: true,
+            sorter: (a, b) => a.age - b.age,
+            ellipsis: true,
         },
         {
             title: 'address',
             dataIndex: 'address',
             width: '40%',
             editable: true,
+            sorter: {
+                compare: (a, b) => a.address.localeCompare(b.address),
+            },
+        },
+        {
+            title: 'operation',
+            dataIndex: 'operation',
+            render: (_, record) =>
+                data.length >= 1 ? (
+                    <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
+                                okText={"Aceptar"} onConfirm={() => Delete(record.key)}
+                                icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
+                        <DeleteTwoTone/>
+                    </Popconfirm>
+                ) : null,
         },
         {
             title: 'operation',
@@ -121,15 +151,15 @@ const CRUD_Table = () => {
                     marginRight: 8,
                 }}
             >
-              Save
+              <SaveTwoTone />
             </Typography.Link>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+            <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
+              <a><CloseSquareTwoTone /></a>
             </Popconfirm>
           </span>
                 ) : (
                     <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        Edit
+                        <EditTwoTone />
                     </Typography.Link>
                 );
             },
@@ -151,6 +181,7 @@ const CRUD_Table = () => {
             }),
         };
     });
+
     return (
         <Form form={form} component={false}>
             <Table
@@ -164,6 +195,9 @@ const CRUD_Table = () => {
                 columns={mergedColumns}
                 rowClassName="editable-row"
                 pagination={{
+                    position: ["bottomCenter"],
+                    pageSizeOptions: ["5", "10", "20", "50", "100"],
+                    showQuickJumper: true,
                     onChange: cancel,
                 }}
             />
