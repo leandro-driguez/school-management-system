@@ -20,6 +20,8 @@ public class StudentDto : SchoolMemberDto
     [Required]
     public string TuitorName { get; set; }
     [Required]
+    public string TuitorId { get; set; }
+    [Required]
     public int Founds { get; set; }
     [Required]
     public string ScholarityLevel { get; set; }
