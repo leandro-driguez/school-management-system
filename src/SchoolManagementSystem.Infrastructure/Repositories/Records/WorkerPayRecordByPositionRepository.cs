@@ -11,10 +11,10 @@ using SchoolManagementSystem.Infrastructure.Configurations.Relations;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories.Records
 {
-    public class ConsultWorkerSalaryRepository :  RecordRepository<Worker>, IConsultWorkerSalaryRepository
+    public class WorkerPayRecordByPositionRepository :  RecordRepository<WorkerPayRecordByPosition>, IWorkerPayRecordByPositionRepository
     {
         // SchoolContext _context;
-        public ConsultWorkerSalaryRepository(IObjectContext context) : base(context)
+        public WorkerPayRecordByPositionRepository(IObjectContext context) : base(context)
         {
             // _context = (SchoolContext)context;
         }

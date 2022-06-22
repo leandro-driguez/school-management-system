@@ -19,20 +19,20 @@ public class ConsultWorkerSalaryService : IConsultWorkerSalaryService
         return new List<int> { 1, 2, 3, 4 };
     }
     
-    
-    public Dictionary<Position, int> GetWorkerFixSalaries(string id)
+    public List<Tuple<string, int>> GetWorkerFixSalaries(string id)
     {      
-        throw new NotImplementedException();
-        // var dict =  new Dictionary<Position,int>();
+        // throw new NotImplementedException();
+        var ans =  new List<Tuple<string, int>>();
+        var _query = _repo.Query()
+                        .Where(c => id == c.WorkerId)
+                        .Include(c => c.Position);
 
-        // foreach( var position in _repo.Query()
-        //                             .Where(c => id == c.Id)
-        //                             .Include(c => c.Positions)
-        //                             .FirstOrDefault()
-        //                             .Positions)
-        //     {
-        //         dict[position] 
-        //     }
+        System.Console.WriteLine(_query);
 
+        foreach( var item in _query)
+            {
+                ans.Add(new Tuple<string, int>(item.Position.Name,item.Payment));
+            }
+        return ans;
     }
 }

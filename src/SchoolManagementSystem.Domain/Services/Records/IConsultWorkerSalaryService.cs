@@ -6,6 +6,6 @@ public interface IConsultWorkerSalaryService
 {
     public List<int> Proof();
 
-    public Dictionary<Position, int> GetWorkerFixSalaries();
+    public List<Tuple<string, int>> GetWorkerFixSalaries(string id);
 
 }
