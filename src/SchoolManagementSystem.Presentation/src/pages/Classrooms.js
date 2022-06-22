@@ -1,7 +1,7 @@
+
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CRUD_Table from "../components/Table/CRUD_Table";
-
 
 const Classrooms = () => {
 
@@ -21,7 +21,7 @@ const Classrooms = () => {
             dataIndex: 'capacity',
             width: '15%',
             editable: true,
-            dataType: 'text',
+            dataType: 'number',
             sorter: {
                 compare: (a, b) => a.capacity - b.capacity 
             },
