@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.Domain.Services;
 using AutoMapper;
 using SchoolManagementSystem.API.Controllers;

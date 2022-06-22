@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
-using SchoolManagementSystem.Domain.Services;
-using SchoolManagementSystem.Application.Services_Implementations;
-using SchoolManagementSystem.Application.Repositories_Interfaces;
+using SchoolManagementSystem.Domain.Services.Entities;
+using SchoolManagementSystem.Application.Services_Implementations.Entities;
+using SchoolManagementSystem.Application.Repositories_Interfaces.Entities;
 using SchoolManagementSystem.Infrastructure.Data;
-using SchoolManagementSystem.Infrastructure.Repositories;
+using SchoolManagementSystem.Infrastructure.Repositories.Entities;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using SchoolManagementSystem.API.Dtos;
