@@ -18,7 +18,7 @@ const EditableCell = ({
         ...restProps
     }) => {
     
-    const inputNode = inputType === 'int' ? <InputNumber/> : <Input/>;
+    const inputNode = inputType === 'number' ? <InputNumber/> : <Input/>;
     
     return (
         <td {...restProps}>
@@ -63,7 +63,7 @@ const CRUD_Table = (
                         <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
                                     okText={"Aceptar"} onConfirm={() => Delete(record.id)}
                                     icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-                            <DeleteTwoTone/>
+                            <DeleteTwoTone />
                         </Popconfirm>
                     ) : null,
             },
@@ -75,18 +75,18 @@ const CRUD_Table = (
                     const editable = isEditing(record);
                     return editable ? (
                         <span>
-                <Typography.Link
-                    onClick={() => save(record.id)}
-                    style={{
-                        marginRight: 8,
-                    }}
-                >
-                  <SaveTwoTone />
-                </Typography.Link>
-                <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
-                  <a><CloseSquareTwoTone /></a>
-                </Popconfirm>
-              </span>
+                            <Typography.Link
+                                onClick={() => save(record.id)}
+                                style={{
+                                    marginRight: 8,
+                                }}
+                            >
+                                <SaveTwoTone />
+                            </Typography.Link>
+                            <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
+                                <a><CloseSquareTwoTone /></a>
+                            </Popconfirm>
+                        </span>
                     ) : (
                         <Typography.Link disabled={editingId !== ''} onClick={() => edit(record)}>
                             <EditTwoTone />
@@ -97,96 +97,19 @@ const CRUD_Table = (
         ];
 
         var output = [];
-                    
-        for (let i = 0; i < props.headers.length; i++) {
-            output.push({
-                title: props.headers[i]['title'],
-                dataIndex: props.headers[i]['title'],
-                width: props.headers[i]['width'],
-                editable: props.headers[i]['editable'],
-                sorter: {
-                    compare: props.headers[i]['dataType'] == 'text' ? 
-                    (a, b) => a[props.headers[i]['title']].localeCompare(b[props.headers[i]['title']]) :
-                    (a, b) => a[props.headers[i]['title']] - b[props.headers[i]['title']]
-                },
-                dataType: props.headers[i]['dataType']
-            });
+
+        // columns = props.headers;
+
+        for (let index = 0; index < props.headers.length; index++) {
+           output.push(props.headers[index]); 
         }
         
         output.push(operations[0]);
-        output.push(operations[1]);
+        output.push(operations[1]); 
         
         console.log(output);
 
         return output;
-
-        // return [
-        //     {
-        //         title: 'name',
-        //         dataIndex: 'name',
-        //         width: '15%',
-        //         editable: true,
-        //         sorter: {
-        //             compare: (a, b) => a.name.localeCompare(b.name),
-        //         },
-        //     },
-        //     {
-        //         title: 'age',
-        //         dataIndex: 'age',
-        //         width: '15%',
-        //         editable: true,
-        //         sorter: (a, b) => a.age - b.age,
-        //         // ellipsis: true,
-        //     },
-        //     {
-        //         title: 'address',
-        //         dataIndex: 'address',
-        //         width: '15%',
-        //         editable: true,
-        //         sorter: {
-        //             compare: (a, b) => a.address.localeCompare(b.address),
-        //         },
-        //     },
-        //     {
-        //         title: 'operation',
-        //         dataIndex: 'operation',
-        //         width: '10%',
-        //         render: (_, record) =>
-        //             data.length >= 1 ? (
-        //                 <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
-        //                             okText={"Aceptar"} onConfirm={() => Delete(record.key)}
-        //                             icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-        //                     <DeleteTwoTone/>
-        //                 </Popconfirm>
-        //             ) : null,
-        //     },
-        //     {
-        //         title: 'operation',
-        //         dataIndex: 'operation',
-        //         width: '10%',
-        //         render: (_, record) => {
-        //             const editable = isEditing(record);
-        //             return editable ? (
-        //                 <span>
-        //         <Typography.Link
-        //             onClick={() => save(record.key)}
-        //             style={{
-        //                 marginRight: 8,
-        //             }}
-        //         >
-        //           <SaveTwoTone />
-        //         </Typography.Link>
-        //         <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
-        //           <a><CloseSquareTwoTone /></a>
-        //         </Popconfirm>
-        //       </span>
-        //             ) : (
-        //                 <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-        //                     <EditTwoTone />
-        //                 </Typography.Link>
-        //             );
-        //         },
-        //     }];
     });
     
 
@@ -195,8 +118,7 @@ const CRUD_Table = (
     const edit = (record) => {
         form.setFieldsValue({
             name: '',
-            age: '',
-            address: '',
+            capacity: '',
             ...record,
         });
         setEditingId(record.id);

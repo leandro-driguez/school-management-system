@@ -1,22 +1,30 @@
+
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CRUD_Table from "../components/Table/CRUD_Table";
 
-
 const Classrooms = () => {
 
-    var json = [
+    var headers = [
         {
-            title: 'name',
+            title: 'Name',
+            dataIndex: 'name',
             width: '15%',
             editable: true,
-            dataType: 'text'
+            dataType: 'text',
+            sorter: {
+                compare: (a, b) => a.name.localeCompare(b.name) 
+            },
         },
         {
-            title: 'capacity',
+            title: 'Capacity',
+            dataIndex: 'capacity',
             width: '15%',
             editable: true,
-            dataType: 'int'
+            dataType: 'number',
+            sorter: {
+                compare: (a, b) => a.capacity - b.capacity 
+            },
         }
     ];
 
@@ -26,7 +34,7 @@ const Classrooms = () => {
             <NavBar></NavBar>
             <CRUD_Table
                 url={"https://localhost:5001/api/Classrooms"}
-                headers={json}
+                headers={headers}
             > </CRUD_Table>
         </div>
     );

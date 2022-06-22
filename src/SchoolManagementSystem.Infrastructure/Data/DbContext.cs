@@ -15,6 +15,7 @@ public class SchoolContext : DbContext, IObjectContext
     public SchoolContext (DbContextOptions<SchoolContext> options)
         : base(options)
     {
+        
     }
 
     #region Methods and Properties
