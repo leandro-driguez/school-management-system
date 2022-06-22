@@ -4,15 +4,15 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Dtos;
 
-public class ClassroomDto : IDto
+public class AdditionalServiceDto : IDto
 {
     public string Id { get; set; }
 
     [Required]
-    [MaxLength(10)]
-    public string Name {get; set;}
-
+    public string WorkerId { get; set; }
     [Required]
-    [Range(5, 30)]
-    public int Capacity { get; set; }
+    public string ResourceId { get; set; }
+    [Required]
+    public int WorkerPorcentageProfits { get; set; }
+
 }
