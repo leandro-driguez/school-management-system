@@ -1,6 +1,6 @@
 ﻿using SchoolManagementSystem.Domain.Interfaces;
 
-namespace SchoolManagementSystem.Infrastructure.Repositories.Records
+namespace SchoolManagementSystem.Infrastructure.Repositories
 {
     public class RecordRepository<TEntity> : IRecordRepository<TEntity> where TEntity : class
     {
