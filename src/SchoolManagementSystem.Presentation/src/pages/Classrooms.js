@@ -11,14 +11,20 @@ const Classrooms = () => {
             dataIndex: 'name',
             width: '15%',
             editable: true,
-            dataType: 'text'
+            dataType: 'text',
+            sorter: {
+                compare: (a, b) => a.name.localeCompare(b.name) 
+            },
         },
         {
             title: 'Capacity',
             dataIndex: 'capacity',
             width: '15%',
             editable: true,
-            dataType: 'text'
+            dataType: 'text',
+            sorter: {
+                compare: (a, b) => a.capacity - b.capacity 
+            },
         }
     ];
 
