@@ -14,12 +14,11 @@ namespace SchoolManagementSystem.API.Dtos;
 //     Posgrado
 // }
 
-public class StudentDto : IDto
+public class StudentDto : SchoolMemberDto
 {
-    public string Id { get; set; }
 
     [Required]
-    public Tuitor Tuitor { get; set; }
+    public string TuitorName { get; set; }
     [Required]
     public int Founds { get; set; }
     [Required]
