@@ -14,7 +14,7 @@ public class WorkerPositionRelationDto
     [Required]
     public string PositionId { get; set; }
     // [Required]
-    public string PositionName { get; set; }
+    public string Position { get; set; }
     // [Required]
     public int FixedSalary { get; set; }
 }
