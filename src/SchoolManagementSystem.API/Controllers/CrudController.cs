@@ -53,6 +53,8 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     public virtual IActionResult Post([FromBody] TDTO dto_model)
     {
         var entity = _mapperToDto.Map<TEntity>(dto_model);
+
+        entity.Id = Guid.NewGuid().ToString();
         
         _service.Add(entity);
         _service.CommitAsync();
