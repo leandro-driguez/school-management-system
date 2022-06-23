@@ -35,7 +35,6 @@ public class StudentCourseGroupRelationController : Controller
             EndDate = dto.EndDate
         });
         _service.CommitAsync();
-        // _service.AddStudentsToCourseGroup(dto.StudentId, dto.CourseGroupId, dto.CourseId);
         return Ok();
     }
 
@@ -44,7 +43,14 @@ public class StudentCourseGroupRelationController : Controller
     {
         if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseId))
             return NotFound();
-        _service.DeleteStudentsFromCourseGroup(dto.StudentId, dto.CourseGroupId, dto.CourseId);
+        var item = _service.Query().Where(
+                    c => c.CourseGroupId == dto.CourseGroupId
+                    && c.StudentId == dto.StudentId
+                    && c.CourseGroupCourseId == dto.CourseId
+                ).FirstOrDefault();
+        if (item != null)
+            _service.Remove(item);
+        _service.CommitAsync();
         return Ok();
     }
 

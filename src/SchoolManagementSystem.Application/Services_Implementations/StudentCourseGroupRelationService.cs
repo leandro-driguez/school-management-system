@@ -35,27 +35,4 @@ public class StudentCourseGroupRelationService : BaseService<StudentCourseGroupR
 
         return true;
     }
-
-    public void AddStudentsToCourseGroup(string StudentId, string courseGroupId, string courseId)
-    {
-        repo.Add(new StudentCourseGroupRelation
-        {
-            CourseGroupId = courseGroupId,
-            StudentId = StudentId,
-            CourseGroupCourseId = courseId
-        });
-        repo.CommitAsync();
-    }
-
-    public void DeleteStudentsFromCourseGroup(string StudentId, string courseGroupId, string courseId)
-    {
-        var item = repo.Query().Where(
-                    c => c.CourseGroupId == courseGroupId
-                    && c.StudentId == StudentId
-                    && c.CourseGroupCourseId == courseId
-                ).FirstOrDefault();
-        if (item != null)
-            repo.Remove(item);
-        repo.CommitAsync();
-    }
 }
