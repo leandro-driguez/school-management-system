@@ -5,7 +5,7 @@ import CRUD_Table from "../components/Table/CRUD_Table";
 const Classrooms = () => {
     const columns = [
         {
-            title: 'Name',
+            title: 'Nombre',
             dataIndex: 'name',
             width: '15%',
             editable: true,
@@ -13,9 +13,19 @@ const Classrooms = () => {
             sorter: {
                 compare: (a, b) => a.name.localeCompare(b.name)
             },
+            rules: [
+                {
+                    required: true,
+                    message: "Introduzca nombre",
+                },
+                {
+                    whitespace: true,
+                    message: "Introduzca nombre"
+                }
+            ],
         },
         {
-            title: 'Capacity',
+            title: 'Capacidad',
             dataIndex: 'capacity',
             width: '15%',
             editable: true,
@@ -23,6 +33,12 @@ const Classrooms = () => {
             sorter: {
                 compare: (a, b) => a.capacity - b.capacity
             },
+            rules: [
+                {
+                    required: true,
+                    message: "Introduzca capacidad",
+                }
+            ]
         }
     ];
 
