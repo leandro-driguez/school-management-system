@@ -31,7 +31,7 @@ public class StudentCourseGroupRelationController : Controller
         {
             StudentCourseGroupRelationtDto dto = new StudentCourseGroupRelationtDto(){
                CourseGroupCourseId = item.CourseGroupCourseId,
-            //    CourseGroupCourseName = item.CourseGroup.Course.Name,
+               CourseGroupName = item.CourseGroup.CourseGroupName,
                StudentName = item.Student.Name,
                StudentId = item.StudentId,
                CourseGroupId = item.CourseGroupId,

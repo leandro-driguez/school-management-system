@@ -15,6 +15,9 @@ public class CourseGroupConfiguration : IEntityTypeConfiguration<CourseGroup>
 
         builder.HasOne(cg => cg.Teacher)
             .WithMany(t => t.CourseGroups);
+        
+        builder.Property(cg => cg.CourseGroupName)
+            .IsRequired();
 
         builder.Property(cg => cg.Capacity)
             .IsRequired();

@@ -9,7 +9,7 @@ namespace SchoolManagementSystem.Domain.Entities
     {
         public string CourseId { get; set; }
         public Course Course { get; set; }
-        // public string Name {get; set;}
+        public string CourseGroupName {get; set;}
         public Teacher Teacher{ get; set; }
         public int Capacity { get; set; }
         public DateTime StartDate { get; set; } //= DateTime.Now();

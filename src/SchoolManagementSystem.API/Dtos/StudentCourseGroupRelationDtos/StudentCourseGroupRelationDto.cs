@@ -9,7 +9,7 @@ public class StudentCourseGroupRelationtDto
 {
     [Required]
     public string CourseGroupId { get; set; }
-    // public string CourseGroupName{get; set; }
+    public string CourseGroupName{get; set; }
 
     [Required]
     public string CourseGroupCourseId { get; set; }
