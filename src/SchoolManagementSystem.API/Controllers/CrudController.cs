@@ -50,7 +50,7 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     }
 
     [HttpPost]
-    public virtual IActionResult Post([FromForm] TDTO dto_model)
+    public virtual IActionResult Post([FromBody] TDTO dto_model)
     {
         var entity = _mapperToDto.Map<TEntity>(dto_model);
         
@@ -61,8 +61,10 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     }
 
     [HttpPut]
-    public virtual IActionResult Put( [FromForm] TDTO dto_model)
+    public virtual IActionResult Put([FromBody] TDTO dto_model)
     {
+        // return Ok(dto_model);
+        
         var entities = _service.Query();
         var entity = entities.FirstOrDefault(c => Equals(c.Id, dto_model.Id));
 

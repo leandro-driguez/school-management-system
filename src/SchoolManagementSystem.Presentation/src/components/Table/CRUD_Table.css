@@ -1,5 +1,33 @@
 @import '~antd/dist/antd.css';
 
+.box {
+    margin-left: 0.3%;
+    margin-top: 1%;
+    height: 0.5px;
+    background-color: #ffd2d251;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding: 13px;
+    float: right;
+}
+
+.box > i {
+    font-size: 16px;
+    color: #777;
+}
+
+.box > input {
+    width: 130px;
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+
 .ant-table-thead > tr > th {
     background: #ffb5b53b !important;
     border-color: white;

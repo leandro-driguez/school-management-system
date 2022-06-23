@@ -1,25 +1,24 @@
-
 import {Button, Modal, Form, InputNumber, Input, Popconfirm, Table, Typography} from 'antd';
 import {DeleteTwoTone, EditTwoTone, SaveTwoTone, CloseSquareTwoTone, ExclamationCircleTwoTone } from "@ant-design/icons";
 import {useContext, useEffect, useRef, createContext, useState} from 'react';
-import axios from 'axios'
 import "./CRUD_Table.css";
+import axios from 'axios';
+import { render } from 'react-dom';
 
 const EditableContext = createContext(null);
 
+
 const EditableCell = ({
-        editing,
-        dataIndex,
-        title,
-        inputType,
-        record,
-        index,
-        children,
-        ...restProps
-    }) => {
-    
+                          editing,
+                          dataIndex,
+                          title,
+                          inputType,
+                          record,
+                          index,
+                          children,
+                          ...restProps
+                      }) => {
     const inputNode = inputType === 'number' ? <InputNumber/> : <Input/>;
-    
     return (
         <td {...restProps}>
             {editing ? (
@@ -44,76 +43,62 @@ const EditableCell = ({
     );
 };
 
-const CRUD_Table = (
-        props
-    ) => {
-    
+const CRUD_Table = (props) => {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
-    const [editingId, setEditingId] = useState('');
-    const [columns, setColumns] = useState(() =>{
+    const [editingKey, setEditingKey] = useState('');
 
-        var operations = [
-            {
-                title: 'operation',
-                dataIndex: 'operation',
-                width: '10%',
-                render: (_, record) =>
-                    data.length >= 1 ? (
-                        <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
-                                    okText={"Aceptar"} onConfirm={() => Delete(record.id)}
-                                    icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-                            <DeleteTwoTone />
-                        </Popconfirm>
-                    ) : null,
+    const columns = [];
+
+    const temp = props.columns;
+    for (let i = 0; i < temp.length; i++) {
+        columns.push(temp[i]);
+    }
+
+    columns.push(
+        {
+            title: 'operation',
+            dataIndex: 'operation',
+            width: "1%",
+            render: (_, record) =>
+                data.length >= 1 ? (
+                    <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
+                                okText={"Aceptar"} onConfirm={() => Delete(record.key)}
+                                icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
+                        <DeleteTwoTone/>
+                    </Popconfirm>
+                ) : null,
+        },
+        {
+            title: 'operation',
+            dataIndex: 'operation',
+            width: "1%",
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+            <Typography.Link
+                onClick={() => save(record.key)}
+                style={{
+                    marginRight: 8,
+                }}
+            >
+              <SaveTwoTone />
+            </Typography.Link>
+            <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
+              <a><CloseSquareTwoTone /></a>
+            </Popconfirm>
+          </span>
+                ) : (
+                    <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+                        <EditTwoTone />
+                    </Typography.Link>
+                );
             },
-            {
-                title: 'operation',
-                dataIndex: 'operation',
-                width: '10%',
-                render: (_, record) => {
-                    const editable = isEditing(record);
-                    return editable ? (
-                        <span>
-                            <Typography.Link
-                                onClick={() => save(record.id)}
-                                style={{
-                                    marginRight: 8,
-                                }}
-                            >
-                                <SaveTwoTone />
-                            </Typography.Link>
-                            <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
-                                <a><CloseSquareTwoTone /></a>
-                            </Popconfirm>
-                        </span>
-                    ) : (
-                        <Typography.Link disabled={editingId !== ''} onClick={() => edit(record)}>
-                            <EditTwoTone />
-                        </Typography.Link>
-                    );
-                },
-            }
-        ];
+        },
+    );
 
-        var output = [];
-
-        // columns = props.headers;
-
-        for (let index = 0; index < props.headers.length; index++) {
-           output.push(props.headers[index]); 
-        }
-        
-        output.push(operations[0]);
-        output.push(operations[1]); 
-        
-        console.log(output);
-
-        return output;
-    });
-    
-
-    const isEditing = (record) => record.id === editingId;
+    const isEditing = (record) => record.key === editingKey;
 
     const edit = (record) => {
         form.setFieldsValue({
@@ -121,36 +106,48 @@ const CRUD_Table = (
             capacity: '',
             ...record,
         });
-        setEditingId(record.id);
+        setEditingKey(record.key);
     };
 
     const cancel = () => {
-        setEditingId('');
+        setEditingKey('');
     };
 
-    const save = async (id) => {
+    const save = async (key) => {
         try {
             const row = await form.validateFields();
             const newData = [...data];
-            const index = newData.findIndex((item) => id === item.id);
-
+            const index = newData.findIndex((item) => key === item.key);
+            
             if (index > -1) {
                 const item = newData[index];
                 newData.splice(index, 1, {...item, ...row});
                 setData(newData);
-                setEditingId('');
+                setEditingKey('');
             } else {
                 newData.push(row);
                 setData(newData);
-                setEditingId('');
+                setEditingKey('');
             }
+            axios.put(props.url, newData[index]);
+
         } catch (errInfo) {
             console.log('Validate Failed:', errInfo);
         }
     };
 
-    const Delete = (id) => {
-        const newData = data.filter((item) => item.id !== id);
+
+    const Delete = (key) => {
+        if (editingKey === key){
+            setEditingKey('');
+        }
+
+        const index = data.findIndex((item) => key === item.key);
+
+        axios.delete(props.url + `/${data[index].key}`);
+        
+        const newData = data.filter((item) => item.key !== key);
+
         setData(newData);
     };
 
@@ -163,7 +160,7 @@ const CRUD_Table = (
             ...col,
             onCell: (record) => ({
                 record,
-                inputType: col.dataType,
+                //inputType: col.dataIndex === 'capacity' ? 'number' : 'text',
                 dataIndex: col.dataIndex,
                 title: col.title,
                 editing: isEditing(record),
@@ -171,14 +168,39 @@ const CRUD_Table = (
         };
     });
 
+
     useEffect(()=>{
         axios.get(props.url)
-            .then(resp=>{
+            .then(resp=>{ 
                 setData(resp.data);
             });
     },[]);
 
+
     return (
+        <div>
+            <caption>
+                <p className="table_title"><strong>Aulas</strong></p>
+
+                <div className="box">
+                    <i className="fa fa-search" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        id="myInput"
+                        placeholder="Buscar"
+                    />
+                </div>
+
+                <div className="box">
+                    <a className="table_options"><i className="fa fa-plus-square-o" aria-hidden="true">
+                    </i></a>
+                </div>
+
+                <div className="box">
+                    <p><strong>Total:</strong> {data.length}</p>
+                </div>
+            </caption>
+
         <Form form={form} component={false}>
             <Table
                 components={{
@@ -198,6 +220,7 @@ const CRUD_Table = (
                 }}
             />
         </Form>
+        </div>
     );
 };
 
