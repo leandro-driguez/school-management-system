@@ -1,5 +1,61 @@
 @import '~antd/dist/antd.css';
 
+.container {
+    position: relative;
+    margin-top: 0px;
+    margin-left: 4%;
+    max-width: 91.5%;
+}
+
+.table_options {
+    float: right;
+    align-items: center;
+}
+
+.table_options > i {
+    color: #777;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.table_options > i:hover {
+    color: #c90000;
+}
+
+.table_title {
+    position: relative;
+    float: left;
+}
+
+/* ------------------ LINKS ------------------- */
+a:link,
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #c90000;
+    text-decoration: none;
+}
+
+/* ------------------ BOXES ------------------- */
+
+.box_title {
+    margin-left: 0.3%;
+    margin-top: 1%;
+    height: 0.5px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding: 13px;
+    float: left;
+}
+
+.box_title > p {
+    margin-top: 10px;
+}
+
 .box {
     margin-left: 0.3%;
     margin-top: 1%;
@@ -17,6 +73,10 @@
     color: #777;
 }
 
+.box > p {
+    margin-top: 15px;
+}
+
 .box > input {
     width: 130px;
     flex: 1;
@@ -27,7 +87,7 @@
     padding-left: 10px;
 }
 
-
+/* ------------------ TABLE ------------------- */
 .ant-table-thead > tr > th {
     background: #ffb5b53b !important;
     border-color: white;
@@ -50,7 +110,7 @@
 
 .ant-table {
     margin: 0 auto;
-    margin-top: 2%;
+    margin-top: 0.5%;
     border-collapse: collapse;
     border-radius: 1em;
     overflow: hidden;

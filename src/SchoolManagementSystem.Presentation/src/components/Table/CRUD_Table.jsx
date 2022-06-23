@@ -97,6 +97,17 @@ const CRUD_Table = (props) => {
             },
         },
     );
+    
+    const [isEditingModalVisible, setIsEditingModalVisible] = useState(false);
+
+    const add = () => {
+        const newData = {
+            key: data.length,
+            name: 'djsjs',
+            capacity: '32',
+        };
+        setData([...data, newData]);
+    };
 
     const isEditing = (record) => record.key === editingKey;
 
@@ -179,8 +190,10 @@ const CRUD_Table = (props) => {
 
     return (
         <div>
-            <caption>
-                <p className="table_title"><strong>Aulas</strong></p>
+            <div className={"container"}>
+                <div className="box_title">
+                    <p><strong>Aulas</strong></p>
+                </div>
 
                 <div className="box">
                     <i className="fa fa-search" aria-hidden="true"></i>
@@ -192,14 +205,18 @@ const CRUD_Table = (props) => {
                 </div>
 
                 <div className="box">
-                    <a className="table_options"><i className="fa fa-plus-square-o" aria-hidden="true">
-                    </i></a>
+                    <a className="table_options">
+                        <i className="fa fa-plus-square-o"
+                           aria-hidden="true"
+                           onClick={() => setIsEditingModalVisible(true)}>
+                    </i>
+                    </a>
                 </div>
 
                 <div className="box">
                     <p><strong>Total:</strong> {data.length}</p>
                 </div>
-            </caption>
+            </div>
 
         <Form form={form} component={false}>
             <Table
@@ -220,6 +237,56 @@ const CRUD_Table = (props) => {
                 }}
             />
         </Form>
+
+        <Modal className={"editModal"}
+                   title={"Añadir nueva aula"}
+                   visible={isEditingModalVisible}
+                   centered={true}
+                   onCancel={() => setIsEditingModalVisible(false)}
+                   footer={null}
+                   >
+                <Form name="hey" autoComplete={"off"}>
+                    <Form.Item
+                        label={"Nombre"}
+                        name={"name"}
+                        rules={[
+                            {
+                                required: true,
+                                message: "Introduzca nombre",
+                            },
+                            {
+                                whitespace: true,
+                                message: "Introduzca nombre"
+                            }
+                        ]}
+                        hasFeedback={true}
+                    >
+                        <Input></Input>
+                    </Form.Item>
+
+                    <Form.Item
+                        label={"Capacidad"}
+                        name={"capacity"}
+                        rules={[
+                            {
+                                required: true,
+                                message: "Introduzca capacidad",
+                            },
+                            {
+                                whitespace: true,
+                                message: "Introduzca capacidad"
+                            }
+                        ]}
+                        hasFeedback={true}
+                    >
+                        <Input>
+                        </Input>
+                    </Form.Item>
+                    <Button type="primary" htmlType="submit">Guardar</Button>
+                    <Button>Cancelar</Button>
+                </Form>
+            </Modal>
+            
         </div>
     );
 };
