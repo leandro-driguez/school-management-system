@@ -12,11 +12,13 @@ namespace SchoolManagementSystem.Domain.Services;
 public interface IDoWorkersPaymentService : IRecordService<Worker>
 {
 
-    public IRepository<TeacherCourseGroupRelation> GetTeacherCourseGroupRelationRepo(string id);
-    public IRepository<TeacherCourseRelation> GetTeacherCourseRelationRepo(string id);
+    public IRepository<TeacherCourseGroupRelation> GetTeacherCourseGroupRelationRepo();
+    public IRepository<TeacherCourseRelation> GetTeacherCourseRelationRepo();
+
+    public IRepository<WorkerPositionRelation> GetWorkerPositionRelationRepo();
     // public IRepository<StudentCourseGroupRelation> GetStudentCourseGroupRelationRepo(string id);
     // public IQueryable<TeacherCourseGroupRelation> GetWorkerCoursePorcentualSalaries(string id);
-    public IQueryable<WorkerPayRecordByPosition> GetWorkerFixSalaries(string id);
+    // public IQueryable<WorkerPayRecordByPosition> GetWorkerFixSalaries(string id);
     // public List<DateTime> GetAllPaymentDates(string id);
 
 }

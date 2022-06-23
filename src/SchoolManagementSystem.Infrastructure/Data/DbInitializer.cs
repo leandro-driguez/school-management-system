@@ -246,7 +246,7 @@ public static class DbInitializer
             new CourseGroup
             {
                 Course = new Course { Name = "Transito 101", Price = 16, Type = "Transito" },
-                CourseGroupName = "Aula T1",
+                Name = "Aula T1",
                 Capacity = 16,
                 StartDate = new DateTime(2022, 3, 12),
                 EndDate = new DateTime(2022, 5, 12),
@@ -468,7 +468,7 @@ public static class DbInitializer
         var courseGroup = new CourseGroup
         {
             Course = course,
-            CourseGroupName = "Aula T2",
+            Name = "Aula T2",
             Capacity = 16,
             StartDate = new DateTime(2022, 3, 12),
             EndDate = new DateTime(2022, 5, 12),
@@ -552,7 +552,7 @@ public static class DbInitializer
         var courseGroup = new CourseGroup
         {
             Course = new Course { Name = "Transito 101", Price = 16, Type = "Transito" },
-            CourseGroupName = "Aula T3",
+            Name = "Aula T3",
             Capacity = 16,
             StartDate = new DateTime(2022, 3, 12),
             EndDate = new DateTime(2022, 5, 12),
@@ -593,7 +593,7 @@ public static class DbInitializer
         var courseGroup = new CourseGroup
         {
             Course = new Course { Name = "Transito 101", Price = 1000, Type = "Transito" },
-            CourseGroupName = "Aula T4",
+            Name = "Aula T4",
             Capacity = 16,
             StartDate = new DateTime(2022, 3, 12),
             EndDate = new DateTime(2022, 5, 12),
