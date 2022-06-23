@@ -11,10 +11,10 @@ using AutoMapper;
 namespace SchoolManagementSystem.API.Controllers.Records;
 
 [Route("api/[controller]")]
-public class ConsultWorkerSalaryController : Controller
+public class DoWorkersPaymentController : Controller
 {   
-    IConsultWorkerSalaryService _service;
-    public ConsultWorkerSalaryController(IConsultWorkerSalaryService service)
+    IDoWorkersPaymentService _service;
+    public DoWorkersPaymentController(IDoWorkersPaymentService service)
     {
         _service = service;
     }
@@ -30,20 +30,15 @@ public class ConsultWorkerSalaryController : Controller
             {
                 Id = id,
                 WorkerName = worker.Name,
-                InfoByDate = new List<InfoByDateDto>(),
+                InfoByDate = new List<InfoByDateDto>(){new InfoByDateDto{
+                    InfoByPosition = new List<InfoByPositionDto>(),
+                    InfoByCourse = new List<InfoByCourseDto>()
+                }},
             };
             
-        foreach(var date in _service.GetAllPaymentDates(id))
-            dto.InfoByDate.Add(
-                    new InfoByDateDto{
-                        Date = date,
-                        InfoByPosition =  new List<InfoByPositionDto>(),
-                        InfoByCourse = new List<InfoByCourseDto>()
-                    });
-
         foreach(var info in dto.InfoByDate)
         {
-            var _query = _service.GetWorkerFixSalariesByDate(id,info.Date);
+            var _query = _service.GetWorkerFixSalaries(id);
             foreach (var row in _query)
             {
                 info.InfoByPosition.Add(
@@ -57,7 +52,7 @@ public class ConsultWorkerSalaryController : Controller
         }
         foreach(var info in dto.InfoByDate)
         {
-            var _query = _service.GetWorkerCoursePorcentualSalariesByDate(id,info.Date);
+            var _query = _service.GetWorkerCoursePorcentualSalaries(id);
             foreach (var row in _query)
             {
                 var course = new InfoByCourseDto{

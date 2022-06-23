@@ -8,7 +8,7 @@ using SchoolManagementSystem.Domain.Records;
 namespace SchoolManagementSystem.Domain.Services;
 public interface IConsultWorkerSalaryService : IRecordService<Worker>
 {
-    public IQueryable<TeacherPayRecordPerCourse> GetWorkerCoursePorcentualSalaries(string id, DateTime date);
+    public IQueryable<TeacherPayRecordPerCourse> GetWorkerCoursePorcentualSalariesByDate(string id, DateTime date);
     public IQueryable<WorkerPayRecordByPosition> GetWorkerFixSalariesByDate(string id, DateTime date);
     public List<DateTime> GetAllPaymentDates(string id);
 

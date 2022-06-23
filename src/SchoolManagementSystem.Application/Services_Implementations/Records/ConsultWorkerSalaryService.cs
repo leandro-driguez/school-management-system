@@ -23,7 +23,7 @@ public class ConsultWorkerSalaryService : BaseRecordService<Worker>, IConsultWor
         return new List<int> { 1, 2, 3, 4 };
     }
 
-    public IQueryable<TeacherPayRecordPerCourse> GetWorkerCoursePorcentualSalaries(string id, DateTime date)
+    public IQueryable<TeacherPayRecordPerCourse> GetWorkerCoursePorcentualSalariesByDate(string id, DateTime date)
     {
         var _query = repoTeacherPayments.Query()
                        .Where(c => id == c.TeacherId)
