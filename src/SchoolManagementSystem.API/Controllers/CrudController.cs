@@ -63,7 +63,7 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     [HttpPut]
     public virtual IActionResult Put( [FromForm] TDTO dto_model)
     {
-        var entities = _service.Query().AsNoTrackingWithIdentityResolution();
+        var entities = _service.Query();
         var entity = entities.FirstOrDefault(c => Equals(c.Id, dto_model.Id));
 
         if(entity == null)
