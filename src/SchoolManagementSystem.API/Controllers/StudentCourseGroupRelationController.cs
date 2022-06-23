@@ -23,8 +23,18 @@ public class StudentCourseGroupRelationController : Controller
     [HttpPost]
     public IActionResult Post([FromForm]StudentCourseGroupRelationPostDto dto)
     {
-        if(!_service.AddStudentToCourseGroup(dto.StudentsId, dto.CourseGroupId, dto.CourseId))
+        if(!_service.ValidateIds(dto.StudentsId, dto.CourseGroupId, dto.CourseId))
             return NotFound();
+        _service.AddStudentsToCourseGroup(dto.StudentsId, dto.CourseGroupId, dto.CourseId);
+        return Ok();
+    }
+
+    [HttpDelete]
+    public IActionResult Delete([FromForm]StudentCourseGroupRelationPostDto dto)
+    {
+        if(!_service.ValidateIds(dto.StudentsId, dto.CourseGroupId, dto.CourseId))
+            return NotFound();
+        _service.DeleteStudentsFromCourseGroup(dto.StudentsId, dto.CourseGroupId, dto.CourseId);
         return Ok();
     }
 

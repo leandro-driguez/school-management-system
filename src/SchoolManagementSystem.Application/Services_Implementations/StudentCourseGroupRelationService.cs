@@ -20,7 +20,7 @@ public class StudentCourseGroupRelationService : BaseService<StudentCourseGroupR
         this.cg_repo = cg_repo;
         this.st_repo = st_repo;
     }
-    public bool AddStudentToCourseGroup(List<string> StudentsId, string courseGroupId, string courseId)
+    public bool ValidateIds(List<string> StudentsId, string courseGroupId, string courseId)
     {
         var row = cg_repo.Query().Where(c => c.Id == courseGroupId && c.CourseId == courseId)
                             .FirstOrDefault();
@@ -37,7 +37,12 @@ public class StudentCourseGroupRelationService : BaseService<StudentCourseGroupR
         }
         System.Console.WriteLine("here2");
 
-        foreach (var studentId in StudentsId)
+        return true;
+    }
+
+    public void AddStudentsToCourseGroup(List<string> StudentsId, string courseGroupId, string courseId)
+    {
+                foreach (var studentId in StudentsId)
             repo.Add(new StudentCourseGroupRelation
             {
                 CourseGroupId = courseGroupId,
@@ -45,6 +50,20 @@ public class StudentCourseGroupRelationService : BaseService<StudentCourseGroupR
                 CourseGroupCourseId = courseId
             });
         repo.CommitAsync();
-        return true;
+    }
+
+    public void DeleteStudentsFromCourseGroup(List<string> StudentsId, string courseGroupId, string courseId)
+    {
+        foreach (var studentId in StudentsId)
+        {
+            var item = repo.Query().Where(
+                    c => c.CourseGroupId == courseGroupId
+                    && c.StudentId == studentId
+                    && c.CourseGroupCourseId == courseId
+            ).FirstOrDefault();
+            if(item != null)
+                repo.Remove(item);
+        }
+        repo.CommitAsync();
     }
 }
