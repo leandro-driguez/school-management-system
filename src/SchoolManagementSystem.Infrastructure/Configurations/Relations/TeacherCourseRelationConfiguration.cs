@@ -8,6 +8,6 @@ public class TeacherCourseRelationConfiguration : IEntityTypeConfiguration<Teach
 {
     public void Configure(EntityTypeBuilder<TeacherCourseRelation> builder)
     {
-        builder.HasKey(t => new { t.TeacherId, t.CourseId });
+        // builder.HasKey(t => new { t.TeacherId, t.CourseId });
     }
 }

@@ -46,6 +46,8 @@ public class TeacherCourseGroupRelationController : Controller
     {
         if(!_service.ValidateIds(dto.TeacherId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
+        TeacherCourseRelation item = mapper.Map<TeacherCourseRelation>(mapper.Map<TeacherCourseRelationDto>(dto));
+        _service.AddTeacherCourseRelation(item);
         var relation = mapper.Map<TeacherCourseGroupRelation>(dto);
         _service.Update(relation);
         _service.CommitAsync();
