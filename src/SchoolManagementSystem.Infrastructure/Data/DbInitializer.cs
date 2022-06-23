@@ -502,14 +502,23 @@ public static class DbInitializer
 
     private static WorkerPayRecordByPosition[] GetWorkerPayRecordByPositions()
     {
+        var position = new Position { Name = "director", Workers = new List<Worker>() {
+            new Worker { Id = "79082901293", Name = "JUan", LastName = "Baez",
+                    PhoneNumber = 56471922, Address = "Espada No.404 e/ San Benito y Esperanza", 
+                    DateBecomedMember = new DateTime(2019, 9, 5),
+                    Positions = new List<Position>()
+                     }, 
+        }};
         return new []
-        {
+        {   
             new WorkerPayRecordByPosition
             {
                 Worker = new Worker { Id = "99124297421", Name = "Alfredo", LastName = "Perez",
                     PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
-                    DateBecomedMember = new DateTime(2015, 9, 5) }, 
-                Position = new Position { Name = "director", Workers = new List<Worker>()}, 
+                    DateBecomedMember = new DateTime(2015, 9, 5),
+                    Positions = new List<Position>() { position}
+                     }, 
+                Position = position,
                 Date = new DateTime(2017,2,1), Payment = 1500 
             }
         };

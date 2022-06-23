@@ -25,12 +25,13 @@ public class StudentCourseGroupRelationController : Controller
     [HttpGet]
     public IActionResult GetAll()
     {
-        var _query = _service.Query().Include(c => c.CourseGroup).Include(c => c.Student);
+        var _query = _service.Query().Include(c => c.CourseGroup.Course).Include(c => c.Student);
         List<StudentCourseGroupRelationtDto> output = new List<StudentCourseGroupRelationtDto>();   
         foreach (var item in _query)
         {
             StudentCourseGroupRelationtDto dto = new StudentCourseGroupRelationtDto(){
                CourseGroupCourseId = item.CourseGroupCourseId,
+               CourseGroupCourseName = item.CourseGroup.Course.Name,
                CourseGroupName = item.CourseGroup.CourseGroupName,
                StudentName = item.Student.Name,
                StudentId = item.StudentId,
