@@ -100,13 +100,15 @@ const CRUD_Table = (props) => {
     
     const [isEditingModalVisible, setIsEditingModalVisible] = useState(false);
 
+    const newData = [];
+
     const add = () => {
-        const newData = {
+        const newDat = {
             key: data.length,
-            name: 'djsjs',
-            capacity: '32',
+            name: newData[0],
+            capacity: newData[1],
         };
-        setData([...data, newData]);
+        setData([...data, newDat]);
     };
 
     const isEditing = (record) => record.key === editingKey;
@@ -261,7 +263,10 @@ const CRUD_Table = (props) => {
                         ]}
                         hasFeedback={true}
                     >
-                        <Input></Input>
+                        <Input onChange={(e) => {
+                            newData[0] = e.target.value;
+                        }}>
+                        </Input>
                     </Form.Item>
 
                     <Form.Item
@@ -279,11 +284,14 @@ const CRUD_Table = (props) => {
                         ]}
                         hasFeedback={true}
                     >
-                        <Input>
+                        <Input onChange={(e) => {
+                            newData[1] = e.target.value;
+                            console.log(newData)
+                        }}>
                         </Input>
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">Guardar</Button>
-                    <Button>Cancelar</Button>
+                    <Button type="primary" htmlType="submit" onClick={() => {add(); setIsEditingModalVisible(false);}}>Guardar</Button>
+                    <Button onClick={() => {setIsEditingModalVisible(false);}}>Cancelar</Button>
                 </Form>
             </Modal>
             
