@@ -9,6 +9,8 @@ public class StudentCourseGroupRelationPostDto
 {
     [Required]
     public string CourseGroupId { get; set; }
+    [Required]
+    public string CourseId { get; set; }
 
     [Required]
     [MinLength(1)]

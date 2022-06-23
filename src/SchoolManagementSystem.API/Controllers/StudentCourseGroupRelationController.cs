@@ -21,24 +21,10 @@ public class StudentCourseGroupRelationController : Controller
     }
 
     [HttpPost]
-    public IActionResult Post(StudentCourseGroupRelationPostDto dto)
+    public IActionResult Post([FromForm]StudentCourseGroupRelationPostDto dto)
     {
-        var _query = _service.Query();
-        CourseGroup cg = _query.Include(c => c.CourseGroup)
-                            .Where(c => c.CourseGroupId == dto.CourseGroupId)
-                            .FirstOrDefault().CourseGroup;
-        if(cg == null)
+        if(!_service.AddStudentToCourseGroup(dto.StudentsId, dto.CourseGroupId, dto.CourseId))
             return NotFound();
-        foreach (var studentId in dto.StudentsId)
-        {
-            var std = _query.Where(c => c.StudentId == studentId)
-                                .FirstOrDefault().StudentId;
-            if(std == null)
-                return NotFound();
-        }
-
-
-
         return Ok();
     }
 
