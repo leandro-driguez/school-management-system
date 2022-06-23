@@ -9,15 +9,15 @@ const EditableContext = createContext(null);
 
 
 const EditableCell = ({
-                          editing,
-                          dataIndex,
-                          title,
-                          inputType,
-                          record,
-                          index,
-                          children,
-                          ...restProps
-                      }) => {
+                        editing,
+                        dataIndex,
+                        title,
+                        inputType,
+                        record,
+                        index,
+                        children,
+                        ...restProps
+                    }) => {
     const inputNode = inputType === 'number' ? <InputNumber/> : <Input/>;
     return (
         <td {...restProps}>
@@ -46,6 +46,7 @@ const EditableCell = ({
 const CRUD_Table = (props) => {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
+    const [headers] = useState(props.columns);
     const [editingKey, setEditingKey] = useState('');
 
     const columns = [];
@@ -100,21 +101,13 @@ const CRUD_Table = (props) => {
     
     const [isEditingModalVisible, setIsEditingModalVisible] = useState(false);
 
-    const add = () => {
-        const newData = {
-            key: data.length,
-            name: 'djsjs',
-            capacity: '32',
-        };
-        setData([...data, newData]);
-    };
-
     const isEditing = (record) => record.key === editingKey;
 
     const edit = (record) => {
+
+        console.log(record);
+
         form.setFieldsValue({
-            name: '',
-            capacity: '',
             ...record,
         });
         setEditingKey(record.key);
@@ -147,7 +140,6 @@ const CRUD_Table = (props) => {
         }
     };
 
-
     const Delete = (key) => {
         if (editingKey === key){
             setEditingKey('');
@@ -162,6 +154,12 @@ const CRUD_Table = (props) => {
         setData(newData);
     };
 
+    const getData = async () => 
+        await axios.get(props.url)
+            .then(resp=>{ 
+                setData(resp.data);
+            });
+
     const mergedColumns = columns.map((col) => {
         if (!col.editable) {
             return col;
@@ -171,7 +169,7 @@ const CRUD_Table = (props) => {
             ...col,
             onCell: (record) => ({
                 record,
-                //inputType: col.dataIndex === 'capacity' ? 'number' : 'text',
+                inputType: col.dataType,
                 dataIndex: col.dataIndex,
                 title: col.title,
                 editing: isEditing(record),
@@ -179,13 +177,59 @@ const CRUD_Table = (props) => {
         };
     });
 
-
     useEffect(()=>{
-        axios.get(props.url)
-            .then(resp=>{ 
-                setData(resp.data);
-            });
+        getData();
     },[]);
+
+    const _input_ = (props)=>{
+
+        return (
+            <><Form.Item
+                label={props.header.title}
+                name={props.header.dataIndex}
+                rules={props.header.rules}
+                hasFeedback={true}
+            >
+                <Input onChange={props.onChange}/>
+            </Form.Item></>
+        );
+    };
+
+    const Forms = ()=>{
+        var newItem = {};
+
+        const updateValue = (header, e) => {
+            newItem[header.dataIndex] = e.target.value;
+        };
+
+        return (
+            <Modal className={"editModal"}
+                   title={"Añadir nueva elemento a la tabla."}
+                   visible={isEditingModalVisible}
+                   centered={true}
+                   onCancel={() => setIsEditingModalVisible(false)}
+                   footer={null}
+            >
+                <Form name="hey" autoComplete={"off"}>
+                    {headers.map(
+                        (header) => { return (<_input_ header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
+                    )}
+                    <Button type="primary" 
+                            onClick={ async ()=>{ 
+
+                                await axios.post(props.url, newItem);
+
+                                getData();
+
+                                setIsEditingModalVisible(false);
+                            }} 
+                            htmlType="submit"
+                    >Guardar</Button>
+                    <Button>Cancelar</Button>
+                </Form>
+            </Modal>
+        );
+    };
 
 
     return (
@@ -238,54 +282,7 @@ const CRUD_Table = (props) => {
             />
         </Form>
 
-        <Modal className={"editModal"}
-                   title={"Añadir nueva aula"}
-                   visible={isEditingModalVisible}
-                   centered={true}
-                   onCancel={() => setIsEditingModalVisible(false)}
-                   footer={null}
-                   >
-                <Form name="hey" autoComplete={"off"}>
-                    <Form.Item
-                        label={"Nombre"}
-                        name={"name"}
-                        rules={[
-                            {
-                                required: true,
-                                message: "Introduzca nombre",
-                            },
-                            {
-                                whitespace: true,
-                                message: "Introduzca nombre"
-                            }
-                        ]}
-                        hasFeedback={true}
-                    >
-                        <Input></Input>
-                    </Form.Item>
-
-                    <Form.Item
-                        label={"Capacidad"}
-                        name={"capacity"}
-                        rules={[
-                            {
-                                required: true,
-                                message: "Introduzca capacidad",
-                            },
-                            {
-                                whitespace: true,
-                                message: "Introduzca capacidad"
-                            }
-                        ]}
-                        hasFeedback={true}
-                    >
-                        <Input>
-                        </Input>
-                    </Form.Item>
-                    <Button type="primary" htmlType="submit">Guardar</Button>
-                    <Button>Cancelar</Button>
-                </Form>
-            </Modal>
+        <Forms />
             
         </div>
     );

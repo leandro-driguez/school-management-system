@@ -58,8 +58,10 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         
         _service.Add(entity);
         _service.CommitAsync();
+
+        dto_model.Id = entity.Id;
         
-        return Ok();
+        return Ok(dto_model);
     }
 
     [HttpPut]
