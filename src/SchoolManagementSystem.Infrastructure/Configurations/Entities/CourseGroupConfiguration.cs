@@ -10,6 +10,9 @@ public class CourseGroupConfiguration : IEntityTypeConfiguration<CourseGroup>
     {
         builder.HasKey(p => new { p.Id, p.CourseId });
 
+        builder.HasOne(cg => cg.Course)
+            .WithMany(t => t.CourseGroups);
+
         builder.HasOne(cg => cg.Teacher)
             .WithMany(t => t.CourseGroups);
 

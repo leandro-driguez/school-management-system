@@ -6,12 +6,14 @@ namespace SchoolManagementSystem.API.Dtos;
 public class CourseGroupDto : IDto
 {
         public string Id { get; set; }
-        [Required]
+        // [Required]
         public string CourseId { get; set; }
-        [Required]
+        // [Required]
+        // public string Name { get; set; }
+        // [Required]
         public int Capacity { get; set; }
-        [Required]
+        // [Required]
         public DateTime StartDate { get; set; } //= DateTime.Now();
-        [Required]
+        // [Required]
         public DateTime EndDate { get; set; }
 }

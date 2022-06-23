@@ -15,22 +15,44 @@ namespace SchoolManagementSystem.API.Controllers;
 public class StudentCourseGroupRelationController : Controller
 {
     public readonly IStudentCourseGroupRelationService _service;
+    public readonly IMapper mapper;
     
-    public StudentCourseGroupRelationController(IStudentCourseGroupRelationService service)
+    public StudentCourseGroupRelationController(IStudentCourseGroupRelationService service, IMapper mapper)
     {
         _service = service;
+        this.mapper = mapper;
+    }
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var _query = _service.Query().Include(c => c.CourseGroup).Include(c => c.Student);
+        List<StudentCourseGroupRelationtDto> output = new List<StudentCourseGroupRelationtDto>();   
+        foreach (var item in _query)
+        {
+            StudentCourseGroupRelationtDto dto = new StudentCourseGroupRelationtDto(){
+               CourseGroupCourseId = item.CourseGroupCourseId,
+            //    CourseGroupCourseName = item.CourseGroup.Course.Name,
+               StudentName = item.Student.Name,
+               StudentId = item.StudentId,
+               CourseGroupId = item.CourseGroupId,
+               EndDate = item.EndDate,
+               StartDate = item.StartDate               
+            };
+            output.Add(dto);
+        }
+        return Ok(output);
     }
 
     [HttpPost]
-    public IActionResult Post([FromForm]StudentCourseGroupRelationPostDto dto)
+    public IActionResult Post([FromForm]StudentCourseGroupRelationtDto dto)
     {
-        if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseId))
+        if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
         _service.Add(new StudentCourseGroupRelation
         {
             CourseGroupId = dto.CourseGroupId,
             StudentId = dto.StudentId,
-            CourseGroupCourseId = dto.CourseId,
+            CourseGroupCourseId = dto.CourseGroupCourseId,
             StartDate = dto.StartDate,
             EndDate = dto.EndDate
         });
@@ -38,15 +60,34 @@ public class StudentCourseGroupRelationController : Controller
         return Ok();
     }
 
-    [HttpDelete]
-    public IActionResult Delete([FromForm]StudentCourseGroupRelationPostDto dto)
+    [HttpPut]
+    public IActionResult Put([FromForm]StudentCourseGroupRelationtDto dto)
     {
-        if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseId))
+        if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
+            return NotFound();
+        var relation = new StudentCourseGroupRelation
+        {
+            CourseGroupId = dto.CourseGroupId,
+            StudentId = dto.StudentId,
+            CourseGroupCourseId = dto.CourseGroupCourseId,
+            StartDate = dto.StartDate,
+            EndDate = dto.EndDate
+        };
+        _service.Update(relation);
+        _service.CommitAsync();
+        return Ok();
+    }
+
+    [HttpDelete]
+    public IActionResult Delete([FromForm]StudentCourseGroupRelationtDto dto)
+    {
+        if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
         var item = _service.Query().Where(
                     c => c.CourseGroupId == dto.CourseGroupId
                     && c.StudentId == dto.StudentId
-                    && c.CourseGroupCourseId == dto.CourseId
+                    && c.CourseGroupCourseId == dto.CourseGroupCourseId
+                    && c.StartDate == dto.StartDate
                 ).FirstOrDefault();
         if (item != null)
             _service.Remove(item);
