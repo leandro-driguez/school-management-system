@@ -23,7 +23,7 @@ public class ExpenseRecordController : RecordController<ExpenseRecord, ExpenseRe
         return Ok
         (
             _service.Query()                
-                //.Include(e => e.Expense)
+                .Include(e => e.Expense)
                 .Select(_mapperToDto.Map<ExpenseRecord, ExpenseRecordDto>)
                 .ToList()
         );
