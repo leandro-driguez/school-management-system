@@ -4,6 +4,7 @@ using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
+using SchoolManagementSystem.Domain.Relations;
 using Microsoft.EntityFrameworkCore; 
 using AutoMapper;
 
@@ -23,18 +24,27 @@ public class StudentCourseGroupRelationController : Controller
     [HttpPost]
     public IActionResult Post([FromForm]StudentCourseGroupRelationPostDto dto)
     {
-        if(!_service.ValidateIds(dto.StudentsId, dto.CourseGroupId, dto.CourseId))
+        if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseId))
             return NotFound();
-        _service.AddStudentsToCourseGroup(dto.StudentsId, dto.CourseGroupId, dto.CourseId);
+        _service.Add(new StudentCourseGroupRelation
+        {
+            CourseGroupId = dto.CourseGroupId,
+            StudentId = dto.StudentId,
+            CourseGroupCourseId = dto.CourseId,
+            StartDate = dto.StartDate,
+            EndDate = dto.EndDate
+        });
+        _service.CommitAsync();
+        // _service.AddStudentsToCourseGroup(dto.StudentId, dto.CourseGroupId, dto.CourseId);
         return Ok();
     }
 
     [HttpDelete]
     public IActionResult Delete([FromForm]StudentCourseGroupRelationPostDto dto)
     {
-        if(!_service.ValidateIds(dto.StudentsId, dto.CourseGroupId, dto.CourseId))
+        if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseId))
             return NotFound();
-        _service.DeleteStudentsFromCourseGroup(dto.StudentsId, dto.CourseGroupId, dto.CourseId);
+        _service.DeleteStudentsFromCourseGroup(dto.StudentId, dto.CourseGroupId, dto.CourseId);
         return Ok();
     }
 

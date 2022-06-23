@@ -20,50 +20,42 @@ public class StudentCourseGroupRelationService : BaseService<StudentCourseGroupR
         this.cg_repo = cg_repo;
         this.st_repo = st_repo;
     }
-    public bool ValidateIds(List<string> StudentsId, string courseGroupId, string courseId)
+    public bool ValidateIds(string StudentId, string courseGroupId, string courseId)
     {
         var row = cg_repo.Query().Where(c => c.Id == courseGroupId && c.CourseId == courseId)
                             .FirstOrDefault();
 
         if (row == null)
             return false;
-        System.Console.WriteLine("here");
-        foreach (var studentId in StudentsId)
-        {
-            var std = st_repo.Query().Where(c => c.Id == studentId)
-                                .FirstOrDefault();
-            if (std == null)
-                return false;
-        }
-        System.Console.WriteLine("here2");
+
+        var std = st_repo.Query().Where(c => c.Id == StudentId)
+                            .FirstOrDefault();
+        if (std == null)
+            return false;
 
         return true;
     }
 
-    public void AddStudentsToCourseGroup(List<string> StudentsId, string courseGroupId, string courseId)
+    public void AddStudentsToCourseGroup(string StudentId, string courseGroupId, string courseId)
     {
-                foreach (var studentId in StudentsId)
-            repo.Add(new StudentCourseGroupRelation
-            {
-                CourseGroupId = courseGroupId,
-                StudentId = studentId,
-                CourseGroupCourseId = courseId
-            });
+        repo.Add(new StudentCourseGroupRelation
+        {
+            CourseGroupId = courseGroupId,
+            StudentId = StudentId,
+            CourseGroupCourseId = courseId
+        });
         repo.CommitAsync();
     }
 
-    public void DeleteStudentsFromCourseGroup(List<string> StudentsId, string courseGroupId, string courseId)
+    public void DeleteStudentsFromCourseGroup(string StudentId, string courseGroupId, string courseId)
     {
-        foreach (var studentId in StudentsId)
-        {
-            var item = repo.Query().Where(
+        var item = repo.Query().Where(
                     c => c.CourseGroupId == courseGroupId
-                    && c.StudentId == studentId
+                    && c.StudentId == StudentId
                     && c.CourseGroupCourseId == courseId
-            ).FirstOrDefault();
-            if(item != null)
-                repo.Remove(item);
-        }
+                ).FirstOrDefault();
+        if (item != null)
+            repo.Remove(item);
         repo.CommitAsync();
     }
 }

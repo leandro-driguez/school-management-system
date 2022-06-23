@@ -11,9 +11,11 @@ public class StudentCourseGroupRelationPostDto
     public string CourseGroupId { get; set; }
     [Required]
     public string CourseId { get; set; }
-
     [Required]
-    [MinLength(1)]
-    public List<string> StudentsId{get; set;}
+    public string StudentId{get; set;}
+    // [Required]
+    public DateTime StartDate {get; set;}
+    // [Required]
+    public DateTime EndDate {get; set;}
 }
 

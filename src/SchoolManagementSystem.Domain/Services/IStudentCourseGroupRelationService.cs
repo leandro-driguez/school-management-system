@@ -8,7 +8,7 @@ namespace SchoolManagementSystem.Domain.Services;
 
 public interface IStudentCourseGroupRelationService : IService<StudentCourseGroupRelation>
 {
-    public bool ValidateIds(List<string> StudentsId, string courseGroupId, string courseId);
-    public void AddStudentsToCourseGroup(List<string> StudentsId, string courseGroupId, string courseId);
-    public void DeleteStudentsFromCourseGroup(List<string> StudentsId, string courseGroupId, string courseId);
+    public bool ValidateIds(string StudentId, string courseGroupId, string courseId);
+    public void AddStudentsToCourseGroup(string StudentId, string courseGroupId, string courseId);
+    public void DeleteStudentsFromCourseGroup(string StudentId, string courseGroupId, string courseId);
 }
