@@ -1,7 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CRUD_Table from "../components/Table/CRUD_Table";
-import SimpleTable from "../components/SimpleTable/SimpleTable";
 
 const Classrooms = () => {
     const columns = [
