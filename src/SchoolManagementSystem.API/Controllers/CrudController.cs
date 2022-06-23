@@ -50,19 +50,25 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     }
 
     [HttpPost]
-    public virtual IActionResult Post([FromForm] TDTO dto_model)
+    public virtual IActionResult Post([FromBody] TDTO dto_model)
     {
         var entity = _mapperToDto.Map<TEntity>(dto_model);
+
+        entity.Id = Guid.NewGuid().ToString();
         
         _service.Add(entity);
         _service.CommitAsync();
+
+        dto_model.Id = entity.Id;
         
-        return Ok();
+        return Ok(dto_model);
     }
 
     [HttpPut]
-    public virtual IActionResult Put( [FromForm] TDTO dto_model)
+    public virtual IActionResult Put([FromBody] TDTO dto_model)
     {
+        // return Ok(dto_model);
+        
         var entities = _service.Query();
         var entity = entities.FirstOrDefault(c => Equals(c.Id, dto_model.Id));
 
