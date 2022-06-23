@@ -34,7 +34,7 @@ public class DoWorkersPaymentController : Controller
                     InfoByPosition = new List<InfoByPositionDto>(),
                     InfoByCourse = new List<InfoByCourseDto>()
                 }},
-            };
+            }; 
             
         foreach(var info in dto.InfoByDate)
         {
@@ -50,29 +50,57 @@ public class DoWorkersPaymentController : Controller
                 );
             }
         }
+        var tCGR_repo = _service.GetTeacherCourseGroupRelationRepo(id);
+        var tCR_repo = _service.GetTeacherCourseRelationRepo(id);
+        var sCGR_repo = _service.GetTeacherCourseRelationRepo(id);
+        // var public IRepository<StudentCourseGroupRelation> GetStudentCourseGroupRelationRepo(string id);
         foreach(var info in dto.InfoByDate)
         {
-            var _query = _service.GetWorkerCoursePorcentualSalaries(id);
-            foreach (var row in _query)
+            var courserow = from tcgr in tCGR_repo.Query()
+                    join tcr in tCR_repo.Query()
+                        on new {CourseId = tcgr.CourseGroupCourseId, tcgr.TeacherId}
+                        equals new {CourseId = tcr.CourseId, tcr.TeacherId}
+                    into details
+                    from d in details
+                    select new {
+                        CourseId = d.CourseId,
+                        CourseName = d.Course.Name,
+                        CourseGroupId = d.Course,
+                        Porcentage = d.CorrespondingPorcentage,
+                  };
+            foreach (var row in courserow )
             {
-                var course = new InfoByCourseDto{
-                        CourseId = row.CourseId,
-                        CourseName = row.Course.Name,
-                        Porcentage = row.PaidPorcentage,
-                        InfoByCourseGroup = new List<InfoByCourseGroupDto>()
-                    };
-                
-                    foreach (var cgroup in row.Course.CourseGroups)
-                    {
-                        course.InfoByCourseGroup.Add(
-                            new InfoByCourseGroupDto{
-                                CourseGroupId = cgroup.Id,
-                                CourseGroupIncome = cgroup.StudentCourseGroupRelations.Count() * row.Course.Price,
-                                CourseGroupWorkerPayment = row.PaidPorcentage * (cgroup.StudentCourseGroupRelations.Count() * row.Course.Price)
-                            }
-                        );
-                    }
+                InfoByCourseDto course = new InfoByCourseDto(){
+                    CourseId = row.CourseId,
+                    CourseName = row.CourseName,
+                    Porcentage = row.Porcentage,
+                    InfoByCourseGroup = new List<InfoByCourseGroupDto>()
+                };
+                var groups = (from tCGR in tCGR_repo.Query().Include(c => c.CourseGroup)
+                        where tCGR.CourseGroupCourseId == row.CourseId
+                        select new { tCGR.CourseGroup});
+                foreach (var group in groups)
+                {
+                    course.InfoByCourseGroup.Add(new InfoByCourseGroupDto(){
+                        CourseGroupId = group.CourseGroup.Id
+                    });
+                }
+                dto.InfoByDate[0].InfoByCourse.Add(course);
+                        // group tCGR2 by tCGR2.CourseGroupCourseId;
+                        
             }
+            
+                    // foreach (var cgroup in row.Course.CourseGroups)
+                    // {
+                    //     course.InfoByCourseGroup.Add(
+                    //         new InfoByCourseGroupDto{
+                    //             CourseGroupId = cgroup.Id,
+                    //             CourseGroupIncome = cgroup.StudentCourseGroupRelations.Count() * row.Course.Price,
+                    //             CourseGroupWorkerPayment = row.PaidPorcentage * (cgroup.StudentCourseGroupRelations.Count() * row.Course.Price)
+                    //         }
+                    //     );
+                    // }
+        //     }
         }
         return Ok(dto);
     }

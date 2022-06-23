@@ -1,7 +1,9 @@
 
 using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Relations;
 using SchoolManagementSystem.Domain.Records;
+using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Application.Repositories_Interfaces.Records;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
 // using Microsoft.AspNetCore.Mvc;
@@ -13,20 +15,38 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
 {
     IWorkerPayRecordByPositionRepository repoPositionPayments;
     ITeacherPayRecordPerCourseRepository repoTeacherPayments;
-    public DoWorkersPaymentService(IWorkerPayRecordByPositionRepository repo_1, ITeacherPayRecordPerCourseRepository repo_2, IWorkerRepository base_repo) : base(base_repo)
+    ITeacherCourseGroupRelationRepository repoTeacherCGREl;
+    ITeacherCourseRelationRepository repoTeacherCourseRel;
+    // ICourseGroupRepository repoCG;
+    public DoWorkersPaymentService(ITeacherCourseRelationRepository repoTeacherCourseRel,ITeacherCourseGroupRelationRepository repoTeacherCGREl, IWorkerPayRecordByPositionRepository repo_1, ITeacherPayRecordPerCourseRepository repo_2, IWorkerRepository base_repo) : base(base_repo)
     {
         repoPositionPayments = repo_1;
         repoTeacherPayments = repo_2;
+        this.repoTeacherCGREl = repoTeacherCGREl;
+        this.repoTeacherCourseRel = repoTeacherCourseRel;
     }
-
-    public IQueryable<TeacherPayRecordPerCourse> GetWorkerCoursePorcentualSalaries(string id)
+    public IRepository<TeacherCourseGroupRelation>  GetTeacherCourseGroupRelationRepo(string id)
     {
-        var _query = repoTeacherPayments.Query()
-                       .Where(c => id == c.TeacherId)
-                       .Include(c => c.Course);
-
-        return _query;
+        return repoTeacherCGREl;
     }
+    public  IRepository<TeacherCourseRelation>  GetTeacherCourseRelationRepo(string id)
+    {
+        return repoTeacherCourseRel;
+    }
+    // public IQueryable<TeacherCourseGroupRelation> GetWorkerCoursePorcentualSalaries(string id)
+    // {
+    //     // var _query = from teacherCGREl in repoTeacherCGREl.Query()
+    //                     join teacherCourseRel in repoTeacherCourseRel.Query()
+    //                     on new {teacherCGREl.TeacherId, CourseId = teacherCGREl.CourseGroupCourseId}
+    //                         equals new {teacherCourseRel.TeacherId, CourseId = teacherCourseRel.CourseId}
+    //                     select new {
+    //                         TeacherId = teacherCGREl.TeacherId,
+    //                         Procentage = teacherCourseRel.CorrespondingPorcentage,
+    //                         CourseGroup = teacherCGREl.CourseGroup
+    //                     };
+
+    //     return _query;
+    // }
 
     public IQueryable<WorkerPayRecordByPosition> GetWorkerFixSalaries(string id)
     {
