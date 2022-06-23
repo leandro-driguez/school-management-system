@@ -33,4 +33,6 @@ public class SchoolMemberDto : IDto
                        ApplyFormatInEditMode = true)]
         [Display(Name = "Date Becomed Member")]
         public DateTime DateBecomedMember { get; set; }
+
+        public IList<Position> Positions { get; set; }
 }
