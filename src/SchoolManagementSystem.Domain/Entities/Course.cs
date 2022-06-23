@@ -12,7 +12,7 @@ namespace SchoolManagementSystem.Domain.Entities
         public string Name { get; set; }
         public IList<CourseGroup> CourseGroups { get; set; }
 
-        public IList<Teacher> Teachers { get; set; }
+        // public IList<Teacher> Teachers { get; set; }
         public IList<TeacherCourseRelation> TeacherCourseRelations { get; set; }
     }
 }

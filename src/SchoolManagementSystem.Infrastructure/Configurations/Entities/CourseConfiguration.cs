@@ -12,15 +12,15 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
     {
         builder.HasKey(c => c.Id);
         
-        builder.HasMany(c => c.Teachers)
-                .WithMany(t => t.Courses)
-                .UsingEntity<TeacherCourseRelation>(
-                    j => 
-                    {
-                        j.Property(pt => pt.CorrespondingPorcentage);
-                        j.HasKey(pt => new {pt.TeacherId, pt.CourseId});
-                    }
-                );
+        // builder.HasMany(c => c.Teachers)
+        //         .WithMany(t => t.Courses)
+        //         .UsingEntity<TeacherCourseRelation>(
+        //             j => 
+        //             {
+        //                 j.Property(pt => pt.CorrespondingPorcentage);
+        //                 j.HasKey(pt => new {pt.TeacherId, pt.CourseId});
+        //             }
+        //         );
 
         builder.Property(c => c.Name)
             .IsRequired();
