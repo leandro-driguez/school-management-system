@@ -9,7 +9,7 @@ public class StudentCourseGroupRelationProfile : Profile
 {
     public StudentCourseGroupRelationProfile()
     {
-        CreateMap<StudentCourseGroupRelation, StudentCourseGroupRelationtDto>();
-        CreateMap<StudentCourseGroupRelationtDto, StudentCourseGroupRelation>();
+        CreateMap<StudentCourseGroupRelation, StudentCourseGroupRelationDto>();
+        CreateMap<StudentCourseGroupRelationDto, StudentCourseGroupRelation>();
     }
 }

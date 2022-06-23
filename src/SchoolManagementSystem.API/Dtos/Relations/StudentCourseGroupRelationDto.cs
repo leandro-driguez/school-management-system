@@ -5,7 +5,7 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Dtos;
 
-public class StudentCourseGroupRelationtDto
+public class StudentCourseGroupRelationDto
 {
     [Required]
     public string CourseGroupId { get; set; }

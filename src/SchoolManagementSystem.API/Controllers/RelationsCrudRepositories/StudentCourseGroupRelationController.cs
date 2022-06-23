@@ -26,10 +26,10 @@ public class StudentCourseGroupRelationController : Controller
     public IActionResult GetAll()
     {
         var _query = _service.Query().Include(c => c.CourseGroup.Course).Include(c => c.Student);
-        List<StudentCourseGroupRelationtDto> output = new List<StudentCourseGroupRelationtDto>();   
+        List<StudentCourseGroupRelationDto> output = new List<StudentCourseGroupRelationDto>();   
         foreach (var item in _query)
         {
-            StudentCourseGroupRelationtDto dto = new StudentCourseGroupRelationtDto(){
+            StudentCourseGroupRelationDto dto = new StudentCourseGroupRelationDto(){
                CourseGroupCourseId = item.CourseGroupCourseId,
                CourseGroupCourseName = item.CourseGroup.Course.Name,
                CourseGroupName = item.CourseGroup.CourseGroupName,
@@ -45,7 +45,7 @@ public class StudentCourseGroupRelationController : Controller
     }
 
     [HttpPost]
-    public IActionResult Post([FromForm]StudentCourseGroupRelationtDto dto)
+    public IActionResult Post([FromForm]StudentCourseGroupRelationDto dto)
     {
         if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
@@ -62,7 +62,7 @@ public class StudentCourseGroupRelationController : Controller
     }
 
     [HttpPut]
-    public IActionResult Put([FromForm]StudentCourseGroupRelationtDto dto)
+    public IActionResult Put([FromForm]StudentCourseGroupRelationDto dto)
     {
         if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
@@ -80,7 +80,7 @@ public class StudentCourseGroupRelationController : Controller
     }
 
     [HttpDelete]
-    public IActionResult Delete([FromForm]StudentCourseGroupRelationtDto dto)
+    public IActionResult Delete([FromForm]StudentCourseGroupRelationDto dto)
     {
         if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();

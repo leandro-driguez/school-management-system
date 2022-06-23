@@ -9,6 +9,6 @@ public class WorkerPositionRelationConfiguration : IEntityTypeConfiguration<Work
 {
     public void Configure(EntityTypeBuilder<WorkerPositionRelation> builder)
     {
-        builder.HasKey(w => new { w.WorkerId, w.PositionId });
+        // builder.HasKey(w => new { w.WorkerId, w.PositionId });
     }
 }

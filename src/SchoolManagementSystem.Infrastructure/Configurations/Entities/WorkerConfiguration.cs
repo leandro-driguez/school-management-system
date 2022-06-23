@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Relations;
 
 namespace SchoolManagementSystem.Infrastructure.Configurations;
 
@@ -16,6 +17,11 @@ public class WorkerConfiguration : IEntityTypeConfiguration<Worker>
             .WithMany(r => r.Providers);
         
         builder.HasMany(w => w.Positions)
-            .WithMany(p => p.Workers);
+            .WithMany(p => p.Workers).UsingEntity<WorkerPositionRelation>(
+                j =>
+                {
+                    j.Property(pt => pt.FixedSalary);
+                    j.HasKey(t => new { t.WorkerId, t.PositionId });
+                });
     }
 }
