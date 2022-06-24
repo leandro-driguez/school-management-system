@@ -10,6 +10,8 @@
 .table_options {
     float: right;
     align-items: center;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .table_options > i {
@@ -87,7 +89,18 @@ a:hover {
     padding-left: 10px;
 }
 
+
 /* ------------------ TABLE ------------------- */
+
+.ant-table th.ant-table-selection-column{
+    width: 1%;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #cbcbcb;
+    border-color: #504a4a;
+}
+
 .ant-table-thead > tr > th {
     background: #ffb5b53b !important;
     border-color: white;

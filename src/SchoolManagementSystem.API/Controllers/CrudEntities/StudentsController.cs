@@ -8,6 +8,7 @@ using SchoolManagementSystem.Domain.Enums;
 using SchoolManagementSystem.Domain.Relations;
 using AutoMapper;
 using SchoolManagementSystem.API.Controllers;
+using Microsoft.EntityFrameworkCore;
 
 namespace SchoolManagementSystem.API.Controllers.CrudEntities;
 
@@ -82,10 +83,28 @@ public class StudentsController : CrudController<Student, StudentDto>
         if(student == null)
             return NotFound(dto_model);
 
-        _mapperToDto.Map(dto_model,student);
+        _mapperToDto.Map(dto_model, student);
         _service.Update(student);
         _service.CommitAsync();
 
         return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public override IActionResult Delete(string id)
+    {
+        var Id = new SchoolMember{Id = id}.Id;
+        
+        var worker = _service.Query()
+            .AsNoTrackingWithIdentityResolution()
+            .FirstOrDefault(c => Equals(c.Id, Id));
+        
+        if(worker == null)
+            return NotFound(id);
+        
+        _service.Remove(worker);
+        _service.CommitAsync();
+        
+        return Ok(worker);
     }
 }

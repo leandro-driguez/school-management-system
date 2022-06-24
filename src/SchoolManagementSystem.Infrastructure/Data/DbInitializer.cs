@@ -624,7 +624,7 @@ public static class DbInitializer
             Capacity = 16,
             StartDate = new DateTime(2022, 3, 12),
             EndDate = new DateTime(2022, 5, 12),
-            Teacher = new Teacher{ Id="00523573123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+            Teacher = new Teacher{ Id="00523573122", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
                 Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                 CourseGroups = new List<CourseGroup>() }
         };

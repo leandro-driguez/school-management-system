@@ -126,7 +126,7 @@ const BasicMean = () => {
             <CRUD_Table 
                 title={"Medios básicos"} 
                 columns={columns} 
-                operations={["edit","delete"]}
+                operations={["edit","delete","add"]}
                 url={"https://localhost:5001/api/BasicMean"}
                 tableID={tableID}
                 searchboxID={searchboxID}

@@ -1,5 +1,12 @@
 import {Button, Modal, Form, InputNumber, Input, Popconfirm, Table, Typography} from 'antd';
-import {DeleteTwoTone, EditTwoTone, SaveTwoTone, CloseSquareTwoTone, ExclamationCircleTwoTone } from "@ant-design/icons";
+import {
+    DeleteTwoTone,
+    EditTwoTone,
+    SaveTwoTone,
+    CloseSquareTwoTone,
+    ExclamationCircleTwoTone,
+    EllipsisOutlined
+} from "@ant-design/icons";
 import {useContext, useEffect, useRef, createContext, useState} from 'react';
 import "./CRUD_Table.css";
 import axios from 'axios';
@@ -56,48 +63,67 @@ const CRUD_Table = (props) => {
         columns.push(temp[i]);
     }
 
-    columns.push(
-        {
-            title: 'Eliminar',
-            dataIndex: 'operation',
-            width: "1%",
-            render: (_, record) =>
-                data.length >= 1 ? (
-                    <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
-                                okText={"Aceptar"} onConfirm={() => Delete(record.key)}
-                                icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-                        <DeleteTwoTone/>
-                    </Popconfirm>
-                ) : null,
-        },
-        {
-            title: 'Editar',
-            dataIndex: 'operation',
-            width: "1%",
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-            <Typography.Link
-                onClick={() => save(record.key)}
-                style={{
-                    marginRight: 8,
-                }}
-            >
-              <SaveTwoTone />
-            </Typography.Link>
-            <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
-              <a><CloseSquareTwoTone /></a>
-            </Popconfirm>
-          </span>
-                ) : (
-                    <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        <EditTwoTone />
+    for (let i = 0; i < props.operations.length; i++) {
+        if (props.operations[i] === 'edit'){
+            columns.push(
+                {
+                    title: 'Editar',
+                    dataIndex: 'operation',
+                    width: "1%",
+                    render: (_, record) => {
+                        const editable = isEditing(record);
+                        return editable ? (
+                            <span>
+                    <Typography.Link
+                        onClick={() => save(record.key)}
+                        style={{
+                            marginRight: 8,
+                        }}
+                    >
+                      <SaveTwoTone />
                     </Typography.Link>
-                );
-            },
-        },
-    );
+                    <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
+                      <a><CloseSquareTwoTone /></a>
+                    </Popconfirm>
+                  </span>
+                        ) : (
+                            <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+                                <EditTwoTone />
+                            </Typography.Link>
+                        );
+                    },
+                },
+            );
+        }
+        if (props.operations[i] === 'delete'){
+            columns.push(
+                {
+                    title: 'Eliminar',
+                    dataIndex: 'operation',
+                    width: "1%",
+                    render: (_, record) =>
+                        data.length >= 1 ? (
+                            <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
+                                        okText={"Aceptar"} onConfirm={() => Delete(record.key)}
+                                        icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
+                                <DeleteTwoTone/>
+                            </Popconfirm>
+                        ) : null,
+                }
+            );
+        }
+        if (props.operations[i] === 'details'){
+            columns.push(
+                {
+                    title: 'Detalles',
+                    dataIndex: 'operation',
+                    width: "1%",
+                    render: (_, record) =>
+                        <a href={props.link}><EllipsisOutlined style={{color:"blue"}}/></a>
+                }
+            );
+        }
+    }
     
     const [isEditingModalVisible, setIsEditingModalVisible] = useState(false);
 
@@ -154,6 +180,14 @@ const CRUD_Table = (props) => {
         setData(newData);
     };
 
+    const DeleteMultipleRows = (keys) => {
+        if(keys.length > 0){
+            for (let i = 0; i < keys.length; i++) {
+                Delete(keys[i]);
+            }
+        }
+    };
+
     const search = (input_id, table_id) =>{
         var input, filter, table, tr, td, i, j, x, txtValue;
         input = document.getElementById(input_id);
@@ -183,6 +217,16 @@ const CRUD_Table = (props) => {
         }
     };
 
+    const [selRowKeys, setSelRowKeys] = useState([])
+    const [selectedRowKeys, setSelectedRowKeys] = useState([])
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            setSelectedRowKeys(selectedRowKeys);
+        },
+    };
+
+    console.log(rowSelection);
 
     const getData = async () => 
         await axios.get(props.url)
@@ -244,7 +288,7 @@ const CRUD_Table = (props) => {
                     {headers.map(
                         (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
                     )}
-                    <Button type="primary" 
+                    <Button type="primary"
                             onClick={ async ()=>{ 
 
                                 await axios.post(props.url, newItem);
@@ -255,7 +299,7 @@ const CRUD_Table = (props) => {
                             }} 
                             htmlType="submit"
                     >Guardar</Button>
-                    <Button>Cancelar</Button>
+                    <Button onClick={()=>{setIsEditingModalVisible(false);}}>Cancelar</Button>
                 </Form>
             </Modal>
         );
@@ -283,8 +327,27 @@ const CRUD_Table = (props) => {
                     <a className="table_options">
                         <i className="fa fa-plus-square-o"
                            aria-hidden="true"
-                           onClick={() => setIsEditingModalVisible(true)}>
+                           onClick={() => {
+                               for (let i = 0; i < props.operations.length; i++) {
+                                   if(props.operations[i] === 'add'){
+                                       setIsEditingModalVisible(true);
+                                   }
+                               }
+                               }}>
                     </i>
+                    </a>
+
+                    <a className="table_options">
+                        <i className="fa fa-minus-square-o"
+                           aria-hidden="true"
+                           onClick={() => {
+                               for (let i = 0; i < props.operations.length; i++) {
+                                   if(props.operations[i] === 'delete'){
+                                        DeleteMultipleRows(selectedRowKeys);
+                                   }
+                               }
+                           }}>
+                        </i>
                     </a>
                 </div>
 
@@ -302,6 +365,9 @@ const CRUD_Table = (props) => {
                     body: {
                         cell: EditableCell,
                     },
+                }}
+                rowSelection={{
+                    ...rowSelection,
                 }}
                 bordered
                 dataSource={data}

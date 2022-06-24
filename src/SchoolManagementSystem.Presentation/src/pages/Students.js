@@ -215,10 +215,11 @@ const Students = () => {
             <CRUD_Table 
                 title={"Estudiantes"} 
                 columns={columns} 
-                operations={["edit","delete"]}
+                operations={["edit","delete","add","details"]}
                 url={"https://localhost:5001/api/Students"}
                 tableID={tableID}
                 searchboxID={searchboxID}
+                link={"../StudentDetails"}
             >
             </CRUD_Table>
         </div>

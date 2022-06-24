@@ -55,7 +55,7 @@ const Expenses = () => {
             <CRUD_Table 
                 title={"Gastos"} 
                 columns={columns} 
-                operations={["edit","delete"]}
+                operations={["edit","delete","add"]}
                 url={"https://localhost:5001/api/Expenses"}
                 tableID={tableID}
                 searchboxID={searchboxID}
