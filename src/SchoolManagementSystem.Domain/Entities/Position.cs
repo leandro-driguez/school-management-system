@@ -11,4 +11,9 @@ public class Position : Entity
 
     // [Required]
     public IList<Worker> Workers { get; set; }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }

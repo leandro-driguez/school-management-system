@@ -54,7 +54,7 @@ public class DoWorkersPaymentController : Controller
         var tCR_repo = _service.GetTeacherCourseRelationRepo();
         foreach(var info in dto.InfoByDate)
         {
-            var courserow = from tcgr in tCGR_repo.Query().Where(c => c.TeacherId == id)
+            var courserows = from tcgr in tCGR_repo.Query().Where(c => c.TeacherId == id)
                     join tcr in tCR_repo.Query().Where(c => c.TeacherId == id)
                         on new {CourseId = tcgr.CourseGroupCourseId, tcgr.TeacherId}
                         equals new {CourseId = tcr.CourseId, tcr.TeacherId}
@@ -66,29 +66,31 @@ public class DoWorkersPaymentController : Controller
                         CourseGroupId = d.Course,
                         Porcentage = d.CorrespondingPorcentage,
                   };
-            foreach (var row in courserow )
-            {
-                InfoByCourseDto course = new InfoByCourseDto(){
-                    CourseId = row.CourseId,
-                    CourseName = row.CourseName,
-                    Porcentage = row.Porcentage,
-                    InfoByCourseGroup = new List<InfoByCourseGroupDto>()
-                };
-                var groups = (from tCGR in tCGR_repo.Query().Include(c => c.CourseGroup.StudentCourseGroupRelations).Where(c => c.TeacherId == id)
-                            join tCR in tCR_repo.Query().Include(c => c.Course).Where(c => c.TeacherId == id)
-                            on tCGR.CourseGroupCourseId equals tCR.CourseId
-                        where tCGR.CourseGroupCourseId == row.CourseId
-                        select new { tCGR.CourseGroup, StudentAmount = tCGR.CourseGroup.StudentCourseGroupRelations.Count(), tCR.Course.Price});
-                foreach (var group in groups)
+            foreach (var gg in courserows.GroupBy(c => c.CourseId))
+                foreach (var row in gg)
                 {
-                    course.InfoByCourseGroup.Add(new InfoByCourseGroupDto(){
-                        CourseGroupId = group.CourseGroup.Id
-                        , CourseGroupIncome = group.StudentAmount * group.Price
-                        ,CourseGroupWorkerPayment = ((double)(1.0)/100) * course.Porcentage * group.StudentAmount * group.Price
-                    });
+                    InfoByCourseDto course = new InfoByCourseDto(){
+                        CourseId = row.CourseId,
+                        CourseName = row.CourseName,
+                        Porcentage = row.Porcentage,
+                        InfoByCourseGroup = new List<InfoByCourseGroupDto>()
+                    };
+                    var groups = (from tCGR in tCGR_repo.Query().Include(c => c.CourseGroup.StudentCourseGroupRelations).Where(c => c.TeacherId == id)
+                                join tCR in tCR_repo.Query().Include(c => c.Course).Where(c => c.TeacherId == id)
+                                on tCGR.CourseGroupCourseId equals tCR.CourseId
+                            where tCGR.CourseGroupCourseId == row.CourseId
+                            select new { tCGR.CourseGroup, StudentAmount = tCGR.CourseGroup.StudentCourseGroupRelations.Count(), tCR.Course.Price});
+                    foreach (var group in groups)
+                    {
+                        course.InfoByCourseGroup.Add(new InfoByCourseGroupDto(){
+                            CourseGroupId = group.CourseGroup.Id
+                            ,CourseGroupName = group.CourseGroup.Name
+                            , CourseGroupIncome = group.StudentAmount * group.Price
+                            ,CourseGroupWorkerPayment = ((double)(1.0)/100) * course.Porcentage * group.StudentAmount * group.Price
+                        });
+                    }
+                    dto.InfoByDate[0].InfoByCourse.Add(course);
                 }
-                dto.InfoByDate[0].InfoByCourse.Add(course);
-            }
             
         }
         return Ok(dto);

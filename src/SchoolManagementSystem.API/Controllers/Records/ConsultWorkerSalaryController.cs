@@ -90,6 +90,7 @@ public class ConsultWorkerSalaryController : Controller
                 {
                     course.InfoByCourseGroup.Add(new InfoByCourseGroupDto(){
                         CourseGroupId = group.CourseGroup.Id
+                        ,CourseGroupName = group.CourseGroup.Name
                         , CourseGroupIncome = group.StudentAmount * group.Price
                         ,CourseGroupWorkerPayment = ((double)(1.0)/100) * course.Porcentage * group.StudentAmount * group.Price
                     });

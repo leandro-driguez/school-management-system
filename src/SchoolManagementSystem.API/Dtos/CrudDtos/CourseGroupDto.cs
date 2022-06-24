@@ -9,7 +9,7 @@ public class CourseGroupDto : IDto
         [Required]
         public string CourseId { get; set; }
         [Required]
-        public string CourseGroupName { get; set; }
+        public string Name { get; set; }
         [Required]
         public int Capacity { get; set; }
         [Required]
