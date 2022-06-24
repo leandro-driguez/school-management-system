@@ -24,10 +24,10 @@ public class TeachersController : CrudController<Teacher, TeacherDto>
         var _serv = (_service as ITeacherService);
         if(!_serv.SpecialPost(id))
             return NotFound();
-        var entity = _serv.Query().Single(c => c.Id == id);
-        var dto_model = _mapperToDto.Map<TeacherDto>(entity);
+        // var entity = _serv.Query().Single(c => c.Id == id);
+        // var dto_model = _mapperToDto.Map<TeacherDto>(entity);
 
-        return Ok(dto_model);
+        return Ok();
     }
     [HttpPost]
     public override IActionResult Post([FromBody] TeacherDto dto_model)
