@@ -1,5 +1,12 @@
 import {Button, Modal, Form, InputNumber, Input, Popconfirm, Table, Typography} from 'antd';
-import {DeleteTwoTone, EditTwoTone, SaveTwoTone, CloseSquareTwoTone, ExclamationCircleTwoTone } from "@ant-design/icons";
+import {
+    DeleteTwoTone,
+    EditTwoTone,
+    SaveTwoTone,
+    CloseSquareTwoTone,
+    ExclamationCircleTwoTone,
+    EllipsisOutlined
+} from "@ant-design/icons";
 import {useContext, useEffect, useRef, createContext, useState} from 'react';
 import "./CRUD_Table.css";
 import axios from 'axios';
@@ -102,6 +109,17 @@ const CRUD_Table = (props) => {
                                 <DeleteTwoTone/>
                             </Popconfirm>
                         ) : null,
+                }
+            );
+        }
+        if (props.operations[i] === 'details'){
+            columns.push(
+                {
+                    title: 'Detalles',
+                    dataIndex: 'operation',
+                    width: "1%",
+                    render: (_, record) =>
+                        <a href={props.link}><EllipsisOutlined style={{color:"blue"}}/></a>
                 }
             );
         }
@@ -270,7 +288,7 @@ const CRUD_Table = (props) => {
                     {headers.map(
                         (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
                     )}
-                    <Button type="primary" 
+                    <Button type="primary"
                             onClick={ async ()=>{ 
 
                                 await axios.post(props.url, newItem);
@@ -309,7 +327,13 @@ const CRUD_Table = (props) => {
                     <a className="table_options">
                         <i className="fa fa-plus-square-o"
                            aria-hidden="true"
-                           onClick={() => setIsEditingModalVisible(true)}>
+                           onClick={() => {
+                               for (let i = 0; i < props.operations.length; i++) {
+                                   if(props.operations[i] === 'add'){
+                                       setIsEditingModalVisible(true);
+                                   }
+                               }
+                               }}>
                     </i>
                     </a>
 
@@ -317,7 +341,11 @@ const CRUD_Table = (props) => {
                         <i className="fa fa-minus-square-o"
                            aria-hidden="true"
                            onClick={() => {
-                               DeleteMultipleRows(selectedRowKeys);
+                               for (let i = 0; i < props.operations.length; i++) {
+                                   if(props.operations[i] === 'delete'){
+                                        DeleteMultipleRows(selectedRowKeys);
+                                   }
+                               }
                            }}>
                         </i>
                     </a>

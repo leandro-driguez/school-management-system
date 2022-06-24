@@ -135,10 +135,11 @@ const Workers = () => {
             <CRUD_Table 
                 title={"Trabajadores"} 
                 columns={columns} 
-                operations={["edit","delete"]}
+                operations={["edit","delete","add","details"]}
                 url={"https://localhost:5001/api/Workers"}
                 tableID={tableID}
                 searchboxID={searchboxID}
+                link={"../WorkerDetails"}
             >
             </CRUD_Table>
         </div>

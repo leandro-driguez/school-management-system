@@ -75,10 +75,11 @@ const Courses = () => {
             <CRUD_Table 
                 title={"Cursos"} 
                 columns={columns} 
-                operations={["edit","delete"]}
+                operations={["edit","delete","add","details"]}
                 url={"https://localhost:5001/api/Courses"}
                 tableID={tableID}
                 searchboxID={searchboxID}
+                link={"../CourseDetails"}
             >
             </CRUD_Table>
         </div>

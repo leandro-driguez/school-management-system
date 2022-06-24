@@ -35,7 +35,7 @@ const Positions = () => {
             <CRUD_Table 
                 title={"Cargos"} 
                 columns={columns} 
-                operations={["edit","delete"]}
+                operations={["edit","delete","add"]}
                 url={"https://localhost:5001/api/Positions"}
                 tableID={tableID}
                 searchboxID={searchboxID}

@@ -51,7 +51,7 @@ const Classrooms = () => {
             <CRUD_Table 
                 title={"Aulas"} 
                 columns={columns} 
-                operations={["edit","delete"]}
+                operations={["edit","delete","add"]}
                 url={"https://localhost:5001/api/Classrooms"}
                 tableID={tableID}
                 searchboxID={searchboxID}
