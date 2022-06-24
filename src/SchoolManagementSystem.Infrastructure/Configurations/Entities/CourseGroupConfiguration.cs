@@ -22,7 +22,9 @@ public class CourseGroupConfiguration : IEntityTypeConfiguration<CourseGroup>
         //     });
 
         builder.HasOne(cg => cg.Teacher)
-            .WithMany(t => t.CourseGroups);
+            .WithMany(t => t.CourseGroups)
+            .OnDelete(DeleteBehavior.SetNull);
+        
         
         builder.Property(cg => cg.Name)
             .IsRequired();
