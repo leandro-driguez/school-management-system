@@ -50,6 +50,7 @@ public class WorkersController : CrudController<Worker, WorkerDto>
         var id = _mapperToDto.Map<Worker>(dto_model).Id;
 
         var worker = _service.Query()
+            .AsNoTrackingWithIdentityResolution()
             .FirstOrDefault(c => Equals(c.Id, id));
 
         if(worker == null)
@@ -59,7 +60,7 @@ public class WorkersController : CrudController<Worker, WorkerDto>
         _service.Update(worker);
         _service.CommitAsync();
 
-        return Ok();
+        return Ok(worker);
     }
 
     [HttpDelete("{id}")]
@@ -67,16 +68,16 @@ public class WorkersController : CrudController<Worker, WorkerDto>
     {
         var Id = new SchoolMember{Id = id}.Id;
         
-        var entity = _service.Query()
+        var worker = _service.Query()
             .AsNoTrackingWithIdentityResolution()
             .FirstOrDefault(c => Equals(c.Id, Id));
         
-        if(entity == null)
+        if(worker == null)
             return NotFound(id);
         
-        _service.Remove(entity);
+        _service.Remove(worker);
         _service.CommitAsync();
         
-        return Ok();
+        return Ok(worker);
     }
 }
