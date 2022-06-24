@@ -57,47 +57,39 @@ public class ConsultWorkerSalaryController : Controller
         }
         var tCGR_repo = _service.GetTeacherCourseGroupRelationRepo();
         var tCR_repo = _service.GetTeacherCourseRelationRepo();
-        foreach(var info in dto.InfoByDate)
+        foreach (var info in dto.InfoByDate)
         {
-            var courserow = from tcgr in tCGR_repo.Query().Where(c => c.TeacherId == id 
-                                                                && c.StartDate <= info.Date
-                                                                && (c.EndDate >= info.Date || c.EndDate < c.StartDate))
-                    join tcr in tCR_repo.Query().Where(c => c.TeacherId == id)
-                        on new {CourseId = tcgr.CourseGroupCourseId, tcgr.TeacherId}
-                        equals new {CourseId = tcr.CourseId, tcr.TeacherId}
-                    into details
-                    from d in details
-                    select new {
-                        CourseId = d.CourseId,
-                        CourseName = d.Course.Name,
-                        CourseGroupId = d.Course,
-                        Porcentage = d.CorrespondingPorcentage,
-                  };
-            foreach (var row in courserow )
+            var _querytcr = tCR_repo.Query().Where(c => c.TeacherId == id).Include(c => c.Course);
+            foreach (var row in _querytcr)
             {
-                InfoByCourseDto course = new InfoByCourseDto(){
+                InfoByCourseDto course = new InfoByCourseDto()
+                {
                     CourseId = row.CourseId,
-                    CourseName = row.CourseName,
-                    Porcentage = row.Porcentage,
+                    CourseName = row.Course.Name,
+                    Porcentage = row.CorrespondingPorcentage,
                     InfoByCourseGroup = new List<InfoByCourseGroupDto>()
                 };
-                var groups = (from tCGR in tCGR_repo.Query().Include(c => c.CourseGroup.StudentCourseGroupRelations).Where(c => c.TeacherId == id)
-                            join tCR in tCR_repo.Query().Include(c => c.Course).Where(c => c.TeacherId == id)
-                            on tCGR.CourseGroupCourseId equals tCR.CourseId
-                        where tCGR.CourseGroupCourseId == row.CourseId
-                        select new { tCGR.CourseGroup, StudentAmount = tCGR.CourseGroup.StudentCourseGroupRelations.Count(), tCR.Course.Price});
-                foreach (var group in groups)
+                var _querytcgr = tCGR_repo.Query().Where(c => c.TeacherId == id 
+                                                            && c.CourseGroupCourseId == course.CourseId
+                                                             && c.StartDate <= info.Date
+                                                            && (c.EndDate >= info.Date || c.EndDate < c.StartDate))
+                                                    .Include(c => c.CourseGroup.StudentCourseGroupRelations);
+                foreach (var group in _querytcgr)
                 {
-                    course.InfoByCourseGroup.Add(new InfoByCourseGroupDto(){
+                    var income = group.CourseGroup.StudentCourseGroupRelations.Count() * row.Course.Price;
+                    course.InfoByCourseGroup.Add(new InfoByCourseGroupDto()
+                    {
                         CourseGroupId = group.CourseGroup.Id
-                        ,CourseGroupName = group.CourseGroup.Name
-                        , CourseGroupIncome = group.StudentAmount * group.Price
-                        ,CourseGroupWorkerPayment = ((double)(1.0)/100) * course.Porcentage * group.StudentAmount * group.Price
+                        ,
+                        CourseGroupName = group.CourseGroup.Name
+                        ,
+                        CourseGroupIncome = income
+                        ,
+                        CourseGroupWorkerPayment = ((double)(1.0) / 100) * income * course.Porcentage
                     });
                 }
-                dto.InfoByDate[0].InfoByCourse.Add(course);
+                info.InfoByCourse.Add(course);
             }
-            
         }
         return Ok(dto);
     }

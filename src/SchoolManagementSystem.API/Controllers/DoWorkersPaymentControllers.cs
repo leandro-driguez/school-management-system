@@ -55,15 +55,6 @@ public class DoWorkersPaymentController : Controller
         var tCR_repo = _service.GetTeacherCourseRelationRepo();
         foreach (var info in dto.InfoByDate)
         {
-            // var courserows = from tcr in tCR_repo.Query().Where(c => c.TeacherId == id)
-            //                  select new
-            //                  {
-            //                      CourseId = d.CourseId,
-            //                      CourseName = d.Course.Name,
-            //                      CourseGroupId = d.Course,
-            //                      Porcentage = d.CorrespondingPorcentage,
-            //                  };
-            // foreach (var gg in courserows.GroupBy(c => c.CourseId))
             var _querytcr = tCR_repo.Query().Where(c => c.TeacherId == id).Include(c => c.Course);
             foreach (var row in _querytcr)
             {
