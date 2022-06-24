@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SchoolManagementSystem.Domain.Entities;
+using SchoolManagementSystem.Domain.Relations;
 
 namespace SchoolManagementSystem.Infrastructure.Configurations;
 

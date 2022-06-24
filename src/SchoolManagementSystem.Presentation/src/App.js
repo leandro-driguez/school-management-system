@@ -15,7 +15,7 @@ import SalaryPayment from './pages/SalaryPayment';
 import Expenses from './pages/Expenses';
 import Debtors from './pages/Debtors'
 import Users from './pages/Users';
-import BasicAssets from './pages/BasicAssets';
+import BasicMeans from './pages/BasicMeans';
 import Positions from './pages/Positions';
 import Classrooms from './pages/Classrooms';
 
@@ -38,7 +38,7 @@ function App() {
                 <Route path='/Debtors' element={<Debtors/>}/>
                 <Route path='/Users' element={<Users/>}/>
                 <Route path='/Positions' element={<Positions/>}/>
-                <Route path='/BasicAssets' element={<BasicAssets/>}/>
+                <Route path='/BasicMeans' element={<BasicMeans />}/>
                 <Route path='/Classrooms' element={<Classrooms/>}/>
             </Routes>
         </Router>

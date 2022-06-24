@@ -57,7 +57,7 @@ public class ConsultWorkerSalaryController : Controller
         }
         foreach(var info in dto.InfoByDate)
         {
-            var _query = _service.GetWorkerCoursePorcentualSalaries(id,info.Date);
+            var _query = _service.GetWorkerCoursePorcentualSalariesByDate(id,info.Date);
             foreach (var row in _query)
             {
                 var course = new InfoByCourseDto{

@@ -13,10 +13,18 @@ public class CourseGroupConfiguration : IEntityTypeConfiguration<CourseGroup>
         builder.HasOne(cg => cg.Course)
             .WithMany(t => t.CourseGroups);
 
+        // builder.HasOne(w => w.Teacher)
+        // .WithMany(p => p.CourseGroups).UsingEntity<TeacherCourseGroupRelation>(
+        //     j =>
+        //     {
+        //         j.Property(pt => pt.EndDate);
+        //         j.HasKey(t => new { t.CourseGroupId, t.CourseGroupCourseId, t.StartDate });
+        //     });
+
         builder.HasOne(cg => cg.Teacher)
             .WithMany(t => t.CourseGroups);
         
-        builder.Property(cg => cg.CourseGroupName)
+        builder.Property(cg => cg.Name)
             .IsRequired();
 
         builder.Property(cg => cg.Capacity)

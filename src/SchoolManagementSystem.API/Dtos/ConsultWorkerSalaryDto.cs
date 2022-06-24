@@ -81,7 +81,4 @@ public class ConsultWorkerSalaryGetSingleDto : IDto
     public string WorkerName { get; set; }
     
     public List<InfoByDateDto> InfoByDate{get; set;}
-
-
-
 }
