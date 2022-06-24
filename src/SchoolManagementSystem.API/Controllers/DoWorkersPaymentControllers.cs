@@ -93,4 +93,13 @@ public class DoWorkersPaymentController : Controller
         }
         return Ok(dto);
     }
+
+    [HttpPost]
+    public IActionResult Post(DoWorkerPaymentDto dto)
+    {
+        _service.DoCoursePayment(dto.Date,dto.Id);
+        _service.DoPositionPayment(dto.Date,dto.Id);
+        return Ok();
+    }
+
 }
