@@ -182,7 +182,7 @@ const CRUD_Table = (props) => {
         getData();
     },[]);
 
-    const _input_ = (props)=>{
+    const FormInput = (props)=>{
 
         return (
             <><Form.Item
@@ -213,7 +213,7 @@ const CRUD_Table = (props) => {
             >
                 <Form name="hey" autoComplete={"off"}>
                     {headers.map(
-                        (header) => { return (<_input_ header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
+                        (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
                     )}
                     <Button type="primary" 
                             onClick={ async ()=>{ 
