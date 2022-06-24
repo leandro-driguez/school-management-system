@@ -42,6 +42,9 @@ const Classrooms = () => {
         }
     ];
 
+    const tableID = 'ClassroomsTable';
+    const searchboxID = 'ClassroomsSearchbox';
+
     // const originData = [
     //     {key:"bc9f1407-812d-4f34-92f7-05d01076db9d",name:"Aula 1",capacity:30},
     //     {key:"c65b4ed0-8e30-472a-9166-59558f5d014c",name:"Aula 2",capacity:20},
@@ -68,6 +71,8 @@ const Classrooms = () => {
                 // data={originData} 
                 operations={["edit","delete"]}
                 url={"https://localhost:5001/api/Classrooms"}
+                tableID={tableID}
+                searchboxID={searchboxID}
             >
             </CRUD_Table>
         </div>
