@@ -59,7 +59,9 @@ public class ConsultWorkerSalaryController : Controller
         var tCR_repo = _service.GetTeacherCourseRelationRepo();
         foreach(var info in dto.InfoByDate)
         {
-            var courserow = from tcgr in tCGR_repo.Query().Where(c => c.TeacherId == id)
+            var courserow = from tcgr in tCGR_repo.Query().Where(c => c.TeacherId == id 
+                                                                && c.StartDate <= info.Date
+                                                                && (c.EndDate >= info.Date || c.EndDate < c.StartDate))
                     join tcr in tCR_repo.Query().Where(c => c.TeacherId == id)
                         on new {CourseId = tcgr.CourseGroupCourseId, tcgr.TeacherId}
                         equals new {CourseId = tcr.CourseId, tcr.TeacherId}
