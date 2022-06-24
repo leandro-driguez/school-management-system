@@ -61,7 +61,7 @@ export default class Menu extends Component {
                     <div className="dropdown-content">
                         <a href="../Users">Usuarios</a>
                         <a href="../Positions">Cargos</a>
-                        <a href="../BasicAssets">Medios Básicos</a>
+                        <a href="../BasicMean">Medios Básicos</a>
                         <a href="../Classrooms">Aulas</a>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ import SalaryPayment from './pages/SalaryPayment';
 import Expenses from './pages/Expenses';
 import Debtors from './pages/Debtors'
 import Users from './pages/Users';
-import BasicMeans from './pages/BasicMeans';
+import BasicMean from './pages/BasicMean';
 import Positions from './pages/Positions';
 import Classrooms from './pages/Classrooms';
 import Login from  './pages/Login';
@@ -26,25 +26,25 @@ function App() {
             <Routes>
                 <Route path='/' element={<Login/>}/>
                 <Route path='/Home' element={<Home/>}/>
-                <Route path='/Home/Students' element={<Students/>}/>
-                <Route path='/Home/Students/StudentDetails' element={<StudentDetails/>}/>
-                <Route path='/Home/Workers' element={<Workers/>}/>
-                <Route path='/Home/Workers/WorkerDetails' element={<WorkerDetails/>}/>
-                <Route path='/Home/CoursesInformation' element={<CoursesInformation/>}/>
-                <Route path='/Home/CoursesInformation/CourseDetails' element={<CourseDetails/>}/>
-                <Route path='/Home/Schedules' element={<Schedules/>}/>
-                <Route path='/Home/Income' element={<Income/>}/>
-                <Route path='/Home/CoursesPayment' element={<CoursesPayment/>}/>
-                <Route path='/Home/SalaryPayment' element={<SalaryPayment/>}/>
-                <Route path='/Home/Expenses' element={<Expenses/>}/>
-                <Route path='/Home/Debtors' element={<Debtors/>}/>
-                <Route path='/Home/Users' element={<Users/>}/>
-                <Route path='/Home/Positions' element={<Positions/>}/>
-                <Route path='/Home/BasicMeans' element={<BasicMeans />}/>
-                <Route path='/Home/Classrooms' element={<Classrooms/>}/>
+                <Route path='/Students' element={<Students/>}/>
+                <Route path='/Students/StudentDetails' element={<StudentDetails/>}/>
+                <Route path='/Workers' element={<Workers/>}/>
+                <Route path='/Workers/WorkerDetails' element={<WorkerDetails/>}/>
+                <Route path='/CoursesInformation' element={<CoursesInformation/>}/>
+                <Route path='/CoursesInformation/CourseDetails' element={<CourseDetails/>}/>
+                <Route path='/Schedules' element={<Schedules/>}/>
+                <Route path='/Income' element={<Income/>}/>
+                <Route path='/CoursesPayment' element={<CoursesPayment/>}/>
+                <Route path='/SalaryPayment' element={<SalaryPayment/>}/>
+                <Route path='/Expenses' element={<Expenses/>}/>
+                <Route path='/Debtors' element={<Debtors/>}/>
+                <Route path='/Users' element={<Users/>}/>
+                <Route path='/Positions' element={<Positions/>}/>
+                <Route path='/BasicMean' element={<BasicMean />}/>
+                <Route path='/Classrooms' element={<Classrooms/>}/>
             </Routes>
         </Router>
     );
 }
-
+// á, é, í, ó, ú
 export default App;

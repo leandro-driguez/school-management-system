@@ -266,7 +266,7 @@ const CRUD_Table = (props) => {
         <div>
             <div className={"container"}>
                 <div className="box_title">
-                    <p><strong>Aulas</strong></p>
+                    <p><strong>{props.title}</strong></p>
                 </div>
 
                 <div className="box">

@@ -1,4 +1,9 @@
 
+.PHONY: run
+
+run:
+	dotnet run --project src/SchoolManagementSystem.API
+
 .PHONY: build
 
 build:
