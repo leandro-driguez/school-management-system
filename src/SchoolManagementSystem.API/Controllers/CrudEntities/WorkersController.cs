@@ -16,4 +16,15 @@ public class WorkersController : CrudController<Worker, WorkerDto>
         IMapper mapper) : base(service ,mapper)
     {
     }
+
+    [HttpPost]
+    public override IActionResult Post([FromBody] WorkerDto dto_model)
+    {
+        var entity = _mapperToDto.Map<Worker>(dto_model);
+        
+        _service.Add(entity);
+        _service.CommitAsync();
+
+        return Ok(dto_model);
+    }
 }
