@@ -162,6 +162,14 @@ const CRUD_Table = (props) => {
         setData(newData);
     };
 
+    const DeleteMultipleRows = (keys) => {
+        if(keys.length > 0){
+            for (let i = 0; i < keys.length; i++) {
+                Delete(keys[i]);
+            }
+        }
+    };
+
     const search = (input_id, table_id) =>{
         var input, filter, table, tr, td, i, j, x, txtValue;
         input = document.getElementById(input_id);
@@ -191,6 +199,16 @@ const CRUD_Table = (props) => {
         }
     };
 
+    const [selRowKeys, setSelRowKeys] = useState([])
+    const [selectedRowKeys, setSelectedRowKeys] = useState([])
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            setSelectedRowKeys(selectedRowKeys);
+        },
+    };
+
+    console.log(rowSelection);
 
     const getData = async () => 
         await axios.get(props.url)
@@ -263,7 +281,7 @@ const CRUD_Table = (props) => {
                             }} 
                             htmlType="submit"
                     >Guardar</Button>
-                    <Button>Cancelar</Button>
+                    <Button onClick={()=>{setIsEditingModalVisible(false);}}>Cancelar</Button>
                 </Form>
             </Modal>
         );
@@ -294,6 +312,15 @@ const CRUD_Table = (props) => {
                            onClick={() => setIsEditingModalVisible(true)}>
                     </i>
                     </a>
+
+                    <a className="table_options">
+                        <i className="fa fa-minus-square-o"
+                           aria-hidden="true"
+                           onClick={() => {
+                               DeleteMultipleRows(selectedRowKeys);
+                           }}>
+                        </i>
+                    </a>
                 </div>
 
 
@@ -310,6 +337,9 @@ const CRUD_Table = (props) => {
                     body: {
                         cell: EditableCell,
                     },
+                }}
+                rowSelection={{
+                    ...rowSelection,
                 }}
                 bordered
                 dataSource={data}
