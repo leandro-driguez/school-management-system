@@ -5,7 +5,7 @@ import {ArrowRightOutlined, LockOutlined, MailOutlined, UserOutlined} from "@ant
 
 const Login = () => {
     return(
-        <div className="container">
+        <div className="login_container">
             <div className="screen">
                 <div className="screen__content">
                     <form className="login">
