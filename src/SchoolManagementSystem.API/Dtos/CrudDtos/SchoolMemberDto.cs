@@ -10,9 +10,6 @@ public class SchoolMemberDto : IDto
         [Required]
         [StringLength(11)]
         [JsonPropertyName("key")]
-        public string _id{ get;set; }
-
-        [JsonIgnore]
         public string Id {get; set;}
 
         [Required]

@@ -113,7 +113,8 @@ a:hover {
     margin-top: 0.5%;
     border-collapse: collapse;
     border-radius: 1em;
-    overflow: hidden;
+    overflow: scroll;
+    overflow-y: hidden;
     width: 90%;
     align-items: center;
 }

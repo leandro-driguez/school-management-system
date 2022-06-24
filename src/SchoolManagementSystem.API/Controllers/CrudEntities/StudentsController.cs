@@ -19,6 +19,21 @@ public class StudentsController : CrudController<Student, StudentDto>
     {
     }
 
+    [HttpGet]
+    public override IActionResult GetAll()
+    {
+        return Ok
+        (
+            _service.Query()
+                .Select(_mapperToDto.Map<Student,StudentDto>)
+                .Select((dto) => {
+                    dto.Id = dto.Id.Substring(25);
+                    return dto;
+                })
+                .ToList()
+        );
+    }
+
     [HttpPost]
     public override IActionResult Post([FromBody] StudentDto dto_model)
     {
@@ -43,23 +58,34 @@ public class StudentsController : CrudController<Student, StudentDto>
 
         var scholarityLevel = _mapperToDto.Map<Education>(dto_model.ScholarityLevel);
 
-        var entity = new Student
-        {
-            Id = dto_model._id,
-            Name = dto_model.Name,
-            LastName = dto_model.LastName,
-            PhoneNumber = dto_model.PhoneNumber,
-            Address = dto_model.Address,
-            DateBecomedMember = dto_model.DateBecomedMember,
-            Tuitor = tuitor,
-            Founds = dto_model.Founds,
-            ScholarityLevel = scholarityLevel,
-            StudentCourseGroupRelations = new List<StudentCourseGroupRelation>()
-        };
+
+        var student = _mapperToDto.Map<Student>(dto_model);
+
+        student.Tuitor = tuitor;
+        student.StudentCourseGroupRelations = new List<StudentCourseGroupRelation>();
+        student.ScholarityLevel = scholarityLevel;
         
-        _service.Add(entity);
+        _service.Add(student);
         _service.CommitAsync();
         
         return Ok(dto_model);
+    }
+
+    [HttpPut]
+    public override IActionResult Put([FromBody] StudentDto dto_model)
+    {
+        var id = _mapperToDto.Map<Student>(dto_model).Id;
+
+        var student = _service.Query()
+            .FirstOrDefault(c => Equals(c.Id, id));
+
+        if(student == null)
+            return NotFound(dto_model);
+
+        _mapperToDto.Map(dto_model,student);
+        _service.Update(student);
+        _service.CommitAsync();
+
+        return Ok();
     }
 }
