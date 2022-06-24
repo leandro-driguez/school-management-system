@@ -4,6 +4,7 @@ using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
+using Microsoft.EntityFrameworkCore;  
 using AutoMapper;
 using SchoolManagementSystem.API.Controllers;
 
@@ -17,6 +18,21 @@ public class WorkersController : CrudController<Worker, WorkerDto>
     {
     }
 
+    [HttpGet]
+    public override IActionResult GetAll()
+    {
+        return Ok
+        (
+            _service.Query()
+                .Select(_mapperToDto.Map<Worker, WorkerDto>)
+                .Select((dto) => {
+                    dto.Id = dto.Id.Substring(25);
+                    return dto;
+                })
+                .ToList()
+        );
+    }
+
     [HttpPost]
     public override IActionResult Post([FromBody] WorkerDto dto_model)
     {
@@ -26,5 +42,41 @@ public class WorkersController : CrudController<Worker, WorkerDto>
         _service.CommitAsync();
 
         return Ok(dto_model);
+    }
+
+    [HttpPut]
+    public override IActionResult Put([FromBody] WorkerDto dto_model)
+    {
+        var id = _mapperToDto.Map<Worker>(dto_model).Id;
+
+        var worker = _service.Query()
+            .FirstOrDefault(c => Equals(c.Id, id));
+
+        if(worker == null)
+            return NotFound(dto_model);
+
+        _mapperToDto.Map(dto_model, worker);
+        _service.Update(worker);
+        _service.CommitAsync();
+
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public override IActionResult Delete(string id)
+    {
+        var Id = new SchoolMember{Id = id}.Id;
+        
+        var entity = _service.Query()
+            .AsNoTrackingWithIdentityResolution()
+            .FirstOrDefault(c => Equals(c.Id, Id));
+        
+        if(entity == null)
+            return NotFound(id);
+        
+        _service.Remove(entity);
+        _service.CommitAsync();
+        
+        return Ok();
     }
 }
