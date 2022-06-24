@@ -494,6 +494,7 @@ public static class DbInitializer
                 CourseGroupCourseId = course.Id, 
                 CourseGroupId = courseGroup.Id, 
                 Date = new DateTime(2017,8,12), 
+                DatePaid = new DateOnly(2017,1, 29).AddMonths(2),
                 StudentId = student.Id, 
                 Student = student
             }
@@ -501,7 +502,7 @@ public static class DbInitializer
     }
 
     private static WorkerPayRecordByPosition[] GetWorkerPayRecordByPositions()
-    {
+    {        
         var position = new Position { Name = "director", Workers = new List<Worker>() {
             new Worker { Id = "79082901293", Name = "JUan", LastName = "Baez",
                     PhoneNumber = 56471922, Address = "Espada No.404 e/ San Benito y Esperanza", 
