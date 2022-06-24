@@ -82,7 +82,7 @@ public class StudentsController : CrudController<Student, StudentDto>
         if(student == null)
             return NotFound(dto_model);
 
-        _mapperToDto.Map(dto_model,student);
+        _mapperToDto.Map(dto_model, student);
         _service.Update(student);
         _service.CommitAsync();
 
