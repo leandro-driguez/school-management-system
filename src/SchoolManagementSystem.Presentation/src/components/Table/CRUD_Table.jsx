@@ -58,7 +58,7 @@ const CRUD_Table = (props) => {
 
     columns.push(
         {
-            title: 'operation',
+            title: 'Eliminar',
             dataIndex: 'operation',
             width: "1%",
             render: (_, record) =>
@@ -71,7 +71,7 @@ const CRUD_Table = (props) => {
                 ) : null,
         },
         {
-            title: 'operation',
+            title: 'Editar',
             dataIndex: 'operation',
             width: "1%",
             render: (_, record) => {
@@ -133,13 +133,12 @@ const CRUD_Table = (props) => {
                 setData(newData);
                 setEditingKey('');
             }
-            axios.put(props.url, newData[index]);
+            await axios.put(props.url, newData[index]);
 
         } catch (errInfo) {
             console.log('Validate Failed:', errInfo);
         }
     };
-
 
     const Delete = (key) => {
         if (editingKey === key){
@@ -154,6 +153,36 @@ const CRUD_Table = (props) => {
 
         setData(newData);
     };
+
+    const search = (input_id, table_id) =>{
+        var input, filter, table, tr, td, i, j, x, txtValue;
+        input = document.getElementById(input_id);
+        filter = input.value.toUpperCase();
+        table = document.getElementById(table_id);
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            x = true
+            for (j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1){
+                        x = false;
+                        break;
+                    }
+                }
+            }
+            if(x){
+                tr[i].style.display = "none";
+            }
+            else{
+                tr[i].style.display = "";
+            }
+        }
+    };
+
 
     const getData = async () => 
         await axios.get(props.url)
@@ -182,7 +211,7 @@ const CRUD_Table = (props) => {
         getData();
     },[]);
 
-    const _input_ = (props)=>{
+    const FormInput = (props)=>{
 
         return (
             <><Form.Item
@@ -213,7 +242,7 @@ const CRUD_Table = (props) => {
             >
                 <Form name="hey" autoComplete={"off"}>
                     {headers.map(
-                        (header) => { return (<_input_ header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
+                        (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
                     )}
                     <Button type="primary" 
                             onClick={ async ()=>{ 
@@ -244,8 +273,9 @@ const CRUD_Table = (props) => {
                     <i className="fa fa-search" aria-hidden="true"></i>
                     <input
                         type="search"
-                        id="myInput"
+                        id={props.searchboxID}
                         placeholder="Buscar"
+                        onKeyUp={() => {search(props.searchboxID, props.tableID);}}
                     />
                 </div>
 
@@ -258,6 +288,8 @@ const CRUD_Table = (props) => {
                     </a>
                 </div>
 
+
+
                 <div className="box">
                     <p><strong>Total:</strong> {data.length}</p>
                 </div>
@@ -265,6 +297,7 @@ const CRUD_Table = (props) => {
 
         <Form form={form} component={false}>
             <Table
+                id={props.tableID}
                 components={{
                     body: {
                         cell: EditableCell,

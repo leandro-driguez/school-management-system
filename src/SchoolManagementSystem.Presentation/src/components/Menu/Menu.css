@@ -1,29 +1,30 @@
-/* ------------------ BACKGROUNG -------------------
+/* ------------------ BACKGROUNG ------------------- */
 body {
     background-image: url("../Menu/images/bckgrd.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
 }
-*/
+
 
 /* ------------------ MENU ------------------- */
-.container {
+.menu_container {
     position: relative;
     margin-top: 100px;
-    margin-left: 9%;
-    margin-right: 9%;
+    margin-left: 11%;
+    margin-right: 11%;
 }
 
-img {
+.menu_img {
     width: 250px;
 }
 
 /* ------------------ DROPDOWN ------------------- */
-button {
+.menu_button {
+    padding: 0;
     background-color: #ffffff;
     border: none;
-    margin: 0px;
+    margin: 0;
     font-family: "Times New Roman", Times, serif;
     font-size: 1rem;
 }

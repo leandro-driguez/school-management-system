@@ -8,10 +8,10 @@ import Administration from "../Menu/images/Administration.jpg";
 export default class Menu extends Component {
     render() {
         return (
-            <div className="container">
+            <div className="menu_container">
                 <div className="dropdown" align="left">
-                    <button>
-                        <img src={Personal} alt="Personal"/>
+                    <button className={"menu_button"}>
+                        <img className={"menu_img"} src={Personal} alt="Personal"/>
                     </button>
 
                     <div className="dropdown-content">
@@ -21,12 +21,12 @@ export default class Menu extends Component {
                 </div>
 
                 <div className="dropdown" align="left">
-                    <button>
-                        <img src={Offers} alt="Ofertas"/>
+                    <button className={"menu_button"}>
+                        <img className={"menu_img"} src={Offers} alt="Ofertas"/>
                     </button>
 
                     <div className="dropdown-content">
-                        <button data-toggle="dropdown">Cursos</button>
+                        <button className={"menu_button"} data-toggle="dropdown">Cursos</button>
                         <div
                           className="dropdown-sec">
                             <a href="../CoursesInformation">Información</a>
@@ -36,12 +36,12 @@ export default class Menu extends Component {
                 </div>
 
                 <div className="dropdown" align="left">
-                    <button>
-                        <img src={Finances} alt="Finanzas"/>
+                    <button className={"menu_button"}>
+                        <img className={"menu_img"} src={Finances} alt="Finanzas"/>
                     </button>
 
                     <div className="dropdown-content">
-                        <button>
+                        <button className={"menu_button"}>
                             <a href="../Income">Ingresos</a>
                         </button>
                         <div className="dropdown-sec">
@@ -54,8 +54,8 @@ export default class Menu extends Component {
                 </div>
 
                 <div className="dropdown" align="left">
-                    <button>
-                        <img src={Administration} alt="Administración"/>
+                    <button className={"menu_button"}>
+                        <img className={"menu_img"} src={Administration} alt="Administración"/>
                     </button>
 
                     <div className="dropdown-content">
