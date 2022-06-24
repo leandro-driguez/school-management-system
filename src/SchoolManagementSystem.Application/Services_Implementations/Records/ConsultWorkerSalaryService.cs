@@ -4,6 +4,8 @@ using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Application.Repositories_Interfaces.Records;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
+using SchoolManagementSystem.Domain.Relations;
+using SchoolManagementSystem.Domain.Interfaces;
 // using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +15,19 @@ public class ConsultWorkerSalaryService : BaseRecordService<Worker>, IConsultWor
 {
     IWorkerPayRecordByPositionRepository repoPositionPayments;
     ITeacherPayRecordPerCourseRepository repoTeacherPayments;
-    public ConsultWorkerSalaryService(IWorkerPayRecordByPositionRepository repo_1, ITeacherPayRecordPerCourseRepository repo_2, IWorkerRepository base_repo) : base(base_repo)
+    ITeacherCourseGroupRelationRepository tCGR_repo;
+    ITeacherCourseRelationRepository tCR_repo;
+    public ConsultWorkerSalaryService(ITeacherCourseRelationRepository tCR_repo,
+                                    ITeacherCourseGroupRelationRepository tCGR_repo,
+                                    IWorkerPayRecordByPositionRepository repo_1,
+                                    ITeacherPayRecordPerCourseRepository repo_2,
+                                    IWorkerRepository base_repo) : base(base_repo)
     {
         repoPositionPayments = repo_1;
         repoTeacherPayments = repo_2;
+        this.tCR_repo = tCR_repo;
+        this.tCGR_repo = tCGR_repo;
+
     }
     public List<int> Proof()
     {
@@ -27,7 +38,7 @@ public class ConsultWorkerSalaryService : BaseRecordService<Worker>, IConsultWor
     {
         var _query = repoTeacherPayments.Query()
                        .Where(c => id == c.TeacherId)
-                       .Include(c => c.Course)
+                       .Include(c => c.Course.CourseGroups)
                        .Where(c => date == c.Date);
 
         return _query;
@@ -60,5 +71,13 @@ public class ConsultWorkerSalaryService : BaseRecordService<Worker>, IConsultWor
         dates = dates.Distinct().ToList();
 
         return dates;
+    }
+    public IRepository<TeacherCourseGroupRelation> GetTeacherCourseGroupRelationRepo()
+    {
+        return tCGR_repo;
+    }
+    public IRepository<TeacherCourseRelation> GetTeacherCourseRelationRepo(){
+        return tCR_repo;
+
     }
 }

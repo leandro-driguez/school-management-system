@@ -1,16 +1,14 @@
 
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using SchoolManagementSystem.Domain.Entities;
+
 
 namespace SchoolManagementSystem.API.Dtos;
 
-public class PositionDto : IDto
+public class DoWorkerPaymentDto
 {
-    [JsonPropertyName("key")]
     public string Id { get; set; }
+    public DateTime Date {get; set;}
 
-    [Required]
-    [MaxLength(20)]
-    public string Name { get; set; }
 }
+

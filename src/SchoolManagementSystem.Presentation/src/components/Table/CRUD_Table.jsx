@@ -56,48 +56,56 @@ const CRUD_Table = (props) => {
         columns.push(temp[i]);
     }
 
-    columns.push(
-        {
-            title: 'Eliminar',
-            dataIndex: 'operation',
-            width: "1%",
-            render: (_, record) =>
-                data.length >= 1 ? (
-                    <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
-                                okText={"Aceptar"} onConfirm={() => Delete(record.key)}
-                                icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-                        <DeleteTwoTone/>
-                    </Popconfirm>
-                ) : null,
-        },
-        {
-            title: 'Editar',
-            dataIndex: 'operation',
-            width: "1%",
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-            <Typography.Link
-                onClick={() => save(record.key)}
-                style={{
-                    marginRight: 8,
-                }}
-            >
-              <SaveTwoTone />
-            </Typography.Link>
-            <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
-              <a><CloseSquareTwoTone /></a>
-            </Popconfirm>
-          </span>
-                ) : (
-                    <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        <EditTwoTone />
+    for (let i = 0; i < props.operations.length; i++) {
+        if (props.operations[i] === 'edit'){
+            columns.push(
+                {
+                    title: 'Editar',
+                    dataIndex: 'operation',
+                    width: "1%",
+                    render: (_, record) => {
+                        const editable = isEditing(record);
+                        return editable ? (
+                            <span>
+                    <Typography.Link
+                        onClick={() => save(record.key)}
+                        style={{
+                            marginRight: 8,
+                        }}
+                    >
+                      <SaveTwoTone />
                     </Typography.Link>
-                );
-            },
-        },
-    );
+                    <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
+                      <a><CloseSquareTwoTone /></a>
+                    </Popconfirm>
+                  </span>
+                        ) : (
+                            <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+                                <EditTwoTone />
+                            </Typography.Link>
+                        );
+                    },
+                },
+            );
+        }
+        if (props.operations[i] === 'delete'){
+            columns.push(
+                {
+                    title: 'Eliminar',
+                    dataIndex: 'operation',
+                    width: "1%",
+                    render: (_, record) =>
+                        data.length >= 1 ? (
+                            <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
+                                        okText={"Aceptar"} onConfirm={() => Delete(record.key)}
+                                        icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
+                                <DeleteTwoTone/>
+                            </Popconfirm>
+                        ) : null,
+                }
+            );
+        }
+    }
     
     const [isEditingModalVisible, setIsEditingModalVisible] = useState(false);
 
@@ -284,7 +292,7 @@ const CRUD_Table = (props) => {
         <div>
             <div className={"container"}>
                 <div className="box_title">
-                    <p><strong>Aulas</strong></p>
+                    <p><strong>{props.title}</strong></p>
                 </div>
 
                 <div className="box">

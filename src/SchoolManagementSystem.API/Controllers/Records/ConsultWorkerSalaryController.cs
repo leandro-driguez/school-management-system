@@ -55,28 +55,40 @@ public class ConsultWorkerSalaryController : Controller
                 );
             }
         }
-        foreach(var info in dto.InfoByDate)
+        var tCGR_repo = _service.GetTeacherCourseGroupRelationRepo();
+        var tCR_repo = _service.GetTeacherCourseRelationRepo();
+        foreach (var info in dto.InfoByDate)
         {
-            var _query = _service.GetWorkerCoursePorcentualSalariesByDate(id,info.Date);
-            foreach (var row in _query)
+            var _querytcr = tCR_repo.Query().Where(c => c.TeacherId == id).Include(c => c.Course);
+            foreach (var row in _querytcr)
             {
-                var course = new InfoByCourseDto{
-                        CourseId = row.CourseId,
-                        CourseName = row.Course.Name,
-                        Porcentage = row.PaidPorcentage,
-                        InfoByCourseGroup = new List<InfoByCourseGroupDto>()
-                    };
-                
-                    foreach (var cgroup in row.Course.CourseGroups)
+                InfoByCourseDto course = new InfoByCourseDto()
+                {
+                    CourseId = row.CourseId,
+                    CourseName = row.Course.Name,
+                    Porcentage = row.CorrespondingPorcentage,
+                    InfoByCourseGroup = new List<InfoByCourseGroupDto>()
+                };
+                var _querytcgr = tCGR_repo.Query().Where(c => c.TeacherId == id 
+                                                            && c.CourseGroupCourseId == course.CourseId
+                                                             && c.StartDate <= info.Date
+                                                            && (c.EndDate >= info.Date || c.EndDate < c.StartDate))
+                                                    .Include(c => c.CourseGroup.StudentCourseGroupRelations);
+                foreach (var group in _querytcgr)
+                {
+                    var income = group.CourseGroup.StudentCourseGroupRelations.Count() * row.Course.Price;
+                    course.InfoByCourseGroup.Add(new InfoByCourseGroupDto()
                     {
-                        course.InfoByCourseGroup.Add(
-                            new InfoByCourseGroupDto{
-                                CourseGroupId = cgroup.Id,
-                                CourseGroupIncome = cgroup.StudentCourseGroupRelations.Count() * row.Course.Price,
-                                CourseGroupWorkerPayment = row.PaidPorcentage * (cgroup.StudentCourseGroupRelations.Count() * row.Course.Price)
-                            }
-                        );
-                    }
+                        CourseGroupId = group.CourseGroup.Id
+                        ,
+                        CourseGroupName = group.CourseGroup.Name
+                        ,
+                        CourseGroupIncome = income
+                        ,
+                        CourseGroupWorkerPayment = ((double)(1.0) / 100) * income * course.Porcentage
+                    });
+                }
+                info.InfoByCourse.Add(course);
             }
         }
         return Ok(dto);
