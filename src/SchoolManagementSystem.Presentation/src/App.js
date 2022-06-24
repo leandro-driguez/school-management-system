@@ -6,7 +6,7 @@ import Students from './pages/Students';
 import StudentDetails from './pages/StudentDetails';
 import Workers from './pages/Workers';
 import WorkerDetails from './pages/WorkerDetails';
-import CoursesInformation from './pages/CoursesInformation';
+import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
 import Schedules from './pages/Schedules';
 import Income from './pages/Income';
@@ -15,7 +15,7 @@ import SalaryPayment from './pages/SalaryPayment';
 import Expenses from './pages/Expenses';
 import Debtors from './pages/Debtors'
 import Users from './pages/Users';
-import BasicMeans from './pages/BasicMeans';
+import BasicMean from './pages/BasicMean';
 import Positions from './pages/Positions';
 import Classrooms from './pages/Classrooms';
 import Login from  './pages/Login';
@@ -30,7 +30,7 @@ function App() {
                 <Route path='/Students/StudentDetails' element={<StudentDetails/>}/>
                 <Route path='/Workers' element={<Workers/>}/>
                 <Route path='/Workers/WorkerDetails' element={<WorkerDetails/>}/>
-                <Route path='/CoursesInformation' element={<CoursesInformation/>}/>
+                <Route path='/Courses' element={<Courses />}/>
                 <Route path='/CoursesInformation/CourseDetails' element={<CourseDetails/>}/>
                 <Route path='/Schedules' element={<Schedules/>}/>
                 <Route path='/Income' element={<Income/>}/>
@@ -40,7 +40,7 @@ function App() {
                 <Route path='/Debtors' element={<Debtors/>}/>
                 <Route path='/Users' element={<Users/>}/>
                 <Route path='/Positions' element={<Positions/>}/>
-                <Route path='/BasicMeans' element={<BasicMeans />}/>
+                <Route path='/BasicMean' element={<BasicMean />}/>
                 <Route path='/Classrooms' element={<Classrooms/>}/>
             </Routes>
         </Router>

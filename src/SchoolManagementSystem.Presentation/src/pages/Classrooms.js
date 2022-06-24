@@ -49,7 +49,7 @@ const Classrooms = () => {
         <div>
             <NavBar></NavBar>
             <CRUD_Table 
-                title={"Title"} 
+                title={"Aulas"} 
                 columns={columns} 
                 operations={["edit","delete"]}
                 url={"https://localhost:5001/api/Classrooms"}
