@@ -9,7 +9,7 @@ public class TeacherConfiguration : IEntityTypeConfiguration<Teacher>
 {
     public void Configure(EntityTypeBuilder<Teacher> builder)
     {
-        builder.ToTable("Teachers");
+        // builder.ToTable("Teachers");
         
         builder.HasBaseType<Worker>();
 

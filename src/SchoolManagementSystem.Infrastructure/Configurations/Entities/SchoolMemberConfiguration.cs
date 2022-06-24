@@ -8,6 +8,13 @@ public class SchoolMemberConfiguration : IEntityTypeConfiguration<SchoolMember>
 {
     public void Configure(EntityTypeBuilder<SchoolMember> builder)
     {
+
+        builder.HasDiscriminator<String>(c => c.Type)
+            .HasValue<Student>("Student")
+            .HasValue<Worker>("Worker")
+            .HasValue<Teacher>("Teacher");
+            ;
+
         builder.Property(s => s.Id)
             .IsRequired();
         builder.HasKey(s => s.Id);

@@ -226,6 +226,15 @@ public static class DbInitializer
                 .AddRangeAsync(
                     GetSchoolMembers()
                 );
+            context.AddRangeAsync(
+                    GetStudents()
+                );
+            context.AddRangeAsync(
+                    GetTeachers()
+                );
+            context.AddRangeAsync(
+                    GetWorkers()
+                );
         }
         if (!context.Shifts.Any())
         {
@@ -234,20 +243,20 @@ public static class DbInitializer
                     GetShifts()
                 );
         }
-        if (!context.Students.Any())
-        {
-            context.Students
-                .AddRangeAsync(
-                    GetStudents()
-                );
-        }
-        if (!context.Teachers.Any())
-        {
-            context.Teachers
-                .AddRangeAsync(
-                    GetTeachers()
-                );
-        }
+        // if (!context.Students.Any())
+        // {
+        //     context.Students
+        //         .AddRangeAsync(
+        //             GetStudents()
+        //         );
+        // }
+        // if (!context.Teachers.Any())
+        // {
+        //     context.Teachers
+        //         .AddRangeAsync(
+        //             GetTeachers()
+        //         );
+        // }
         if (!context.Tuitors.Any())
         {
             context.Tuitors
@@ -255,13 +264,13 @@ public static class DbInitializer
                     GetTuitors()
                 );
         }
-        if (!context.Workers.Any())
-        {
-            context.Workers
-                .AddRangeAsync(
-                    GetWorkers()
-                );
-        }
+        // if (!context.Workers.Any())
+        // {
+        //     context.Workers
+        //         .AddRangeAsync(
+        //             GetWorkers()
+        //         );
+        // }
         //     
         // Records
         if (!context.ExpenseRecords.Any())
@@ -393,7 +402,7 @@ public static class DbInitializer
                 Capacity = 16,
                 StartDate = new DateTime(2022, 3, 12),
                 EndDate = new DateTime(2022, 5, 12),
-                Teacher = new Teacher{ Id="00522627121", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                Teacher = new Teacher{ Id="00522627123", Name = "juanito", LastName = "tirador", PhoneNumber = 76444081,
                     Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                     CourseGroups = new List<CourseGroup>() }
                 // Shifts = new List<Shift>(),
