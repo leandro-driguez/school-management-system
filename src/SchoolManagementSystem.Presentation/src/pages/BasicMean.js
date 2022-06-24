@@ -11,7 +11,7 @@ const BasicMean = () => {
             editable: true,
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.name.localeCompare(b.name)
+                compare: (a, b) => a.type.localeCompare(b.type)
             },
             rules: [
                 {
@@ -31,7 +31,7 @@ const BasicMean = () => {
             editable: true,
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.name.localeCompare(b.name)
+                compare: (a, b) => a.origin.localeCompare(b.origin)
             },
             rules: [
                 {
@@ -71,7 +71,7 @@ const BasicMean = () => {
             editable: true,
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.name.localeCompare(b.name)
+                compare: (a, b) => a.description.localeCompare(b.description)
             },
             rules: [
                 {
@@ -111,7 +111,7 @@ const BasicMean = () => {
             editable: true,
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.name.localeCompare(b.name)
+                compare: (a, b) => a.inaugurationDate.localeCompare(b.inaugurationDate)
             },
             rules: []
         }

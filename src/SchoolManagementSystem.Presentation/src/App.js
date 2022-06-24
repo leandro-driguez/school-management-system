@@ -6,7 +6,7 @@ import Students from './pages/Students';
 import StudentDetails from './pages/StudentDetails';
 import Workers from './pages/Workers';
 import WorkerDetails from './pages/WorkerDetails';
-import CoursesInformation from './pages/CoursesInformation';
+import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
 import Schedules from './pages/Schedules';
 import Income from './pages/Income';
@@ -30,7 +30,7 @@ function App() {
                 <Route path='/Students/StudentDetails' element={<StudentDetails/>}/>
                 <Route path='/Workers' element={<Workers/>}/>
                 <Route path='/Workers/WorkerDetails' element={<WorkerDetails/>}/>
-                <Route path='/CoursesInformation' element={<CoursesInformation/>}/>
+                <Route path='/Courses' element={<Courses />}/>
                 <Route path='/CoursesInformation/CourseDetails' element={<CourseDetails/>}/>
                 <Route path='/Schedules' element={<Schedules/>}/>
                 <Route path='/Income' element={<Income/>}/>

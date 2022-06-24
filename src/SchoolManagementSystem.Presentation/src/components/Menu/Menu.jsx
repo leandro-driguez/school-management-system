@@ -29,7 +29,7 @@ export default class Menu extends Component {
                         <button data-toggle="dropdown">Cursos</button>
                         <div
                           className="dropdown-sec">
-                            <a href="../CoursesInformation">Información</a>
+                            <a href="../Courses">Información</a>
                             <a href="../Schedules">Horarios</a>
                         </div>
                     </div>
