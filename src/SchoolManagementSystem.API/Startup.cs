@@ -38,9 +38,14 @@ public class Startup
         services.AddDbContext<SchoolContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
 
+        services.Configure<JWT>(Configuration.GetSection("JWT"));
+
+        services.AddDbContext<IdentityContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("IdentityContextSQLite")));
+
         // For Identity
         services.AddIdentity<IdentityUser, IdentityRole>()
-            .AddEntityFrameworkStores<SchoolContext>();
+            .AddEntityFrameworkStores<IdentityContext>();
             // .AddDefaultTokenProviders();
 
         // Adding Authentication
@@ -68,8 +73,6 @@ public class Startup
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
             };
         });
-
-
 
         services.AddAutoMapper(typeof(Program));
 
@@ -127,9 +130,12 @@ public class Startup
         {
             var services = scope.ServiceProvider;
         
-            var context = services.GetRequiredService<SchoolContext>();
-            context.Database.EnsureCreated();
-            DbInitializer.Initialize(context);
+            var schoolContext = services.GetRequiredService<SchoolContext>();
+            schoolContext.Database.EnsureCreated();
+            DbInitializer.Initialize(schoolContext);
+
+            var identityContext = services.GetRequiredService<IdentityContext>();
+            identityContext.Database.EnsureCreated();
         }
 
         app.UseHttpsRedirection();
@@ -139,8 +145,8 @@ public class Startup
 
         app.UseAuthorization();
 
-        app.UseAuthentication();
-        app.UseAuthorization();
+        // app.UseAuthentication();
+        // app.UseAuthorization();
         
         app.UseEndpoints(endpoints =>
         {

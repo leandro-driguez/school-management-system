@@ -3,19 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SchoolManagementSystem.Infrastructure.Configurations;
 using SchoolManagementSystem.Infrastructure.Configurations.Records;
 using SchoolManagementSystem.Infrastructure.Configurations.Relations;
-using Microsoft.AspNetCore.Identity;
 
 namespace SchoolManagementSystem.Infrastructure.Persistence;
 
-public class SchoolContext : IdentityDbContext<IdentityUser>, IObjectContext
+public class SchoolContext : DbContext, IObjectContext
 {
     public SchoolContext (DbContextOptions<SchoolContext> options)
         : base(options)
-    {        
+    {
+        
     }
 
     #region Methods and Properties
@@ -49,7 +48,10 @@ public class SchoolContext : IdentityDbContext<IdentityUser>, IObjectContext
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolMember> SchoolMembers { get; set; }
     public DbSet<Shift> Shifts { get; set; }
+    // public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Tuitor> Tuitors { get; set; }
+    // public DbSet<Student> Students { get; set; }
+    // public DbSet<Worker> Workers { get; set; }
     
     // Records
     public DbSet<ExpenseRecord> ExpenseRecords { get; set; }
