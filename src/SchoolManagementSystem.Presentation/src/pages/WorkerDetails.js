@@ -14,6 +14,7 @@ const WorkerDetails = () => {
         {
             title: 'Nombre',
             dataIndex: 'name',
+            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -33,6 +34,7 @@ const WorkerDetails = () => {
         {
             title: 'Salario',
             dataIndex: 'salary',
+            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
@@ -53,6 +55,7 @@ const WorkerDetails = () => {
         {
             title: 'Fecha',
             dataIndex: 'date',
+            width: '15%',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.date.localeCompare(b.date)
@@ -61,6 +64,7 @@ const WorkerDetails = () => {
         {
             title: 'Salario Fijo',
             dataIndex: 'fixedSalary',
+            width: '15%',
             dataType: 'number',
             sorter: {
                 compare: (a, b) => a.fixedSalary - b.fixedSalary
@@ -69,6 +73,7 @@ const WorkerDetails = () => {
         {
             title: 'Salario Porcentual',
             dataIndex: 'percentageSalary',
+            width: '15%',
             dataType: 'number',
             sorter: {
                 compare: (a, b) => a.percentageSalary - b.percentageSalary
@@ -77,6 +82,7 @@ const WorkerDetails = () => {
         {
             title: 'Total',
             dataIndex: 'total',
+            width: '15%',
             dataType: 'number',
             sorter: {
                 compare: (a, b) => a.total - b.total

@@ -49,9 +49,9 @@ const Students = () => {
             dataIndex: 'key',
             width: '15%',
             editable: true,
-            dataType: 'text',
+            dataType: 'number',
             sorter: {
-                compare: (a, b) => a.key.localeCompare(b.key)
+                compare: (a, b) => a.key - b.key
             },
             rules: [
                 {

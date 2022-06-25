@@ -49,9 +49,9 @@ const Workers = () => {
             dataIndex: 'key',
             width: '15%',
             editable: true,
-            dataType: 'text',
+            dataType: 'number',
             sorter: {
-                compare: (a, b) => a.lastName.localeCompare(b.lastName)
+                compare: (a, b) => a.key - b.key
             },
             rules: [
                 {
