@@ -6,6 +6,4 @@ namespace SchoolManagementSystem.API.Dtos;
 
 public class WorkerDto : SchoolMemberDto
 {
-    //public string Id { get; set; }
-
 }

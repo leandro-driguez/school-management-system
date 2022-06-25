@@ -10,6 +10,11 @@ using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.API.Mappers;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using SchoolManagementSystem.Infrastructure.Identity;
 
 namespace SchoolManagementSystem.API;
 
@@ -31,6 +36,39 @@ public class Startup
         services.AddDbContext<SchoolContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
 
+        services.Configure<JWT>(Configuration.GetSection("JWT"));
+
+        services.AddDbContext<IdentityContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("IdentityContextSQLite")));
+
+        services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<IdentityContext>();
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+
+        // Adding Jwt Bearer
+        .AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.RequireHttpsMetadata = false;
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = Configuration["JWT:Issuer"],
+                ValidAudience = Configuration["JWT:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
+            };
+        });
+
         services.AddAutoMapper(typeof(Program));
 
         //Injection of deendencies with reflection
@@ -50,17 +88,11 @@ public class Startup
                 });
         });
         
-        // services.AddDefaultIdentity<IdentityUser>(options =>
-        //         options.SignIn.RequireConfirmedAccount = false)
-        //     .AddEntityFrameworkStores<SchoolContext>();
-        
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "School Management System", Version = "v1" });
         });
-        
-        // services.AddDatabaseDeveloperPageExceptionFilter();
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -88,9 +120,14 @@ public class Startup
         {
             var services = scope.ServiceProvider;
         
-            var context = services.GetRequiredService<SchoolContext>();
-            context.Database.EnsureCreated();
-            DbInitializer.Initialize(context);
+            var schoolContext = services.GetRequiredService<SchoolContext>();
+            schoolContext.Database.EnsureCreated();
+
+            DbInitializer.Initialize(schoolContext);
+            
+            var identityContext = services.GetRequiredService<IdentityContext>();
+            identityContext.Database.EnsureCreated();
+            
         }
 
         app.UseHttpsRedirection();
@@ -98,6 +135,7 @@ public class Startup
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
         
         app.UseEndpoints(endpoints =>

@@ -6,6 +6,7 @@ namespace SchoolManagementSystem.Domain.Services;
 public interface ITeacherService : IService<Teacher>
 {
     // Selecciona a un profesor con cierto id
-    // y toma toda su información
+    // y toma toda su informaciï¿½n
     Teacher GetTeacherById(string id);
+    public bool SpecialPost(string id);
 }

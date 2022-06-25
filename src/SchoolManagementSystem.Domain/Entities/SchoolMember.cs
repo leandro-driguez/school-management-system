@@ -6,6 +6,7 @@ namespace SchoolManagementSystem.Domain.Entities
     public class SchoolMember : Entity
     {
         private protected string _id;
+        public string Type { get; set; }
 
         // [Required]
         public override string Id {

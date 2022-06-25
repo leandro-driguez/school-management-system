@@ -1,15 +1,15 @@
 
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.API.Dtos;
 
 public class SchoolMemberDto : IDto
 {
-     private protected string _id;
-
         [Required]
         [StringLength(11)]
+        [JsonPropertyName("key")]
         public string Id {get; set;}
 
         [Required]
@@ -24,7 +24,7 @@ public class SchoolMemberDto : IDto
         public int PhoneNumber{ get; set; }
         
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Address { get; set; }
         
         [Required]
@@ -33,6 +33,4 @@ public class SchoolMemberDto : IDto
                        ApplyFormatInEditMode = true)]
         [Display(Name = "Date Becomed Member")]
         public DateTime DateBecomedMember { get; set; }
-
-        public IList<Position> Positions { get; set; }
 }

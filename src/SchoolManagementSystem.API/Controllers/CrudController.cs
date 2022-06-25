@@ -1,7 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.API.Dtos;
-using SchoolManagementSystem.API.Mappers;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
 using Microsoft.EntityFrameworkCore; 
@@ -24,7 +23,7 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public virtual IActionResult GetAll()
     {
         return Ok
         (
@@ -67,15 +66,13 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     [HttpPut]
     public virtual IActionResult Put([FromBody] TDTO dto_model)
     {
-        // return Ok(dto_model);
-        
         var entities = _service.Query();
         var entity = entities.FirstOrDefault(c => Equals(c.Id, dto_model.Id));
 
         if(entity == null)
             return NotFound(dto_model);
         
-        _mapperToDto.Map(dto_model,entity);
+        _mapperToDto.Map(dto_model, entity);
         _service.Update(entity);
         _service.CommitAsync();
         

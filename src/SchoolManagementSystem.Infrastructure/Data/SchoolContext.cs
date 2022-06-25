@@ -49,10 +49,10 @@ public class SchoolContext : DbContext, IObjectContext
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SchoolMember> SchoolMembers { get; set; }
     public DbSet<Shift> Shifts { get; set; }
-    public DbSet<Teacher> Teachers { get; set; }
+    // public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Tuitor> Tuitors { get; set; }
-    public DbSet<Student> Students { get; set; }
-    public DbSet<Worker> Workers { get; set; }
+    // public DbSet<Student> Students { get; set; }
+    // public DbSet<Worker> Workers { get; set; }
     
     // Records
     public DbSet<ExpenseRecord> ExpenseRecords { get; set; }

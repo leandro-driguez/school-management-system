@@ -7,6 +7,149 @@ namespace SchoolManagementSystem.Infrastructure.Data;
 
 public static class DbInitializer
 {
+    #region Entities for add to other entities
+
+    static Teacher carmen = new Teacher{
+        Name = "Carmen",
+        LastName = "Gonzalez",
+        Address = "Calle Conchita",
+        Id = "091283928",
+        DateBecomedMember = new DateTime(2012,09,21),
+        PhoneNumber = 58981234
+    };
+    static Teacher juan = new Teacher{
+        Name = "Juan",
+        LastName = "Rodriguz",
+        Address = "Calle Paz",
+        Id = "90871238292",
+        DateBecomedMember = new DateTime(2015,09,21),
+        PhoneNumber = 57891234
+    };
+    static Tuitor frank = new Tuitor{
+        Name = "Frank",
+        PhoneNumber = 57881239,
+    };
+    static Student sasha = new Student{
+        Name = "Sasha",
+        LastName = "hernand",
+        Address = "Calle Victoria",
+        Id = "90831243234",
+        DateBecomedMember = new DateTime(2019,06,15),
+        PhoneNumber = 56781239,
+        Founds = 12,
+        ScholarityLevel = Domain.Enums.Education.Posgrado,
+        Tuitor = frank
+    };
+    static Student sandra = new Student{
+        Name = "Sandra",
+        LastName = "Jimenez",
+        Address = "Calle Pancha",
+        Id = "02293881244",
+        DateBecomedMember = new DateTime(2021,08,21),
+        PhoneNumber = 59871304,
+        Founds = 145,
+        ScholarityLevel = Domain.Enums.Education.TecnicoMedio,
+        Tuitor = frank
+    };
+    static Student Hermen = new Student{
+        Name = "Hermen",
+        LastName = "Cartan",
+        Address = "Calle Pencil",
+        Id = "98130923454",
+        DateBecomedMember = new DateTime(2014,09,28),
+        PhoneNumber = 56813049,
+        Founds = 102,
+        ScholarityLevel = Domain.Enums.Education.Primaria,
+        Tuitor = frank
+    };
+    static Student Rodrigo = new Student{
+        Name = "Rodrigo",
+        LastName = "Posada",
+        Address = "Calle Vento",
+        Id = "06871223456",
+        DateBecomedMember = new DateTime(2021,06,15),
+        PhoneNumber = 57893019,
+        Founds = 120,
+        ScholarityLevel = Domain.Enums.Education.Secundaria,
+        Tuitor = frank
+    };
+    static Student Carlos = new Student{
+        Name = "Carlos",
+        LastName = "Yatra",
+        Address = "Calle Guntilla",
+        Id = "98052378290",
+        DateBecomedMember = new DateTime(2019,06,15),
+        PhoneNumber = 56781239,
+        Founds = 134,
+        ScholarityLevel = Domain.Enums.Education.Preuniversitario,
+        Tuitor = frank
+    };
+
+    static Position director = new Position{
+        Name = "director"
+    };
+    static Position secretaria = new Position{
+        Name = "secretaria"
+    };
+    static Position asistente = new Position{
+        Name = "asistente"
+    };
+
+    static Course algebra = new Course{
+        Name = "Algebra",
+        Price =  200,
+        Type = "Mates"
+    };
+    static Course logica = new Course{
+        Name = "logica",
+        Price =  200,
+        Type = "Mates"
+    };
+    static Course geometria = new Course{
+        Name = "geometria",
+        Price =  200,
+        Type = "Mates"
+    };
+    static Course historia = new Course{
+        Name = "Historia",
+        Price =  200,
+        Type = "Letras"
+    };
+        
+    static CourseGroup algebralineal = new CourseGroup{
+        Name = "AlgebraLineal",
+        Course = algebra,
+        CourseId = algebra.Id,
+        Capacity = 30,
+        StartDate = new DateTime(2020,07,01),
+        EndDate = new DateTime(2020,09,20),
+    };
+    static CourseGroup algebra2 = new CourseGroup{
+        Name = "Algebra2",
+        Course = algebra,
+        CourseId = algebra.Id,
+        Capacity = 30,
+        StartDate = new DateTime(2020,10,02),
+        EndDate = new DateTime(2020,12,02),
+    };
+    static CourseGroup geometriaespacial = new CourseGroup{
+        Name = "geometria es",
+        Course = geometria,
+        CourseId = geometria.Id,
+        Capacity = 20,
+        StartDate = new DateTime(2021,03,01),
+        EndDate = new DateTime(2021,05,20),
+    };
+    static CourseGroup historiaDelArte = new CourseGroup{
+        Name = "historiaDA",
+        Course = historia,
+        CourseId = historia.Id,
+        Capacity = 30,
+        StartDate = new DateTime(2022,01,01),
+        EndDate = new DateTime(2020,04,09),
+    };
+
+    #endregion
     public static void Initialize(SchoolContext context)
     {
         // // Entities
@@ -83,6 +226,15 @@ public static class DbInitializer
                 .AddRangeAsync(
                     GetSchoolMembers()
                 );
+            context.AddRangeAsync(
+                    GetStudents()
+                );
+            context.AddRangeAsync(
+                    GetTeachers()
+                );
+            context.AddRangeAsync(
+                    GetWorkers()
+                );
         }
         if (!context.Shifts.Any())
         {
@@ -91,20 +243,20 @@ public static class DbInitializer
                     GetShifts()
                 );
         }
-        if (!context.Students.Any())
-        {
-            context.Students
-                .AddRangeAsync(
-                    GetStudents()
-                );
-        }
-        if (!context.Teachers.Any())
-        {
-            context.Teachers
-                .AddRangeAsync(
-                    GetTeachers()
-                );
-        }
+        // if (!context.Students.Any())
+        // {
+        //     context.Students
+        //         .AddRangeAsync(
+        //             GetStudents()
+        //         );
+        // }
+        // if (!context.Teachers.Any())
+        // {
+        //     context.Teachers
+        //         .AddRangeAsync(
+        //             GetTeachers()
+        //         );
+        // }
         if (!context.Tuitors.Any())
         {
             context.Tuitors
@@ -112,13 +264,13 @@ public static class DbInitializer
                     GetTuitors()
                 );
         }
-        if (!context.Workers.Any())
-        {
-            context.Workers
-                .AddRangeAsync(
-                    GetWorkers()
-                );
-        }
+        // if (!context.Workers.Any())
+        // {
+        //     context.Workers
+        //         .AddRangeAsync(
+        //             GetWorkers()
+        //         );
+        // }
         //     
         // Records
         if (!context.ExpenseRecords.Any())
@@ -250,7 +402,7 @@ public static class DbInitializer
                 Capacity = 16,
                 StartDate = new DateTime(2022, 3, 12),
                 EndDate = new DateTime(2022, 5, 12),
-                Teacher = new Teacher{ Id="00522627123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                Teacher = new Teacher{ Id="00522627123", Name = "juanito", LastName = "tirador", PhoneNumber = 76444081,
                     Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                     CourseGroups = new List<CourseGroup>() }
                 // Shifts = new List<Shift>(),
@@ -472,7 +624,7 @@ public static class DbInitializer
             Capacity = 16,
             StartDate = new DateTime(2022, 3, 12),
             EndDate = new DateTime(2022, 5, 12),
-            Teacher = new Teacher{ Id="00523573123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+            Teacher = new Teacher{ Id="00523573122", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
                 Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                 CourseGroups = new List<CourseGroup>() }
         };
@@ -585,6 +737,122 @@ public static class DbInitializer
                 StartDate = new DateTime(2019,4,12), 
                 Student = student,
                 StudentId = student.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = algebralineal,
+                CourseGroupCourseId = algebralineal.Id,
+                CourseGroupId = algebra.Id,
+                EndDate = algebralineal.EndDate,
+                StartDate = algebralineal.StartDate,
+                Student = sasha,
+                StudentId = sasha.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = algebralineal,
+                CourseGroupCourseId = algebralineal.Id,
+                CourseGroupId = algebra.Id,
+                EndDate = algebralineal.EndDate,
+                StartDate = algebralineal.StartDate,
+                Student = Carlos,
+                StudentId = Carlos.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = algebralineal,
+                CourseGroupCourseId = algebralineal.Id,
+                CourseGroupId = algebra.Id,
+                EndDate = algebralineal.EndDate,
+                StartDate = algebralineal.StartDate,
+                Student = Rodrigo,
+                StudentId = Rodrigo.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = algebralineal,
+                CourseGroupCourseId = algebralineal.Id,
+                CourseGroupId = algebra.Id,
+                EndDate = algebralineal.EndDate,
+                StartDate = algebralineal.StartDate,
+                Student = Hermen,
+                StudentId = Hermen.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = algebra2,
+                CourseGroupCourseId = algebra2.Id,
+                CourseGroupId = algebra.Id,
+                EndDate = algebra2.EndDate,
+                StartDate = algebra2.StartDate,
+                Student = Hermen,
+                StudentId = Hermen.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = algebra2,
+                CourseGroupCourseId = algebra2.Id,
+                CourseGroupId = algebra.Id,
+                EndDate = algebra2.EndDate,
+                StartDate = algebra2.StartDate,
+                Student = sandra,
+                StudentId = sandra.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = historiaDelArte,
+                CourseGroupCourseId = historiaDelArte.Id,
+                CourseGroupId = algebra.Id,
+                EndDate = historiaDelArte.EndDate,
+                StartDate = historiaDelArte.StartDate,
+                Student = Carlos,
+                StudentId = Carlos.Id
+            }
+            
+        };
+    }
+    
+    private static TeacherCourseRelation[] GetTeacherCourseRelations()
+    {
+        var teacher = new Teacher
+        {
+            Id = "75934499884", Name = "Teresa", LastName = "Graveran",
+            PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza",
+            DateBecomedMember = new DateTime(2008, 9, 5),
+            CourseGroups = new List<CourseGroup>()
+
+        };
+        var course = new Course { Name = "Mat PI", Price = 1200, Type = "Matematica" };
+        return new []
+        {
+            new TeacherCourseRelation
+            {
+                Teacher = teacher,
+                TeacherId = teacher.Id,
+                Course = course,
+                CourseId = course.Id,
+                CorrespondingPorcentage = 40
+            },
+            new TeacherCourseRelation{
+                Teacher = juan,
+                TeacherId = juan.Id,
+                Course = algebra,
+                CourseId = algebra.Id,
+                CorrespondingPorcentage = 50
+            },
+            new TeacherCourseRelation{
+                Teacher = juan,
+                TeacherId = juan.Id,
+                Course = geometria,
+                CourseId = geometria.Id,
+                CorrespondingPorcentage = 50
+            },
+            new TeacherCourseRelation{
+                Teacher = carmen,
+                TeacherId = carmen.Id,
+                Course = historia,
+                CourseId = historia.Id,
+                CorrespondingPorcentage = 40
             }
         };
     }
@@ -622,34 +890,40 @@ public static class DbInitializer
                 CourseGroupCourseId = courseGroup.Course.Id,
                 Teacher = teacher,
                 StartDate = new DateTime(2022,3,21)
-            }
-        };
-    }
-    
-    private static TeacherCourseRelation[] GetTeacherCourseRelations()
-    {
-        var teacher = new Teacher
-        {
-            Id = "75934499884", Name = "Teresa", LastName = "Graveran",
-            PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza",
-            DateBecomedMember = new DateTime(2008, 9, 5),
-            CourseGroups = new List<CourseGroup>()
-
-        };
-        var course = new Course { Name = "Mat PI", Price = 1200, Type = "Matematica" };
-        return new []
-        {
-            new TeacherCourseRelation
+            },
+            new TeacherCourseGroupRelation
             {
-                Teacher = teacher,
-                TeacherId = teacher.Id,
-                Course = course,
-                CourseId = course.Id,
-                CorrespondingPorcentage = 40
-            }
+                CourseGroup = algebralineal,
+                CourseGroupId = algebralineal.Id,
+                StartDate = algebralineal.StartDate,
+                EndDate = algebralineal.EndDate,
+                Teacher = juan,
+                TeacherId = juan.Id,
+                CourseGroupCourseId = algebra.Id
+            },
+            new TeacherCourseGroupRelation
+            {
+                CourseGroup = algebra2,
+                CourseGroupId = algebra2.Id,
+                StartDate = algebra2.StartDate,
+                EndDate = algebra2.EndDate,
+                Teacher = juan,
+                TeacherId = juan.Id,
+                CourseGroupCourseId = algebra.Id
+            },
+            new TeacherCourseGroupRelation
+            {
+                CourseGroup = historiaDelArte,
+                CourseGroupId = historiaDelArte.Id,
+                StartDate = historiaDelArte.StartDate,
+                EndDate = historiaDelArte.EndDate,
+                Teacher = carmen,
+                TeacherId = carmen.Id,
+                CourseGroupCourseId = historia.Id
+            },
         };
     }
-    
+
     private static WorkerPositionRelation[] GetWorkerPositionRelations()
     {
         return new WorkerPositionRelation[]
@@ -664,7 +938,22 @@ public static class DbInitializer
                     DateBecomedMember = new DateTime(2015, 9, 5) 
                 },
                 FixedSalary = 2000
-            }
+            },
+            new WorkerPositionRelation{
+                Position = director,
+                Worker = carmen,
+                FixedSalary = 5000
+            },
+            new WorkerPositionRelation{
+                Position = asistente,
+                Worker = juan,
+                FixedSalary = 3000
+            },
+             new WorkerPositionRelation{
+                Position = secretaria,
+                Worker = carmen,
+                FixedSalary = 2000
+            },
         };
     }
     

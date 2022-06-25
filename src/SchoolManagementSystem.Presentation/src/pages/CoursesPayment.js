@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import NavBar from "../components/NavBar/NavBar";
 
 const CoursesPayment = () => {
-    return (
+    return(
         <div>
-            <NavBar></NavBar>
+        <NavBar></NavBar>
         </div>
     );
 };

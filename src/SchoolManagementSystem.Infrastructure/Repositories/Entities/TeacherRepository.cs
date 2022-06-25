@@ -11,4 +11,11 @@ public class TeacherRepository : CrudRepository<Teacher>, ITeacherRepository
     {
 
     }
+
+    public void SpecialPost(string id)
+    {
+        // var context = (Context as SchoolContext);
+        // var member = context.SchoolMembers.(id);
+        // member.
+    }
 }

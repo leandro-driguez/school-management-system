@@ -1,11 +1,15 @@
 
 using System.ComponentModel.DataAnnotations;
-using SchoolManagementSystem.Domain.Entities;
+using System.Text.Json.Serialization;
 
 namespace SchoolManagementSystem.API.Dtos;
 public class BasicMeanDto : IDto
 {
+    [JsonPropertyName("key")]
     public string Id { get; set; }
+
+    [Required]
+    public int Price { get; set; }
 
     [Required]
     [MaxLength(20)]
@@ -18,13 +22,12 @@ public class BasicMeanDto : IDto
     [Required]
     public int DevaluationInTime { get; set; }
 
-    // [Required]
-    // [DataType(DataType.Date)]
-    // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-    //               ApplyFormatInEditMode = true)]
-    // public DateTime InaugurationDate { get; set; }
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
+                  ApplyFormatInEditMode = true)]
+    public DateTime InaugurationDate { get; set; }
 
-    // [Required]
-    // [MaxLength(100)]
-    // public string Description { get; set; }
+    [Required]
+    [MaxLength(100)]
+    public string Description { get; set; }
 }
