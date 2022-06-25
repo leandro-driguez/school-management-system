@@ -5,7 +5,7 @@ using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
 using SchoolManagementSystem.Domain.Interfaces;
-using SchoolManagementSystem.Infrastructure.Persistence;
+using SchoolManagementSystem.Infrastructure.Data;
 using SchoolManagementSystem.Infrastructure.Configurations.Records;
 using SchoolManagementSystem.Infrastructure.Configurations.Relations;
 

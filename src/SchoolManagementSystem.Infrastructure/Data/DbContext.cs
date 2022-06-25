@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
+using SchoolManagementSystem.Domain.Interfaces;
 using SchoolManagementSystem.Infrastructure.Configurations;
 using SchoolManagementSystem.Infrastructure.Configurations.Records;
 using SchoolManagementSystem.Infrastructure.Configurations.Relations;
 
-namespace SchoolManagementSystem.Infrastructure.Persistence;
+namespace SchoolManagementSystem.Infrastructure.Data;
 
 public class SchoolContext : DbContext, IObjectContext
 {

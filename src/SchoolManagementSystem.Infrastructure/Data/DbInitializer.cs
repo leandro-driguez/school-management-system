@@ -3,7 +3,7 @@ using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
 
-namespace SchoolManagementSystem.Infrastructure.Persistence;
+namespace SchoolManagementSystem.Infrastructure.Data;
 
 public static class DbInitializer
 {

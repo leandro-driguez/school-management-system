@@ -1,8 +1,6 @@
-
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
-import { Tabs } from "antd";
-import { useParams } from "react-router-dom";
+import {Tabs} from "antd";
 import CRUD_Table from "../components/Table/CRUD_Table";
 
 const { TabPane } = Tabs;
@@ -12,43 +10,38 @@ const onChange = (key) => {
 };
 
 const WorkerDetails = () => {
-
-    const { id } = useParams();
-
     const positionsColumns = [
         {
-            title: 'Cargo',
-            dataIndex: 'position',
-            width: '15%',
+            title: 'Nombre',
+            dataIndex: 'name',
             editable: true,
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.position.localeCompare(b.position)
+                compare: (a, b) => a.name.localeCompare(b.name)
             },
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el cargo.",
+                    message: "Introduzca nombre",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el cargo."
+                    message: "Introduzca nombre"
                 }
             ],
         },
         {
-            title: 'Salario fijo',
-            dataIndex: 'fixedSalary',
-            width: '15%',
+            title: 'Salario',
+            dataIndex: 'salary',
             editable: true,
             dataType: 'number',
             sorter: {
-                compare: (a, b) => a.fixedSalary - b.fixedSalary
+                compare: (a, b) => a.salary - b.salary
             },
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el salario fijo.",
+                    message: "Introduzca salario",
                 }
             ]
         }
@@ -101,7 +94,7 @@ const WorkerDetails = () => {
                     <CRUD_Table title={"Cargos"}
                                 columns={positionsColumns}
                                 operations={["edit","delete","add"]}
-                                url={"https://localhost:5001/api/PositionSalary/" + `${id}`}
+                                url={"https://localhost:5001/api/Classrooms"}
                                 tableID={positionsTableID}
                                 searchboxID={positionsSearchboxID}
                     ></CRUD_Table>
