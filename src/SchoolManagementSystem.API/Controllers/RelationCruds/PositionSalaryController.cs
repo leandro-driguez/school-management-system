@@ -23,20 +23,29 @@ public class PositionSalaryController : Controller
         _service = service;
         this.mapper = mapper;
     }
+
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
-        var _query = _service.Query().Where(c=>c.WorkerId == id).Include(c => c.Worker).Include(c => c.Position);
+        var Id = new SchoolMember{ Id=id }.Id;
+
+        var _query = _service.Query()
+            .Where(c=>c.WorkerId == Id)
+            .Include(c => c.Worker)
+            .Include(c => c.Position);
+        
         var listofPositionSalary = new List<PositionSalaryRelDto>();
+        
         foreach (var row in _query)
         {
-            PositionSalaryRelDto single = new PositionSalaryRelDto
+            var single = new PositionSalaryRelDto
             {
                 Position = row.Position.Name,
                 FixedSalary = row.FixedSalary
             };
             listofPositionSalary.Add(single);
         }
+        
         return Ok(listofPositionSalary);
     }
 

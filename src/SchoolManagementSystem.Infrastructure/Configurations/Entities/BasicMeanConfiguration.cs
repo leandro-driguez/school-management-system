@@ -4,7 +4,8 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Infrastructure.Configurations;
 
-public class BasicMeanConfiguration : IEntityTypeConfiguration<BasicMean>
+public class 
+    BasicMeanConfiguration : IEntityTypeConfiguration<BasicMean>
 {
     public void Configure(EntityTypeBuilder<BasicMean> builder)
     {

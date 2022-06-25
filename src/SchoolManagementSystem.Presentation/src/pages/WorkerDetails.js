@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
-import {Tabs} from "antd";
+import { Tabs } from "antd";
+import { useParams } from "react-router-dom";
 import CRUD_Table from "../components/Table/CRUD_Table";
 
 const { TabPane } = Tabs;
@@ -10,10 +11,13 @@ const onChange = (key) => {
 };
 
 const WorkerDetails = () => {
+
+    const { id } = useParams();
+
     const positionsColumns = [
         {
-            title: 'Nombre',
-            dataIndex: 'name',
+            title: 'Cargo',
+            dataIndex: 'position',
             width: '15%',
             editable: true,
             dataType: 'text',
@@ -32,8 +36,8 @@ const WorkerDetails = () => {
             ],
         },
         {
-            title: 'Salario',
-            dataIndex: 'salary',
+            title: 'Salario fijo',
+            dataIndex: 'fixedSalary',
             width: '15%',
             editable: true,
             dataType: 'number',
@@ -100,7 +104,7 @@ const WorkerDetails = () => {
                     <CRUD_Table title={"Cargos"}
                                 columns={positionsColumns}
                                 operations={["edit","delete","add"]}
-                                url={"https://localhost:5001/api/Classrooms"}
+                                url={"https://localhost:5001/api/PositionSalary/" + `${id}`}
                                 tableID={positionsTableID}
                                 searchboxID={positionsSearchboxID}
                     ></CRUD_Table>
