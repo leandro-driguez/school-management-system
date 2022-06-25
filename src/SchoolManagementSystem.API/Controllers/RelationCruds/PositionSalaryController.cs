@@ -26,8 +26,15 @@ public class PositionSalaryController : Controller
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
-        var _query = _service.Query().Where(c=>c.WorkerId == id).Include(c => c.Worker).Include(c => c.Position);
-        var listofPositionSalary = new List<PositionSalaryRelDto>();
+        var Id = new SchoolMember{Id = id}.Id;
+
+        var _query = _service.Query()
+            .Where(c=>c.WorkerId == Id)
+            .Include(c => c.Worker)
+            .Include(c => c.Position);
+        
+        var listOfPositionSalary = new List<PositionSalaryRelDto>();
+        
         foreach (var row in _query)
         {
             PositionSalaryRelDto single = new PositionSalaryRelDto
@@ -35,9 +42,10 @@ public class PositionSalaryController : Controller
                 Position = row.Position.Name,
                 FixedSalary = row.FixedSalary
             };
-            listofPositionSalary.Add(single);
+            listOfPositionSalary.Add(single);
         }
-        return Ok(listofPositionSalary);
+
+        return Ok(listOfPositionSalary);
     }
 
 }
