@@ -1,3 +1,4 @@
+
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import { Tabs } from "antd";
@@ -22,16 +23,16 @@ const WorkerDetails = () => {
             editable: true,
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.name.localeCompare(b.name)
+                compare: (a, b) => a.position.localeCompare(b.position)
             },
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca el cargo.",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca el cargo."
                 }
             ],
         },
@@ -42,12 +43,12 @@ const WorkerDetails = () => {
             editable: true,
             dataType: 'number',
             sorter: {
-                compare: (a, b) => a.salary - b.salary
+                compare: (a, b) => a.fixedSalary - b.fixedSalary
             },
             rules: [
                 {
                     required: true,
-                    message: "Introduzca salario",
+                    message: "Introduzca el salario fijo.",
                 }
             ]
         }
