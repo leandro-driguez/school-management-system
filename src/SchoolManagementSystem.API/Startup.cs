@@ -4,12 +4,19 @@ using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Services;
 using SchoolManagementSystem.Application.Services_Implementations;
 using SchoolManagementSystem.Application.Repositories_Interfaces;
-using SchoolManagementSystem.Infrastructure.Data;
+using SchoolManagementSystem.Infrastructure.Persistence;
 using SchoolManagementSystem.Infrastructure.Repositories;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using SchoolManagementSystem.API.Dtos;
 using SchoolManagementSystem.API.Mappers;
+
+using SchoolManagementSystem.Infrastructure.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 namespace SchoolManagementSystem.API;
 
@@ -31,11 +38,46 @@ public class Startup
         services.AddDbContext<SchoolContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("SchoolContextSQLite")));
 
+        services.Configure<JWT>(Configuration.GetSection("JWT"));
+
+        services.AddDbContext<IdentityContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("IdentityContextSQLite")));
+
+        // For Identity
+        services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<IdentityContext>();
+            // .AddDefaultTokenProviders();
+
+        // Adding Authentication
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+
+        // Adding Jwt Bearer
+        .AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.RequireHttpsMetadata = false;
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+                ValidIssuer = Configuration["JWT:Issuer"],
+                ValidAudience = Configuration["JWT:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
+            };
+        });
+
         services.AddAutoMapper(typeof(Program));
 
         //Injection of deendencies with reflection
         MyDependencyInjections.SetUpMyServicesDependencyInjections(services, Configuration);
-
 
         services.AddScoped<IObjectContext, SchoolContext>();
 
@@ -88,9 +130,12 @@ public class Startup
         {
             var services = scope.ServiceProvider;
         
-            var context = services.GetRequiredService<SchoolContext>();
-            context.Database.EnsureCreated();
-            DbInitializer.Initialize(context);
+            var schoolContext = services.GetRequiredService<SchoolContext>();
+            schoolContext.Database.EnsureCreated();
+            DbInitializer.Initialize(schoolContext);
+
+            var identityContext = services.GetRequiredService<IdentityContext>();
+            identityContext.Database.EnsureCreated();
         }
 
         app.UseHttpsRedirection();
@@ -99,6 +144,9 @@ public class Startup
         app.UseRouting();
 
         app.UseAuthorization();
+
+        // app.UseAuthentication();
+        // app.UseAuthorization();
         
         app.UseEndpoints(endpoints =>
         {
