@@ -85,6 +85,51 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
 
     public void GroupCurseNoPaid(string studentId, string groupCourseId)
     {
-        throw new NotImplementedException();
+        // cursos-grupo que ya ha ido pagando el estudiante
+        var q1 = from record in _studentCourseRecord.Query()
+                 where record.StudentId == studentId
+                 select record.CourseGroupId;        
+        // cursos-grupo en los que no ha pagado aún
+        // solo tiene los que nunca ha pagado ni una vez
+        var q2 = from relation in _studentCourseRelation.Query()
+                 where !q1.Contains(relation.CourseGroupId)
+                 select relation;
+
+        // de los registros de pago del estudiante determinado y su grupo de clase
+        // agrupar los registros por el grupo de clase
+        // tomando la última fecha de pago
+        var q3 = from record in _studentCourseRecord.Query()
+                 where record.StudentId == studentId &&
+                       record.CourseGroupId == groupCourseId
+                 group record by record.CourseGroupId into g
+                 select new
+                 {
+                     StudentId = g.Select(r => r.StudentId).FirstOrDefault(),
+                     CourseGroupId = g.Select(r => r.CourseGroupId).FirstOrDefault(),
+                     CourseGroupCourseId = g.Select(r => r.CourseGroupCourseId).FirstOrDefault(),
+                     Date = g.Select(r => r.Date).FirstOrDefault(),
+                     DatePaid = g.Max(r => r.DatePaid)                     
+                 };
+        var q4 = from record in q3
+                 join relation in _studentCourseRelation.Query()
+                 on new
+                 {
+                     record.StudentId,
+                     record.CourseGroupId,
+                     record.CourseGroupCourseId,
+                 } equals new
+                 {
+                     relation.StudentId,
+                     relation.CourseGroupId,
+                     relation.CourseGroupCourseId,
+                 }
+                 select new
+                 {
+                     StudentId = record.StudentId,
+                     CourseGroupId = record.CourseGroupId,
+                     CourseGroupCourseId = record.CourseGroupCourseId,
+                     Date = record.Date,
+                     EndDate = relation.EndDate,
+                 };
     }
 }
