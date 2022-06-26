@@ -101,6 +101,7 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
                      StudentId = relation.StudentId,
                      CourseGroupId = relation.CourseGroupId,
                      CourseGroupCourseId = relation.CourseGroupCourseId,
+                     DatePaid = relation.CourseGroup.StartDate
                      
                  };
 
@@ -146,6 +147,7 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
                      StudentId = r.StudentId,
                      CourseGroupId = r.CourseGroupId,
                      CourseGroupCourseId = r.CourseGroupCourseId,
+                     DatePaid = r.DatePaid
                  };
         return q2.Union(q5);
     }
