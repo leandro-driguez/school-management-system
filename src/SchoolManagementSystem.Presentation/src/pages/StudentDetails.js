@@ -1,8 +1,10 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
-import { Tabs } from "antd";
+import {Divider, Tabs} from "antd";
 import { useParams } from "react-router-dom";
 import CRUD_Table from "../components/Table/CRUD_Table";
+import {DeleteTwoTone, EditTwoTone} from "@ant-design/icons";
+import "./detailsHeader.css";
 
 const { TabPane } = Tabs;
 
@@ -18,7 +20,6 @@ const StudentDetails = () => {
         {
             title: 'Nombre',
             dataIndex: 'name',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -38,7 +39,6 @@ const StudentDetails = () => {
         {
             title: 'Tipo',
             dataIndex: 'type',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -54,8 +54,8 @@ const StudentDetails = () => {
         {
             title: 'Grupo',
             dataIndex: 'group',
-            width: '15%',
             dataType: 'text',
+            editable: true,
             sorter: {
                 compare: (a, b) => a.group.localeCompare(b.group)
             },
@@ -69,8 +69,8 @@ const StudentDetails = () => {
         {
             title: 'Fecha de inscripción',
             dataIndex: 'startDate',
-            width: '15%',
             dataType: 'text',
+            editable: true,
             sorter: {
                 compare: (a, b) => a.startDate.localeCompare(b.startDate)
             },
@@ -90,37 +90,25 @@ const StudentDetails = () => {
         {
             title: 'Fecha',
             dataIndex: 'date',
-            width: '15%',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.date.localeCompare(b.date)
             },
         },
         {
-            title: 'Salario Fijo',
-            dataIndex: 'fixedSalary',
-            width: '15%',
+            title: 'Pago',
+            dataIndex: 'payment',
             dataType: 'number',
             sorter: {
-                compare: (a, b) => a.fixedSalary - b.fixedSalary
+                compare: (a, b) => a.payment - b.payment
             },
         },
         {
-            title: 'Salario Porcentual',
-            dataIndex: 'percentageSalary',
-            width: '15%',
+            title: 'Grupo',
+            dataIndex: 'group',
             dataType: 'number',
             sorter: {
-                compare: (a, b) => a.percentageSalary - b.percentageSalary
-            },
-        },
-        {
-            title: 'Total',
-            dataIndex: 'total',
-            width: '15%',
-            dataType: 'number',
-            sorter: {
-                compare: (a, b) => a.total - b.total
+                compare: (a, b) => a.group - b.group
             },
         }
     ];
@@ -130,6 +118,20 @@ const StudentDetails = () => {
     return (
         <div>
             <NavBar></NavBar>
+            <Divider className={"detailsHeader"}>
+                <strong>Nombre</strong> <Divider type="vertical" />
+                <strong>Apellidos</strong> <Divider type="vertical" />
+                CI <Divider type="vertical" />
+                Teléfono <Divider type="vertical" />
+                Dirección <Divider type="vertical" />
+                Nivel escolar <Divider type="vertical" />
+                Fecha de inicio en la sede <Divider type="vertical" />
+                Fondo <Divider type="vertical" />
+                Tutor <Divider type="vertical" />
+                Teléfono (tutor) <Divider type="vertical" />
+                <EditTwoTone /> <Divider type="vertical" />
+                <DeleteTwoTone/>
+            </Divider>
             <Tabs centered defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="Cursos actuales" key="1">
                     <CRUD_Table title={"Cursos"}
