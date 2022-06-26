@@ -9,8 +9,7 @@ namespace SchoolManagementSystem.API.Dtos;
 public class StudentDto : SchoolMemberDto
 {
 
-    [Required]
-    public string IDCardNo { get; set; }
+    
 
     [Required]
     public string TuitorName { get; set; }
