@@ -15,6 +15,7 @@ public interface IDoStudentPaymentService : IRecordService<Student>
     public IRecordRepository<StudentPaymentRecordPerCourseGroup> GetStudentPaymentRecordPerCourseGroupRepo();
     public IRepository<Student> GetStudentRepo();
     public IRepository<CourseGroup> GetCOurseGroupRepo();
-    public void DoCoursePayment(string studentId, string groupCourseId);
+    public void DoCoursePayment(string studentId, string courseGroupId,
+                        string courseId, DateTime DatePaid);
 
 }

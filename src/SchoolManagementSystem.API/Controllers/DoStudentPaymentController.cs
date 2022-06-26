@@ -38,8 +38,20 @@ public class DoStudentPaymentController : Controller
     [HttpPost]
     public IActionResult Post([FromForm] StudentIdGroupIdDto dto)
     {
-        _servicePayment.DoCoursePayment(dto.StudentId, dto.GroupId);
-        return Ok("Efectuado");
+        var groupCurseNoPaid = (from g in GroupCurseNoPaid(dto.StudentId)
+                                where g.GroupId == dto.GroupId
+                                select g)
+                                .FirstOrDefault();
+        if (groupCurseNoPaid == null)
+        {
+            return NotFound(dto);
+        }
+        groupCurseNoPaid.DatePaid = groupCurseNoPaid.DatePaid.Date.AddDays(30);
+        _servicePayment.DoCoursePayment(groupCurseNoPaid.StudentId,
+                                        groupCurseNoPaid.GroupId,
+                                        groupCurseNoPaid.CourseId,
+                                        groupCurseNoPaid.DatePaid);
+        return Ok(groupCurseNoPaid);
     }
 
     private IQueryable<StudentGroupPaymentDto> GroupCurseNoPaid(string studentId)

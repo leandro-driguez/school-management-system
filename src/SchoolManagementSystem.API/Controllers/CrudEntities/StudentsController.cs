@@ -27,10 +27,10 @@ public class StudentsController : CrudController<Student, StudentDto>
         (
             _service.Query()
                 .Select(_mapperToDto.Map<Student,StudentDto>)
-                .Select((dto) => {
-                    dto.Id = dto.Id.Substring(25);
-                    return dto;
-                })
+                //.Select((dto) => {
+                //    dto.Id = dto.Id.Substring(25);
+                //    return dto;
+                //})
                 .ToList()
         );
     }

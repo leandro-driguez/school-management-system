@@ -30,8 +30,19 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
         _studentCourseRecord = studentCourseRepository;
     }
 
-    public void DoCoursePayment(string studentId, string groupCourseId)
+    public void DoCoursePayment(string studentId, string courseGroupId,
+                        string courseId, DateTime DatePaid)
     {
+        _studentCourseRecord.Add(new StudentPaymentRecordPerCourseGroup
+        {
+            StudentId = studentId,
+            CourseGroupId = courseGroupId,
+            CourseGroupCourseId = courseId,
+            DatePaid = DatePaid,
+            Date = DateTime.Now,
+            
+        });        
+        _studentCourseRelation.CommitAsync();
         //if (_studentRepo.GetById(studentId) == null)
         //    return "No existe el estudiante";
         //if (_courseGroupRepo.GetById(groupCourseId) == null)
