@@ -9,19 +9,8 @@ namespace SchoolManagementSystem.Domain.Entities
         public string Type { get; set; }
 
         // [Required]
-        public override string Id {
-            get => _id;
-            
-            set{
-                string CardId = value;
-              
-                while (CardId.Length < 32){
-                    CardId = "0" + CardId;
-                }
 
-                _id = new Guid(CardId).ToString();
-            }
-        }
+        public string IdCardNo {get; set;}
 
         // [Required]
         // [MaxLength(20)]
