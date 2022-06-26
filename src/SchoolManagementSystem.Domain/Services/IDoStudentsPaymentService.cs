@@ -11,10 +11,10 @@ using SchoolManagementSystem.Domain.Interfaces;
 namespace SchoolManagementSystem.Domain.Services;
 public interface IDoStudentPaymentService : IRecordService<Student>
 {
-    public IQueryable GroupCurseNoPaid(string studentId);    
-    //public IRepository<TeacherCourseGroupRelation> GetTeacherCourseGroupRelationRepo();
-    //public IRepository<TeacherCourseRelation> GetTeacherCourseRelationRepo();
-    //public IRepository<WorkerPositionRelation> GetWorkerPositionRelationRepo();
-    public string DoCoursePayment(string studentId, string groupCourseId);
+    public IRepository<StudentCourseGroupRelation> GetStudentCourseGroupRelationRepo();
+    public IRecordRepository<StudentPaymentRecordPerCourseGroup> GetStudentPaymentRecordPerCourseGroupRepo();
+    public IRepository<Student> GetStudentRepo();
+    public IRepository<CourseGroup> GetCOurseGroupRepo();
+    public void DoCoursePayment(string studentId, string groupCourseId);
 
 }
