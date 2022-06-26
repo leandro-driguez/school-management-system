@@ -5,12 +5,12 @@ namespace SchoolManagementSystem.Domain.Entities
 {
     public class SchoolMember : Entity
     {
-        private protected string _id;
+        // private protected string _id;
         public string Type { get; set; }
 
         // [Required]
 
-        public string IdCardNo {get; set;}
+        public string IDCardNo {get; set;}
 
         // [Required]
         // [MaxLength(20)]

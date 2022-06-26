@@ -13,7 +13,7 @@ public static class DbInitializer
         Name = "Carmen",
         LastName = "Gonzalez",
         Address = "Calle Conchita",
-        IdCardNo = "091283928",
+        IDCardNo = "091283928",
         DateBecomedMember = new DateTime(2012,09,21),
         PhoneNumber = 58981234
     };
@@ -21,7 +21,7 @@ public static class DbInitializer
         Name = "Juan",
         LastName = "Rodriguz",
         Address = "Calle Paz",
-        IdCardNo = "90871238292",
+        IDCardNo = "90871238292",
         DateBecomedMember = new DateTime(2015,09,21),
         PhoneNumber = 57891234
     };
@@ -33,7 +33,7 @@ public static class DbInitializer
         Name = "Sasha",
         LastName = "hernand",
         Address = "Calle Victoria",
-        IdCardNo = "90831243234",
+        IDCardNo = "90831243234",
         DateBecomedMember = new DateTime(2019,06,15),
         PhoneNumber = 56781239,
         Founds = 12,
@@ -44,7 +44,7 @@ public static class DbInitializer
         Name = "Sandra",
         LastName = "Jimenez",
         Address = "Calle Pancha",
-        IdCardNo = "02293881244",
+        IDCardNo = "02293881244",
         DateBecomedMember = new DateTime(2021,08,21),
         PhoneNumber = 59871304,
         Founds = 145,
@@ -55,7 +55,7 @@ public static class DbInitializer
         Name = "Hermen",
         LastName = "Cartan",
         Address = "Calle Pencil",
-        IdCardNo = "98130923454",
+        IDCardNo = "98130923454",
         DateBecomedMember = new DateTime(2014,09,28),
         PhoneNumber = 56813049,
         Founds = 102,
@@ -66,7 +66,7 @@ public static class DbInitializer
         Name = "Rodrigo",
         LastName = "Posada",
         Address = "Calle Vento",
-        IdCardNo = "06871223456",
+        IDCardNo = "06871223456",
         DateBecomedMember = new DateTime(2021,06,15),
         PhoneNumber = 57893019,
         Founds = 120,
@@ -77,7 +77,7 @@ public static class DbInitializer
         Name = "Carlos",
         LastName = "Yatra",
         Address = "Calle Guntilla",
-        IdCardNo = "98052378290",
+        IDCardNo = "98052378290",
         DateBecomedMember = new DateTime(2019,06,15),
         PhoneNumber = 56781239,
         Founds = 134,
@@ -352,12 +352,12 @@ public static class DbInitializer
     {
         return new AdditionalService[]
         {
-            // new AdditionalService {Worker = new Worker { IdCardNo = "99122104222", Name = "Luis",
-            //     LastName = "Guerrero", PhoneNumber = 52372293, 
-            //     Address = "Espada No.404 e/ San Benito y Esperanza", 
-            //     DateBecomedMember = new DateTime(2015, 9, 5) },
-            //     Resource = new Resource { Name = "libro de Ingles basico", Category = "Cuaderno", Price = 1000, 
-            //     Providers = new List<Worker>() } , WorkerPorcentageProfits = 15}
+            new AdditionalService {Worker = new Worker { IDCardNo = "99122104222", Name = "Luis",
+                LastName = "Guerrero", PhoneNumber = 52372293, 
+                Address = "Espada No.404 e/ San Benito y Esperanza", 
+                DateBecomedMember = new DateTime(2015, 9, 5) },
+                Resource = new Resource { Name = "libro de Ingles basico", Category = "Cuaderno", Price = 1000, 
+                Providers = new List<Worker>() } , WorkerPorcentageProfits = 15}
         };
     }
     
@@ -402,7 +402,7 @@ public static class DbInitializer
                 Capacity = 16,
                 StartDate = new DateTime(2022, 3, 12),
                 EndDate = new DateTime(2022, 5, 12),
-                Teacher = new Teacher{ IdCardNo="00522627123", Name = "juanito", LastName = "tirador", PhoneNumber = 76444081,
+                Teacher = new Teacher{ IDCardNo="00522627123", Name = "juanito", LastName = "tirador", PhoneNumber = 76444081,
                     Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                     CourseGroups = new List<CourseGroup>() }
                 // Shifts = new List<Shift>(),
@@ -474,17 +474,17 @@ public static class DbInitializer
     
     private static SchoolMember[] GetSchoolMembers()
     {
-        var schoolMember = new SchoolMember { IdCardNo = "98012134289", Name = "Leandro", LastName = "Rodriguez Llosa",
+        var schoolMember = new SchoolMember { IDCardNo = "98012134289", Name = "Leandro", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2015, 9, 5) };
     
         return new SchoolMember[]
         {
             schoolMember,
-            new SchoolMember { IdCardNo = "98022134289", Name = "Leandro", LastName = "Rodriguez Llosa",
+            new SchoolMember { IDCardNo = "98022134289", Name = "Leandro", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2015, 9, 5) },
-            new SchoolMember { IdCardNo = "98012334289", Name = "Leandro", LastName = "Rodriguez Llosa",
+            new SchoolMember { IDCardNo = "98012334289", Name = "Leandro", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2015, 9, 5) }
         };
@@ -517,12 +517,12 @@ public static class DbInitializer
     {
         return new Student[2]
         {
-            new Student { IdCardNo = "123456784012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+            new Student { IDCardNo = "123456784012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
                 Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
                 DateBecomedMember = new DateTime(2020, 2, 1),
                 Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
                 ScholarityLevel = Domain.Enums.Education.Posgrado },
-            new Student { IdCardNo = "123456789012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+            new Student { IDCardNo = "123456789012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
                 Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
                 DateBecomedMember = new DateTime(2020, 2, 1),
                 Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
@@ -543,7 +543,7 @@ public static class DbInitializer
     {
         return  new Teacher[]
         {
-            new Teacher { IdCardNo = "71022200221", Name = "Teresa", LastName = "Graveran",
+            new Teacher { IDCardNo = "71022200221", Name = "Teresa", LastName = "Graveran",
                 PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2008, 9, 5), CourseGroups  = new List<CourseGroup>()}
         };
@@ -553,10 +553,10 @@ public static class DbInitializer
     {
         return new Worker[]
         {
-            new Worker { IdCardNo = "99123100221", Name = "Dario", LastName = "Rodriguez Llosa",
+            new Worker { IDCardNo = "99123100221", Name = "Dario", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2015, 9, 5) },
-            new Worker { IdCardNo = "99123160221", Name = "Dario", LastName = "Rodriguez Llosa",
+            new Worker { IDCardNo = "99123160221", Name = "Dario", LastName = "Rodriguez Llosa",
                 PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                 DateBecomedMember = new DateTime(2015, 9, 5) }
         };
@@ -574,7 +574,7 @@ public static class DbInitializer
     {
         var worker = new Worker
         {
-            IdCardNo = "99197504222", Name = "Luis",
+            IDCardNo = "99197504222", Name = "Luis",
             LastName = "Guerrero", PhoneNumber = 52372293,
             Address = "Espada No.404 e/ San Benito y Esperanza",
             DateBecomedMember = new DateTime(2015, 9, 5)
@@ -587,29 +587,29 @@ public static class DbInitializer
         
         return new StudentPaymentRecordForAdditionalService[]
         {
-            // new StudentPaymentRecordForAdditionalService
-            // {
-            //     AdditionalService = new AdditionalService
-            //     {
-            //         Worker = worker,
-            //         Resource = resource,
-            //         WorkerPorcentageProfits = 15
-            //     },
-            //     AdditionalServiceResourceId = resource.Id,
-            //     AdditionalServiceWorkerId = worker.Id,
-            //     Student = new Student 
-            //     {
-            //         IdCardNo = "0998765432158", Name = "Pablo", LastName = "Curbelo Paez", 
-            //         PhoneNumber = 56784392, Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
-            //         DateBecomedMember = new DateTime(2020, 2, 1), Founds = 3,
-            //         Tuitor = new Tuitor
-            //         {
-            //             Name = "Elena", PhoneNumber = 54637721
-            //         },  
-            //         ScholarityLevel = Domain.Enums.Education.Primaria 
-            //     },
-            //     Date = new DateTime(2018,12,02)
-            // }
+            new StudentPaymentRecordForAdditionalService
+            {
+                AdditionalService = new AdditionalService
+                {
+                    Worker = worker,
+                    Resource = resource,
+                    WorkerPorcentageProfits = 15
+                },
+                AdditionalServiceResourceId = resource.Id,
+                AdditionalServiceWorkerId = worker.Id,
+                Student = new Student 
+                {
+                    IDCardNo = "0998765432158", Name = "Pablo", LastName = "Curbelo Paez", 
+                    PhoneNumber = 56784392, Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
+                    DateBecomedMember = new DateTime(2020, 2, 1), Founds = 3,
+                    Tuitor = new Tuitor
+                    {
+                        Name = "Elena", PhoneNumber = 54637721
+                    },  
+                    ScholarityLevel = Domain.Enums.Education.Primaria 
+                },
+                Date = new DateTime(2018,12,02)
+            }
         };
     }
     
@@ -624,14 +624,14 @@ public static class DbInitializer
             Capacity = 16,
             StartDate = new DateTime(2022, 3, 12),
             EndDate = new DateTime(2022, 5, 12),
-            Teacher = new Teacher{ IdCardNo="00523573122", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+            Teacher = new Teacher{ IDCardNo="00523573122", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
                 Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                 CourseGroups = new List<CourseGroup>() }
         };
 
         var student = new Student 
         { 
-            IdCardNo = "93084574542", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+            IDCardNo = "93084574542", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
             Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
             DateBecomedMember = new DateTime(2020, 2, 1),
             Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
@@ -655,7 +655,7 @@ public static class DbInitializer
     private static WorkerPayRecordByPosition[] GetWorkerPayRecordByPositions()
     {
         var position = new Position { Name = "director", Workers = new List<Worker>() {
-            new Worker { IdCardNo = "79082901293", Name = "JUan", LastName = "Baez",
+            new Worker { IDCardNo = "79082901293", Name = "JUan", LastName = "Baez",
                     PhoneNumber = 56471922, Address = "Espada No.404 e/ San Benito y Esperanza", 
                     DateBecomedMember = new DateTime(2019, 9, 5),
                     Positions = new List<Position>()
@@ -665,7 +665,7 @@ public static class DbInitializer
         {   
             new WorkerPayRecordByPosition
             {
-                Worker = new Worker { IdCardNo = "99124297421", Name = "Alfredo", LastName = "Perez",
+                Worker = new Worker { IDCardNo = "99124297421", Name = "Alfredo", LastName = "Perez",
                     PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                     DateBecomedMember = new DateTime(2015, 9, 5),
                     Positions = new List<Position>() { position}
@@ -688,7 +688,7 @@ public static class DbInitializer
                 },
                 Teacher =new Teacher 
                 { 
-                    IdCardNo = "95012393872", Name = "Rebeca", LastName = "Portales",
+                    IDCardNo = "95012393872", Name = "Rebeca", LastName = "Portales",
                     PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza", 
                     DateBecomedMember = new DateTime(2008, 9, 5), 
                     CourseGroups  = new List<CourseGroup>()
@@ -710,14 +710,14 @@ public static class DbInitializer
             EndDate = new DateTime(2022, 5, 12),
             Teacher = new Teacher
             { 
-                IdCardNo="00032834123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                IDCardNo="00032834123", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
                 Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                 CourseGroups = new List<CourseGroup>() 
             }
         };
         var student = new Student
         {
-            IdCardNo = "08490438573", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
+            IDCardNo = "08490438573", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
             Address = "Pocitos No.23 e/ Czda de Vento y ALmendares",
             DateBecomedMember = new DateTime(2020, 2, 1),
             Tuitor = new Tuitor
@@ -815,7 +815,7 @@ public static class DbInitializer
     {
         var teacher = new Teacher
         {
-            IdCardNo = "75934499884", Name = "Teresa", LastName = "Graveran",
+            IDCardNo = "75934499884", Name = "Teresa", LastName = "Graveran",
             PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza",
             DateBecomedMember = new DateTime(2008, 9, 5),
             CourseGroups = new List<CourseGroup>()
@@ -867,14 +867,14 @@ public static class DbInitializer
             EndDate = new DateTime(2022, 5, 12),
             Teacher = new Teacher
             { 
-                IdCardNo="65423476345", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
+                IDCardNo="65423476345", Name = "marcos", LastName = "tirador", PhoneNumber = 76444081,
                 Address = "Calle Cotilla", DateBecomedMember = new DateTime(2020, 5, 14), 
                 CourseGroups = new List<CourseGroup>() 
             }
         };
         var teacher = new Teacher
         {
-            IdCardNo = "78493402348", Name = "Teresa", LastName = "Graveran",
+            IDCardNo = "78493402348", Name = "Teresa", LastName = "Graveran",
             PhoneNumber = 59821123, Address = "Espada No.404 e/ San Benito y Esperanza",
             DateBecomedMember = new DateTime(2008, 9, 5),
             CourseGroups = new List<CourseGroup>()
@@ -932,7 +932,7 @@ public static class DbInitializer
                 Position = new Position { Name = "Secretaria", Workers = new List<Worker>()},
                 Worker = new Worker 
                 { 
-                    IdCardNo = "83403899900", Name = "Martha", LastName = "Garcia",
+                    IDCardNo = "83403899900", Name = "Martha", LastName = "Garcia",
                     PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                     DateBecomedMember = new DateTime(2015, 9, 5) 
                 },
