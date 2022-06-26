@@ -65,11 +65,13 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
                            relation.CourseGroupId == groupCourseId
                      select relation.EndDate;
             if (q2.Count() != 1)
+            {
                 // Este Exception jamás debe ocurrir
                 throw new Exception("En StudentCourseGroupRelation hay más de un Curso " +
-                                    "con el mismo StudentId y GroupCourseId" +
-                                    "o no existe la relación\nQuery\n" +
-                                    q2.ToList().ToString());
+                                    "con el mismo StudentId y GroupCourseId " +
+                                    "o no existe la relación\nQuery:\n" +
+                                    q2.ToList());                
+            }
             var finalDate = q2.First().Date;
             if (finalDate >= q1.First().Date)
             {
@@ -83,7 +85,7 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
         throw new NotImplementedException("Falta revisar los curso que no se han pagado ni una vez");
     }
 
-    public void GroupCurseNoPaid(string studentId, string groupCourseId)
+    public IQueryable GroupCurseNoPaid(string studentId)
     {
         // cursos-grupo que ya ha ido pagando el estudiante
         var q1 = from record in _studentCourseRecord.Query()
@@ -92,22 +94,28 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
         // cursos-grupo en los que no ha pagado aún
         // solo tiene los que nunca ha pagado ni una vez
         var q2 = from relation in _studentCourseRelation.Query()
+                 where relation.StudentId == studentId
                  where !q1.Contains(relation.CourseGroupId)
-                 select relation;
+                 select new 
+                 {
+                     StudentId = relation.StudentId,
+                     CourseGroupId = relation.CourseGroupId,
+                     CourseGroupCourseId = relation.CourseGroupCourseId,
+                     
+                 };
 
         // de los registros de pago del estudiante determinado y su grupo de clase
         // agrupar los registros por el grupo de clase
         // tomando la última fecha de pago
         var q3 = from record in _studentCourseRecord.Query()
-                 where record.StudentId == studentId &&
-                       record.CourseGroupId == groupCourseId
+                 where record.StudentId == studentId
                  group record by record.CourseGroupId into g
                  select new
                  {
                      StudentId = g.Select(r => r.StudentId).FirstOrDefault(),
                      CourseGroupId = g.Select(r => r.CourseGroupId).FirstOrDefault(),
                      CourseGroupCourseId = g.Select(r => r.CourseGroupCourseId).FirstOrDefault(),
-                     Date = g.Select(r => r.Date).FirstOrDefault(),
+                     //Date = g.Select(r => r.Date).FirstOrDefault(),
                      DatePaid = g.Max(r => r.DatePaid)                     
                  };
         var q4 = from record in q3
@@ -128,8 +136,17 @@ public class DoStudentPaymentService : BaseService<Student>, IDoStudentPaymentSe
                      StudentId = record.StudentId,
                      CourseGroupId = record.CourseGroupId,
                      CourseGroupCourseId = record.CourseGroupCourseId,
-                     Date = record.Date,
+                     DatePaid = record.DatePaid,
                      EndDate = relation.EndDate,
                  };
+        var q5 = from r in q4
+                 where r.DatePaid.Date < r.EndDate.Date
+                 select new
+                 {
+                     StudentId = r.StudentId,
+                     CourseGroupId = r.CourseGroupId,
+                     CourseGroupCourseId = r.CourseGroupCourseId,
+                 };
+        return q2.Union(q5);
     }
 }

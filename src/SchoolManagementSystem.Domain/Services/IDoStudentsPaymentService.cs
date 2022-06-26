@@ -11,7 +11,7 @@ using SchoolManagementSystem.Domain.Interfaces;
 namespace SchoolManagementSystem.Domain.Services;
 public interface IDoStudentPaymentService : IRecordService<Student>
 {
-    public void GroupCurseNoPaid(string studentId, string groupCourseId);    
+    public IQueryable GroupCurseNoPaid(string studentId);    
     //public IRepository<TeacherCourseGroupRelation> GetTeacherCourseGroupRelationRepo();
     //public IRepository<TeacherCourseRelation> GetTeacherCourseRelationRepo();
     //public IRepository<WorkerPositionRelation> GetWorkerPositionRelationRepo();

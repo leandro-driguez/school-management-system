@@ -9,6 +9,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 using Microsoft.EntityFrameworkCore; 
 using AutoMapper;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace SchoolManagementSystem.API.Controllers;
 
@@ -34,28 +35,17 @@ public class DoStudentPaymentController : Controller
         this.mapper = mapper;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetAll([FromForm] string id)
+    [HttpGet]
+    public IActionResult GetAll([FromQuery] string id)
     {
-        
-        // cursos-grupo que ya ha ido pagando el estudiante
-        var q1 = from record in _serviceRecord.Query()
-                 where record.StudentId == id
-                 select record.CourseGroupId;
-
-        
-        //var q2 = from record in _serviceRecord.Query()
-        //         group record by record.CourseGroupId into g
-        //         select g.OrderByDescending(e => e.CourseGroupId).FirstOrDefault() into r
-        //         select r;
-
-        // cursos-grupo en los que no ha pagado aún
-        // solo tiene los que nunca ha pagado ni una vez
-        var q3 = from relation in _serviceRelation.Query()
-                 where !q1.Contains(relation.CourseGroupId)
-                 select relation;
-
-        return Ok(q3.ToList());
+        //return Ok("Hola");
+        var q1 = _servicePayment.GroupCurseNoPaid(id);
+        List<object> l = new List<object>();
+        foreach (var row in q1)
+        {
+            l.Add(row);
+        }
+        return Ok(l);
         //return Ok(new IList[] { q3.ToList(), q4.ToList(), q5.ToList() });
     }
 
