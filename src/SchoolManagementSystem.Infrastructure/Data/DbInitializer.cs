@@ -646,8 +646,19 @@ public static class DbInitializer
                 CourseGroupCourseId = course.Id, 
                 CourseGroupId = courseGroup.Id, 
                 Date = new DateTime(2017,8,12), 
-                DatePaid = new DateOnly(2017,1, 29).AddMonths(2),
+                DatePaid = new DateTime(2017,8, 14),
                 StudentId = student.Id, 
+                Student = student
+            },
+
+            new StudentPaymentRecordPerCourseGroup
+            {
+                CourseGroup = courseGroup,
+                CourseGroupCourseId = course.Id,
+                CourseGroupId = courseGroup.Id,
+                Date = new DateTime(2017,8,20),
+                DatePaid = new DateTime(2017,9, 14),
+                StudentId = student.Id,
                 Student = student
             }
         };

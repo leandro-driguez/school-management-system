@@ -17,6 +17,15 @@ public class StudentPayCourseRecordController : RecordController<StudentPaymentR
     {
     }
 
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        return Ok(_service.Query()
+            .Include(s => s.CourseGroup.Course)
+            .Select(_mapperToDto.Map<StudentPaymentRecordPerCourseGroup, StudentPayCourseRecordDto>)
+            .ToList());
+    }
+
     [HttpGet("{id}")]
     public IActionResult PaymentByStudentId(string id)
     {

@@ -7,15 +7,12 @@ namespace SchoolManagementSystem.API.Dtos;
 public class StudentPayCourseRecordDto
 {
 
-    //[Required]
-    //public string StudentId { get; set; }
-    [Required]
-    public DateTime Date { get; set; }
-    //[Required]
-    //public string CourseGroupId { get; set; }
-    [Required]
+    public string StudentId { get; set; }
+    public Student Student { get; set; }
+
     public string CourseGroupId { get; set; }
-    [Required]
-    public int CourseGroupCoursePrice { get; set; }
+    public string CourseGroupCourseId { get; set; }
+    public CourseGroup CourseGroup { get; set; }
+    public DateTime DatePaid { get; set; }
 
 }
