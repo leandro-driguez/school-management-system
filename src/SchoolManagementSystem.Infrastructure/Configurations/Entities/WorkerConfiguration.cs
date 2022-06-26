@@ -13,6 +13,10 @@ public class WorkerConfiguration : IEntityTypeConfiguration<Worker>
         
         builder.HasBaseType<SchoolMember>();
 
+        // builder.HasDiscriminator<bool>(c => c.IsTeacher)
+        //     .HasValue<Teacher>(true)
+        //     ;
+
         builder.HasMany(w => w.Services)
             .WithMany(r => r.Providers);
         

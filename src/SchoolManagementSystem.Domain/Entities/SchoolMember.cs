@@ -8,6 +8,7 @@ namespace SchoolManagementSystem.Domain.Entities
         // private protected string _id;
         public string Type { get; set; }
 
+        // public bool IsTeacher { get; set; } = false;
         // [Required]
 
         public string IDCardNo {get; set;}

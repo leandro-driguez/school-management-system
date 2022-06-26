@@ -22,7 +22,7 @@ public class TeachersController : CrudController<Teacher, TeacherDto>
     public virtual IActionResult BecomeTeacher(string id)
     {
         var _serv = (_service as ITeacherService);
-        if(!_serv.SpecialPost(id))
+        if(!_serv.BecomeTeacher(id))
             return NotFound();
 
         return Ok();
