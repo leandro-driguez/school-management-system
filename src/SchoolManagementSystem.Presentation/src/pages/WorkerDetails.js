@@ -79,7 +79,7 @@ const WorkerDetails = () => {
         },
         {
             title: 'Salario Fijo',
-            dataIndex: 'fixedSalary',
+            dataIndex: 'totalFixSalary',
             width: '15%',
             dataType: 'number',
             sorter: {
@@ -94,7 +94,7 @@ const WorkerDetails = () => {
         },
         {
             title: 'Salario Porcentual',
-            dataIndex: 'percentageSalary',
+            dataIndex: 'totalCoursesPorcentualPayment',
             width: '15%',
             dataType: 'number',
             sorter: {
@@ -144,7 +144,7 @@ const WorkerDetails = () => {
                     <CRUD_Table title={"Cargos"}
                                 columns={positionsColumns}
                                 operations={["edit","delete","add"]}
-                                url={"https://localhost:5001/api/PositionSalary/" + `${id}`}
+                                url={"https://localhost:5001/api/WorkerPositionRelation/" + `${id}`}
                                 tableID={positionsTableID}
                                 searchboxID={positionsSearchboxID}
                     ></CRUD_Table>
@@ -152,8 +152,8 @@ const WorkerDetails = () => {
                 <TabPane tab="Control de salario" key="2">
                     <CRUD_Table title={"Salario Acumulado"}
                                 columns={acumulatedSalaryColumns}
-                                operations={["details"]}
-                                url={"https://localhost:5001/api/Classrooms"}
+                                operations={[]}
+                                url={"https://localhost:5001/api/ConsultWorkerSalary/"+ `${id}`}
                                 tableID={acumulatedSalaryTableID}
                                 searchboxID={acumulatedSalarySearchboxID}
                     ></CRUD_Table>
