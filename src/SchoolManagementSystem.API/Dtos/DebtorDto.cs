@@ -33,7 +33,12 @@ public class DebtorDto
     [Required]
     [JsonPropertyName("group")]
     public string GroupName { get; set; }
-
+    [Required]
+    [JsonPropertyName("debt")]
+    public int Debt { get; set; }
+    [Required]
+    [JsonPropertyName("dealy")]
+    public int Dealy { get; set; }
     //[Required]
     //public string CourseId { get; set; }
     //[Required]

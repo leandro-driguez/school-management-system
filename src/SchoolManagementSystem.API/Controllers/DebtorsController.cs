@@ -43,6 +43,8 @@ public class DebtorsController : Controller
                     StudentId = student.Id,
                     StudentName = student.Name,
                     StudentLastName = student.LastName,
+                    Debt = payment.CoursePrice,
+                    Dealy = (DateTime.Now.Date - payment.DatePaid).Days
                 });
             }
         }
@@ -67,6 +69,7 @@ public class DebtorsController : Controller
                      GroupId = relation.CourseGroupId,
                      GroupName = relation.CourseGroup.Name,
                      CourseId = relation.CourseGroupCourseId,
+                     CoursePrice = relation.CourseGroup.Course.Price,
                      DatePaid = relation.CourseGroup.StartDate,
                      EndDate = relation.CourseGroup.EndDate,
                      Date = relation.StartDate,
@@ -109,6 +112,7 @@ public class DebtorsController : Controller
                      GroupId = record.CourseGroupId,
                      GroupName = record.CourseGroupName,
                      CourseId = record.CourseGroupCourseId,
+                     CoursePrice = relation.CourseGroup.Course.Price,
                      DatePaid = record.DatePaid,
                      EndDate = relation.EndDate,
                      Date = record.Date,

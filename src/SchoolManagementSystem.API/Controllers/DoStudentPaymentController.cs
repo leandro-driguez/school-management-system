@@ -73,6 +73,7 @@ public class DoStudentPaymentController : Controller
                      GroupId = relation.CourseGroupId,
                      GroupName = relation.CourseGroup.Name,
                      CourseId = relation.CourseGroupCourseId,
+                     CoursePrice = relation.CourseGroup.Course.Price,
                      DatePaid = relation.CourseGroup.StartDate,
                      EndDate = relation.CourseGroup.EndDate,
                      Date = relation.StartDate,
@@ -90,6 +91,7 @@ public class DoStudentPaymentController : Controller
                      CourseGroupId = g.Select(r => r.CourseGroupId).FirstOrDefault(),
                      CourseGroupName = g.Select(r => r.CourseGroup.Name).FirstOrDefault(),
                      CourseGroupCourseId = g.Select(r => r.CourseGroupCourseId).FirstOrDefault(),
+                     CoursePrice = g.Select(r => r.CourseGroup.Course.Price).FirstOrDefault(),
                      DatePaid = g.Max(r => r.DatePaid),
                      Date = g.Max(r => r.Date),
                  };
@@ -115,6 +117,7 @@ public class DoStudentPaymentController : Controller
                      GroupId = record.CourseGroupId,
                      GroupName = record.CourseGroupName,
                      CourseId = record.CourseGroupCourseId,
+                     CoursePrice = record.CoursePrice,
                      DatePaid = record.DatePaid,
                      EndDate = relation.EndDate,
                      Date = record.Date,                     
