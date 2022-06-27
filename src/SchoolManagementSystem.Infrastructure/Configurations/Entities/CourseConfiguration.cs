@@ -22,6 +22,9 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
         //             }
         //         );
 
+        builder.HasMany(c => c.CourseGroups)
+                .WithOne(c => c.Course);
+
         builder.Property(c => c.Name)
             .IsRequired();
         

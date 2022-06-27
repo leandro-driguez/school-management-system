@@ -114,7 +114,7 @@ const CourseDetails = () => {
         },
         {
             title: 'Profesor',
-            dataIndex: 'teacher',
+            dataIndex: 'teacherName',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -228,7 +228,7 @@ const CourseDetails = () => {
                     <CRUD_Table title={"Grupos"}
                                 columns={groupsColumns}
                                 operations={["edit","delete","add","details"]}
-                                url={"https://localhost:5001/api/CourseGroups"}
+                                url={"https://localhost:5001/api/CourseCourseGroupRelation/" + `${id}`}
                                 tableID={groupsTableID}
                                 searchboxID={groupsSearchboxID}
                     ></CRUD_Table>
