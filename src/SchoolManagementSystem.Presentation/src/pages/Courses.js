@@ -5,26 +5,6 @@ import CRUD_Table from "../components/Table/CRUD_Table";
 const Courses = () => {
     const columns = [
         {
-            title: 'Tipo',
-            dataIndex: 'type',
-            width: '15%',
-            editable: true,
-            dataType: 'text',
-            sorter: {
-                compare: (a, b) => a.type.localeCompare(b.type)
-            },
-            rules: [
-                {
-                    required: true,
-                    message: "Introduzca el tipo de curso.",
-                },
-                {
-                    whitespace: true,
-                    message: "Introduzca el tipo de curso."
-                }
-            ],
-        },
-        {
             title: 'Nombre',
             dataIndex: 'name',
             width: '15%',
@@ -43,6 +23,26 @@ const Courses = () => {
                     message: "Introduzca la capacidad."
                 }
             ]
+        },
+        {
+            title: 'Tipo',
+            dataIndex: 'type',
+            width: '15%',
+            editable: true,
+            dataType: 'text',
+            sorter: {
+                compare: (a, b) => a.type.localeCompare(b.type)
+            },
+            rules: [
+                {
+                    required: true,
+                    message: "Introduzca el tipo de curso.",
+                },
+                {
+                    whitespace: true,
+                    message: "Introduzca el tipo de curso."
+                }
+            ],
         },
         {
             title: 'Precio',
