@@ -19,7 +19,7 @@ const StudentDetails = () => {
     const currentCoursesColumns = [
         {
             title: 'Nombre',
-            dataIndex: 'name',
+            dataIndex: 'courseGroupCourseName',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -38,7 +38,7 @@ const StudentDetails = () => {
         },
         {
             title: 'Tipo',
-            dataIndex: 'type',
+            dataIndex: 'courseType',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -53,7 +53,7 @@ const StudentDetails = () => {
         },
         {
             title: 'Grupo',
-            dataIndex: 'group',
+            dataIndex: 'courseGroupName',
             dataType: 'text',
             editable: true,
             sorter: {
@@ -137,7 +137,7 @@ const StudentDetails = () => {
                     <CRUD_Table title={"Cursos"}
                                 columns={currentCoursesColumns}
                                 operations={["edit","delete","add"]}
-                                url={"https://localhost:5001/api/Classrooms"}
+                                url={"https://localhost:5001/api/StudentCourseGroupRelation/" + `${id}`}
                                 tableID={currentCoursesTableID}
                                 searchboxID={currentCoursesSearchboxID}
                     ></CRUD_Table>
