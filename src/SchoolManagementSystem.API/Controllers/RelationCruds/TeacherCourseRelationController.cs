@@ -30,6 +30,14 @@ public class TeacherCourseRelationController : Controller
 
         return Ok(_query.Select(mapper.Map<TeacherCourseRelation,TeacherCourseRelationDto>));
     }
+
+    [HttpGet("{id}")]
+    public IActionResult Get(string id)
+    {
+        var _query = _service.Query().Where(c => c.CourseId == id).Include(c => c.Teacher).Include(c => c.Course);
+
+        return Ok(_query.Select(mapper.Map<TeacherCourseRelation,TeacherCourseRelationDto>));
+    }
     [HttpGet("{TeacherId}, {CourseId}")]
     public IActionResult GetAll(string TeacherId,string CourseId)
     {

@@ -11,6 +11,8 @@ public class TeacherCourseRelationDto
     public string TeacherId { get; set; }
     // [Required]
     public string TeacherName { get; set; }
+    public string TeacherLastName { get; set; }
+    public string TeacherIDCardNo { get; set; }
     [Required]
     public string CourseId { get; set; }
     // [Required]
