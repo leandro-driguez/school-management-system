@@ -47,11 +47,11 @@ public class DoStudentPaymentController : Controller
             return NotFound(dto);
         }
         groupCurseNoPaid.DatePaid = groupCurseNoPaid.DatePaid.Date.AddDays(30);
-        _servicePayment.DoCoursePayment(groupCurseNoPaid.StudentId,
+        var record = _servicePayment.DoCoursePayment(groupCurseNoPaid.StudentId,
                                         groupCurseNoPaid.GroupId,
                                         groupCurseNoPaid.CourseId,
                                         groupCurseNoPaid.DatePaid);
-        return Ok(groupCurseNoPaid);
+        return Ok(record);
     }
 
     private IQueryable<StudentGroupPaymentDto> GroupCurseNoPaid(string studentId)
@@ -60,6 +60,7 @@ public class DoStudentPaymentController : Controller
         var q1 = from record in _servicePayment.GetStudentPaymentRecordPerCourseGroupRepo().Query()
                  where record.StudentId == studentId
                  select record.CourseGroupId;
+        var l1 = q1.ToList();
         // cursos-grupo en los que no ha pagado aún
         // solo tiene los que nunca ha pagado ni una vez
         var q2 = from relation in _servicePayment.GetStudentCourseGroupRelationRepo().Query()
@@ -73,7 +74,7 @@ public class DoStudentPaymentController : Controller
                      DatePaid = relation.CourseGroup.StartDate,
                      Date = relation.StartDate,
                  };
-
+        var l2 = q2.ToList();
         // de los registros de pago del estudiante determinado y su grupo de clase
         // agrupar los registros por el grupo de clase
         // tomando la última fecha de pago
@@ -88,6 +89,7 @@ public class DoStudentPaymentController : Controller
                      DatePaid = g.Max(r => r.DatePaid),
                      Date = g.Max(r => r.Date),
                  };
+        var l3 = q3.ToList();
         var q4 = from record in q3
                  join relation in _servicePayment.GetStudentCourseGroupRelationRepo().Query()
                  on new
@@ -110,6 +112,7 @@ public class DoStudentPaymentController : Controller
                      EndDate = relation.EndDate,
                      Date = record.Date,
                  };
+        var l4 = q4.ToList();
         var q5 = from r in q4
                  where r.DatePaid.Date < r.EndDate.Date
                  select new StudentGroupPaymentDto
@@ -120,6 +123,7 @@ public class DoStudentPaymentController : Controller
                      DatePaid = r.DatePaid,
                      Date = r.Date
                  };
+        var l5 = q5.ToList();
         return q2.Union(q5);
     }
 }
