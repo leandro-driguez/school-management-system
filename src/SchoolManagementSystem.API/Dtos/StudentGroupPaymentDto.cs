@@ -12,6 +12,8 @@ public class StudentGroupPaymentDto
     [Required]
     public string GroupId { get; set; }
     [Required]
+    public string GroupName { get; set; }
+    [Required]
     public string CourseId { get; set; }
     [Required]
     public DateTime DatePaid { get; set; }
