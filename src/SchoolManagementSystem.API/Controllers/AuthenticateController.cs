@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.Infrastructure.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagementSystem.API.Controllers;
 
@@ -111,6 +112,13 @@ public class AuthenticateController : ControllerBase
             await _userManager.AddToRoleAsync(user, UserRoles.User);
         }
         return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+    }
+
+    [Authorize]
+    [HttpGet("loggedIn")]
+    public IActionResult LoggedIn()
+    {
+        return Ok();
     }
 
     private JwtSecurityToken GetToken(List<Claim> authClaims)

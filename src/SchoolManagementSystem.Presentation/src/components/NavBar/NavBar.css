@@ -12,6 +12,13 @@
     float: right;
 }
 
+.logout {
+    height: 40px;
+    width: auto;
+    margin: 10px;
+    float: right;
+}
+
 hr {
     clear: both;
     color: #c50000;
