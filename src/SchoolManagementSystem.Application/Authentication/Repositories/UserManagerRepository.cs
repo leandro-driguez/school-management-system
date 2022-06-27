@@ -9,9 +9,7 @@ public class UserManagerRepository : IUserManagerRepository
     private readonly UserManager<IdentityUser> _userManager;
 
     public UserManagerRepository(UserManager<IdentityUser> userManager)
-    {
-        _userManager = userManager;
-    }
+        => _userManager = userManager;
 
     public async Task<IdentityResult> AddToRole(IdentityUser user, string role)
         => await _userManager.AddToRoleAsync(user,role);
@@ -27,4 +25,26 @@ public class UserManagerRepository : IUserManagerRepository
 
     public async Task<IList<string>> GetRoles(IdentityUser user)
         => await _userManager.GetRolesAsync(user);
+
+    public async Task<string> GeneratePasswordResetToken(IdentityUser user)
+        => await _userManager.GeneratePasswordResetTokenAsync(user);
+
+    public async Task<IdentityResult> ChangePassword(IdentityUser user, 
+        string currentPassword, string newPassword) 
+            => await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+
+    public async Task<bool> IsValidPassword(IdentityUser user, string password)
+    {
+        var validators = _userManager.PasswordValidators;
+
+        foreach (var item in validators)
+        {
+            var validation = await item.ValidateAsync(_userManager, user, password);
+
+            if (validation.Errors.Any())
+                return false; 
+        }
+
+        return true;
+    }
 }

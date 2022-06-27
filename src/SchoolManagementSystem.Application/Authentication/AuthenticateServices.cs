@@ -1,12 +1,12 @@
 
+using System.Text;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using SchoolManagementSystem.Application.Authenticate.Interfaces;
-using SchoolManagementSystem.Application.Authenticate.Models;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using SchoolManagementSystem.Application.Authenticate.Models;
+using SchoolManagementSystem.Application.Authenticate.Interfaces;
 
 namespace SchoolManagementSystem.Application.Authenticate;
 
@@ -101,6 +101,36 @@ public class AuthenticateServices : IAuthenticateService
         }
 
         return new Response { Status = "Successful", Message = "User created successfully!" };
+    }
+
+    public async Task<Response> GeneratePasswordResetToken(string username)
+    {
+        var user = await _userManagerRepository.FindByName(username);
+
+        if (user == null)
+            return new Response { Status="Error", Message="User do not exist." };
+
+        var token = await _userManagerRepository.GeneratePasswordResetToken(user);
+
+        return new Response { Result=token, Status="Successful", Message="Token created successfully!"};
+    }
+
+    public async Task<Response> ChangePassword(string username, string currentPassword, string newPassword)
+    {
+        var user = await _userManagerRepository.FindByName(username);
+
+        if (user == null)
+            return new Response { Status="Error", Message="User do not exist." };
+
+        if (! await _userManagerRepository.CheckPassword(user, currentPassword))
+            return new Response { Status="Error", Message="User and password do not match." };
+
+        if (! await _userManagerRepository.IsValidPassword(user, newPassword))
+            return new Response { Status="Error", Message="New password is invalid." };
+
+        await _userManagerRepository.ChangePassword(user, currentPassword, newPassword);
+
+        return new Response { Status="Successful", Message="Password changed successfully!" };
     }
 
     private JwtSecurityToken GetToken(List<Claim> authClaims)

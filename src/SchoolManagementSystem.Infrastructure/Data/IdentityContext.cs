@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using SchoolManagementSystem.Domain.Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Data;
 
