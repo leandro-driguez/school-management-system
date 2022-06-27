@@ -3,8 +3,7 @@ import NavBar from "../components/NavBar/NavBar";
 import {useState} from 'react';
 import "./collapse.css";
 import CRUD_Table from "../components/Table/CRUD_Table";
-import {Button, Collapse, DatePicker, Modal} from "antd";
-import moment from "moment";
+import {Button, Collapse, Modal} from "antd";
 
 const { Panel } = Collapse;
 
@@ -12,13 +11,7 @@ const onChange = (key) => {
     console.log(key);
 };
 
-const dateFormat = 'DD/MM/YYYY';
-
-const disabledDate = (current) => {
-    return current && current >= moment().endOf('day');
-};
-
-const SalaryPayment = () => {
+const SalaryPaymentControlDetails = () => {
     const fixedSalaryPaymentColumns = [
         {
             title: 'Cargo',
@@ -71,20 +64,9 @@ const SalaryPayment = () => {
     const percentageSalaryPaymentColumnsTableID = 'percentageSalaryPaymentColumnsTable';
     const percentageSalaryPaymentColumnsSearchboxID = 'percentageSalaryPaymentColumnsSearchbox';
 
-    const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
-
     return (
         <div>
             <NavBar></NavBar>
-            <DatePicker placeholder={"Seleccione la fecha"}
-                        disabledDate={disabledDate}
-                        defaultValue={moment()}
-                        format={dateFormat}
-                        style={{
-                            marginLeft: "5%",
-                            borderRadius: "10px"
-                        }}
-            />
             <Collapse onChange={onChange} ghost>
                 <Panel header="Salario fijo: $___" key="1">
                     <CRUD_Table title={""}
@@ -106,27 +88,9 @@ const SalaryPayment = () => {
                     ></CRUD_Table>
                 </Panel>
             </Collapse>
-            <div className={"checkout"}>
-            <p className={"total"}><strong>Total: $___</strong></p>
-                <Button className={"checkout_button"} onClick={()=>setIsConfirmationModalVisible(true)}>
-                    <strong>Registrar pago</strong>
-                </Button>
-            </div>
-            <Modal title={"Confirmar registro de pago"}
-                   visible={isConfirmationModalVisible}
-                   centered={true}
-                   cancelText={"Cancelar"}
-                   onCancel={() => setIsConfirmationModalVisible(false)}
-                   okText={"Aceptar"}
-                   onOk={() => setIsConfirmationModalVisible(false)}
-            >
-            <p>
-                ¿Está seguro de que quiere registar el pago de salario en la fecha _________ al trabajador __________
-                con un importe de $___?
-            </p>
-            </Modal>
+            <p className={"total_p"}><strong>Total: $___</strong></p>
         </div>
     );
 };
 
-export default SalaryPayment;
+export default SalaryPaymentControlDetails;

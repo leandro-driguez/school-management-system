@@ -68,7 +68,7 @@ const Students = () => {
             ]
         },
         {
-            title: 'Carnet ID',
+            title: 'Carnet de identidad',
             dataIndex: 'key',
             editable: true,
             dataType: 'number',

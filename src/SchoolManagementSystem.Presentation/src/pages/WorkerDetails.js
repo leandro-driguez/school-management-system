@@ -176,10 +176,11 @@ const WorkerDetails = () => {
                 <TabPane tab="Control de salario" key="2">
                     <CRUD_Table title={"Salario Acumulado"}
                                 columns={acumulatedSalaryColumns}
-                                operations={[]}
+                                operations={["details"]}
                                 url={"https://localhost:5001/api/ConsultWorkerSalary/"+ `${id}`}
                                 tableID={acumulatedSalaryTableID}
                                 searchboxID={acumulatedSalarySearchboxID}
+                                link={"../SalaryPaymentControlDetails"}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>

@@ -256,6 +256,7 @@ const CourseDetails = () => {
                                 url={"https://localhost:5001/api/CourseGroups"}
                                 tableID={groupsTableID}
                                 searchboxID={groupsSearchboxID}
+                                link={"../GroupDetails"}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>
