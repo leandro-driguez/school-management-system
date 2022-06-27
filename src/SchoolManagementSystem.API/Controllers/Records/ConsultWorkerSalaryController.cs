@@ -91,6 +91,6 @@ public class ConsultWorkerSalaryController : Controller
                 info.InfoByCourse.Add(course);
             }
         }
-        return Ok(dto);
+        return Ok(dto.InfoByDate);
     }
 }
