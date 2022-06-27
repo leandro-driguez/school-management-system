@@ -22,7 +22,7 @@ const CourseDetails = () => {
     const teachersColumns = [
         {
             title: 'Carnet de identidad',
-            dataIndex: 'CI',
+            dataIndex: 'teacherIDCardNo',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.CI.localeCompare(b.CI)
@@ -40,7 +40,7 @@ const CourseDetails = () => {
         },
         {
             title: 'Nombre',
-            dataIndex: 'name',
+            dataIndex: 'teacherName',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.name.localeCompare(b.name)
@@ -59,7 +59,7 @@ const CourseDetails = () => {
         {
             title: 'Apellidos',
             required: true,
-            dataIndex: 'lastName',
+            dataIndex: 'teacherLastName',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.lastName.localeCompare(b.lastName)
@@ -77,7 +77,7 @@ const CourseDetails = () => {
         },
         {
             title: 'Porciento salarial',
-            dataIndex: 'salaryPercentage',
+            dataIndex: 'correspondingPorcentage',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -117,7 +117,7 @@ const CourseDetails = () => {
         },
         {
             title: 'Profesor',
-            dataIndex: 'teacher',
+            dataIndex: 'teacherName',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -243,7 +243,7 @@ const CourseDetails = () => {
                     <CRUD_Table title={"Profesores"}
                                 columns={teachersColumns}
                                 operations={["edit","delete","add","details"]}
-                                url={"https://localhost:5001/api/TeacherCourseRelation"}
+                                url={"https://localhost:5001/api/TeacherCourseRelation/" + `${id}`}
                                 tableID={teachersTableID}
                                 searchboxID={teachersSearchboxID}
                                 link={"../WorkerDetails"}
@@ -253,7 +253,7 @@ const CourseDetails = () => {
                     <CRUD_Table title={"Grupos"}
                                 columns={groupsColumns}
                                 operations={["edit","delete","add","details"]}
-                                url={"https://localhost:5001/api/CourseGroups"}
+                                url={"https://localhost:5001/api/CourseCourseGroupRelation/" + `${id}`}
                                 tableID={groupsTableID}
                                 searchboxID={groupsSearchboxID}
                                 link={"../GroupDetails"}
