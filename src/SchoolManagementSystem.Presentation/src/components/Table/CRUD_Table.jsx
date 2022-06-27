@@ -119,7 +119,7 @@ const CRUD_Table = (props) => {
                     dataIndex: 'operation',
                     width: "1%",
                     render: (_, record) =>
-                        <a href={props.link}><EllipsisOutlined style={{color:"blue"}}/></a>
+                        <a href={props.link + `/${record.key}`}><EllipsisOutlined style={{color:"blue"}}/></a>
                 }
             );
         }

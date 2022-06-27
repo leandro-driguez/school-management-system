@@ -25,7 +25,7 @@ public class TeacherService : BaseService<Teacher>, ITeacherService
             .Include(teacher => teacher.TeacherCourseGroupRelations)
             .FirstOrDefault();
     }
-    public bool SpecialPost(string id){
+    public bool BecomeTeacher(string id){
         var worker = schl_member_repo.Query().Single(c => c.Id == id);
         if (worker == null)
             return false;

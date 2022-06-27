@@ -8,6 +8,9 @@ namespace SchoolManagementSystem.API.Dtos;
 public class SchoolMemberDto : IDto
 {
         [Required]
+        public string IDCardNo { get; set; }
+
+        [Required]
         [StringLength(11)]
         [JsonPropertyName("key")]
         public string Id {get; set;}
