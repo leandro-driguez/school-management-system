@@ -3,6 +3,9 @@ import NavBar from "../components/NavBar/NavBar";
 import {Divider, Tabs} from "antd";
 import { useParams } from "react-router-dom";
 import CRUD_Table from "../components/Table/CRUD_Table";
+import Login from "../components/Login/Login";
+import {useState} from 'react';
+import axios from "axios";
 import {DeleteTwoTone, EditTwoTone} from "@ant-design/icons";
 import "./detailsHeader.css";
 
@@ -125,6 +128,27 @@ const WorkerDetails = () => {
     ];
     const acumulatedSalaryTableID = 'AcumulatedSalaryTable';
     const acumulatedSalarySearchboxID = 'AcumulatedSalarySearchbox';
+
+    const [loggedIn] = useState(()=>{
+        if (localStorage['token'] == null)
+            return false;
+
+        let respOk = true;
+
+        const JWT = JSON.parse(localStorage['token']);
+
+        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
+                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
+                .catch((err) => {
+                respOk = false;
+                console.log(err.response);
+            });
+
+        return respOk;
+    });
+         
+    if (!loggedIn)
+        return <Login />;
 
     return (
         <div>
