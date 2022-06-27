@@ -231,7 +231,34 @@ const CourseDetails = () => {
     return (
         <div>
             <NavBar></NavBar>
-            <p>Detalles del curso</p>
+            <Divider className={"detailsHeader"}>
+                <strong>Nombre</strong> <Divider type="vertical" />
+                Tipo <Divider type="vertical" />
+                Precio <Divider type="vertical" />
+                <EditTwoTone /> <Divider type="vertical" />
+                <DeleteTwoTone/>
+            </Divider>
+            <Tabs centered defaultActiveKey="1" onChange={onChange} >
+                <TabPane tab="Profesores" key="1">
+                    <CRUD_Table title={"Profesores"}
+                                columns={teachersColumns}
+                                operations={["edit","delete","add","details"]}
+                                url={"https://localhost:5001/api/TeacherCourseRelation"}
+                                tableID={teachersTableID}
+                                searchboxID={teachersSearchboxID}
+                                link={"../WorkerDetails"}
+                    ></CRUD_Table>
+                </TabPane>
+                <TabPane tab="Grupos" key="2">
+                    <CRUD_Table title={"Grupos"}
+                                columns={groupsColumns}
+                                operations={["edit","delete","add","details"]}
+                                url={"https://localhost:5001/api/CourseGroups"}
+                                tableID={groupsTableID}
+                                searchboxID={groupsSearchboxID}
+                    ></CRUD_Table>
+                </TabPane>
+            </Tabs>
         </div>
     );
 };
