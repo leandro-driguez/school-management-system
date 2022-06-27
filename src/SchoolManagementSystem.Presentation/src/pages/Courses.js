@@ -27,7 +27,7 @@ const Courses = () => {
     });
          
     if (!loggedIn)
-        return <Login />;
+        window.location.replace("https://localhost:3000/");
 
     const columns = [
         {
