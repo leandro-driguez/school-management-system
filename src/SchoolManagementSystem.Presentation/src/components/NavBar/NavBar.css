@@ -12,14 +12,8 @@
     float: right;
 }
 
-.logout {
-    height: 40px;
-    width: auto;
-    margin: 10px;
-    float: right;
-}
-
 hr {
+    margin-top: 0px;
     clear: both;
     color: #c50000;
     border: 1px solid #c50000;
