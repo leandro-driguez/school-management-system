@@ -15,44 +15,40 @@ namespace SchoolManagementSystem.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class DoStudentPaymentController : Controller
+public class DebtorsController : Controller
 {    
     public readonly IDoStudentPaymentService _servicePayment;
     public readonly IMapper mapper;
 
-    public DoStudentPaymentController(IDoStudentPaymentService servicePayment,
+    public DebtorsController(IDoStudentPaymentService servicePayment,
         IMapper mapper)
-    {        
+    {
         _servicePayment = servicePayment;
         this.mapper = mapper;
-    }
+    }    
 
     [HttpGet]
-    public virtual IActionResult GetAll([FromQuery] string id)
+    public IActionResult GetAll()
     {
-        //return Ok("Hola");        
-        return Ok( GroupCurseNoPaid(id).ToList());
-        //return Ok(new IList[] { q3.ToList(), q4.ToList(), q5.ToList() });
-    }
-
-    [HttpPost]
-    public IActionResult Post([FromForm] StudentIdGroupIdDto dto)
-    {
-        var groupCurseNoPaid = (from g in GroupCurseNoPaid(dto.StudentId)
-                                where g.GroupId == dto.GroupId
-                                select g)
-                                .FirstOrDefault();
-        if (groupCurseNoPaid == null)
+        List<DebtorDto> debtors = new List<DebtorDto>();
+        foreach (Student student in _servicePayment.GetStudentRepo().Query())
         {
-            return NotFound(dto);
+            foreach(var payment in GroupCurseNoPaid(student.Id))
+            {
+                debtors.Add(new DebtorDto
+                {
+                    GroupId = payment.GroupId,
+                    GroupName = payment.GroupName,
+                    IDCardNo = student.IDCardNo,
+                    StudentId = student.Id,
+                    StudentName = student.Name,
+                    StudentLastName = student.LastName,
+                    Debt = payment.CoursePrice,
+                    Dealy = (DateTime.Now.Date - payment.DatePaid).Days
+                });
+            }
         }
-        groupCurseNoPaid.DatePaid = groupCurseNoPaid.DatePaid.Date.AddDays(30);
-        var record = _servicePayment.DoCoursePayment(groupCurseNoPaid.StudentId,
-                                        groupCurseNoPaid.GroupId,
-                                        groupCurseNoPaid.CourseId,
-                                        groupCurseNoPaid.DatePaid);
-        groupCurseNoPaid.Date = record.Date;
-        return Ok(groupCurseNoPaid);
+        return Ok(debtors);        
     }
 
     protected IQueryable<StudentGroupPaymentDto> GroupCurseNoPaid(string studentId)
@@ -91,7 +87,6 @@ public class DoStudentPaymentController : Controller
                      CourseGroupId = g.Select(r => r.CourseGroupId).FirstOrDefault(),
                      CourseGroupName = g.Select(r => r.CourseGroup.Name).FirstOrDefault(),
                      CourseGroupCourseId = g.Select(r => r.CourseGroupCourseId).FirstOrDefault(),
-                     CoursePrice = g.Select(r => r.CourseGroup.Course.Price).FirstOrDefault(),
                      DatePaid = g.Max(r => r.DatePaid),
                      Date = g.Max(r => r.Date),
                  };
@@ -117,10 +112,10 @@ public class DoStudentPaymentController : Controller
                      GroupId = record.CourseGroupId,
                      GroupName = record.CourseGroupName,
                      CourseId = record.CourseGroupCourseId,
-                     CoursePrice = record.CoursePrice,
+                     CoursePrice = relation.CourseGroup.Course.Price,
                      DatePaid = record.DatePaid,
                      EndDate = relation.EndDate,
-                     Date = record.Date,                     
+                     Date = record.Date,
                  };
         var l4 = q4.ToList();
         // Tomando solo los pagos pendientes
