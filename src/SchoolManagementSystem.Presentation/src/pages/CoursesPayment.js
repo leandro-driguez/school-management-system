@@ -1,10 +1,13 @@
-import React, {useState,useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import NavBar from "../components/NavBar/NavBar";
+import {Collapse} from "antd";
+import CRUD_Table from "../components/Table/CRUD_Table";
 
 const CoursesPayment = () => {
-    return(
+    return (
         <div>
-        <NavBar></NavBar>
+            <NavBar></NavBar>
+
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
+import CRUD_Table from "../components/Table/CRUD_Table";
 
 const Debtors = () => {
     const columns = [
@@ -42,15 +43,33 @@ const Debtors = () => {
             sorter: {
                 compare: (a, b) => a.debt.localeCompare(b.debt)
             },
-        }
+        },
+        {
+            title: 'Retraso',
+            dataIndex: 'dealy',
+            dataType: 'text',
+            sorter: {
+                compare: (a, b) => a.dealy.localeCompare(b.dealy)
+            },
+        },
     ];
 
-    const tableID = 'CoursesTable';
-    const searchboxID = 'CoursesSearchbox';
+    const tableID = 'debtorsTable';
+    const searchboxID = 'debtorsSearchbox';
 
     return (
         <div>
             <NavBar></NavBar>
+            <CRUD_Table
+                title={"Estudiantes"}
+                columns={columns}
+                operations={["details"]}
+                url={"https://localhost:5001/api/Students"}
+                tableID={tableID}
+                searchboxID={searchboxID}
+                link={"../StudentDetails"}
+            >
+            </CRUD_Table>
         </div>
     );
 };
