@@ -16,5 +16,7 @@ public class StudentGroupPaymentDto
     [Required]
     public DateTime DatePaid { get; set; }
     [Required]
+    public DateTime EndDate { get; set; }
+    [Required]
     public DateTime Date { get; set; }
 }

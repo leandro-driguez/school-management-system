@@ -51,7 +51,8 @@ public class DoStudentPaymentController : Controller
                                         groupCurseNoPaid.GroupId,
                                         groupCurseNoPaid.CourseId,
                                         groupCurseNoPaid.DatePaid);
-        return Ok(record);
+        groupCurseNoPaid.Date = record.Date;
+        return Ok(groupCurseNoPaid);
     }
 
     private IQueryable<StudentGroupPaymentDto> GroupCurseNoPaid(string studentId)
@@ -72,12 +73,13 @@ public class DoStudentPaymentController : Controller
                      GroupId = relation.CourseGroupId,
                      CourseId = relation.CourseGroupCourseId,
                      DatePaid = relation.CourseGroup.StartDate,
+                     EndDate = relation.CourseGroup.EndDate,
                      Date = relation.StartDate,
                  };
         var l2 = q2.ToList();
         // de los registros de pago del estudiante determinado y su grupo de clase
         // agrupar los registros por el grupo de clase
-        // tomando la última fecha de pago
+        // tomando la última fecha de pago, y el último mes pagado
         var q3 = from record in _servicePayment.GetStudentPaymentRecordPerCourseGroupRepo().Query()
                  where record.StudentId == studentId
                  group record by record.CourseGroupId into g
@@ -90,6 +92,8 @@ public class DoStudentPaymentController : Controller
                      Date = g.Max(r => r.Date),
                  };
         var l3 = q3.ToList();
+        // haciendo un JOIN de la tabla anterior con la tabla de Relaciones
+        // para obtener la fecha de fin
         var q4 = from record in q3
                  join relation in _servicePayment.GetStudentCourseGroupRelationRepo().Query()
                  on new
@@ -103,27 +107,23 @@ public class DoStudentPaymentController : Controller
                      relation.CourseGroupId,
                      relation.CourseGroupCourseId,
                  }
-                 select new
+                 select new StudentGroupPaymentDto
                  {
                      StudentId = record.StudentId,
-                     CourseGroupId = record.CourseGroupId,
-                     CourseGroupCourseId = record.CourseGroupCourseId,
+                     GroupId = record.CourseGroupId,
+                     CourseId = record.CourseGroupCourseId,
                      DatePaid = record.DatePaid,
                      EndDate = relation.EndDate,
                      Date = record.Date,
                  };
         var l4 = q4.ToList();
+        // Tomando solo los pagos pendientes
         var q5 = from r in q4
                  where r.DatePaid.Date < r.EndDate.Date
-                 select new StudentGroupPaymentDto
-                 {
-                     StudentId = r.StudentId,
-                     GroupId = r.CourseGroupId,
-                     CourseId = r.CourseGroupCourseId,
-                     DatePaid = r.DatePaid,
-                     Date = r.Date
-                 };
+                 select r;
         var l5 = q5.ToList();
+        // Se retorna los cursos que nunca se han pagado
+        // junto a los cursos que se pagaron al menos una vez
         return q2.Union(q5);
     }
 }
