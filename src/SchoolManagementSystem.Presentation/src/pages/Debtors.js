@@ -64,7 +64,7 @@ const Debtors = () => {
                 title={"Estudiantes"}
                 columns={columns}
                 operations={["details"]}
-                url={"https://localhost:5001/api/Students"}
+                url={"https://localhost:5001/api/Debtors"}
                 tableID={tableID}
                 searchboxID={searchboxID}
                 link={"../StudentDetails"}
