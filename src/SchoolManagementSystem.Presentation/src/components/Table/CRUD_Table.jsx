@@ -270,7 +270,7 @@ const CRUD_Table = (props) => {
     };
 
     const Forms = ()=>{
-        var newItem = {};
+        var newItem = { key: "string" };
 
         const updateValue = (header, e) => {
             newItem[header.dataIndex] = e.target.value;
@@ -291,7 +291,7 @@ const CRUD_Table = (props) => {
                     <Button type="primary"
                             onClick={ async ()=>{ 
 
-                                await axios.post(props.url, newItem);
+                                await axios.post(props.url, newItem).catch((resp) => console.log(resp.data));
 
                                 getData();
 

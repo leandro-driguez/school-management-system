@@ -71,12 +71,12 @@ const Workers = () => {
         },
         {
             title: 'Carnet ID',
-            dataIndex: 'key',
+            dataIndex: 'idCardNo',
             width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
-                compare: (a, b) => a.key - b.key
+                compare: (a, b) => a.idCardNo.localeCompare(b.idCardNo)
             },
             rules: [
                 {
