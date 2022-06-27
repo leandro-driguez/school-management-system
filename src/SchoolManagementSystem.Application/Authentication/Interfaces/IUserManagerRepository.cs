@@ -1,7 +1,7 @@
 
 using Microsoft.AspNetCore.Identity;
 
-namespace SchoolManagementSystem.Infrastructure.Repositories.Identity;
+namespace SchoolManagementSystem.Application.Authenticate.Interfaces;
 
 public interface IUserManagerRepository
 {

@@ -1,8 +1,8 @@
 
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.Application.Authenticate.Interfaces;
 
-namespace SchoolManagementSystem.Infrastructure.Repositories.Identity;
+namespace SchoolManagementSystem.Application.Authenticate.Repositories;
 
 public class UserManagerRepository : IUserManagerRepository
 {
