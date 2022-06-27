@@ -17,28 +17,6 @@ const onChange = (key) => {
 
 const StudentDetails = () => {
 
-    const [loggedIn] = useState(()=>{
-        if (localStorage['token'] == null)
-            return false;
-
-        let respOk = true;
-
-        const JWT = JSON.parse(localStorage['token']);
-
-        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
-                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
-                .catch((err) => {
-                respOk = false;
-                console.log(err.response);
-            });
-
-        return respOk;
-    });
-         
-    if (!loggedIn)
-        return <Login />;
-
-
     const { id } = useParams();
 
     const currentCoursesColumns = [
@@ -137,8 +115,30 @@ const StudentDetails = () => {
             },
         }
     ];
+    
     const paymentRecordTableID = 'paymentRecordTable';
     const paymentRecordSearchboxID = 'paymentRecordSearchbox';
+
+    const [loggedIn] = useState(()=>{
+        if (localStorage['token'] == null)
+            return false;
+
+        let respOk = true;
+
+        const JWT = JSON.parse(localStorage['token']);
+
+        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
+                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
+                .catch((err) => {
+                respOk = false;
+                console.log(err.response);
+            });
+
+        return respOk;
+    });
+         
+    if (!loggedIn)
+        return <Login />;
 
     return (
         <div>

@@ -1,9 +1,6 @@
 import React from "react";
-import {useContext, useEffect, useRef, createContext, useState} from 'react';
 import NavBar from "../components/NavBar/NavBar";
-import Login from "../components/Login/Login";
 import {useState} from 'react';
-import axios from "axios";
 import "./collapse.css";
 import CRUD_Table from "../components/Table/CRUD_Table";
 import {Button, Collapse, Modal} from "antd";

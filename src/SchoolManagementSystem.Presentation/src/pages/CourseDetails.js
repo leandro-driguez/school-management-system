@@ -5,16 +5,15 @@ import { useParams } from "react-router-dom";
 import CRUD_Table from "../components/Table/CRUD_Table";
 import "./detailsHeader.css";
 import {DeleteTwoTone, EditTwoTone} from "@ant-design/icons";
+import Login from "../components/Login/Login";
+import {useState} from 'react';
+import axios from "axios";
 
 const { TabPane } = Tabs;
 
 const onChange = (key) => {
     console.log(key);
 };
-import Login from "../components/Login/Login";
-import {useState} from 'react';
-import axios from "axios";
-
 
 const CourseDetails = () => {
 
