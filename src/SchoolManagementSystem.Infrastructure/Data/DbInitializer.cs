@@ -119,6 +119,7 @@ public static class DbInitializer
     static CourseGroup algebralineal = new CourseGroup{
         Name = "AlgebraLineal",
         Course = algebra,
+        Teacher = juan,
         CourseId = algebra.Id,
         Capacity = 30,
         StartDate = new DateTime(2020,07,01),
@@ -128,6 +129,7 @@ public static class DbInitializer
         Name = "Algebra2",
         Course = algebra,
         CourseId = algebra.Id,
+        Teacher = juan,
         Capacity = 30,
         StartDate = new DateTime(2020,10,02),
         EndDate = new DateTime(2020,12,02),
@@ -143,6 +145,7 @@ public static class DbInitializer
     static CourseGroup historiaDelArte = new CourseGroup{
         Name = "historiaDA",
         Course = historia,
+        Teacher = carmen,
         CourseId = historia.Id,
         Capacity = 30,
         StartDate = new DateTime(2022,01,01),
@@ -909,7 +912,7 @@ public static class DbInitializer
                 StartDate = algebralineal.StartDate,
                 EndDate = algebralineal.EndDate,
                 Teacher = juan,
-                TeacherId = juan.Id,
+                // TeacherId = juan.Id,
                 CourseGroupCourseId = algebra.Id
             },
             new TeacherCourseGroupRelation
@@ -919,7 +922,7 @@ public static class DbInitializer
                 StartDate = algebra2.StartDate,
                 EndDate = algebra2.EndDate,
                 Teacher = juan,
-                TeacherId = juan.Id,
+                // TeacherId = juan.Id,
                 CourseGroupCourseId = algebra.Id
             },
             new TeacherCourseGroupRelation
@@ -929,7 +932,7 @@ public static class DbInitializer
                 StartDate = historiaDelArte.StartDate,
                 EndDate = historiaDelArte.EndDate,
                 Teacher = carmen,
-                TeacherId = carmen.Id,
+                // TeacherId = carmen.Id,
                 CourseGroupCourseId = historia.Id
             },
         };
