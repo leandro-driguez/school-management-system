@@ -11,4 +11,9 @@ public class CourseGroupRepository : CrudRepository<CourseGroup>, ICourseGroupRe
     {
 
     }
+
+    public CourseGroup GetById(string id)
+    {
+        return Query().Where(g => g.Id == id).FirstOrDefault();
+    }
 }

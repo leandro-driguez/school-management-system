@@ -9,6 +9,11 @@ public class StudentRepository : CrudRepository<Student>, IStudentRepository
 {
     public StudentRepository(IObjectContext context) : base(context)
     {
+        
+    }
 
+    public Student GetById(string id)
+    {
+        return Query().Where(s => s.Id == id).FirstOrDefault();
     }
 }
