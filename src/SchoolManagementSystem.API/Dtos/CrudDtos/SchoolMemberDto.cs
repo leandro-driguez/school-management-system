@@ -31,9 +31,9 @@ public class SchoolMemberDto : IDto
         public string Address { get; set; }
         
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-                       ApplyFormatInEditMode = true)]
+        // [DataType(DataType.Date)]
+        // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
+        //                ApplyFormatInEditMode = true)]
         [Display(Name = "Date Becomed Member")]
-        public DateTime DateBecomedMember { get; set; }
+        public string DateBecomedMember { get; set; }
 }
