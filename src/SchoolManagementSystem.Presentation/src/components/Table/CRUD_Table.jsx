@@ -278,7 +278,7 @@ const CRUD_Table = (props) => {
 
         return (
             <Modal className={"editModal"}
-                   title={"Añadir nueva elemento a la tabla."}
+                   title={"Añadir nuevo elemento a la tabla"}
                    visible={isEditingModalVisible}
                    centered={true}
                    onCancel={() => setIsEditingModalVisible(false)}

@@ -32,7 +32,6 @@ const Students = () => {
         {
             title: 'Nombre',
             dataIndex: 'name',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -52,7 +51,6 @@ const Students = () => {
         {
             title: 'Apellidos',
             dataIndex: 'lastName',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -72,7 +70,6 @@ const Students = () => {
         {
             title: 'Carnet ID',
             dataIndex: 'key',
-            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
@@ -92,7 +89,6 @@ const Students = () => {
         {
             title: 'Teléfono',
             dataIndex: 'phoneNumber',
-            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
@@ -112,7 +108,6 @@ const Students = () => {
         {
             title: 'Dirección',
             dataIndex: 'address',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -132,7 +127,6 @@ const Students = () => {
         {
             title: 'Grado de escolaridad',
             dataIndex: 'scholarityLevel',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -152,7 +146,6 @@ const Students = () => {
         {
             title: 'Fecha de inicio en la sede',
             dataIndex: 'dateBecomedMember',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -172,7 +165,6 @@ const Students = () => {
         {
             title: 'Fondos',
             dataIndex: 'founds',
-            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
@@ -192,7 +184,6 @@ const Students = () => {
         {
             title: 'Nombre del tutor',
             dataIndex: 'tuitorName',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -212,7 +203,6 @@ const Students = () => {
         {
             title: 'Teléfono del tutor',
             dataIndex: 'tuitorPhoneNumber',
-            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {

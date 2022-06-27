@@ -26,10 +26,8 @@ public class PositionSalaryController : Controller
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
-        var Id = new SchoolMember{Id = id}.Id;
-
         var _query = _service.Query()
-            .Where(c=>c.WorkerId == Id)
+            .Where(c=>c.WorkerId == id)
             .Include(c => c.Worker)
             .Include(c => c.Position);
         

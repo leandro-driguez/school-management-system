@@ -126,7 +126,7 @@ a:hover {
     margin-top: 0.5%;
     border-collapse: collapse;
     border-radius: 1em;
-    overflow: scroll;
+    overflow: auto;
     overflow-y: hidden;
     width: 90%;
     align-items: center;
@@ -146,6 +146,22 @@ a:hover {
 
 .ant-table-pagination > .ant-pagination-item-active{
     color: #c50000;
+}
+
+.ant-table::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+.ant-table::-webkit-scrollbar-track {
+    background-color: #ffb5b53b;
+    border-radius: 100px;
+}
+
+.ant-table::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    border: 0px solid transparent;
+    background: linear-gradient(90deg, #ffb79d, rgb(218, 26, 26));
 }
 
 .editable-row .ant-form-item-explain {
