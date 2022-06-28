@@ -28,7 +28,7 @@ RangePicker.propTypes = {
 
 var date = new Date("2016-01-04 23:34");
 
-var formattedDate = format(date, "yyyy-MM-dd HH:mm");
+var formattedDate = format(date, "d/M/yyyy HH:mm:ss a");
 
 console.log(formattedDate);
 
@@ -37,16 +37,16 @@ const Schedules = () => {
     const [isEventModalVisible, setIsEventModalVisible] = useState(false);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
+    //Fields to add
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
+    //dropdown
     const [classrooms, setClassrooms] = useState([]);
 
     const [classroomSelected, setClassroomSelected] = useState();
-
-    console.log(`selected ${classroomSelected}`);
 
     //initial events
     const events = [
@@ -98,7 +98,7 @@ const Schedules = () => {
         const id = data.length;
         const newData = [{eventId:id, title: title, description: description, startTime: startDate, endTime: endDate}];
         console.log(newData);
-        setData([...data, newData]);
+        setData([...events, newData]);
     };
 
     //read
@@ -119,8 +119,8 @@ const Schedules = () => {
     };
 
     const handleChangeDebut = (range) => {
-        setStartDate(new Date(range[0].format("yyyy-MM-DD HH:mm")).toString());
-        setEndDate(new Date(range[1].format("yyyy-MM-DD HH:mm")).toString());
+        setStartDate(new Date(range[0].format("d/M/yyyy hh:mm:ss A")).toString());
+        setEndDate(new Date(range[1].format("d/M/yyyy hh:mm:ss A")).toString());
     }
 
     return (
@@ -193,9 +193,9 @@ const Schedules = () => {
                                 style={{marginBottom: "13px"}}
                                 visible={false}
                                 showTime={{
-                                    format: 'HH:mm',
+                                    format: 'hh:mm:ss A',
                                 }}
-                                format="YYYY-MM-DD HH:mm"
+                                format="d/M/yyyy hh:mm:ss A"
                                 onChange={handleChangeDebut}
                                 //onOk={onOk}
                             />
@@ -236,9 +236,9 @@ const Schedules = () => {
                             style={{marginBottom: "13px"}}
                             visible={false}
                             showTime={{
-                                format: 'HH:mm',
+                                format: 'hh:mm:ss A',
                             }}
-                            format="YYYY-MM-DD HH:mm"
+                            format="d/M/yyyy hh:mm:ss A"
                             defaultValue={[
                                 moment(currentEvent.startTime.toString()),
                                 moment(currentEvent.endTime.toString())]}
