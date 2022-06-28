@@ -11,24 +11,31 @@ using AutoMapper;
 namespace SchoolManagementSystem.API.Controllers.Records;
 
 [Route("api/[controller]")]
-public class WorkerPaymentGetSalaryPerCourse : Controller
+public class WorkerPaymentGetSalaryPerCourseController : Controller
 {
     IDoWorkersPaymentService _service;
     IMapper mapper;
-    public WorkerPaymentGetSalaryPerCourse(IDoWorkersPaymentService service, IMapper mapper)
+    public WorkerPaymentGetSalaryPerCourseController(IDoWorkersPaymentService service, IMapper mapper)
     {
         this.mapper = mapper;
         _service = service;
     }
 
-    // [HttpGet("{id}")]
-    // public IActionResult Get(string id)
-    // {
-    //     var worker = _service.Query().SingleOrDefault(c => c.Id == id);
-    //     if (worker == null)
-    //         NotFound();
+    [HttpGet("{id}")]
+    public IActionResult Get(string id)
+    {
+        string[] ids = id.Split("$$");
+        var workerid = ids[0];var courseid = ids[1];
 
-    //     return Ok(_service.GetWorkerPaymentInfo(id).InfoByDate[0].InfoByPosition.Select(mapper.Map<InfoByPositionDto>));
-    // }
+        var worker = _service.Query().SingleOrDefault(c => c.Id == workerid);
+        if (worker == null)
+            NotFound();
+
+        return Ok(_service.GetWorkerPaymentInfo(workerid).InfoByDate[0]
+                    .InfoByCourse
+                    .Single(c => c.CourseId == courseid)
+                    .InfoByCourseGroup
+                    .Select(mapper.Map<InfoByCourseGroupDto>));
+    }
 
 }

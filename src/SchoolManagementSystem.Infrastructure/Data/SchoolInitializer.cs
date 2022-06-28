@@ -157,6 +157,7 @@ public static class SchoolInitializer
     #endregion
     public static void Initialize(SchoolContext context) 
     {
+
         // Entities
         if (!context.AdditionalServices.Any())
         {
@@ -441,11 +442,11 @@ public static class SchoolInitializer
         return new Schedule[3]
         {
             new Schedule 
-                { Duration = new TimeOnly(12), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Friday },
+                { EndTime = new DateTime(2020,08,09), StartTime = new DateTime(2020,08,08) },
             new Schedule 
-                { Duration = new TimeOnly(15), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Monday },
+                { EndTime = new DateTime(2020,08,10), StartTime = new DateTime(2020,08,9) },
             new Schedule
-                { Duration = new TimeOnly(20), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Thursday }
+                { EndTime = new DateTime(2020,08,11), StartTime = new DateTime(2020,08,10) },
         };
     }
     
@@ -474,17 +475,29 @@ public static class SchoolInitializer
             new Shift
             {
                 Classroom = new Classroom { Name = "Aula 1", Capacity = 30 }, Schedule = new Schedule
-                    { Duration = new TimeOnly(12), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Friday }
+                    { EndTime = new DateTime(2022,05,29,14,30,0), StartTime = new (2022,05,29,13,0,0),
+                    //  DayOfWeek = DayOfWeek.Friday 
+                    }
+                ,Group = algebra2
+                ,Description = "Algebra 2 - Teacher : Juan Rodriguez"
             },
             new Shift
             {
                 Classroom = new Classroom { Name = "Aula 2", Capacity = 20 }, Schedule = new Schedule
-                    { Duration = new TimeOnly(14), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Monday }
+                    { EndTime = new DateTime(2022,05,27,12,30,0), StartTime = new (2022,05,27,11,0,0), 
+                    // DayOfWeek = DayOfWeek.Monday 
+                    }
+                ,Description = "Algebra lineal - Teacher : Juan Rodriguez"
+                ,Group = algebralineal
             },
             new Shift
             {
                 Classroom = new Classroom { Name = "Aula 3", Capacity = 16 }, Schedule = new Schedule
-                    { Duration = new TimeOnly(15), StartTime = new TimeOnly(0), DayOfWeek = DayOfWeek.Tuesday }
+                    { EndTime = new DateTime(2022,05,28,13,55,0), StartTime = new (2022,05,28,12,25,0), 
+                    // DayOfWeek = DayOfWeek.Tuesday 
+                    }
+                ,Description = "Historia del Arte - Teacher : Carmen"
+                ,Group = historiaDelArte
             }
     
         };

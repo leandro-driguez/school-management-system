@@ -9,16 +9,16 @@ namespace SchoolManagementSystem.Domain.Entities
         // [DataType(DataType.Time)]
         // [DisplayFormat(DataFormatString = "{0:hh-mm-ss}",
         //     ApplyFormatInEditMode = true)]
-        public TimeOnly Duration { get; set; }
+        public DateTime EndTime { get; set; }
 
         // [Required]
         // [DataType(DataType.Time)]
         // [DisplayFormat(DataFormatString = "{0:hh-mm-ss}",
         //     ApplyFormatInEditMode = true)]
-        public TimeOnly StartTime{ get; set; }
+        public DateTime StartTime{ get; set; }
         
         // [Required]
-        public DayOfWeek DayOfWeek { get; set; }
+        // public DayOfWeek DayOfWeek { get; set; }
         
         public IList<Shift> Shifts { get; set; }
     }

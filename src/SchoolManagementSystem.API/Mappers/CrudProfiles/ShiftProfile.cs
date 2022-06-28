@@ -11,5 +11,7 @@ public class ShiftProfile : Profile
     {
         CreateMap<Shift, ShiftDto>();
         CreateMap<ShiftDto, Shift>();
+        CreateMap<Shift, ShiftsDto>();
+        CreateMap<ShiftsDto, Shift>();
     }
 }
