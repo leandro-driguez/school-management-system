@@ -42,7 +42,7 @@ const SalaryPayment = () => {
         },
         {
             title: 'Importe',
-            dataIndex: 'income',
+            dataIndex: 'fixSalaryPosition',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.income.localeCompare(b.income)
@@ -129,7 +129,7 @@ const SalaryPayment = () => {
                     <CRUD_Table title={""}
                                 columns={fixedSalaryPaymentColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/TeacherCourseRelation" + `/${workerSelected}`}
+                                url={"https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}`}
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
                     ></CRUD_Table>
