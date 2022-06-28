@@ -28,6 +28,8 @@ public class DebtorsNotificationController : Controller
     [HttpGet]
     public IActionResult GetDebtorsAmount()
     {
+        if(DebtorsStaticClass.DebtorsAmount == 0)
+            return NotFound();
         return Ok (new {
                 Title = "There are some debtors.",
                 Descrpition = $"There are {DebtorsStaticClass.DebtorsAmount} students that did not have paid some courses.",
