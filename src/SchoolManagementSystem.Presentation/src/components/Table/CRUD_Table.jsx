@@ -351,8 +351,6 @@ const CRUD_Table = (props) => {
                     </a>
                 </div>
 
-
-
                 <div className="box">
                     <p><strong>Total:</strong> {data.length}</p>
                 </div>
