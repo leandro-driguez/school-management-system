@@ -22,7 +22,7 @@ class DebtorNotificationService
         // List<DebtorDto> debtors = new List<DebtorDto>();
         foreach (Student student in _servicePayment.GetStudentRepo().Query())
         {
-            if(DebtorsController.GroupCurseNoPaid(_servicePayment,student.Id).Count() > 0)
+            if(DebtorsController.GroupCurseNoPaid(_servicePayment,student.Id).Where(s => DateTime.Now.Date > s.DatePaid.Date).Count() > 0)
                 count +=1;
             // foreach(var payment in DebtorsController.GroupCurseNoPaid(_servicePayment,student.Id))
             // {
