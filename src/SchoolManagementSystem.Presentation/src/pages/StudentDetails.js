@@ -92,10 +92,10 @@ const StudentDetails = () => {
     const paymentRecordColumns = [
         {
             title: 'Fecha',
-            dataIndex: 'date',
+            dataIndex: 'datePaid',
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.date.localeCompare(b.date)
+                compare: (a, b) => a.datePaid.localeCompare(b.datePaid)
             },
         },
         {
@@ -108,10 +108,10 @@ const StudentDetails = () => {
         },
         {
             title: 'Grupo',
-            dataIndex: 'group',
-            dataType: 'number',
+            dataIndex: 'courseName',
+            dataType: 'text',
             sorter: {
-                compare: (a, b) => a.group - b.group
+                compare: (a, b) => a.courseName.localeCompare(b.courseName)
             },
         }
     ];
@@ -171,7 +171,7 @@ const StudentDetails = () => {
                     <CRUD_Table title={"Histórico de pago"}
                                 columns={paymentRecordColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/Classrooms"}
+                                url={"https://localhost:5001/api/StudentPayCourseRecord/" + `${id}`}
                                 tableID={paymentRecordTableID}
                                 searchboxID={paymentRecordSearchboxID}
                     ></CRUD_Table>
