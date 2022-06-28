@@ -1,29 +1,35 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CRUD_Table from "../components/Table/CRUD_Table";
+import Login from "../components/Login/Login";
+import {useState} from 'react';
+import axios from "axios";
+
 
 const Courses = () => {
+
+    const [loggedIn] = useState(()=>{
+        if (localStorage['token'] == null)
+            return false;
+
+        let respOk = true;
+
+        const JWT = JSON.parse(localStorage['token']);
+
+        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
+                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
+                .catch((err) => {
+                respOk = false;
+                console.log(err.response);
+            });
+
+        return respOk;
+    });
+         
+    if (!loggedIn)
+        window.location.replace("https://localhost:3000/");
+
     const columns = [
-        {
-            title: 'Tipo',
-            dataIndex: 'type',
-            width: '15%',
-            editable: true,
-            dataType: 'text',
-            sorter: {
-                compare: (a, b) => a.type.localeCompare(b.type)
-            },
-            rules: [
-                {
-                    required: true,
-                    message: "Introduzca el tipo de curso.",
-                },
-                {
-                    whitespace: true,
-                    message: "Introduzca el tipo de curso."
-                }
-            ],
-        },
         {
             title: 'Nombre',
             dataIndex: 'name',
@@ -43,6 +49,26 @@ const Courses = () => {
                     message: "Introduzca la capacidad."
                 }
             ]
+        },
+        {
+            title: 'Tipo',
+            dataIndex: 'type',
+            width: '15%',
+            editable: true,
+            dataType: 'text',
+            sorter: {
+                compare: (a, b) => a.type.localeCompare(b.type)
+            },
+            rules: [
+                {
+                    required: true,
+                    message: "Introduzca el tipo de curso.",
+                },
+                {
+                    whitespace: true,
+                    message: "Introduzca el tipo de curso."
+                }
+            ],
         },
         {
             title: 'Precio',
@@ -80,6 +106,7 @@ const Courses = () => {
                 tableID={tableID}
                 searchboxID={searchboxID}
                 link={"../CourseDetails"}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

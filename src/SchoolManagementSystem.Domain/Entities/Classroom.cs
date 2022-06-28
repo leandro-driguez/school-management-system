@@ -10,4 +10,9 @@ public class Classroom : Entity
     public int Capacity { get; set; }
     
     public IList<Shift> Shifts { get; set; }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }

@@ -10,6 +10,6 @@ public class StudentPaymentRecordPerCourseGroupConfiguration
     public void Configure(EntityTypeBuilder<StudentPaymentRecordPerCourseGroup> builder)
     {
         builder.HasKey(s 
-            => new { s.StudentId, s.CourseGroupId, s.CourseGroupCourseId, s.Date });
+            => new { s.StudentId, s.CourseGroupId, s.CourseGroupCourseId, s.Date, s.DatePaid });        
     }
 }

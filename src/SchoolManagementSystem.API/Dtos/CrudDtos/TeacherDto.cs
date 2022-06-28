@@ -1,36 +1,39 @@
 
 using System.ComponentModel.DataAnnotations;
-using SchoolManagementSystem.Domain.Entities;
+using System.Text.Json.Serialization;
 
 namespace SchoolManagementSystem.API.Dtos;
 
 public class TeacherDto : IDto
 {
-    private protected string _id;
-
     [Required]
     [StringLength(11)]
-    public string Id { get; set; }
+    [JsonPropertyName("teacherIDCardNo")]
+    public string IDCardNo { get; set; }
+
+    [Required]
+    [JsonPropertyName("key")]
+    public string Id {get; set;}
 
     [Required]
     [MaxLength(20)]
     public string Name { get; set; }
-
+    
     [Required]
     [MaxLength(30)]
     public string LastName { get; set; }
-
+    
     [Required]
-    public int PhoneNumber { get; set; }
-
+    public int PhoneNumber{ get; set; }
+    
     [Required]
-    [MaxLength(50)]
+    [MaxLength(100)]
     public string Address { get; set; }
-
+    
     [Required]
-    [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
-                   ApplyFormatInEditMode = true)]
+    // [DataType(DataType.Date)]
+    // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
+    //                ApplyFormatInEditMode = true)]
     [Display(Name = "Date Becomed Member")]
-    public DateTime DateBecomedMember { get; set; }
+    public string DateBecomedMember { get; set; }
 }

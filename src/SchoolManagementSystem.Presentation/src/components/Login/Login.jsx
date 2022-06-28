@@ -1,9 +1,30 @@
 import React from "react";
 import logo from "./images/dclase_icon.ico";
 import './Login.css';
-import {ArrowRightOutlined, LockOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
+import {ArrowRightOutlined, LockOutlined, MailOutlined, UserOutlined, LogoutOutlined} from "@ant-design/icons";
+import { useState } from "react";
+import Home from '../../pages/Home';
+import axios from "axios";
+import { useNavigationType } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function handleSubmit(){ 
+    
+        var resp = await axios.post('https://localhost:5001/api/Authenticate/login', 
+            { "username": username, "password": password })
+            .then(resp => { 
+                    localStorage.setItem('token', JSON.stringify(resp.data));
+                })
+                .catch((err) =>{
+                        // console.log(err.resp.data)
+                    });
+    }
+
     return(
         <div className="login_container">
             <div className="screen">
@@ -15,6 +36,7 @@ const Login = () => {
                                 type="text"
                                 className="login__input"
                                 placeholder="Usuario / correo"
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                         <div className="login__field">
@@ -23,12 +45,14 @@ const Login = () => {
                                 type="password"
                                 className="login__input"
                                 placeholder="Contraseña"
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <button className="button login__submit">
+                        <a href="http://localhost:3000/Home" className="button login__submit"
+                            onClick={handleSubmit()}>
                             <span className="button__text">Iniciar sesión</span>
-                            <i className="button__icon"> <ArrowRightOutlined /></i>
-                        </button>
+                            <i className="button__icon"> <ArrowRightOutlined /></i>                            
+                        </a>
                     </form>
                     <img className="social-login" src={logo} alt="dclase_icon"/>
                 </div>

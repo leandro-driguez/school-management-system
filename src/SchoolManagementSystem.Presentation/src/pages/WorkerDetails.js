@@ -1,8 +1,13 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
-import { Tabs } from "antd";
+import {Divider, Tabs} from "antd";
 import { useParams } from "react-router-dom";
 import CRUD_Table from "../components/Table/CRUD_Table";
+import Login from "../components/Login/Login";
+import {useState} from 'react';
+import axios from "axios";
+import {DeleteTwoTone, EditTwoTone} from "@ant-design/icons";
+import "./detailsHeader.css";
 
 const { TabPane } = Tabs;
 
@@ -47,7 +52,7 @@ const WorkerDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca salario",
+                    message: "Introduzca salario fijo",
                 }
             ]
         }
@@ -67,7 +72,7 @@ const WorkerDetails = () => {
         },
         {
             title: 'Salario Fijo',
-            dataIndex: 'fixedSalary',
+            dataIndex: 'totalFixSalary',
             width: '15%',
             dataType: 'number',
             sorter: {
@@ -76,7 +81,7 @@ const WorkerDetails = () => {
         },
         {
             title: 'Salario Porcentual',
-            dataIndex: 'percentageSalary',
+            dataIndex: 'totalCoursesPorcentualPayment',
             width: '15%',
             dataType: 'number',
             sorter: {
@@ -96,26 +101,60 @@ const WorkerDetails = () => {
     const acumulatedSalaryTableID = 'AcumulatedSalaryTable';
     const acumulatedSalarySearchboxID = 'AcumulatedSalarySearchbox';
 
+    const [loggedIn] = useState(()=>{
+        if (localStorage['token'] == null)
+            return false;
+
+        let respOk = true;
+
+        const JWT = JSON.parse(localStorage['token']);
+
+        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
+                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
+                .catch((err) => {
+                respOk = false;
+                console.log(err.response);
+            });
+
+        return respOk;
+    });
+         
+    if (!loggedIn)
+        window.location.replace("http://localhost:3000/");
+
     return (
         <div>
             <NavBar></NavBar>
+            <Divider className={"detailsHeader"}>
+                <strong>Nombre</strong> <Divider type="vertical" />
+                <strong>Apellidos</strong> <Divider type="vertical" />
+                CI <Divider type="vertical" />
+                Teléfono <Divider type="vertical" />
+                Dirección <Divider type="vertical" />
+                Fecha de inicio en la sede <Divider type="vertical" />
+                <EditTwoTone /> <Divider type="vertical" />
+                <DeleteTwoTone/>
+            </Divider>
             <Tabs centered defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="Cargos actuales" key="1">
                     <CRUD_Table title={"Cargos"}
                                 columns={positionsColumns}
                                 operations={["edit","delete","add"]}
-                                url={"https://localhost:5001/api/PositionSalary/" + `${id}`}
+                                url={"https://localhost:5001/api/WorkerPositionRelation/" + `${id}`}
                                 tableID={positionsTableID}
                                 searchboxID={positionsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </TabPane>
                 <TabPane tab="Control de salario" key="2">
                     <CRUD_Table title={"Salario Acumulado"}
                                 columns={acumulatedSalaryColumns}
-                                operations={[]}
-                                url={"https://localhost:5001/api/Classrooms"}
+                                operations={["details"]}
+                                url={"https://localhost:5001/api/ConsultWorkerSalary/"+ `${id}`}
                                 tableID={acumulatedSalaryTableID}
                                 searchboxID={acumulatedSalarySearchboxID}
+                                link={"../SalaryPaymentControlDetails"}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>

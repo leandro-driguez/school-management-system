@@ -1,8 +1,33 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CRUD_Table from "../components/Table/CRUD_Table";
+import Login from "../components/Login/Login";
+import {useState} from 'react';
+import axios from "axios";
 
 const Workers = () => {
+
+    const [loggedIn] = useState(()=>{
+        if (localStorage['token'] == null)
+            return false;
+
+        let respOk = true;
+
+        const JWT = JSON.parse(localStorage['token']);
+
+        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
+                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
+                .catch((err) => {
+                respOk = false;
+                console.log(err.response);
+            });
+
+        return respOk;
+    });
+         
+    if (!loggedIn)
+        window.location.replace("http://localhost:3000/");
+
     const columns = [
         {
             title: 'Nombre',
@@ -16,11 +41,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el nombre.",
+                    message: "Introduzca el nombre",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el nombre."
+                    message: "Introduzca el nombre"
                 }
             ]
         },
@@ -36,31 +61,31 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca los apellidos.",
+                    message: "Introduzca los apellidos",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca los apellidos."
+                    message: "Introduzca los apellidos"
                 }
             ]
         },
         {
             title: 'Carnet ID',
-            dataIndex: 'key',
+            dataIndex: 'idCardNo',
             width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
-                compare: (a, b) => a.key - b.key
+                compare: (a, b) => a.idCardNo.localeCompare(b.idCardNo)
             },
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el carnet ID.",
+                    message: "Introduzca el carnet de identidad",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el carnet ID."
+                    message: "Introduzca el carnet de identidad"
                 }
             ]
         },
@@ -76,11 +101,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el número de teléfono.",
+                    message: "Introduzca el número de teléfono",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el número de teléfono."
+                    message: "Introduzca el número de teléfono"
                 }
             ]
         },
@@ -96,11 +121,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca la dirección.",
+                    message: "Introduzca la dirección",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca la dirección."
+                    message: "Introduzca la dirección"
                 }
             ]
         },
@@ -116,11 +141,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca la fecha de inicio en la sede.",
+                    message: "Introduzca la fecha de inicio en la sede",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca la fecha de inicio en la sede."
+                    message: "Introduzca la fecha de inicio en la sede"
                 }
             ]
         },
@@ -140,6 +165,7 @@ const Workers = () => {
                 tableID={tableID}
                 searchboxID={searchboxID}
                 link={"../WorkerDetails"}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

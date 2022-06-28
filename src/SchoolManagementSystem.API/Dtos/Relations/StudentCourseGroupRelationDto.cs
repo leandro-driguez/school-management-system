@@ -14,6 +14,7 @@ public class StudentCourseGroupRelationDto
     [Required]
     public string CourseGroupCourseId { get; set; }
     public string CourseGroupCourseName{get; set; }
+    public string CourseType{get; set; }
 
     [Required]
     public string StudentId{get; set;}

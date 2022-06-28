@@ -1,13 +1,37 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CRUD_Table from "../components/Table/CRUD_Table";
+import Login from "../components/Login/Login";
+import {useState} from 'react';
+import axios from "axios";
 
 const Students = () => {
+
+    const [loggedIn] = useState(()=>{
+        if (localStorage['token'] == null)
+            return false;
+
+        let respOk = true;
+
+        const JWT = JSON.parse(localStorage['token']);
+
+        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
+                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
+                .catch((err) => {
+                respOk = false;
+                console.log(err.response);
+            });
+
+        return respOk;
+    });
+         
+    if (!loggedIn)
+        window.location.replace("http://localhost:3000/");
+
     const columns = [
         {
             title: 'Nombre',
             dataIndex: 'name',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -27,7 +51,6 @@ const Students = () => {
         {
             title: 'Apellidos',
             dataIndex: 'lastName',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -45,29 +68,27 @@ const Students = () => {
             ]
         },
         {
-            title: 'Carnet ID',
-            dataIndex: 'key',
-            width: '15%',
+            title: 'Carnet de identidad',
+            dataIndex: 'idCardNo',
             editable: true,
-            dataType: 'number',
+            dataType: 'text',
             sorter: {
-                compare: (a, b) => a.key - b.key
+                compare: (a, b) => a.idCardNo.localeCompare(b.idCardNo)
             },
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el carnet ID.",
+                    message: "Introduzca el carnet de identidad.",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el carnet ID."
+                    message: "Introduzca el carnet de identidad."
                 }
             ]
         },
         {
             title: 'Teléfono',
             dataIndex: 'phoneNumber',
-            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
@@ -87,7 +108,6 @@ const Students = () => {
         {
             title: 'Dirección',
             dataIndex: 'address',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -107,7 +127,6 @@ const Students = () => {
         {
             title: 'Grado de escolaridad',
             dataIndex: 'scholarityLevel',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -127,7 +146,6 @@ const Students = () => {
         {
             title: 'Fecha de inicio en la sede',
             dataIndex: 'dateBecomedMember',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -147,7 +165,6 @@ const Students = () => {
         {
             title: 'Fondos',
             dataIndex: 'founds',
-            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
@@ -167,7 +184,6 @@ const Students = () => {
         {
             title: 'Nombre del tutor',
             dataIndex: 'tuitorName',
-            width: '15%',
             editable: true,
             dataType: 'text',
             sorter: {
@@ -187,7 +203,6 @@ const Students = () => {
         {
             title: 'Teléfono del tutor',
             dataIndex: 'tuitorPhoneNumber',
-            width: '15%',
             editable: true,
             dataType: 'number',
             sorter: {
@@ -220,6 +235,7 @@ const Students = () => {
                 tableID={tableID}
                 searchboxID={searchboxID}
                 link={"../StudentDetails"}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

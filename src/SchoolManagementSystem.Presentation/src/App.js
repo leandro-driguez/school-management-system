@@ -6,8 +6,10 @@ import Students from './pages/Students';
 import StudentDetails from './pages/StudentDetails';
 import Workers from './pages/Workers';
 import WorkerDetails from './pages/WorkerDetails';
+import SalaryPaymentControlDetails from "./pages/SalaryPaymentControlDetails";
 import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
+import GroupDetails from "./pages/GroupDetails";
 import Schedules from './pages/Schedules';
 import Income from './pages/Income';
 import CoursesPayment from './pages/CoursesPayment';
@@ -18,20 +20,23 @@ import Users from './pages/Users';
 import BasicMean from './pages/BasicMean';
 import Positions from './pages/Positions';
 import Classrooms from './pages/Classrooms';
-import Login from  './pages/Login';
+import LoginPage from  './pages/Login';
+import Dropdown from  './components/Dropdown/Dropdown';
 
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path='/' element={<Login/>}/>
+                <Route path='/' element={<LoginPage/>}/>
                 <Route path='/Home' element={<Home/>}/>
                 <Route path='/Students' element={<Students/>}/>
-                <Route path='/StudentDetails' element={<StudentDetails/>}/>
+                <Route path='/StudentDetails/:id' element={<StudentDetails/>}/>
                 <Route path='/Workers' element={<Workers/>}/>
                 <Route path='/WorkerDetails/:id' element={<WorkerDetails/>}/>
+                <Route path='/SalaryPaymentControlDetails/:id' element={<SalaryPaymentControlDetails/>}/>
                 <Route path='/Courses' element={<Courses />}/>
-                <Route path='/CourseDetails' element={<CourseDetails/>}/>
+                <Route path='/CourseDetails/:id' element={<CourseDetails/>}/>
+                <Route path='/GroupDetails/:id' element={<GroupDetails/>}/>
                 <Route path='/Schedules' element={<Schedules/>}/>
                 <Route path='/Income' element={<Income/>}/>
                 <Route path='/CoursesPayment' element={<CoursesPayment/>}/>
@@ -42,6 +47,7 @@ function App() {
                 <Route path='/Positions' element={<Positions/>}/>
                 <Route path='/BasicMean' element={<BasicMean />}/>
                 <Route path='/Classrooms' element={<Classrooms/>}/>
+                <Route path='/test' element={<Dropdown/>}/>
             </Routes>
         </Router>
     );

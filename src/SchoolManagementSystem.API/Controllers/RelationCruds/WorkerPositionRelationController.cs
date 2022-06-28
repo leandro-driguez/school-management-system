@@ -30,8 +30,19 @@ public class WorkerPositionRelationController : Controller
         return Ok(_query.Select(mapper.Map<WorkerPositionRelation,WorkerPositionRelationDto>));
     }
 
+    [HttpGet("{id}")]
+    public IActionResult Get(string id)
+    {
+        var _query = _service.Query()
+            .Where(c=>c.WorkerId == id)
+            .Include(c => c.Worker)
+            .Include(c => c.Position);
+        
+        return Ok(_query.Select(mapper.Map<WorkerPositionRelationDto>));
+    }
+
     [HttpPost]
-    public IActionResult Post([FromForm]WorkerPositionRelationDto dto)
+    public IActionResult Post([FromBody]WorkerPositionRelationDto dto)
     {
         if(!_service.ValidateIds(dto.WorkerId, dto.PositionId))
             return NotFound();
@@ -41,7 +52,7 @@ public class WorkerPositionRelationController : Controller
     }
 
     [HttpPut]
-    public IActionResult Put([FromForm]WorkerPositionRelationDto dto)
+    public IActionResult Put([FromBody]WorkerPositionRelationDto dto)
     {
         if(!_service.ValidateIds(dto.WorkerId, dto.PositionId))
             return NotFound();
@@ -52,7 +63,7 @@ public class WorkerPositionRelationController : Controller
     }
 
     [HttpDelete]
-    public IActionResult Delete([FromForm]WorkerPositionRelationDto dto)
+    public IActionResult Delete([FromBody]WorkerPositionRelationDto dto)
     {
         if(!_service.ValidateIds(dto.WorkerId, dto.PositionId))
             return NotFound();

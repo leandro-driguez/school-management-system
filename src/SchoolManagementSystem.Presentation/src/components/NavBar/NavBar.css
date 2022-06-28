@@ -12,7 +12,14 @@
     float: right;
 }
 
+.notiName {
+    height: 15px;
+    width: auto;
+    margin: 0px;    
+}
+
 hr {
+    margin-top: 0px;
     clear: both;
     color: #c50000;
     border: 1px solid #c50000;
