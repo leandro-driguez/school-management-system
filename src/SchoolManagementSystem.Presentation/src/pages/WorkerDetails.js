@@ -148,7 +148,7 @@ const WorkerDetails = () => {
     });
          
     if (!loggedIn)
-        return <Login />;
+        window.location.replace("http://localhost:3000/");
 
     return (
         <div>

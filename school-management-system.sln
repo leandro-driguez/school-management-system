@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.Doma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.Infrastructure", "src\SchoolManagementSystem.Infrastructure\SchoolManagementSystem.Infrastructure.csproj", "{C8C8D58C-4837-408F-9416-D784EE89A836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.Application", "src\SchoolManagementSystem.Application\SchoolManagementSystem.Application.csproj", "{B7781C80-68E3-4E7D-9802-7F4FFCF2358A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.Application", "src\SchoolManagementSystem.Application\BusinessLogic\SchoolManagementSystem.Application.csproj", "{B7781C80-68E3-4E7D-9802-7F4FFCF2358A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagementSystem.API", "src\SchoolManagementSystem.API\SchoolManagementSystem.API.csproj", "{87A43FD3-01DB-4FBA-9B23-7EA78BE479AE}"
 EndProject

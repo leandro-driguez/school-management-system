@@ -38,17 +38,13 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
     {
         var entities = _service.Query()
             .AsNoTrackingWithIdentityResolution();
-        System.Console.WriteLine(id);
         
         var entity = entities
             .FirstOrDefault(c => Equals(c.Id, id));
-        System.Console.WriteLine(id);
         if (entity == null)
         {
-            System.Console.WriteLine("shit");
             return NotFound(id);
         }        
-        System.Console.WriteLine(id);
         return Ok(entity);
     }
 

@@ -14,7 +14,9 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using SchoolManagementSystem.Infrastructure.Identity;
+using SchoolManagementSystem.Application.Authenticate.Models;
+using SchoolManagementSystem.Application.Authenticate;
+using SchoolManagementSystem.Application.Authenticate.Interfaces;
 
 namespace SchoolManagementSystem.API;
 
@@ -122,11 +124,11 @@ public class Startup
         
             var schoolContext = services.GetRequiredService<SchoolContext>();
             schoolContext.Database.EnsureCreated();
-
-            DbInitializer.Initialize(schoolContext);
             
             var identityContext = services.GetRequiredService<IdentityContext>();
             identityContext.Database.EnsureCreated();
+
+            SchoolInitializer.Initialize(schoolContext);
             
         }
 

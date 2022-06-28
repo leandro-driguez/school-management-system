@@ -26,7 +26,7 @@ const Students = () => {
     });
          
     if (!loggedIn)
-        return <Login />;
+        window.location.replace("http://localhost:3000/");
 
     const columns = [
         {
@@ -69,11 +69,11 @@ const Students = () => {
         },
         {
             title: 'Carnet de identidad',
-            dataIndex: 'key',
+            dataIndex: 'idCardNo',
             editable: true,
-            dataType: 'number',
+            dataType: 'text',
             sorter: {
-                compare: (a, b) => a.key - b.key
+                compare: (a, b) => a.idCardNo.localeCompare(b.idCardNo)
             },
             rules: [
                 {

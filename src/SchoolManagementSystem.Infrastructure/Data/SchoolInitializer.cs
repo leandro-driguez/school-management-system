@@ -2,10 +2,12 @@
 using SchoolManagementSystem.Domain.Entities;
 using SchoolManagementSystem.Domain.Records;
 using SchoolManagementSystem.Domain.Relations;
+using SchoolManagementSystem.Application.Authenticate.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace SchoolManagementSystem.Infrastructure.Data;
 
-public static class DbInitializer
+public static class SchoolInitializer
 {
     #region Entities for add to other entities
 
@@ -153,9 +155,9 @@ public static class DbInitializer
     };
 
     #endregion
-    public static void Initialize(SchoolContext context)
+    public static void Initialize(SchoolContext context) 
     {
-        // // Entities
+        // Entities
         if (!context.AdditionalServices.Any())
         {
             context.AdditionalServices
@@ -246,35 +248,13 @@ public static class DbInitializer
                     GetShifts()
                 );
         }
-        // if (!context.Students.Any())
-        // {
-        //     context.Students
-        //         .AddRangeAsync(
-        //             GetStudents()
-        //         );
-        // }
-        // if (!context.Teachers.Any())
-        // {
-        //     context.Teachers
-        //         .AddRangeAsync(
-        //             GetTeachers()
-        //         );
-        // }
         if (!context.Tuitors.Any())
         {
             context.Tuitors
                 .AddRangeAsync(
                     GetTuitors()
                 );
-        }
-        // if (!context.Workers.Any())
-        // {
-        //     context.Workers
-        //         .AddRangeAsync(
-        //             GetWorkers()
-        //         );
-        // }
-        //     
+        }     
         // Records
         if (!context.ExpenseRecords.Any())
         {
@@ -326,7 +306,6 @@ public static class DbInitializer
                     GetTeacherCourseGroupRelations()
                 );
         }
-
         if (!context.TeacherCourseRelations.Any())
         {
             context.TeacherCourseRelations
@@ -341,16 +320,11 @@ public static class DbInitializer
                     GetWorkerPositionRelations()
                 );
         }
-        
+
         context.SaveChangesAsync();
     }
 
     #region Seed Database
-
-    /// <summary>
-    ///     
-    /// </summary>
-    /// <returns></returns>
     private static AdditionalService[] GetAdditionalServices()
     {
         return new AdditionalService[]

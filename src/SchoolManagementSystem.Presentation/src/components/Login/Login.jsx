@@ -48,11 +48,11 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <button className="button login__submit"
+                        <a href="http://localhost:3000/Home" className="button login__submit"
                             onClick={handleSubmit()}>
                             <span className="button__text">Iniciar sesión</span>
                             <i className="button__icon"> <ArrowRightOutlined /></i>                            
-                        </button>
+                        </a>
                     </form>
                     <img className="social-login" src={logo} alt="dclase_icon"/>
                 </div>

@@ -20,13 +20,14 @@ import Users from './pages/Users';
 import BasicMean from './pages/BasicMean';
 import Positions from './pages/Positions';
 import Classrooms from './pages/Classrooms';
-import Login from  './pages/Login';
+import LoginPage from  './pages/Login';
+import Dropdown from  './components/Dropdown/Dropdown';
 
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path='/' element={<Login/>}/>
+                <Route path='/' element={<LoginPage/>}/>
                 <Route path='/Home' element={<Home/>}/>
                 <Route path='/Students' element={<Students/>}/>
                 <Route path='/StudentDetails/:id' element={<StudentDetails/>}/>
@@ -46,6 +47,7 @@ function App() {
                 <Route path='/Positions' element={<Positions/>}/>
                 <Route path='/BasicMean' element={<BasicMean />}/>
                 <Route path='/Classrooms' element={<Classrooms/>}/>
+                <Route path='/test' element={<Dropdown/>}/>
             </Routes>
         </Router>
     );

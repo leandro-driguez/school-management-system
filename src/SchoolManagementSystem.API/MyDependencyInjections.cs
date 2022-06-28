@@ -14,7 +14,8 @@ public static class MyDependencyInjections
             .CurrentDomain
             .GetAssemblies()
             .SelectMany(x => x.GetTypes())
-            .Where(x => x.Namespace == "SchoolManagementSystem.Domain.Services")
+            .Where(x => (x.Namespace == "SchoolManagementSystem.Domain.Services" || 
+                x.Namespace == "SchoolManagementSystem.Application.Authenticate.Interfaces"))
             .Where(x => x.IsInterface)
             .Where(x => !x.ContainsGenericParameters)
             .ToList();

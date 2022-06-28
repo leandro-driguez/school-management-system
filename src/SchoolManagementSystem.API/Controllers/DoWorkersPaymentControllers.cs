@@ -96,5 +96,4 @@ public class DoWorkersPaymentController : Controller
         _service.DoPositionPayment(dto.Date, dto.Id);
         return Ok();
     }
-
 }

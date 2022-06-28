@@ -27,7 +27,7 @@ const BasicMean = () => {
     });
          
     if (!loggedIn)
-        return <Login />;
+        window.location.replace("http://localhost:3000/");
 
     const columns = [
         {

@@ -1,5 +1,5 @@
 
-namespace SchoolManagementSystem.Infrastructure.Identity;
+namespace SchoolManagementSystem.Application.Authenticate.Models;
 
 public class JWT
 {
