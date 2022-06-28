@@ -17,5 +17,6 @@ namespace SchoolManagementSystem.Domain.Entities
         public IList<StudentCourseGroupRelation> StudentCourseGroupRelations { get; set; }
         // public IList<Teacher> Teachers { get; set; }
         public IList<TeacherCourseGroupRelation> TeacherCourseGroupRelations { get; set; }
+        public IList<Shift> Shifts { get; set; }
     }
 }

@@ -13,10 +13,10 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
         builder.Property(s => s.StartTime)
             .IsRequired();
         
-        builder.Property(s => s.DayOfWeek)
-            .IsRequired();
+        // builder.Property(s => s.DayOfWeek)
+        //     .IsRequired();
         
-        builder.Property(s => s.Duration)
+        builder.Property(s => s.EndTime)
             .IsRequired();
     }
 }

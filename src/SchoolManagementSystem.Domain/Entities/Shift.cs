@@ -12,5 +12,9 @@ namespace SchoolManagementSystem.Domain.Entities
         public string ScheduleId { get; set; }
         
         public Schedule Schedule { get; set; }
+
+        public CourseGroup Group {get; set; }
+        
+        public string Description{get; set;} 
     }
 }
