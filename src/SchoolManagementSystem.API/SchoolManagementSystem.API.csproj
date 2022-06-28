@@ -10,6 +10,7 @@
     <ProjectReference Include="..\SchoolManagementSystem.Domain\SchoolManagementSystem.Domain.csproj" />
     <ProjectReference Include="..\SchoolManagementSystem.Infrastructure\SchoolManagementSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\SchoolManagementSystem.Application\SchoolManagementSystem.Application.csproj" />
+	<ProjectReference Include="..\SchoolManagementSystem.Application\Authentication\Authentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>
