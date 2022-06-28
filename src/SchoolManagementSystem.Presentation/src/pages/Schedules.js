@@ -38,6 +38,11 @@ const Schedules = () => {
     const [isEventModalVisible, setIsEventModalVisible] = useState(false);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
     const [classrooms, setClassrooms] = useState([]);
 
     const [classroomSelected, setClassroomSelected] = useState();
@@ -90,7 +95,11 @@ const Schedules = () => {
     //Operations
     //create
     const createEvent = () => {
-        setIsAddModalVisible(true);
+        setIsAddModalVisible(false);
+        const id = data.length;
+        const newData = [{eventId:id, title: title, description: description, startTime: startDate, endTime: endDate}];
+        console.log(newData);
+        setData([...data, newData]);
     };
 
     //read
@@ -110,6 +119,11 @@ const Schedules = () => {
         setIsEventModalVisible(false);
     };
 
+    const handleChangeDebut = (range) => {
+        setStartDate(new Date(range[0].format("yyyy-MM-DD HH:mm")).toString());
+        setEndDate(new Date(range[1].format("yyyy-MM-DD HH:mm")).toString());
+    }
+
     return (
         <div>
             <NavBar></NavBar>
@@ -122,7 +136,7 @@ const Schedules = () => {
                     onChange={setClassroomSelected}
                 />
 
-                <Button style={{marginLeft: "10px"}} onClick={createEvent}>
+                <Button style={{marginLeft: "10px"}} onClick={() => setIsAddModalVisible(true)}>
                     Añadir turno
                 </Button>
                 </div>
@@ -163,11 +177,13 @@ const Schedules = () => {
                               hasFeedback={true}>
 
                         <Input
+                            onChange={(e) => {setTitle(e.target.value);}}
                             placeholder={"Título"}>
                         </Input>
                     </FormItem>
 
                     <FormItem name={"Descripción"} label={"Descripción"}><Input.TextArea
+                        onChange={(e) => {setDescription(e.target.value);}}
                         placeholder={"Descripción"}></Input.TextArea></FormItem>
 
                     <FormItem name={"Horario"} label={"Horario"}>
@@ -179,7 +195,7 @@ const Schedules = () => {
                                     format: 'HH:mm',
                                 }}
                                 format="YYYY-MM-DD HH:mm"
-                                //onChange={onChange}
+                                onChange={handleChangeDebut}
                                 //onOk={onOk}
                             />
                         </Space>
@@ -187,7 +203,8 @@ const Schedules = () => {
                 </Form>
                 <div style={{marginLeft: "17%"}}>
                     <Button type="primary"
-                            onClick={() => setIsAddModalVisible(false)}
+                            onClick={() => {setIsAddModalVisible(false);
+                                console.log(title, description, startDate, endDate);}}
                             htmlType="submit"
                             style={{marginRight: "5px"}}
                     >Guardar</Button>
