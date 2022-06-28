@@ -30,11 +30,11 @@ const CourseDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca carnet de identidad",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca carnet de identidad"
                 }
             ],
         },
@@ -327,9 +327,7 @@ const CourseDetails = () => {
             <Divider className={"detailsHeader"}>
                 <strong>Nombre</strong> <Divider type="vertical" />
                 Tipo <Divider type="vertical" />
-                Precio <Divider type="vertical" />
-                <EditTwoTone /> <Divider type="vertical" />
-                <DeleteTwoTone/>
+                Precio
             </Divider>
             <Tabs centered defaultActiveKey="1" onChange={onChange} >
                 <TabPane tab="Profesores" key="1">

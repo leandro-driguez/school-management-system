@@ -131,9 +131,7 @@ const WorkerDetails = () => {
                 CI <Divider type="vertical" />
                 Teléfono <Divider type="vertical" />
                 Dirección <Divider type="vertical" />
-                Fecha de inicio en la sede <Divider type="vertical" />
-                <EditTwoTone /> <Divider type="vertical" />
-                <DeleteTwoTone/>
+                Fecha de inicio en la sede
             </Divider>
             <Tabs centered defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="Cargos actuales" key="1">
