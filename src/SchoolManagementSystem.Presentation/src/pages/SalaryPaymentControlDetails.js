@@ -95,6 +95,7 @@ const SalaryPaymentControlDetails = () => {
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </Panel>
 
@@ -112,6 +113,7 @@ const SalaryPaymentControlDetails = () => {
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

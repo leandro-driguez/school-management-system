@@ -50,10 +50,8 @@ public class TeacherCourseRelationController : Controller
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody]TeacherCourseRelationDto dto)
+    public IActionResult Post([FromBody] TeacherCourseRelationDto dto)
     {
-        // if(!_service.ValidateIds(dto.TeacherId, dto.CourseId))
-        //     return NotFound();
         _service.Add(mapper.Map<TeacherCourseRelation>(dto));
         _service.CommitAsync();
         return Ok();

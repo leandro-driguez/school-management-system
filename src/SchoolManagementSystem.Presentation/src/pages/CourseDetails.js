@@ -228,98 +228,6 @@ const CourseDetails = () => {
     if (!loggedIn)
         window.location.replace("http://localhost:3000/");
 
-    const tmp = [
-        {
-        "idCardNo": "75934499884",
-        "key": "2374c000-ff26-43f9-97ff-f2d12611f77c",
-        "name": "Teresa",
-        "lastName": "Graveran",
-        "phoneNumber": 59821123,
-        "address": "Espada No.404 e/ San Benito y Esperanza",
-        "dateBecomedMember": "9/5/2008 12:00:00 AM"
-        },
-        {
-        "idCardNo": "00032834123",
-        "key": "24ba6072-ea76-4109-882f-81476e899172",
-        "name": "marcos",
-        "lastName": "tirador",
-        "phoneNumber": 76444081,
-        "address": "Calle Cotilla",
-        "dateBecomedMember": "5/14/2020 12:00:00 AM"
-        },
-        {
-        "idCardNo": "00523573122",
-        "key": "87e032fa-bb28-48f1-b7b7-a2394fb0211f",
-        "name": "marcos",
-        "lastName": "tirador",
-        "phoneNumber": 76444081,
-        "address": "Calle Cotilla",
-        "dateBecomedMember": "5/14/2020 12:00:00 AM"
-        },
-        {
-        "idCardNo": "78493402348",
-        "key": "997df9ed-a026-47fd-acc5-88396a527045",
-        "name": "Teresa",
-        "lastName": "Graveran",
-        "phoneNumber": 59821123,
-        "address": "Espada No.404 e/ San Benito y Esperanza",
-        "dateBecomedMember": "9/5/2008 12:00:00 AM"
-        },
-        {
-        "idCardNo": "00522627123",
-        "key": "99b88208-ef53-47d8-a116-0a3971489025",
-        "name": "juanito",
-        "lastName": "tirador",
-        "phoneNumber": 76444081,
-        "address": "Calle Cotilla",
-        "dateBecomedMember": "5/14/2020 12:00:00 AM"
-        },
-        {
-        "idCardNo": "65423476345",
-        "key": "a4514034-f1c3-4cba-b8f2-80d0cea77ef6",
-        "name": "marcos",
-        "lastName": "tirador",
-        "phoneNumber": 76444081,
-        "address": "Calle Cotilla",
-        "dateBecomedMember": "5/14/2020 12:00:00 AM"
-        },
-        {
-        "idCardNo": "95012393872",
-        "key": "bfb05d43-243a-4757-9fa1-cb6bb3958bac",
-        "name": "Rebeca",
-        "lastName": "Portales",
-        "phoneNumber": 59821123,
-        "address": "Espada No.404 e/ San Benito y Esperanza",
-        "dateBecomedMember": "9/5/2008 12:00:00 AM"
-        },
-        {
-        "idCardNo": "71022200221",
-        "key": "d587b8b1-f81e-4e28-87ee-32a067c614bf",
-        "name": "Teresa",
-        "lastName": "Graveran",
-        "phoneNumber": 59821123,
-        "address": "Espada No.404 e/ San Benito y Esperanza",
-        "dateBecomedMember": "9/5/2008 12:00:00 AM"
-        },
-        {
-        "idCardNo": "90871238292",
-        "key": "e785715e-9c2b-446b-b3e1-5db778aad074",
-        "name": "Juan",
-        "lastName": "Rodriguz",
-        "phoneNumber": 57891234,
-        "address": "Calle Paz",
-        "dateBecomedMember": "9/21/2015 12:00:00 AM"
-        },
-        {
-        "idCardNo": "091283928",
-        "key": "fab1255c-55fd-4674-9a84-5d60d3e403ef",
-        "name": "Carmen",
-        "lastName": "Gonzalez",
-        "phoneNumber": 58981234,
-        "address": "Calle Conchita",
-        "dateBecomedMember": "9/21/2012 12:00:00 AM"
-        }
-    ]
 
     return (
         <div>
@@ -340,7 +248,17 @@ const CourseDetails = () => {
                         link={"../WorkerDetails"}
                         thereIsDropdown={true}
                         dropDownUrl={'https://localhost:5001/api/Teachers'}
-                        dropDownHeaders={['teacherName', 'teacherLastName', 'teacherIDCardNo']}
+                        dropDownHeaders={['teacherId', 'teacherName', 'teacherLastName', 'teacherIDCardNo']}
+                        map={
+                            new Map([
+                                ['teacherId', 'key'],
+                                ['teacherName','name'], 
+                                ['teacherLastName','lastName'], 
+                                ['teacherIDCardNo', 'idCardNo']
+                            ])
+                        }
+                        print={(teacher) => (teacher.name + ' ' + teacher.lastName)}
+                        FormsInitialValues={{ courseId: id }}
                     ></CRUD_Table>
                 </TabPane>
 
@@ -353,6 +271,7 @@ const CourseDetails = () => {
                         searchboxID={groupsSearchboxID}
                         link={"../GroupDetails"}
                         thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>

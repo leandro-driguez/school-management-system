@@ -69,6 +69,7 @@ const Debtors = () => {
                 searchboxID={searchboxID}
                 link={"../StudentDetails"}
             thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
             >
             </CRUD_Table>
         </div>

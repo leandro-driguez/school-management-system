@@ -142,6 +142,7 @@ const WorkerDetails = () => {
                                 tableID={positionsTableID}
                                 searchboxID={positionsSearchboxID}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </TabPane>
                 <TabPane tab="Control de salario" key="2">
@@ -153,6 +154,7 @@ const WorkerDetails = () => {
                                 searchboxID={acumulatedSalarySearchboxID}
                                 link={"../SalaryPaymentControlDetails"}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>

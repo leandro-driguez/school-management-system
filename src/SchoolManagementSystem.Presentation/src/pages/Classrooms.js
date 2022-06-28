@@ -82,6 +82,7 @@ const Classrooms = () => {
                 tableID={tableID}
                 searchboxID={searchboxID}
                 thereIsDropdown={false}
+                FormsInitialValues={{ key: "string" }}
             >
             </CRUD_Table>
         </div>

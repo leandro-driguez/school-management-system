@@ -15,7 +15,6 @@ public class TeacherCourseRelationDto
     public string TeacherIDCardNo { get; set; }
     [Required]
     public string CourseId { get; set; }
-    // [Required]
     public string CourseName { get; set; }
     [Required]
     public int CorrespondingPorcentage { get; set; }

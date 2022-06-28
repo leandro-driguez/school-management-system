@@ -70,6 +70,7 @@ const Income = () => {
                                 searchboxID={SearchboxID}
                                 link={"../GroupDetails"}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

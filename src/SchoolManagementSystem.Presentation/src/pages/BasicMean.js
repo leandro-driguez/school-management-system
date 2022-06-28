@@ -157,6 +157,7 @@ const BasicMean = () => {
                 tableID={tableID}
                 searchboxID={searchboxID}
             thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
             >
             </CRUD_Table>
         </div>

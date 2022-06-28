@@ -166,6 +166,7 @@ const Workers = () => {
                 searchboxID={searchboxID}
                 link={"../WorkerDetails"}
             thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
             >
             </CRUD_Table>
         </div>

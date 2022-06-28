@@ -91,6 +91,7 @@ const CoursesPayment = () => {
                 tableID={fixedSalaryPaymentColumnsTableID}
                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
                 thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
             ></CRUD_Table>
             <div className={"checkout"}>
                 <div className={"total"}>
