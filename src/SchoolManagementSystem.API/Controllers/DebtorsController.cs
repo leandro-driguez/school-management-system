@@ -33,7 +33,7 @@ public class DebtorsController : Controller
         List<DebtorDto> debtors = new List<DebtorDto>();
         foreach (Student student in _servicePayment.GetStudentRepo().Query())
         {
-            foreach(var payment in GroupCurseNoPaid(student.Id))
+            foreach(var payment in GroupCurseNoPaid(student.Id).Where(s => DateTime.Now.Date > s.DatePaid.Date))
             {
                 debtors.Add(new DebtorDto
                 {
