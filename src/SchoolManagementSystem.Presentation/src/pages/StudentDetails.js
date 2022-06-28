@@ -153,9 +153,7 @@ const StudentDetails = () => {
                 Fecha de inicio en la sede <Divider type="vertical" />
                 Fondo <Divider type="vertical" />
                 Tutor <Divider type="vertical" />
-                Teléfono (tutor) <Divider type="vertical" />
-                <EditTwoTone /> <Divider type="vertical" />
-                <DeleteTwoTone/>
+                Teléfono (tutor)
             </Divider>
             <Tabs centered defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="Cursos actuales" key="1">
