@@ -124,9 +124,7 @@ const GroupDetails = () => {
                 Capacidad <Divider type="vertical" />
                 Cantidad actual de estudiantes <Divider type="vertical" />
                 Fecha de inicio <Divider type="vertical" />
-                Fecha de terminación <Divider type="vertical" />
-                <EditTwoTone /> <Divider type="vertical" />
-                <DeleteTwoTone/>
+                Fecha de terminación
             </Divider>
                     <CRUD_Table title={"Estudiantes"}
                                 columns={groupStudentsColumns}
