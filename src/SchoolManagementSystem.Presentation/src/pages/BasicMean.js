@@ -156,6 +156,7 @@ const BasicMean = () => {
                 url={"https://localhost:5001/api/BasicMean"}
                 tableID={tableID}
                 searchboxID={searchboxID}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

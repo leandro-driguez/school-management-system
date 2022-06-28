@@ -1,10 +1,12 @@
 
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SchoolManagementSystem.API.Dtos;
 
 public class CourseGroupDto : IDto
 {
+        [JsonPropertyName("key")]
         public string Id { get; set; }
         [Required]
         public string TeacherName { get; set; }

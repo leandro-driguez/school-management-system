@@ -7,7 +7,6 @@ import {Button, Collapse, DatePicker, Modal} from "antd";
 import moment from "moment";
 import Dropdown from "../components/Dropdown/Dropdown";
 import axios from "axios";
-import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
 
 const { Panel } = Collapse;
 
@@ -95,14 +94,16 @@ const SalaryPaymentControlDetails = () => {
                                 url={"https://localhost:5001/api/TeacherCourseRelation"}
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
 
                 <Panel header="Salario porcentual: $___" key="2">
-                    <Dropdown_NameOnly
+                    <Dropdown
                         title={"Curso"}
                         options={courses}
                         onChange={setCourseSelected}
+                        print={(course) => (course.name)}
                     />
                     <CRUD_Table title={""}
                                 columns={percentageSalaryPaymentColumns}
@@ -110,6 +111,7 @@ const SalaryPaymentControlDetails = () => {
                                 url={"https://localhost:5001/api/TeacherCourseRelation" + `/${courseSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

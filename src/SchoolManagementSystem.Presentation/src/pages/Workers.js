@@ -165,6 +165,7 @@ const Workers = () => {
                 tableID={tableID}
                 searchboxID={searchboxID}
                 link={"../WorkerDetails"}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

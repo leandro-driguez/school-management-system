@@ -33,13 +33,19 @@ public class StudentPayCourseRecordController : RecordController<StudentPaymentR
         {
             return NotFound(id);
         }
+        
         return Ok
         (
             _service.Query()
                 .Where(s => s.StudentId == id)
                 .Include(s => s.CourseGroup.Course)
-                .Select(_mapperToDto.Map<StudentPaymentRecordPerCourseGroup, StudentPayCourseRecordDto>)
-                .ToList()
+                .Select(s => new StudentPayCourseRecordDto
+                {
+                    DatePaid = s.DatePaid,
+                    Payment = s.CourseGroup.Course.Price,
+                    CourseName = s.CourseGroup.Course.Name
+                })
+                .ToList()                
         );
     }
 }

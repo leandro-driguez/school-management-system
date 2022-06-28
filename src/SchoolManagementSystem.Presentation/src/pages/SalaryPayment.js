@@ -7,7 +7,6 @@ import {Button, Collapse, DatePicker, Modal} from "antd";
 import moment from "moment";
 import Dropdown from "../components/Dropdown/Dropdown";
 import axios from "axios";
-import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
 
 const { Panel } = Collapse;
 
@@ -56,7 +55,7 @@ const SalaryPayment = () => {
     const percentageSalaryPaymentColumns = [
         {
             title: 'Grupo',
-            dataIndex: 'group',
+            dataIndex: 'courseGroupName',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.group.localeCompare(b.group)
@@ -64,7 +63,7 @@ const SalaryPayment = () => {
         },
         {
             title: 'Ingreso del grupo',
-            dataIndex: 'groupIncome',
+            dataIndex: 'courseGroupIncome',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.groupIncome.localeCompare(b.groupIncome)
@@ -72,7 +71,7 @@ const SalaryPayment = () => {
         },
         {
             title: 'Importe',
-            dataIndex: 'income',
+            dataIndex: 'courseGroupWorkerPayment',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.income.localeCompare(b.income)
@@ -85,21 +84,21 @@ const SalaryPayment = () => {
 
     const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
 
-    const getData = async () => 
+    const getWorkers = async () => 
         await axios.get('https://localhost:5001/api/Workers')
             .then(resp=>{ 
                 setWorkers(resp.data);
             });
 
-    const getDataCourses = async () =>
+    const getCourses = async () =>
         await axios.get('https://localhost:5001/api/Courses')
             .then(resp=>{
                 setCourses(resp.data);
             });
 
     useEffect(()=>{
-            getData();
-            getDataCourses();
+            getWorkers();
+            getCourses();
         },[]);
 
     return (
@@ -107,21 +106,29 @@ const SalaryPayment = () => {
             <NavBar />
 
             <div style={{marginBottom: "10px"}}>
-            <Dropdown
-                title={"Trabajador"}
-                options={workers}
-                onChange={setWorkerSelected}
+            
+                <Dropdown
+                    title={"Trabajador"}
+                    options={workers}
+                    onChange={setWorkerSelected}
+                    print={(student) => (student.name + ' ' + student.lastName)}
                 />
-
-            <DatePicker placeholder={"Seleccione la fecha"}
-                        disabledDate={disabledDate}
-                        defaultValue={moment()}
-                        format={dateFormat}
-                        style={{
-                            float: "right",
-                            marginRight: "5%",
-                        }}
+                
+            <Dropdown
+                title={"Curso"}
+                options={courses}
+                onChange={setCourseSelected}
+                print={(course) => (course.name)}
             />
+                <DatePicker placeholder={"Seleccione la fecha"}
+                            disabledDate={disabledDate}
+                            defaultValue={moment()}
+                            format={dateFormat}
+                            style={{
+                                float: "right",
+                                marginRight: "5%",
+                            }}
+                />
             </div>
 
             <Collapse onChange={(key) => console.log(key)} ghost>
@@ -132,22 +139,19 @@ const SalaryPayment = () => {
                                 url={"https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}`}
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
 
                 <Panel header="Salario porcentual: $___" key="2">
-                    <Dropdown_NameOnly
-                        title={"Curso"}
-                        options={courses}
-                        onChange={setCourseSelected}
-                    />
 
                     <CRUD_Table title={""}
                                 columns={percentageSalaryPaymentColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/TeacherCourseRelation" + `/${workerSelected}` + `/${courseSelected}`}
+                                url={"https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `$$${courseSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

@@ -5,7 +5,6 @@ import React from 'react';
 
 const { Option } = Select;
 
-
 const Dropdown = (props) => {
     return (
         <Select
@@ -19,7 +18,7 @@ const Dropdown = (props) => {
             onChange={props.onChange}
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
-            {props.options.map((option) => <Option key={option.key}>{option.name + ' ' + option.lastName}</Option>)}
+            {props.options.map((option) => <Option key={option.key}>{props.print(option)}</Option>)}
         </Select>
     );
 };

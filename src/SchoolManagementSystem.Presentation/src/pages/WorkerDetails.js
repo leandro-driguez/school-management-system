@@ -143,6 +143,7 @@ const WorkerDetails = () => {
                                 url={"https://localhost:5001/api/WorkerPositionRelation/" + `${id}`}
                                 tableID={positionsTableID}
                                 searchboxID={positionsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </TabPane>
                 <TabPane tab="Control de salario" key="2">
@@ -153,6 +154,7 @@ const WorkerDetails = () => {
                                 tableID={acumulatedSalaryTableID}
                                 searchboxID={acumulatedSalarySearchboxID}
                                 link={"../SalaryPaymentControlDetails"}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>

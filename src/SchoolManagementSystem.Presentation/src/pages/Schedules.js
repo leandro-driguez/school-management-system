@@ -11,10 +11,9 @@ import {CloseSquareTwoTone, DeleteTwoTone, ExclamationCircleTwoTone, SaveTwoTone
 import FormItem from "antd/es/form/FormItem";
 import axios from "axios";
 import {useContext, useEffect, useRef, createContext, useState} from 'react';
+import Dropdown from '../components/Dropdown/Dropdown';
 
 import { render } from 'react-dom';
-import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
-import Dropdown_Schedule from "../components/Dropdown_Schedule/Dropdown";
 
 
 //Date Range Picker
@@ -130,10 +129,12 @@ const Schedules = () => {
 
             <Card>
                 <div style={{marginBottom: "10px"}}>
-                <Dropdown_Schedule
+
+                <Dropdown
                     title={"Aula"}
                     options={classrooms}
                     onChange={setClassroomSelected}
+                    print={(classroom) => (classroom.name)}
                 />
 
                 <Button style={{marginLeft: "10px"}} onClick={() => setIsAddModalVisible(true)}>

@@ -11,11 +11,11 @@ using AutoMapper;
 namespace SchoolManagementSystem.API.Controllers.Records;
 
 [Route("api/[controller]")]
-public class WorkerPaymentGetFixSalary : Controller
+public class WorkerPaymentGetFixSalaryController : Controller
 {
     IDoWorkersPaymentService _service;
     IMapper mapper;
-    public WorkerPaymentGetFixSalary(IDoWorkersPaymentService service, IMapper mapper)
+    public WorkerPaymentGetFixSalaryController(IDoWorkersPaymentService service, IMapper mapper)
     {
         this.mapper = mapper;
         _service = service;
@@ -24,6 +24,7 @@ public class WorkerPaymentGetFixSalary : Controller
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
+        System.Console.WriteLine(id);
         var worker = _service.Query().SingleOrDefault(c => c.Id == id);
         if (worker == null)
             NotFound();
