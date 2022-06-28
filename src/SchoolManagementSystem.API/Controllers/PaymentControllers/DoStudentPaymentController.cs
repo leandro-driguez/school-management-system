@@ -27,7 +27,7 @@ public class DoStudentPaymentController : Controller
         this.mapper = mapper;
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public virtual IActionResult GetAll([FromQuery] string id)
     {
         //return Ok("Hola");        
