@@ -30,12 +30,15 @@ public class DebtorsNotificationController : Controller
     {
         if(DebtorsStaticClass.DebtorsAmount == 0)
             return NotFound();
-        return Ok (new {
-                Title = "There are some debtors.",
-                Descrpition = $"There are {DebtorsStaticClass.DebtorsAmount} students that did not have paid some courses.",
-                Type = "Warning"
-            }
-            
+        var a = new
+        {
+            Title = "There are some debtors.",
+            Descrpition = $"There are {DebtorsStaticClass.DebtorsAmount} students that did not have paid some courses.",
+            Type = "Warning"
+        };
+        DebtorsStaticClass.DebtorsAmount = 0;
+        return Ok (
+            a
         );
     }
 
