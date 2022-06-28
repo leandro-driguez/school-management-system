@@ -87,7 +87,7 @@ const CoursesPayment = () => {
             <CRUD_Table title={""}
                 columns={fixedSalaryPaymentColumns}
                 operations={[]}
-                url={"https://localhost:5001/api/TeacherCourseRelation"}
+                url={"https://localhost:5001/api/DoStudentPayment" + `/${studentSelected}`}
                 tableID={fixedSalaryPaymentColumnsTableID}
                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
                 thereIsDropdown={false}
