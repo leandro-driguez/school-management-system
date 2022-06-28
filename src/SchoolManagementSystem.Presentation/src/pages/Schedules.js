@@ -182,7 +182,6 @@ const Schedules = () => {
                 <Form>
                     <FormItem>
                     <Input.TextArea
-                        onChange={}
                         defaultValue={currentEvent.description}>
                     </Input.TextArea>
                 </FormItem>

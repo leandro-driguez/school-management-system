@@ -7,6 +7,7 @@ import {Button, Collapse, DatePicker, Modal} from "antd";
 import moment from "moment";
 import Dropdown from "../components/Dropdown/Dropdown";
 import axios from "axios";
+import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
 
 const { Panel } = Collapse;
 
@@ -21,6 +22,12 @@ const SalaryPayment = () => {
     const [workers, setWorkers] = useState([]);
 
     const [workerSelected, setWorkerSelected] = useState();
+
+    console.log(`selected ${workerSelected}`);
+
+    const [courses, setCourses] = useState([]);
+
+    const [courseSelected, setCourseSelected] = useState();
 
     console.log(`selected ${workerSelected}`);
 
@@ -84,25 +91,38 @@ const SalaryPayment = () => {
                 setWorkers(resp.data);
             });
 
+    const getDataCourses = async () =>
+        await axios.get('https://localhost:5001/api/Courses')
+            .then(resp=>{
+                setCourses(resp.data);
+            });
+
     useEffect(()=>{
             getData();
+            getDataCourses();
         },[]);
 
     return (
         <div>
             <NavBar />
-            
+
+            <div style={{marginBottom: "10px"}}>
+            <Dropdown
+                title={"Trabajador"}
+                options={workers}
+                onChange={setWorkerSelected}
+                />
+
             <DatePicker placeholder={"Seleccione la fecha"}
                         disabledDate={disabledDate}
                         defaultValue={moment()}
                         format={dateFormat}
                         style={{
-                            marginLeft: "5%",
-                            borderRadius: "10px"
+                            float: "right",
+                            marginRight: "5%",
                         }}
             />
-            
-            <Dropdown title={"Select a person"} options={workers} onChange={setWorkerSelected} />
+            </div>
 
             <Collapse onChange={(key) => console.log(key)} ghost>
                 <Panel header="Salario fijo: $___" key="1">
@@ -116,10 +136,16 @@ const SalaryPayment = () => {
                 </Panel>
 
                 <Panel header="Salario porcentual: $___" key="2">
+                    <Dropdown_NameOnly
+                        title={"Curso"}
+                        options={courses}
+                        onChange={setCourseSelected}
+                    />
+
                     <CRUD_Table title={""}
                                 columns={percentageSalaryPaymentColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/TeacherCourseRelation" + `/${workerSelected}`}
+                                url={"https://localhost:5001/api/TeacherCourseRelation" + `/${workerSelected}` + `/${courseSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
                     ></CRUD_Table>
@@ -140,7 +166,8 @@ const SalaryPayment = () => {
                    onOk={() => setIsConfirmationModalVisible(false)}
             >
             <p>
-                ¿Está seguro de que quiere registar el pago de salario en la fecha _________ al trabajador __________
+                ¿Está seguro de que quiere registar el pago de salario en la fecha _________ al trabajador
+
                 con un importe de $___?
             </p>
             </Modal>
