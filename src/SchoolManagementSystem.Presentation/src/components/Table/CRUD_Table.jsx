@@ -273,7 +273,7 @@ const CRUD_Table = (props) => {
     };
 
     const Forms = (props)=>{
-        var newItem = { key: "string" };
+        var [newItem, setNewItem] = useState(props.InitialValues);
         const [dropDownOptions, setDropDownOptions] = useState([]);
 
         const getOptions = async () =>
@@ -286,19 +286,24 @@ const CRUD_Table = (props) => {
             getOptions();
         },[]);
 
-        console.log(dropDownOptions);
-
         const updateValue = (header, e) => {
             newItem[header.dataIndex] = e.target.value;
+            console.log(newItem);
         };
         
         const itemSelected = (key) => {
-            const optionSelected = dropDownOptions.findIndex(
+            const optionSelected = dropDownOptions.find(
                 (item) => key === item.key);
             
-            props.dropDownHeaders.map((header) =>
-                newItem[header] = optionSelected[header]);
+            let tmp = {...newItem};
+
+            props.dropDownHeaders.map((header) =>{
+                tmp[header] = optionSelected[props.map.get(header)];
+            });
+
+            setNewItem(tmp);
         };
+
 
         return (
             <Modal className={"editModal"}
@@ -313,31 +318,28 @@ const CRUD_Table = (props) => {
                     {props.thereIsDropdown && 
                         <Dropdown
                             title={"Select"}
-                            options={props.dropDownOptions}
+                            options={dropDownOptions}
                             onChange={itemSelected}
-                            print={props.dropDownPrint}
+                            print={props.print}
                         />
                     }
 
-                    {/* <Select
-                        style={{
-                            marginLeft: "6%",
-                            width: "200px"
-                        }}
-                        showSearch
-                        placeholder={props.title}
-                        optionFilterProp="children"
-                        onChange={props.onChange}
-                        filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
-                    >
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="tom">Tom</Option>
-                    </Select> */}
+                    {props.thereIsDropdown &&
+                        headers.map(
+                            (header) => {
+                                // console.log(header.dataIndex, props.dropDownHeaders, props.dropDownHeaders.some((h) => (h === header.dataIndex)));
+                                if (! props.dropDownHeaders.some((h) => (h === header.dataIndex)))
+                                    return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); 
+                            }
+                        )
+                    }
+
+                    {!props.thereIsDropdown &&
+                        headers.map(
+                            (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
+                        )
+                    }
                     
-                    {headers.map(
-                        (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
-                    )}
                     
                     <Button type="primary" 
                             onClick={ async ()=>{ 
@@ -355,7 +357,6 @@ const CRUD_Table = (props) => {
             </Modal>
         );
     };
-
 
     return (
         <div>
@@ -435,6 +436,9 @@ const CRUD_Table = (props) => {
             thereIsDropdown={props.thereIsDropdown}
             dropDownUrl={props.dropDownUrl}
             dropDownHeaders={props.dropDownHeaders}
+            map={props.map}
+            print={props.print}
+            InitialValues={props.FormsInitialValues}
         />
             
         </div>
