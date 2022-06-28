@@ -70,6 +70,7 @@ const CoursesPayment = () => {
                 title={"Estudiante"}
                 options={students}
                 onChange={setStudentSelected}
+                print={(student) => (student.name + ' ' + student.lastName)}
             />
 
             <DatePicker placeholder={"Seleccione la fecha"}
@@ -84,14 +85,13 @@ const CoursesPayment = () => {
             </div>
 
             <CRUD_Table title={""}
-                        columns={fixedSalaryPaymentColumns}
-                        operations={[]}
-                        url={"https://localhost:5001/api/TeacherCourseRelation"}
-                        tableID={fixedSalaryPaymentColumnsTableID}
-                        searchboxID={fixedSalaryPaymentColumnsSearchboxID}
-                        thereIsDropdown={false}
-                        IsDropdownTeacher={false}
-                    ></CRUD_Table>
+                columns={fixedSalaryPaymentColumns}
+                operations={[]}
+                url={"https://localhost:5001/api/TeacherCourseRelation"}
+                tableID={fixedSalaryPaymentColumnsTableID}
+                searchboxID={fixedSalaryPaymentColumnsSearchboxID}
+                thereIsDropdown={false}
+            ></CRUD_Table>
             <div className={"checkout"}>
                 <div className={"total"}>
                     <p><strong>Total: $___</strong></p>

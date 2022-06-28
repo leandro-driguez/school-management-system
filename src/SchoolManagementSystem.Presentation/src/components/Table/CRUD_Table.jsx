@@ -12,7 +12,6 @@ import "./CRUD_Table.css";
 import axios from 'axios';
 import { render } from 'react-dom';
 import Dropdown from "../Dropdown/Dropdown";
-import Dropdown_Teacher from "../Dropdown_Teacher/Dropdown";
 import { Select } from 'antd';
 const { Option } = Select;
 
@@ -273,7 +272,7 @@ const CRUD_Table = (props) => {
         );
     };
 
-    const Forms = ()=>{
+    const Forms = (props)=>{
         var newItem = { key: "string" };
         const [dropDownOptions, setDropDownOptions] = useState([]);
 
@@ -286,6 +285,8 @@ const CRUD_Table = (props) => {
         useEffect(()=>{
             getOptions();
         },[]);
+
+        console.log(dropDownOptions);
 
         const updateValue = (header, e) => {
             newItem[header.dataIndex] = e.target.value;
@@ -309,23 +310,16 @@ const CRUD_Table = (props) => {
             >
                 <Form name="hey" autoComplete={"off"}>
 
-                    {props.thereIsDropdown && props.IsDropdown && 
+                    {props.thereIsDropdown && 
                         <Dropdown
                             title={"Select"}
                             options={props.dropDownOptions}
                             onChange={itemSelected}
+                            print={props.dropDownPrint}
                         />
                     }
 
-                    {props.thereIsDropdown && props.IsDropdownTeacher &&
-                        <Dropdown_Teacher 
-                            title={"Select"}
-                            options={props.dropDownOptions}
-                            onChange={itemSelected}
-                        />
-                    }
-
-                    <Select
+                    {/* <Select
                         style={{
                             marginLeft: "6%",
                             width: "200px"
@@ -339,7 +333,7 @@ const CRUD_Table = (props) => {
                         <Option value="jack">Jack</Option>
                         <Option value="lucy">Lucy</Option>
                         <Option value="tom">Tom</Option>
-                    </Select>
+                    </Select> */}
                     
                     {headers.map(
                         (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
@@ -438,9 +432,9 @@ const CRUD_Table = (props) => {
         </Form>
 
         <Forms
-            // thereIsDropdown={props.thereIsDropdown}
-            // dropDownUrl={props.dropDownUrl}
-            // dropDownHeaders={props.dropDownHeaders}
+            thereIsDropdown={props.thereIsDropdown}
+            dropDownUrl={props.dropDownUrl}
+            dropDownHeaders={props.dropDownHeaders}
         />
             
         </div>

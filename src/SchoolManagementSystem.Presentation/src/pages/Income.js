@@ -4,7 +4,7 @@ import {Collapse} from "antd";
 import CRUD_Table from "../components/Table/CRUD_Table";
 import "./collapse.css";
 import axios from "axios";
-import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
+import Dropdown from "../components/Dropdown/Dropdown";
 
 const { Panel } = Collapse;
 
@@ -55,10 +55,11 @@ const Income = () => {
             <Collapse defaultActiveKey={['1']} onChange={onChange} ghost>
 
                 <Panel header="Ingresos por curso" key="1">
-                    <Dropdown_NameOnly
+                    <Dropdown
                         title={"Curso"}
                         options={courses}
                         onChange={setCourseSelected}
+                        print={(course) => (course.name)}
                     />
 
                     <CRUD_Table title={""}

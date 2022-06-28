@@ -340,7 +340,9 @@ const CourseDetails = () => {
                         tableID={teachersTableID}
                         searchboxID={teachersSearchboxID}
                         link={"../WorkerDetails"}
-                        thereIsDropdown={false}
+                        thereIsDropdown={true}
+                        dropDownUrl={'https://localhost:5001/api/Teachers'}
+                        dropDownHeaders={['teacherName', 'teacherLastName', 'teacherIDCardNo']}
                     ></CRUD_Table>
                 </TabPane>
 

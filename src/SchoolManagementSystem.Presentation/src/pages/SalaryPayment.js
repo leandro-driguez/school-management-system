@@ -7,7 +7,6 @@ import {Button, Collapse, DatePicker, Modal} from "antd";
 import moment from "moment";
 import Dropdown from "../components/Dropdown/Dropdown";
 import axios from "axios";
-import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
 
 const { Panel } = Collapse;
 
@@ -112,6 +111,7 @@ const SalaryPayment = () => {
                     title={"Trabajador"}
                     options={workers}
                     onChange={setWorkerSelected}
+                    print={(student) => (student.name + ' ' + student.lastName)}
                 />
                 
                 <DatePicker placeholder={"Seleccione la fecha"}
@@ -138,10 +138,11 @@ const SalaryPayment = () => {
                 </Panel>
 
                 <Panel header="Salario porcentual: $___" key="2">
-                    <Dropdown_NameOnly
+                    <Dropdown
                         title={"Curso"}
                         options={courses}
                         onChange={setCourseSelected}
+                        print={(course) => (course.name)}
                     />
 
                     <CRUD_Table title={""}
