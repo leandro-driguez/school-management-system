@@ -107,21 +107,22 @@ const SalaryPayment = () => {
             <NavBar />
 
             <div style={{marginBottom: "10px"}}>
-            <Dropdown
-                title={"Trabajador"}
-                options={workers}
-                onChange={setWorkerSelected}
+            
+                <Dropdown
+                    title={"Trabajador"}
+                    options={workers}
+                    onChange={setWorkerSelected}
                 />
-
-            <DatePicker placeholder={"Seleccione la fecha"}
-                        disabledDate={disabledDate}
-                        defaultValue={moment()}
-                        format={dateFormat}
-                        style={{
-                            float: "right",
-                            marginRight: "5%",
-                        }}
-            />
+                
+                <DatePicker placeholder={"Seleccione la fecha"}
+                            disabledDate={disabledDate}
+                            defaultValue={moment()}
+                            format={dateFormat}
+                            style={{
+                                float: "right",
+                                marginRight: "5%",
+                            }}
+                />
             </div>
 
             <Collapse onChange={(key) => console.log(key)} ghost>
@@ -132,6 +133,7 @@ const SalaryPayment = () => {
                                 url={"https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}`}
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
 
@@ -148,6 +150,7 @@ const SalaryPayment = () => {
                                 url={"https://localhost:5001/api/TeacherCourseRelation" + `/${workerSelected}` + `/${courseSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

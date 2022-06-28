@@ -68,6 +68,7 @@ const Debtors = () => {
                 tableID={tableID}
                 searchboxID={searchboxID}
                 link={"../StudentDetails"}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

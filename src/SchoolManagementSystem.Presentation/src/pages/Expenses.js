@@ -84,6 +84,7 @@ const Expenses = () => {
                 url={"https://localhost:5001/api/Expenses"}
                 tableID={tableID}
                 searchboxID={searchboxID}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

@@ -88,7 +88,8 @@ const Users = () => {
                         tableID={TableID}
                         searchboxID={SearchboxID}
                         link={"../WorkerDetails"}
-            ></CRUD_Table>
+            thereIsDropdown={false}
+                    ></CRUD_Table>
         </div>
     );
 };

@@ -95,6 +95,7 @@ const SalaryPaymentControlDetails = () => {
                                 url={"https://localhost:5001/api/TeacherCourseRelation"}
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
 
@@ -110,6 +111,7 @@ const SalaryPaymentControlDetails = () => {
                                 url={"https://localhost:5001/api/TeacherCourseRelation" + `/${courseSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

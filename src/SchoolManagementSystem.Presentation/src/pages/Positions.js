@@ -64,6 +64,7 @@ const Positions = () => {
                 url={"https://localhost:5001/api/Positions"}
                 tableID={tableID}
                 searchboxID={searchboxID}
+            thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

@@ -135,6 +135,7 @@ const GroupDetails = () => {
                                 tableID={groupStudentsTableID}
                                 searchboxID={groupStudentsSearchboxID}
                                 link={"../StudentDetails"}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
         </div>
     );

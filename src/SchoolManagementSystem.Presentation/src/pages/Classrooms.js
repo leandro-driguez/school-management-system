@@ -81,6 +81,7 @@ const Classrooms = () => {
                 url={"https://localhost:5001/api/Classrooms"}
                 tableID={tableID}
                 searchboxID={searchboxID}
+                thereIsDropdown={false}
             >
             </CRUD_Table>
         </div>

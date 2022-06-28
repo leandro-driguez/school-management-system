@@ -68,6 +68,7 @@ const Income = () => {
                                 tableID={TableID}
                                 searchboxID={SearchboxID}
                                 link={"../GroupDetails"}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

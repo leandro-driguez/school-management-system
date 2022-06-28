@@ -89,7 +89,9 @@ const CoursesPayment = () => {
                         url={"https://localhost:5001/api/TeacherCourseRelation"}
                         tableID={fixedSalaryPaymentColumnsTableID}
                         searchboxID={fixedSalaryPaymentColumnsSearchboxID}
-            ></CRUD_Table>
+                        thereIsDropdown={false}
+                        IsDropdownTeacher={false}
+                    ></CRUD_Table>
             <div className={"checkout"}>
                 <div className={"total"}>
                     <p><strong>Total: $___</strong></p>

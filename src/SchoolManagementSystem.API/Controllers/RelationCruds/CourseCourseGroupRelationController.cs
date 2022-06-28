@@ -34,10 +34,13 @@ public class CourseCourseGroupRelationController : Controller
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
-        System.Console.WriteLine(id);
-        var _query = _service.Query().Where(c => c.CourseId == id).Include(c=>c.StudentCourseGroupRelations).Include(c => c.Teacher);
-        System.Console.WriteLine(_query.Count());
         List<CourseGroupDto> list = new List<CourseGroupDto>();
+        
+        var _query = _service.Query()
+            .Where(c => c.CourseId == id)
+            .Include(c=>c.StudentCourseGroupRelations)
+            .Include(c => c.Teacher);
+        
         foreach (var item in _query)
         {
             var single  = mapper.Map<CourseGroupDto>(item);

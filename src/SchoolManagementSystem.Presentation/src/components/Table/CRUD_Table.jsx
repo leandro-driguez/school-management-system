@@ -11,6 +11,10 @@ import {useContext, useEffect, useRef, createContext, useState} from 'react';
 import "./CRUD_Table.css";
 import axios from 'axios';
 import { render } from 'react-dom';
+import Dropdown from "../Dropdown/Dropdown";
+import Dropdown_Teacher from "../Dropdown_Teacher/Dropdown";
+import { Select } from 'antd';
+const { Option } = Select;
 
 const EditableContext = createContext(null);
 
@@ -271,9 +275,28 @@ const CRUD_Table = (props) => {
 
     const Forms = ()=>{
         var newItem = { key: "string" };
+        const [dropDownOptions, setDropDownOptions] = useState([]);
+
+        const getOptions = async () =>
+            await axios.get(props.dropDownUrl)
+                .then(resp=>{
+                    setDropDownOptions(resp.data);
+                });
+
+        useEffect(()=>{
+            getOptions();
+        },[]);
 
         const updateValue = (header, e) => {
             newItem[header.dataIndex] = e.target.value;
+        };
+        
+        const itemSelected = (key) => {
+            const optionSelected = dropDownOptions.findIndex(
+                (item) => key === item.key);
+            
+            props.dropDownHeaders.map((header) =>
+                newItem[header] = optionSelected[header]);
         };
 
         return (
@@ -285,10 +308,44 @@ const CRUD_Table = (props) => {
                    footer={null}
             >
                 <Form name="hey" autoComplete={"off"}>
+
+                    {props.thereIsDropdown && props.IsDropdown && 
+                        <Dropdown
+                            title={"Select"}
+                            options={props.dropDownOptions}
+                            onChange={itemSelected}
+                        />
+                    }
+
+                    {props.thereIsDropdown && props.IsDropdownTeacher &&
+                        <Dropdown_Teacher 
+                            title={"Select"}
+                            options={props.dropDownOptions}
+                            onChange={itemSelected}
+                        />
+                    }
+
+                    <Select
+                        style={{
+                            marginLeft: "6%",
+                            width: "200px"
+                        }}
+                        showSearch
+                        placeholder={props.title}
+                        optionFilterProp="children"
+                        onChange={props.onChange}
+                        filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
+                    >
+                        <Option value="jack">Jack</Option>
+                        <Option value="lucy">Lucy</Option>
+                        <Option value="tom">Tom</Option>
+                    </Select>
+                    
                     {headers.map(
                         (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
                     )}
-                    <Button type="primary"
+                    
+                    <Button type="primary" 
                             onClick={ async ()=>{ 
 
                                 await axios.post(props.url, newItem).catch((resp) => console.log(resp.data));
@@ -334,7 +391,7 @@ const CRUD_Table = (props) => {
                                    }
                                }
                                }}>
-                    </i>
+                        </i>
                     </a>
 
                     <a className="table_options">
@@ -380,7 +437,11 @@ const CRUD_Table = (props) => {
             />
         </Form>
 
-        <Forms />
+        <Forms
+            // thereIsDropdown={props.thereIsDropdown}
+            // dropDownUrl={props.dropDownUrl}
+            // dropDownHeaders={props.dropDownHeaders}
+        />
             
         </div>
     );

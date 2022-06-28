@@ -165,6 +165,7 @@ const StudentDetails = () => {
                                 url={"https://localhost:5001/api/StudentCourseGroupRelation/" + `${id}`}
                                 tableID={currentCoursesTableID}
                                 searchboxID={currentCoursesSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </TabPane>
                 <TabPane tab="Histórico de pago" key="2">
@@ -174,6 +175,7 @@ const StudentDetails = () => {
                                 url={"https://localhost:5001/api/StudentPayCourseRecord/" + `${id}`}
                                 tableID={paymentRecordTableID}
                                 searchboxID={paymentRecordSearchboxID}
+                    thereIsDropdown={false}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>
