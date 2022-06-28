@@ -5,12 +5,17 @@ import {add, format} from 'date-fns';
 import NavBar from "../components/NavBar/NavBar";
 import {WeeklyCalendar,} from 'antd-weekly-calendar';
 import {Button, Card, DatePicker, Form, Input, Modal, Popconfirm, Space, Typography} from 'antd';
-import {useState} from "react";
 import moment from "moment";
 import * as PropTypes from "prop-types";
 import {CloseSquareTwoTone, DeleteTwoTone, ExclamationCircleTwoTone, SaveTwoTone} from "@ant-design/icons";
 import FormItem from "antd/es/form/FormItem";
 import axios from "axios";
+import {useContext, useEffect, useRef, createContext, useState} from 'react';
+
+import { render } from 'react-dom';
+import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
+import Dropdown_Schedule from "../components/Dropdown_Schedule/Dropdown";
+
 
 //Date Range Picker
 const {RangePicker} = DatePicker;
@@ -33,6 +38,12 @@ const Schedules = () => {
     const [isEventModalVisible, setIsEventModalVisible] = useState(false);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
+    const [classrooms, setClassrooms] = useState([]);
+
+    const [classroomSelected, setClassroomSelected] = useState();
+
+    console.log(`selected ${classroomSelected}`);
+
     //initial events
     const events = [
         {
@@ -49,6 +60,14 @@ const Schedules = () => {
             endTime: new Date("2022-06-28 20:30"),
             title: 'Álgebra Lineal I',
             backgroundColor: 'green',
+        },
+        {
+            eventId: '3',
+            description: "Profesor: Carlos Sanabria",
+            startTime: new Date("2022-06-30 08:00"),
+            endTime: new Date("2022-06-30 11:00"),
+            title: 'Tránsito 101',
+            backgroundColor: 'pink',
         }
     ];
 
@@ -57,6 +76,16 @@ const Schedules = () => {
 
     //current event
     const [currentEvent, setCurrentEvent] = useState(events[0]);
+
+    const getData = async () =>
+        await axios.get('https://localhost:5001/api/Classrooms')
+            .then(resp=>{
+                setClassrooms(resp.data);
+            });
+
+    useEffect(()=>{
+        getData();
+    },[]);
 
     //Operations
     //create
@@ -86,14 +115,18 @@ const Schedules = () => {
             <NavBar></NavBar>
 
             <Card>
-                <Button onClick={createEvent}
-                        style={{
-                            marginTop: "10px",
-                            marginLeft: "80%",
-                            marginBottom: "10px"
-                        }}>
+                <div style={{marginBottom: "10px"}}>
+                <Dropdown_Schedule
+                    title={"Aula"}
+                    options={classrooms}
+                    onChange={setClassroomSelected}
+                />
+
+                <Button style={{marginLeft: "10px"}} onClick={createEvent}>
                     Añadir turno
                 </Button>
+                </div>
+
                 <WeeklyCalendar
                     events={data}
                     weekends={true}
@@ -173,12 +206,6 @@ const Schedules = () => {
                 okText={"Aceptar"}
                 onOk={() => setIsEventModalVisible(false)}
             >
-                <Popconfirm title="¿Está seguro de que quiere eliminar este evento?" cancelText={"Cancelar"}
-                            okText={"Aceptar"} onConfirm={() => deleteEvent()}
-                            icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-                    <DeleteTwoTone/>
-                </Popconfirm>
-
                 <Form>
                     <FormItem>
                     <Input.TextArea
@@ -203,6 +230,11 @@ const Schedules = () => {
                     </Space>
                     </FormItem>
                 </Form>
+                <Popconfirm title="¿Está seguro de que quiere eliminar este evento?" cancelText={"Cancelar"}
+                            okText={"Aceptar"} onConfirm={() => deleteEvent()}
+                            icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
+                    <DeleteTwoTone style={{fontSize:"20px", marginTop:"10px"}}/>
+                </Popconfirm>
             </Modal>
         </div>
     );

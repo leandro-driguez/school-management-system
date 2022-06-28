@@ -1,10 +1,12 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import "./collapse.css";
 import CRUD_Table from "../components/Table/CRUD_Table";
 import {Button, Space, DatePicker, Modal} from "antd";
 import moment from "moment";
+import axios from "axios";
+import Dropdown from "../components/Dropdown/Dropdown";
 
 const dateFormat = 'DD/MM/YYYY';
 
@@ -45,18 +47,42 @@ const CoursesPayment = () => {
 
     const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
 
+    const [students, setStudents] = useState([]);
+
+    const [studentSelected, setStudentSelected] = useState();
+
+    const getData = async () =>
+        await axios.get('https://localhost:5001/api/Students')
+            .then(resp=>{
+                setStudents(resp.data);
+            });
+
+    useEffect(()=>{
+        getData();
+    },[]);
+
     return (
         <div>
             <NavBar></NavBar>
+
+            <div style={{marginBottom: "10px"}}>
+            <Dropdown
+                title={"Estudiante"}
+                options={students}
+                onChange={setStudentSelected}
+            />
+
             <DatePicker placeholder={"Seleccione la fecha"}
                         disabledDate={disabledDate}
                         defaultValue={moment()}
                         format={dateFormat}
                         style={{
-                            marginLeft: "5%",
-                            borderRadius: "10px"
+                            float: "right",
+                            marginRight: "5%",
                         }}
             />
+            </div>
+
             <CRUD_Table title={""}
                         columns={fixedSalaryPaymentColumns}
                         operations={[]}

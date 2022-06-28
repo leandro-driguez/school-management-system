@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../components/NavBar/NavBar";
 import {useState} from 'react';
 import "./collapse.css";
 import CRUD_Table from "../components/Table/CRUD_Table";
-import {Button, Collapse, Modal} from "antd";
+import {Button, Collapse, DatePicker, Modal} from "antd";
+import moment from "moment";
+import Dropdown from "../components/Dropdown/Dropdown";
+import axios from "axios";
+import Dropdown_NameOnly from "../components/Dropdown_NameOnly/Dropdown";
 
 const { Panel } = Collapse;
 
@@ -12,6 +16,22 @@ const onChange = (key) => {
 };
 
 const SalaryPaymentControlDetails = () => {
+    const [courses, setCourses] = useState([]);
+
+    const [courseSelected, setCourseSelected] = useState();
+
+    console.log(`selected ${courseSelected}`);
+
+    const getDataCourses = async () =>
+        await axios.get('https://localhost:5001/api/Courses')
+            .then(resp=>{
+                setCourses(resp.data);
+            });
+
+    useEffect(()=>{
+        getDataCourses();
+    },[]);
+
     const fixedSalaryPaymentColumns = [
         {
             title: 'Cargo',
@@ -79,10 +99,15 @@ const SalaryPaymentControlDetails = () => {
                 </Panel>
 
                 <Panel header="Salario porcentual: $___" key="2">
+                    <Dropdown_NameOnly
+                        title={"Curso"}
+                        options={courses}
+                        onChange={setCourseSelected}
+                    />
                     <CRUD_Table title={""}
                                 columns={percentageSalaryPaymentColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/TeacherCourseRelation"}
+                                url={"https://localhost:5001/api/TeacherCourseRelation" + `/${courseSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
                     ></CRUD_Table>

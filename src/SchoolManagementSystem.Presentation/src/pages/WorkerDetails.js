@@ -52,7 +52,7 @@ const WorkerDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca salario",
+                    message: "Introduzca salario fijo",
                 }
             ]
         }
@@ -69,16 +69,6 @@ const WorkerDetails = () => {
             sorter: {
                 compare: (a, b) => a.date.localeCompare(b.date)
             },
-            rules: [
-                {
-                    required: true,
-                    message: "Introduzca nombre",
-                },
-                {
-                    whitespace: true,
-                    message: "Introduzca nombre"
-                }
-            ],
         },
         {
             title: 'Salario Fijo',
@@ -88,12 +78,6 @@ const WorkerDetails = () => {
             sorter: {
                 compare: (a, b) => a.fixedSalary - b.fixedSalary
             },
-            rules: [
-                {
-                    required: true,
-                    message: "Introduzca salario",
-                }
-            ],
         },
         {
             title: 'Salario Porcentual',
@@ -103,12 +87,6 @@ const WorkerDetails = () => {
             sorter: {
                 compare: (a, b) => a.percentageSalary - b.percentageSalary
             },
-            rules: [
-                {
-                    required: true,
-                    message: "Introduzca salario",
-                }
-            ],
         },
         {
             title: 'Total',
@@ -118,12 +96,6 @@ const WorkerDetails = () => {
             sorter: {
                 compare: (a, b) => a.total - b.total
             },
-            rules: [
-                {
-                    required: true,
-                    message: "Introduzca salario",
-                }
-            ],
         }
     ];
     const acumulatedSalaryTableID = 'AcumulatedSalaryTable';

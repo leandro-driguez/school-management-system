@@ -14,11 +14,11 @@ const Users = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca el carnet de identidad",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca el carnet de identidad"
                 }
             ],
         },
@@ -32,11 +32,11 @@ const Users = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca el nombre",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca el nombre"
                 }
             ],
         },
@@ -50,11 +50,11 @@ const Users = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca los apellidos",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca los apellidos",
                 }
             ],
         },
@@ -69,7 +69,7 @@ const Users = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca porciento salarial",
+                    message: "Introduzca el correo electrónico",
                 }
             ]
         }

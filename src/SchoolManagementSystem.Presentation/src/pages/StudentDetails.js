@@ -65,7 +65,7 @@ const StudentDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca salario",
+                    message: "Introduzca grupo",
                 }
             ]
         },
@@ -80,7 +80,7 @@ const StudentDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca salario",
+                    message: "Introduzca fecha de inscripción",
                 }
             ]
         }

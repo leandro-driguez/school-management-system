@@ -29,7 +29,7 @@ const SalaryPayment = () => {
 
     const [courseSelected, setCourseSelected] = useState();
 
-    console.log(`selected ${workerSelected}`);
+    console.log(`selected ${courseSelected}`);
 
     const fixedSalaryPaymentColumns = [
         {

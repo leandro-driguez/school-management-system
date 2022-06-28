@@ -85,7 +85,7 @@ const GroupDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca salario",
+                    message: "Introduzca la fecha de inscripción",
                 }
             ]
         }

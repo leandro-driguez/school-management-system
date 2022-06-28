@@ -41,11 +41,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el nombre.",
+                    message: "Introduzca el nombre",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el nombre."
+                    message: "Introduzca el nombre"
                 }
             ]
         },
@@ -61,11 +61,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca los apellidos.",
+                    message: "Introduzca los apellidos",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca los apellidos."
+                    message: "Introduzca los apellidos"
                 }
             ]
         },
@@ -81,11 +81,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el carnet ID.",
+                    message: "Introduzca el carnet de identidad",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el carnet ID."
+                    message: "Introduzca el carnet de identidad"
                 }
             ]
         },
@@ -101,11 +101,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el número de teléfono.",
+                    message: "Introduzca el número de teléfono",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el número de teléfono."
+                    message: "Introduzca el número de teléfono"
                 }
             ]
         },
@@ -121,11 +121,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca la dirección.",
+                    message: "Introduzca la dirección",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca la dirección."
+                    message: "Introduzca la dirección"
                 }
             ]
         },
@@ -141,11 +141,11 @@ const Workers = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca la fecha de inicio en la sede.",
+                    message: "Introduzca la fecha de inicio en la sede",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca la fecha de inicio en la sede."
+                    message: "Introduzca la fecha de inicio en la sede"
                 }
             ]
         },

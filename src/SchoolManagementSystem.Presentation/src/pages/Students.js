@@ -78,11 +78,11 @@ const Students = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca el carnet ID.",
+                    message: "Introduzca el carnet de identidad.",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca el carnet ID."
+                    message: "Introduzca el carnet de identidad."
                 }
             ]
         },

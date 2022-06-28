@@ -67,11 +67,11 @@ const CourseDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca apellidos",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca apellidos"
                 }
             ],
         },
@@ -126,11 +126,11 @@ const CourseDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca profesor",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca profesor"
                 }
             ],
         },
@@ -145,7 +145,7 @@ const CourseDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca salario",
+                    message: "Introduzca capacidad",
                 }
             ],
         },
@@ -160,7 +160,7 @@ const CourseDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca cantidad actual de estudiantes",
                 }
             ],
         },
@@ -175,11 +175,11 @@ const CourseDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca fecha de inicio",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca fecha de inicio"
                 }
             ],
         },
@@ -194,11 +194,11 @@ const CourseDetails = () => {
             rules: [
                 {
                     required: true,
-                    message: "Introduzca nombre",
+                    message: "Introduzca fecha de terminación",
                 },
                 {
                     whitespace: true,
-                    message: "Introduzca nombre"
+                    message: "Introduzca fecha de terminación"
                 }
             ],
         }
