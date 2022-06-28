@@ -35,7 +35,7 @@ const SalaryPayment = () => {
         },
         {
             title: 'Importe',
-            dataIndex: 'income',
+            dataIndex: 'fixSalaryPosition',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.income.localeCompare(b.income)
