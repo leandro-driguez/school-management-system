@@ -21,6 +21,7 @@ import BasicMean from './pages/BasicMean';
 import Positions from './pages/Positions';
 import Classrooms from './pages/Classrooms';
 import LoginPage from  './pages/Login';
+import Dropdown from  './components/Dropdown/Dropdown';
 
 function App() {
     return (
@@ -46,6 +47,7 @@ function App() {
                 <Route path='/Positions' element={<Positions/>}/>
                 <Route path='/BasicMean' element={<BasicMean />}/>
                 <Route path='/Classrooms' element={<Classrooms/>}/>
+                <Route path='/test' element={<Dropdown/>}/>
             </Routes>
         </Router>
     );
