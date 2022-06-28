@@ -55,7 +55,7 @@ const SalaryPayment = () => {
     const percentageSalaryPaymentColumns = [
         {
             title: 'Grupo',
-            dataIndex: 'group',
+            dataIndex: 'courseGroupName',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.group.localeCompare(b.group)
@@ -63,7 +63,7 @@ const SalaryPayment = () => {
         },
         {
             title: 'Ingreso del grupo',
-            dataIndex: 'groupIncome',
+            dataIndex: 'courseGroupIncome',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.groupIncome.localeCompare(b.groupIncome)
@@ -71,7 +71,7 @@ const SalaryPayment = () => {
         },
         {
             title: 'Importe',
-            dataIndex: 'income',
+            dataIndex: 'courseGroupWorkerPayment',
             dataType: 'text',
             sorter: {
                 compare: (a, b) => a.income.localeCompare(b.income)
@@ -84,21 +84,21 @@ const SalaryPayment = () => {
 
     const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
 
-    const getData = async () => 
+    const getWorkers = async () => 
         await axios.get('https://localhost:5001/api/Workers')
             .then(resp=>{ 
                 setWorkers(resp.data);
             });
 
-    const getDataCourses = async () =>
+    const getCourses = async () =>
         await axios.get('https://localhost:5001/api/Courses')
             .then(resp=>{
                 setCourses(resp.data);
             });
 
     useEffect(()=>{
-            getData();
-            getDataCourses();
+            getWorkers();
+            getCourses();
         },[]);
 
     return (
@@ -114,6 +114,12 @@ const SalaryPayment = () => {
                     print={(student) => (student.name + ' ' + student.lastName)}
                 />
                 
+            <Dropdown
+                title={"Curso"}
+                options={courses}
+                onChange={setCourseSelected}
+                print={(course) => (course.name)}
+            />
                 <DatePicker placeholder={"Seleccione la fecha"}
                             disabledDate={disabledDate}
                             defaultValue={moment()}
@@ -138,17 +144,11 @@ const SalaryPayment = () => {
                 </Panel>
 
                 <Panel header="Salario porcentual: $___" key="2">
-                    <Dropdown
-                        title={"Curso"}
-                        options={courses}
-                        onChange={setCourseSelected}
-                        print={(course) => (course.name)}
-                    />
 
                     <CRUD_Table title={""}
                                 columns={percentageSalaryPaymentColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/TeacherCourseRelation" + `/${workerSelected}` + `/${courseSelected}`}
+                                url={"https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `$$${courseSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
                     thereIsDropdown={false}
