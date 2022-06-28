@@ -79,6 +79,11 @@ public class Startup
 
         services.AddScoped<IObjectContext, SchoolContext>();
 
+        //Periodic Hosted Service
+        services.AddScoped<DebtorNotificationService>();
+        services.AddSingleton<PeriodicHostedService>();
+        services.AddHostedService( provider => provider.GetRequiredService<PeriodicHostedService>());
+
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(

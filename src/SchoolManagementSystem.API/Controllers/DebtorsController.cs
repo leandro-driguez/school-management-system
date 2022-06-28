@@ -33,7 +33,7 @@ public class DebtorsController : Controller
         List<DebtorDto> debtors = new List<DebtorDto>();
         foreach (Student student in _servicePayment.GetStudentRepo().Query())
         {
-            foreach(var payment in GroupCurseNoPaid(student.Id))
+            foreach(var payment in GroupCurseNoPaid(_servicePayment,student.Id))
             {
                 debtors.Add(new DebtorDto
                 {
@@ -51,14 +51,15 @@ public class DebtorsController : Controller
         return Ok(debtors);        
     }
 
-    protected IQueryable<StudentGroupPaymentDto> GroupCurseNoPaid(string studentId)
+    public static IQueryable<StudentGroupPaymentDto> GroupCurseNoPaid(IDoStudentPaymentService servicePayment, string studentId) 
     {
+        IDoStudentPaymentService _servicePayment = servicePayment;
         // cursos-grupo que ya ha ido pagando el estudiante
         var q1 = from record in _servicePayment.GetStudentPaymentRecordPerCourseGroupRepo().Query()
                  where record.StudentId == studentId
                  select record.CourseGroupId;
         var l1 = q1.ToList();
-        // cursos-grupo en los que no ha pagado aún
+        // cursos-grupo en los que no ha pagado aï¿½n
         // solo tiene los que nunca ha pagado ni una vez
         var q2 = from relation in _servicePayment.GetStudentCourseGroupRelationRepo().Query()
                  where relation.StudentId == studentId
@@ -77,7 +78,7 @@ public class DebtorsController : Controller
         var l2 = q2.ToList();
         // de los registros de pago del estudiante determinado y su grupo de clase
         // agrupar los registros por el grupo de clase
-        // tomando la última fecha de pago, y el último mes pagado
+        // tomando la ï¿½ltima fecha de pago, y el ï¿½ltimo mes pagado
         var q3 = from record in _servicePayment.GetStudentPaymentRecordPerCourseGroupRepo().Query()
                  where record.StudentId == studentId
                  group record by record.CourseGroupId into g
