@@ -140,6 +140,7 @@ const SalaryPayment = () => {
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </Panel>
 
@@ -152,6 +153,7 @@ const SalaryPayment = () => {
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>

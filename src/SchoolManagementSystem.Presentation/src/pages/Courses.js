@@ -107,6 +107,7 @@ const Courses = () => {
                 searchboxID={searchboxID}
                 link={"../CourseDetails"}
             thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
             >
             </CRUD_Table>
         </div>

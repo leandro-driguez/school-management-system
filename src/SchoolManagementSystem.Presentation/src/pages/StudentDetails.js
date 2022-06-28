@@ -166,6 +166,7 @@ const StudentDetails = () => {
                                 tableID={currentCoursesTableID}
                                 searchboxID={currentCoursesSearchboxID}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </TabPane>
                 <TabPane tab="Histórico de pago" key="2">
@@ -176,6 +177,7 @@ const StudentDetails = () => {
                                 tableID={paymentRecordTableID}
                                 searchboxID={paymentRecordSearchboxID}
                     thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>

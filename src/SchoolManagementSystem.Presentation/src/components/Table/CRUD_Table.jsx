@@ -346,6 +346,8 @@ const CRUD_Table = (props) => {
 
                                 await axios.post(props.url, newItem).catch((resp) => console.log(resp.data));
 
+                                console.log(props.url, newItem);
+
                                 getData();
 
                                 setIsEditingModalVisible(false);
@@ -436,6 +438,7 @@ const CRUD_Table = (props) => {
             thereIsDropdown={props.thereIsDropdown}
             dropDownUrl={props.dropDownUrl}
             dropDownHeaders={props.dropDownHeaders}
+            url={props.url}
             map={props.map}
             print={props.print}
             InitialValues={props.FormsInitialValues}

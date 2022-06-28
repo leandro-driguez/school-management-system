@@ -273,6 +273,7 @@ const CourseDetails = () => {
                         searchboxID={groupsSearchboxID}
                         link={"../GroupDetails"}
                         thereIsDropdown={false}
+                        FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>
