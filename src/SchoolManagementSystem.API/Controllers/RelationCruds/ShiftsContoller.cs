@@ -52,17 +52,17 @@ public class ShiftsController : Controller
     }
 
     // [HttpPost]
-    // public IActionResult Post([FromForm]StudentCourseGroupRelationDto dto)
+    // public IActionResult Post([FromBody]StudentCourseGroupRelationDto dto)
     // {
     // }
 
     // [HttpPut]
-    // public IActionResult Put([FromForm]StudentCourseGroupRelationDto dto)
+    // public IActionResult Put([FromBody]StudentCourseGroupRelationDto dto)
     // {
     // }
 
     // [HttpDelete]
-    // public IActionResult Delete([FromForm]StudentCourseGroupRelationDto dto)
+    // public IActionResult Delete([FromBody]StudentCourseGroupRelationDto dto)
     // {
     // }
 

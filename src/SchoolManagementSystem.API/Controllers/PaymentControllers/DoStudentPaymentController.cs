@@ -36,7 +36,7 @@ public class DoStudentPaymentController : Controller
     }
 
     [HttpPost]
-    public IActionResult Post([FromForm] StudentIdGroupIdDto dto)
+    public IActionResult Post([FromBody] StudentIdGroupIdDto dto)
     {
         var groupCurseNoPaid = (from g in GroupCurseNoPaid(dto.StudentId)
                                 where g.GroupId == dto.GroupId
@@ -62,7 +62,7 @@ public class DoStudentPaymentController : Controller
                  where record.StudentId == studentId
                  select record.CourseGroupId;
         var l1 = q1.ToList();
-        // cursos-grupo en los que no ha pagado aún
+        // cursos-grupo en los que no ha pagado aï¿½n
         // solo tiene los que nunca ha pagado ni una vez
         var q2 = from relation in _servicePayment.GetStudentCourseGroupRelationRepo().Query()
                  where relation.StudentId == studentId
@@ -81,7 +81,7 @@ public class DoStudentPaymentController : Controller
         var l2 = q2.ToList();
         // de los registros de pago del estudiante determinado y su grupo de clase
         // agrupar los registros por el grupo de clase
-        // tomando la última fecha de pago, y el último mes pagado
+        // tomando la ï¿½ltima fecha de pago, y el ï¿½ltimo mes pagado
         var q3 = from record in _servicePayment.GetStudentPaymentRecordPerCourseGroupRepo().Query()
                  where record.StudentId == studentId
                  group record by record.CourseGroupId into g

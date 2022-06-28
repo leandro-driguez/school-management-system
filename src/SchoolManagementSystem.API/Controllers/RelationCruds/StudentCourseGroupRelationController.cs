@@ -68,7 +68,7 @@ public class StudentCourseGroupRelationController : Controller
     }
 
     [HttpPost]
-    public IActionResult Post([FromForm]StudentCourseGroupRelationDto dto)
+    public IActionResult Post([FromBody]StudentCourseGroupRelationDto dto)
     {
         if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
@@ -85,7 +85,7 @@ public class StudentCourseGroupRelationController : Controller
     }
 
     [HttpPut]
-    public IActionResult Put([FromForm]StudentCourseGroupRelationDto dto)
+    public IActionResult Put([FromBody]StudentCourseGroupRelationDto dto)
     {
         if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
@@ -103,7 +103,7 @@ public class StudentCourseGroupRelationController : Controller
     }
 
     [HttpDelete]
-    public IActionResult Delete([FromForm]StudentCourseGroupRelationDto dto)
+    public IActionResult Delete([FromBody]StudentCourseGroupRelationDto dto)
     {
         if(!_service.ValidateIds(dto.StudentId, dto.CourseGroupId, dto.CourseGroupCourseId))
             return NotFound();
