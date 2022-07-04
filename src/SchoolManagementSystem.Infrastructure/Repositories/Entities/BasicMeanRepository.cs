@@ -5,7 +5,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class BasicMeanRepository : CrudRepository<BasicMean>, IBasicMeanRepository
+public class BasicMeanRepository : ActiveRepository<BasicMean>, IBasicMeanRepository
 {
     public BasicMeanRepository(IObjectContext context) : base(context)
     {

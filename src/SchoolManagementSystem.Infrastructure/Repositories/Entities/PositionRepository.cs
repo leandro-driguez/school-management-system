@@ -5,7 +5,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class PositionRepository : CrudRepository<Position>, IPositionRepository
+public class PositionRepository : ActiveRepository<Position>, IPositionRepository
 {
     public PositionRepository(IObjectContext context) : base(context)
     {

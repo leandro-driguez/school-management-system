@@ -7,7 +7,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class ClassroomRepository : CrudRepository<Classroom>, IClassroomRepository
+public class ClassroomRepository : ActiveRepository<Classroom>, IClassroomRepository
 {
     public ClassroomRepository(IObjectContext context) : base(context)
     {

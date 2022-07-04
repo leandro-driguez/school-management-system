@@ -37,7 +37,7 @@ namespace SchoolManagementSystem.Testing.ControllersTest
                 IDCardNo = "Unit-Testing",
                 PhoneNumber = 11111111,
                 Address = "unit-testing",
-                DateBecomedMember = DateTime.Now
+                DateBecomedMember = DateTime.Now.ToString()
             };
             if (guid_seed != "")
             {
