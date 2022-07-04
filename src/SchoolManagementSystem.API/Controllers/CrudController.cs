@@ -90,7 +90,8 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         if(entity == null)
             return NotFound(id);
         
-        _service.Remove(entity);
+        entity.Active = false;
+        _service.Update(entity);
         _service.CommitAsync();
         
         return Ok();
