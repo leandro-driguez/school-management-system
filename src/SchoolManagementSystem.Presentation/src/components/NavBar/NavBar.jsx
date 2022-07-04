@@ -97,7 +97,7 @@ const NavBar = (props) => {
                     key: '0',
                 },
                 {
-                    label: <a href="https://localhost:3000/" onClick={() => localStorage.clear()}>Cerrar sesión</a>,
+                    label: <a href="http://localhost:3000/" onClick={() => localStorage.clear()}>Cerrar sesión</a>,
                     key: '1',
                 },
             ]}
