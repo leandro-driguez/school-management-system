@@ -10,6 +10,7 @@ public class StudentDto : SchoolMemberDto
 {
 
     
+    public string TuitorId { get; set; }
 
     [Required]
     public string TuitorName { get; set; }
