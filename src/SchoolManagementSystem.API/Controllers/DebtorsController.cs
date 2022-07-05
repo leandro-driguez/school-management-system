@@ -61,7 +61,7 @@ public class DebtorsController : Controller
                         GroupId = r.GroupId,
                         GroupName = r.GroupName,                        
                         Debt = r.CoursePrice,
-                        Dealy = (DateTime.Now.Date - r.DatePaid.Date).Days
+                        Delay = (DateTime.Now.Date - r.DatePaid.Date).Days
                     }));
     }
 
