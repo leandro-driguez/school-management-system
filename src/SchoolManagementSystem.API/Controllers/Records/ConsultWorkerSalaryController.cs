@@ -24,7 +24,7 @@ public class ConsultWorkerSalaryController : Controller
     {
         var worker = _service.Query().SingleOrDefault(c => c.Id == id);
         if( worker == null)
-            NotFound();
+            return NotFound();
 
         var dto = new ConsultWorkerSalaryGetSingleDto
             {

@@ -77,7 +77,7 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
         repoTeacherPayments.CommitAsync();
     }
 
-    public WorkerPaymentInfo GetWorkerPaymentInfo(string id)
+    public WorkerPaymentInfo GetWorkerPaymentInfo(string id, DateTime Date)
     {
         var worker = this.Query().SingleOrDefault(c => c.Id == id);
         var workerPaymentInfo = new WorkerPaymentInfo
@@ -87,7 +87,7 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
             InfoByDate = new List<InfoByDate>(){new InfoByDate{
                     InfoByPosition = new List<InfoByPosition>(),
                     InfoByCourse = new List<InfoByCourse>(),
-                    Date = DateTime.Now
+                    Date = Date
                 }},
         };
 

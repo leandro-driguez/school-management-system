@@ -21,16 +21,23 @@ public class DoWorkersPaymentController : Controller
         _service = service;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult Get(string id)
+    [HttpGet("{id}/{date}")]
+    public IActionResult Get(string id,string date)
     {
+        var Date = DateTime.Parse(date);
+        if(date == "now")
+            Date = DateTime.Now;
+        else
+            Date = DateTime.Parse(date);
+        System.Console.WriteLine(Date);
         var worker = _service.Query().SingleOrDefault(c => c.Id == id);
         if (worker == null)
             NotFound();
 
 
-        return Ok(mapper.Map<ConsultWorkerSalaryGetSingleDto>(_service.GetWorkerPaymentInfo(id)));
+        return Ok(mapper.Map<ConsultWorkerSalaryGetSingleDto>(_service.GetWorkerPaymentInfo(id, Date)));
     }
+    
 
     [HttpPost]
     public IActionResult Post(DoWorkerPaymentDto dto)
