@@ -3,9 +3,9 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Services;
 
-public interface IWorkerService : IService<Worker>
+public interface IWorkerService : IActiveService<Worker>
 {
     // Selecciona al trabajador con cierto id
-    // y toma toda su información
+    // y toma toda su informaciï¿½n
     Worker GetWorkerById(string id);
 }

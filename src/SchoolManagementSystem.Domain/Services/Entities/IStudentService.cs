@@ -3,9 +3,9 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Services;
 
-public interface IStudentService : IService<Student>
+public interface IStudentService : IActiveService<Student>
 {
     // Selecciona a un estudiante con cierto id
-    // y toma toda su información
+    // y toma toda su informaciï¿½n
     Student GetStudentById(string id);
 }

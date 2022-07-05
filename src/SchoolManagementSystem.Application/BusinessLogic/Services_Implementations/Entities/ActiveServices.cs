@@ -8,7 +8,7 @@ namespace SchoolManagementSystem.Application.Services_Implementations;
 
 
 
-public class ActiveService<TEntity> : BaseService<TEntity> where TEntity : Entity
+public class ActiveService<TEntity> : BaseService<TEntity>, IActiveService<TEntity> where TEntity : Entity
 {
     new IActiveRepository<TEntity> BaseRepository;
     public ActiveService(IActiveRepository<TEntity> repository) : base(repository)
@@ -25,6 +25,6 @@ public class ActiveService<TEntity> : BaseService<TEntity> where TEntity : Entit
         return inac.Union(act);
     }
 
-    public IQueryable<TEntity> QueryInactive() => BaseRepository.QueryInactives();
+    public IQueryable<TEntity> QueryInactives() => BaseRepository.QueryInactives();
 
 }

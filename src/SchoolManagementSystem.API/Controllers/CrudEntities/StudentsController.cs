@@ -23,6 +23,18 @@ public class StudentsController : CrudController<Student, StudentDto>
     [HttpPost]
     public override IActionResult Post([FromBody] StudentDto dto_model)
     {
+        var inactiveStudent = _service.QueryInactives().SingleOrDefault(c => c.IDCardNo == dto_model.IDCardNo && c.Name == dto_model.Name);
+        if(inactiveStudent != null)
+        {
+            inactiveStudent.Active = true;
+            _service.Update(inactiveStudent);
+            _service.CommitAsync();
+
+            dto_model.Id = inactiveStudent.Id;
+            return Ok(dto_model);
+        }
+
+
         var tuitor = new Tuitor 
         { 
             Name = dto_model.TuitorName, 
@@ -46,6 +58,8 @@ public class StudentsController : CrudController<Student, StudentDto>
 
 
         var student = _mapperToDto.Map<Student>(dto_model);
+        student.Id = Guid.NewGuid().ToString();
+        dto_model.Id = student.Id;
 
         student.Tuitor = tuitor;
         student.StudentCourseGroupRelations = new List<StudentCourseGroupRelation>();
@@ -53,6 +67,7 @@ public class StudentsController : CrudController<Student, StudentDto>
         
         _service.Add(student);
         _service.CommitAsync();
+        
         
         return Ok(dto_model);
     }

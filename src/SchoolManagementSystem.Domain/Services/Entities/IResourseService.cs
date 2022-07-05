@@ -3,7 +3,7 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Services;
 
-public interface IResourceService : IService<Resource>
+public interface IResourceService : IActiveService<Resource>
 {
     // Selecciona un recurso con cierto id
     // y toma toda su informaci�n

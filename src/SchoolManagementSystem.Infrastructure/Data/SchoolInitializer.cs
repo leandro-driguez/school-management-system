@@ -11,6 +11,7 @@ public static class SchoolInitializer
 {
     #region Entities for add to other entities
 
+
     static Teacher carmen = new Teacher{
         Name = "Carmen",
         LastName = "Gonzalez",
@@ -31,6 +32,8 @@ public static class SchoolInitializer
         Name = "Frank",
         PhoneNumber = 57881239,
     };
+
+    #region Students
     static Student sasha = new Student{
         Name = "Sasha",
         LastName = "hernand",
@@ -86,7 +89,10 @@ public static class SchoolInitializer
         ScholarityLevel = Domain.Enums.Education.Preuniversitario,
         Tuitor = frank
     };
+        
+    #endregion
 
+    #region Positions
     static Position director = new Position{
         Name = "director"
     };
@@ -96,7 +102,9 @@ public static class SchoolInitializer
     static Position asistente = new Position{
         Name = "asistente"
     };
+    #endregion
 
+    #region Courses
     static Course algebra = new Course{
         Name = "Algebra",
         Price =  200,
@@ -117,14 +125,16 @@ public static class SchoolInitializer
         Price =  200,
         Type = "Letras"
     };
+    #endregion
         
+    #region CourseGroups
     static CourseGroup algebralineal = new CourseGroup{
         Name = "AlgebraLineal",
         Course = algebra,
         Teacher = juan,
         CourseId = algebra.Id,
         Capacity = 30,
-        StartDate = new DateTime(2020,07,01),
+        StartDate = new DateTime(2020,01,01),
         EndDate = new DateTime(2020,09,20),
     };
     static CourseGroup algebra2 = new CourseGroup{
@@ -133,7 +143,7 @@ public static class SchoolInitializer
         CourseId = algebra.Id,
         Teacher = juan,
         Capacity = 30,
-        StartDate = new DateTime(2020,10,02),
+        StartDate = new DateTime(2020,01,02),
         EndDate = new DateTime(2020,12,02),
     };
     static CourseGroup geometriaespacial = new CourseGroup{
@@ -141,8 +151,8 @@ public static class SchoolInitializer
         Course = geometria,
         CourseId = geometria.Id,
         Capacity = 20,
-        StartDate = new DateTime(2021,03,01),
-        EndDate = new DateTime(2021,05,20),
+        StartDate = new DateTime(2020,01,01),
+        EndDate = new DateTime(2020,05,20),
     };
     static CourseGroup historiaDelArte = new CourseGroup{
         Name = "historiaDA",
@@ -150,9 +160,11 @@ public static class SchoolInitializer
         Teacher = carmen,
         CourseId = historia.Id,
         Capacity = 30,
-        StartDate = new DateTime(2022,01,01),
-        EndDate = new DateTime(2020,04,09),
+        StartDate = new DateTime(2020,01,01),
+        EndDate = new DateTime(2020,11,09),
     };
+        
+    #endregion
 
     #endregion
     public static void Initialize(SchoolContext context) 
@@ -326,6 +338,8 @@ public static class SchoolInitializer
     }
 
     #region Seed Database
+
+    #region Entitites
     private static AdditionalService[] GetAdditionalServices()
     {
         return new AdditionalService[]
@@ -552,6 +566,10 @@ public static class SchoolInitializer
         };
     }
     
+    #endregion
+
+    #region Records
+
     private static ExpenseRecord[] GetExpenseRecords()
     {
         return new ExpenseRecord[]{
@@ -701,6 +719,10 @@ public static class SchoolInitializer
         };
     }
     
+    #endregion
+
+    #region Relations
+
     private static StudentCourseGroupRelation[] GetStudentCourseGroupRelations()
     {
         var courseGroup = new CourseGroup
@@ -938,26 +960,31 @@ public static class SchoolInitializer
                     PhoneNumber = 52813412, Address = "Espada No.404 e/ San Benito y Esperanza", 
                     DateBecomedMember = new DateTime(2015, 9, 5) 
                 },
-                FixedSalary = 2000
+                FixedSalary = 2000,
+                StartDate =  new DateTime(2015, 9, 5),
             },
             new WorkerPositionRelation{
                 Position = director,
                 Worker = carmen,
-                FixedSalary = 5000
+                FixedSalary = 5000,
+                StartDate = carmen.DateBecomedMember
             },
             new WorkerPositionRelation{
                 Position = asistente,
                 Worker = juan,
-                FixedSalary = 3000
+                FixedSalary = 3000,
+                StartDate = juan.DateBecomedMember
             },
              new WorkerPositionRelation{
                 Position = secretaria,
                 Worker = carmen,
-                FixedSalary = 2000
+                FixedSalary = 2000,
+                StartDate = carmen.DateBecomedMember
             },
         };
     }
     
+    #endregion
 #endregion
         
 }
