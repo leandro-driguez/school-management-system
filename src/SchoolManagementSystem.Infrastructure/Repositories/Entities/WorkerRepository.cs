@@ -5,7 +5,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class WorkerRepository : CrudRepository<Worker>, IWorkerRepository
+public class WorkerRepository : ActiveRepository<Worker>, IWorkerRepository
 {
     public WorkerRepository(IObjectContext context) : base(context)
     {

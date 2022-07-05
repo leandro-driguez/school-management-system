@@ -3,9 +3,9 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Services;
 
-public interface ITuitorService : IService<Tuitor>
+public interface ITuitorService : IActiveService<Tuitor>
 {
     // Selecciona a un tutor con cierto id
-    // y toma toda su información
+    // y toma toda su informaciï¿½n
     Tuitor GetTuitorById(string id);
 }

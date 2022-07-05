@@ -28,6 +28,8 @@ const SalaryPayment = () => {
 
     const [courseSelected, setCourseSelected] = useState();
 
+    const [dateSelected, setDateSelected] = useState();
+
     console.log(`selected ${courseSelected}`);
 
     const fixedSalaryPaymentColumns = [
@@ -123,7 +125,8 @@ const SalaryPayment = () => {
                 <DatePicker placeholder={"Seleccione la fecha"}
                             disabledDate={disabledDate}
                             defaultValue={moment()}
-                            format={dateFormat}
+                            format={"YYYY.MM.DD"}
+                            onChange={setDateSelected}
                             style={{
                                 float: "right",
                                 marginRight: "5%",
@@ -136,7 +139,7 @@ const SalaryPayment = () => {
                     <CRUD_Table title={""}
                                 columns={fixedSalaryPaymentColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}`}
+                                url={"https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}` + `/${dateSelected}`}
                                 tableID={fixedSalaryPaymentColumnsTableID}
                                 searchboxID={fixedSalaryPaymentColumnsSearchboxID}
                     thereIsDropdown={false}
@@ -149,7 +152,7 @@ const SalaryPayment = () => {
                     <CRUD_Table title={""}
                                 columns={percentageSalaryPaymentColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `$$${courseSelected}`}
+                                url={"https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `/${courseSelected}` + `/${dateSelected}`}
                                 tableID={percentageSalaryPaymentColumnsTableID}
                                 searchboxID={percentageSalaryPaymentColumnsSearchboxID}
                     thereIsDropdown={false}

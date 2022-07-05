@@ -4,7 +4,7 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Application.Repositories_Interfaces;
 
-public interface ITuitorRepository : IRepository<Tuitor>
+public interface ITuitorRepository : IActiveRepository<Tuitor>
 {
     
 }

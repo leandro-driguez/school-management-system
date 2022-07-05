@@ -6,7 +6,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class TeacherService : BaseService<Teacher>, ITeacherService
+public class TeacherService : ActiveService<Teacher>, ITeacherService
 {
     ISchoolMemberRepository schl_member_repo;
     public TeacherService(ISchoolMemberRepository schl_member_repo, ITeacherRepository repository) : base(repository)

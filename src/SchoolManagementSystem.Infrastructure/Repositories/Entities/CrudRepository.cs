@@ -11,7 +11,7 @@ namespace SchoolManagementSystem.Infrastructure.Repositories
 
         public IObjectContext Context { get; }
 
-        public IQueryable<TEntity> Query() => Context.Query<TEntity>();
+        public virtual IQueryable<TEntity> Query() => Context.Query<TEntity>();
 
         public void Add(TEntity entity) => Context.Add(entity);
 

@@ -25,7 +25,7 @@ public class WorkerConfiguration : IEntityTypeConfiguration<Worker>
                 j =>
                 {
                     j.Property(pt => pt.FixedSalary);
-                    j.HasKey(t => new { t.WorkerId, t.PositionId });
+                    j.HasKey(t => new { t.WorkerId, t.PositionId, t.StartDate});
                 });
     }
 }

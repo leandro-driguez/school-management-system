@@ -6,7 +6,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class BasicMeanService : BaseService<BasicMean>, IBasicMeanService
+public class BasicMeanService : ActiveService<BasicMean>, IBasicMeanService
 {
     public BasicMeanService(IBasicMeanRepository repository) : base(repository)
     {

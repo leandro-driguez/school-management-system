@@ -5,7 +5,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class CourseRepository : CrudRepository<Course>, ICourseRepository
+public class CourseRepository : ActiveRepository<Course>, ICourseRepository
 {
     public CourseRepository(IObjectContext context) : base(context)
     {

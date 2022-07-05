@@ -5,7 +5,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class PositionService : BaseService<Position>, IPositionService
+public class PositionService : ActiveService<Position>, IPositionService
 {
     public PositionService(IPositionRepository repository) : base(repository)
     {

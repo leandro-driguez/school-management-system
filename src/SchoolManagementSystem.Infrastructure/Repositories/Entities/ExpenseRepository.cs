@@ -5,7 +5,7 @@ using SchoolManagementSystem.Application.Repositories_Interfaces;
 
 namespace SchoolManagementSystem.Infrastructure.Repositories;
 
-public class ExpenseRepository : CrudRepository<Expense>, IExpenseRepository
+public class ExpenseRepository : ActiveRepository<Expense>, IExpenseRepository
 {
     public ExpenseRepository(IObjectContext context) : base(context)
     {

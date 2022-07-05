@@ -11,6 +11,6 @@ namespace SchoolManagementSystem.Domain.Relations
         public string CourseGroupCourseId { get; set; }
         public CourseGroup CourseGroup { get; set; }
         public DateTime StartDate{ get; set; }
-        public DateTime EndDate{ get; set; }
+        public DateTime EndDate{ get; set; } = DateTime.MaxValue;
     }
 }

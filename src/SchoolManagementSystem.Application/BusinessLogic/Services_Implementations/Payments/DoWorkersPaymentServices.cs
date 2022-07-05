@@ -47,7 +47,8 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
     }
     public void DoPositionPayment(DateTime Date, string WorkerId)
     {
-        var _query = repoWorkerPositionR.Query().Where(c => c.WorkerId == WorkerId);
+        var _query = repoWorkerPositionR.Query().Where(c => c.WorkerId == WorkerId && c.StartDate < Date
+                                                                              && c.EndDate >= Date);
         foreach (var row in _query)
         {
             repoPositionPayments.Add(new WorkerPayRecordByPosition()
@@ -76,7 +77,7 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
         repoTeacherPayments.CommitAsync();
     }
 
-    public WorkerPaymentInfo GetWorkerPaymentInfo(string id)
+    public WorkerPaymentInfo GetWorkerPaymentInfo(string id, DateTime Date)
     {
         var worker = this.Query().SingleOrDefault(c => c.Id == id);
         var workerPaymentInfo = new WorkerPaymentInfo
@@ -85,11 +86,13 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
             WorkerName = worker.Name,
             InfoByDate = new List<InfoByDate>(){new InfoByDate{
                     InfoByPosition = new List<InfoByPosition>(),
-                    InfoByCourse = new List<InfoByCourse>()
+                    InfoByCourse = new List<InfoByCourse>(),
+                    Date = Date
                 }},
         };
 
-        var _query = from wPR in repoWorkerPositionR.Query().Include(c => c.Position).Where(c => c.WorkerId == id)
+        var _query = from wPR in repoWorkerPositionR.Query().Include(c => c.Position).Where(c => c.WorkerId == id && c.StartDate < workerPaymentInfo.InfoByDate[0].Date
+                                                                                                    && c.EndDate >= workerPaymentInfo.InfoByDate[0].Date)
                      select new { wPR.PositionId, salary = wPR.FixedSalary, Name = wPR.Position.Name };
 
         foreach (var row in _query)
@@ -116,11 +119,14 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
                     InfoByCourseGroup = new List<InfoByCourseGroup>()
                 };
                 var _querytcgr = repoTeacherCGREl.Query().Where(c => c.TeacherId == id 
-                                                            && c.CourseGroupCourseId == course.CourseId)
+                                                            && c.CourseGroupCourseId == course.CourseId
+                                                            && c.StartDate <= Date
+                                                            && c.EndDate >= Date
+                                                            )
                                                     .Include(c => c.CourseGroup.StudentCourseGroupRelations);
                 foreach (var group in _querytcgr)
                 {
-                    var income = group.CourseGroup.StudentCourseGroupRelations.Count() * row.Course.Price;
+                    var income = group.CourseGroup.StudentCourseGroupRelations.Where(c => c.StartDate <= info.Date && c.EndDate >= info.Date).Count() * row.Course.Price;
                     course.InfoByCourseGroup.Add(new InfoByCourseGroup()
                     {
                         CourseGroupId = group.CourseGroup.Id

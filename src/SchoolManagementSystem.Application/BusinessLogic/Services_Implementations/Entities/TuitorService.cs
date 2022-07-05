@@ -6,7 +6,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class TuitorService : BaseService<Tuitor>, ITuitorService
+public class TuitorService : ActiveService<Tuitor>, ITuitorService
 {
     public TuitorService(ITuitorRepository repository) : base(repository)
     {

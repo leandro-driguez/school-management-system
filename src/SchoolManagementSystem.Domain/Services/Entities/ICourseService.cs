@@ -3,9 +3,9 @@ using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.Domain.Services;
 
-public interface ICourseService : IService<Course>
+public interface ICourseService : IActiveService<Course>
 {
     // Selecciona un curso con cierto id
-    // y toma toda su información
+    // y toma toda su informaciï¿½n
     Course GetCourseById(string id);
 }
