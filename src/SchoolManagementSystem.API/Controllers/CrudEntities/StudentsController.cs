@@ -57,6 +57,26 @@ public class StudentsController : CrudController<Student, StudentDto>
         return Ok(dto_model);
     }
 
+    [HttpPut]
+    public override IActionResult Put([FromBody] StudentDto dto_model)
+    {
+        var entities = _service.Query().Include(c => c.Tuitor);
+        var entity = entities.FirstOrDefault(c => Equals(c.Id, dto_model.Id));
+
+        if(entity == null)
+            return NotFound(dto_model);
+        
+        _mapperToDto.Map(dto_model, entity);
+        entity.Tuitor.Name = dto_model.TuitorName;
+        entity.Tuitor.PhoneNumber = dto_model.TuitorPhoneNumber;
+
+
+        _service.Update(entity);
+        _service.CommitAsync();
+        
+        return Ok();
+    }
+
     public override IActionResult Delete(string id)
     {
         var students = _service.Query()

@@ -45,7 +45,7 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         {
             return NotFound(id);
         }        
-        return Ok(entity);
+        return Ok(_mapperToDto.Map<TDTO>(entity));
     }
 
     [HttpPost]
