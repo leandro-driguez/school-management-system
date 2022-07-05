@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import Login from "../components/Login/Login";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import axios from "axios";
 import {Divider, Tabs} from "antd";
 import { useParams } from "react-router-dom";
@@ -18,6 +18,18 @@ const onChange = (key) => {
 const StudentDetails = () => {
 
     const { id } = useParams();
+
+    const [info, setInfo] = useState([])
+
+    const getData = async () =>
+        await axios.get("https://localhost:5001/api/Students/" + `${id}`)
+            .then(resp=>{
+                setInfo(resp.data);
+            });
+
+    useEffect(()=>{
+        getData();
+    },[]);
 
     const currentCoursesColumns = [
         {
@@ -119,6 +131,61 @@ const StudentDetails = () => {
     const paymentRecordTableID = 'paymentRecordTable';
     const paymentRecordSearchboxID = 'paymentRecordSearchbox';
 
+    const debtsColumns = [
+        {
+            title: 'Grupo',
+            dataIndex: 'group',
+            editable: true,
+            dataType: 'text',
+            sorter: {
+                compare: (a, b) => a.group.localeCompare(b.group)
+            },
+            rules: [
+                {
+                    required: true,
+                    message: "Introduzca nombre",
+                },
+                {
+                    whitespace: true,
+                    message: "Introduzca nombre"
+                }
+            ],
+        },
+        {
+            title: 'Deuda',
+            dataIndex: 'debt',
+            editable: true,
+            dataType: 'number',
+            sorter: {
+                compare: (a, b) => a.debt - b.debt
+            },
+            rules: [
+                {
+                    required: true,
+                    message: "Introduzca tipo",
+                }
+            ]
+        },
+        {
+            title: 'Retraso',
+            dataIndex: 'delay',
+            dataType: 'number',
+            editable: true,
+            sorter: {
+                compare: (a, b) => a.delay - b.delay
+            },
+            rules: [
+                {
+                    required: true,
+                    message: "Introduzca grupo",
+                }
+            ]
+        }
+    ];
+
+    const debtsTableID = 'debtsTable';
+    const debtsSearchboxID = 'debtsSearchbox';
+
     const [loggedIn] = useState(()=>{
         if (localStorage['token'] == null)
             return false;
@@ -140,26 +207,28 @@ const StudentDetails = () => {
     if (!loggedIn)
         window.location.replace("http://localhost:3000/");
 
+    //<Divider type="vertical" />
+    //Tutor: {info.tuitor.name} <Divider type="vertical" />
+    //Teléfono (tutor): {info.tuitor.phoneNumber}
+
     return (
         <div>
             <NavBar></NavBar>
             <Divider className={"detailsHeader"}>
-                <strong>Nombre</strong> <Divider type="vertical" />
-                <strong>Apellidos</strong> <Divider type="vertical" />
-                CI <Divider type="vertical" />
-                Teléfono <Divider type="vertical" />
-                Dirección <Divider type="vertical" />
-                Nivel escolar <Divider type="vertical" />
-                Fecha de inicio en la sede <Divider type="vertical" />
-                Fondo <Divider type="vertical" />
-                Tutor <Divider type="vertical" />
-                Teléfono (tutor)
+                <strong>Nombre:</strong> {info.name} <Divider type="vertical" />
+                <strong>Apellidos:</strong> {info.lastName}<Divider type="vertical" />
+                CI: {info.idCardNo} <Divider type="vertical" />
+                Teléfono: {info.phoneNumber} <Divider type="vertical" />
+                Dirección: {info.address} <Divider type="vertical" />
+                Nivel escolar: {info.scholarityLevel} <Divider type="vertical" />
+                Fecha de inicio en la sede: {info.dateBecomedMember} <Divider type="vertical" />
+                Fondo: {info.founds}
             </Divider>
             <Tabs centered defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="Cursos actuales" key="1">
                     <CRUD_Table title={"Cursos"}
                                 columns={currentCoursesColumns}
-                                operations={["edit","delete","add"]}
+                                operations={["edit","delete"]}
                                 url={"https://localhost:5001/api/StudentCourseGroupRelation/" + `${id}`}
                                 tableID={currentCoursesTableID}
                                 searchboxID={currentCoursesSearchboxID}
@@ -176,6 +245,16 @@ const StudentDetails = () => {
                                 searchboxID={paymentRecordSearchboxID}
                     thereIsDropdown={false}
                         FormsInitialValues={{ key: "string" }}
+                    ></CRUD_Table>
+                </TabPane>
+                <TabPane tab="Deudas" key="3">
+                    <CRUD_Table title={"Deudas"}
+                                columns={debtsColumns}
+                                operations={[]}
+                                url={"https://localhost:5001/api/StudentPayCourseRecord/" + `${id}`}
+                                tableID={debtsTableID}
+                                searchboxID={debtsSearchboxID}
+                                FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </TabPane>
             </Tabs>
