@@ -61,7 +61,7 @@ const Debtors = () => {
         <div>
             <NavBar></NavBar>
             <CRUD_Table
-                title={"Estudiantes"}
+                title={"Deudores"}
                 columns={columns}
                 operations={["details"]}
                 url={"https://localhost:5001/api/Debtors"}
