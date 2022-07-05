@@ -23,6 +23,19 @@ const Students = () => {
         console.log(list);
         return list;
     }
+
+    function filtersFoundSubMenu(comparer, count){
+        var children = [];
+        for (let index = 0; index < count; index++) {
+            let val = 50 * index;
+            children.push({
+                text: val,
+                value: [comparer, val]
+            });  
+        }        
+        return children;
+    }
+
     const [loggedIn] = useState(()=>{
         if (localStorage['token'] == null)
             return false;
@@ -198,7 +211,27 @@ const Students = () => {
                     whitespace: true,
                     message: "Introduzca los fondos."
                 }
-            ]
+            ],
+            filters: [
+                {
+                    text: "Mayor",
+                    value: "",
+                    children: filtersFoundSubMenu(">=", 11)
+                },
+                {
+                    text: "Menor",
+                    value: "",
+                    children: filtersFoundSubMenu("<=", 11)
+                }
+            ],
+            onFilter: (value, record) => {
+                console.log(value);
+                if (value[0] == ">="){
+                    return record.founds >= value[1];
+                } else {
+                    return record.founds <= value[1];
+                }
+            }
         },
         {
             title: 'Nombre del tutor',
