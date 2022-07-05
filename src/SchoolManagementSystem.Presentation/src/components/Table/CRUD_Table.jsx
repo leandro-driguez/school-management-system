@@ -145,7 +145,12 @@ const CRUD_Table = (props) => {
                     width: "1%",
                     render: (_, record) =>
                         <Popconfirm title="¿Está seguro de que quiere restaurar esta fila?" cancelText={"Cancelar"}
-                                    okText={"Aceptar"} onConfirm={() => console.log("add")}
+                                    okText={"Aceptar"}
+                                    onConfirm={async ()=>{
+                                        await axios.post(props.restore_url + `/${record.key}`).catch((resp) => console.log(resp.data));
+                                        console.log(props.restore_url, record.key);
+                                        await getData();
+                                    }}
                                     icon={<ExclamationCircleTwoTone twoToneColor="orange"/>}>
                             <RedoOutlined />
                         </Popconfirm>

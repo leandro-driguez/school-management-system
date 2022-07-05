@@ -232,7 +232,8 @@ const Students = () => {
                 title={"Estudiantes Bajas de la Sede"}
                 columns={columns}
                 operations={["restore"]}
-                url={"https://localhost:5001/api/Students"}
+                url={"https://localhost:5001/api/Students/Inactive"}
+                restore_url={"https://localhost:5001/api/Students"}
                 tableID={tableID}
                 searchboxID={searchboxID}
                 FormsInitialValues={{ key: "string" }}
