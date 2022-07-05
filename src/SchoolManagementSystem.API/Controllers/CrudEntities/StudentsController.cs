@@ -20,6 +20,36 @@ public class StudentsController : CrudController<Student, StudentDto>
     {
     }
 
+    [HttpGet()]
+    [Route("Inactive")]
+    public IActionResult Get()
+    {
+        //if (active)
+        //{
+        //    return Ok(_service.Query()
+        //            .Select(_mapperToDto.Map<Student, StudentDto>)
+        //            .ToList());
+        //}
+        return Ok(_service.QueryInactives()
+                    .Select(_mapperToDto.Map<Student, StudentDto>)
+                    .ToList());
+    }
+
+    [HttpPost("{id}")]
+    public IActionResult Restore(string id)
+    {
+        var inactiveStudent = _service.QueryInactives().SingleOrDefault(c => c.Id == id);
+        if (inactiveStudent != null)
+        {
+            inactiveStudent.Active = true;
+            _service.Update(inactiveStudent);
+            _service.CommitAsync();
+
+            return Ok(id);
+        }
+        return NotFound(id);
+    }
+
     [HttpPost]
     public override IActionResult Post([FromBody] StudentDto dto_model)
     {
