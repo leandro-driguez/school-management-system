@@ -20,9 +20,7 @@ public class IdentityContext : IdentityDbContext<IdentityUser>
     }  
 
     private void SeedUsers(ModelBuilder builder)  
-    {  
-        PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();  
-        
+    {   
         IdentityUser user = new IdentityUser()  
         {  
             Id = "8ae7e3b7-0e7a-46c0-957b-394f5a92d858",  

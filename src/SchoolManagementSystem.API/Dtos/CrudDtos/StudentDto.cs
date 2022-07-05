@@ -8,16 +8,13 @@ namespace SchoolManagementSystem.API.Dtos;
 
 public class StudentDto : SchoolMemberDto
 {
-
-    
-
-    [Required]
+    // [Required]
     public string TuitorName { get; set; }
     
-    [Required]
+    // [Required]
     public int TuitorPhoneNumber { get; set; }
 
-    [Required]
+    // [Required]
     public int Founds { get; set; }
 
     [Required]

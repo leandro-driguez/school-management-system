@@ -23,7 +23,7 @@ public class SchoolMemberDto : IDto
         [MaxLength(30)]
         public string LastName { get; set; }
         
-        [Required]
+        // [Required]
         public int PhoneNumber{ get; set; }
         
         [Required]
