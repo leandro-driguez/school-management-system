@@ -1,0 +1,26 @@
+@import '~antd/dist/antd.css';
+
+.ant-collapse-header{
+    font-weight: bold;
+    margin-left: 3%;
+}
+
+.ant-picker-calendar-date{
+    float: right;
+}
+
+.checkout, .total_p{
+    margin-top: 30px;
+    margin-left: 5.5%;
+    margin-right: 5.5%;
+}
+
+.total{
+    float: left;
+}
+
+.checkout_button{
+    float: right;
+    border-radius: 20px;
+    margin-left: 5px;
+}
