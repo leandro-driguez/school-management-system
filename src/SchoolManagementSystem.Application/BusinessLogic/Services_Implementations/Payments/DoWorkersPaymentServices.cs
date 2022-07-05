@@ -119,7 +119,10 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
                     InfoByCourseGroup = new List<InfoByCourseGroup>()
                 };
                 var _querytcgr = repoTeacherCGREl.Query().Where(c => c.TeacherId == id 
-                                                            && c.CourseGroupCourseId == course.CourseId)
+                                                            && c.CourseGroupCourseId == course.CourseId
+                                                            && c.StartDate <= Date
+                                                            && c.EndDate >= Date
+                                                            )
                                                     .Include(c => c.CourseGroup.StudentCourseGroupRelations);
                 foreach (var group in _querytcgr)
                 {

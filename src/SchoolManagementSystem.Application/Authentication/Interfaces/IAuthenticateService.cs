@@ -11,4 +11,8 @@ public interface IAuthenticateService
     Task<Response> Register(string userName, string email, string password);
 
     Task<Response> RegisterAdmin(string userName, string email, string password);
+
+    Task<Response> RegisterSecretary(string userName, string email, string password);
+    
+    Task<Response> CreateRole(string role);
 }

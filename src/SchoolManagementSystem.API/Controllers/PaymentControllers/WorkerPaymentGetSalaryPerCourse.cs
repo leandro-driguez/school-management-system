@@ -21,17 +21,19 @@ public class WorkerPaymentGetSalaryPerCourseController : Controller
         _service = service;
     }
 
-    [HttpGet("{id}/{date}")]
-    public IActionResult Get(string id,string date)
+    [HttpGet("{workerid}/{courseid}/{date}")]
+    public IActionResult Get(string workerid, string courseid, string date)
     {
-        var Date = DateTime.Parse(date);
-        if(date == "now")
-            Date = DateTime.Now;
-        else
-            Date = DateTime.Parse(date);
+        System.Console.WriteLine(date);
+        
+        var Date = new DateTime(2020,03,01);
 
-        string[] ids = id.Split("$$");
-        var workerid = ids[0];var courseid = ids[1];
+        try{
+
+            Date = DateTime.Parse(date);
+        }
+        catch {};
+
 
         var worker = _service.Query().SingleOrDefault(c => c.Id == workerid);
         if (worker == null)

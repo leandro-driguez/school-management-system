@@ -20,10 +20,8 @@ public class IdentityContext : IdentityDbContext<IdentityUser>
     }  
 
     private void SeedUsers(ModelBuilder builder)  
-    {  
-        PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();  
-        
-        IdentityUser user = new IdentityUser()  
+    {   
+        IdentityUser admin = new IdentityUser()  
         {  
             Id = "8ae7e3b7-0e7a-46c0-957b-394f5a92d858",  
             UserName = "admin",  
@@ -37,7 +35,23 @@ public class IdentityContext : IdentityDbContext<IdentityUser>
             LockoutEnabled = true,  
         };
 
-        builder.Entity<IdentityUser>().HasData(user);  
+        builder.Entity<IdentityUser>().HasData(admin);
+
+        IdentityUser secretary = new IdentityUser()  
+        {  
+            Id = "33fddbfa-24fd-449c-8b14-47d69e31ba58",  
+            UserName = "secretary",  
+            NormalizedUserName = "SECRETARY",
+            Email = "secretary@dclase.com",  
+            NormalizedEmail = "SECRETARY@DCLASE.COM",
+            PhoneNumber = "54792093",
+            PasswordHash = "AQAAAAEAACcQAAAAEMqMPS4f4FhSorr2p3/P8geVCRFyoLAN1hp8q/V1D9rBR+xEGmLPuT1D/TlZBsrmtw==",
+            SecurityStamp = "6NJTRPIPQJQBEJULDBMUHZGTT5BFS4FB",
+            ConcurrencyStamp = "c1b45808-ed7b-4bf8-b6ce-cd3a1f3e2549",
+            LockoutEnabled = true,  
+        };
+
+        builder.Entity<IdentityUser>().HasData(secretary);  
     }  
 
     private void SeedRoles(ModelBuilder builder)  
@@ -53,7 +67,13 @@ public class IdentityContext : IdentityDbContext<IdentityUser>
                 Id = "d39c3aa3-4cce-45e5-9fe6-69c071ee6758", 
                 Name = "User",   
                 NormalizedName = "USER", 
-                ConcurrencyStamp = "4708f4c2-2a06-4c5b-adbc-3d38ccc5e60a"
+                ConcurrencyStamp = "4708f4c2-2a06-4c5b-adbc-849nal84h92m"
+            },
+            new IdentityRole() { 
+                Id = "d3ir9344-847h-84yh-v83r-69c071ee6758", 
+                Name = "Secretary",   
+                NormalizedName = "SECRETARY", 
+                ConcurrencyStamp = "84ehsk83-vr87-84hw-sndi-3d38ccc5e60a"
             }     
         );  
     }  
@@ -67,6 +87,14 @@ public class IdentityContext : IdentityDbContext<IdentityUser>
             },
             new IdentityUserRole<string>() { 
                 UserId = "8ae7e3b7-0e7a-46c0-957b-394f5a92d858",
+                RoleId = "d39c3aa3-4cce-45e5-9fe6-69c071ee6758"
+            },
+            new IdentityUserRole<string>() { 
+                UserId = "33fddbfa-24fd-449c-8b14-47d69e31ba58",
+                RoleId = "d3ir9344-847h-84yh-v83r-69c071ee6758"
+            },
+            new IdentityUserRole<string>() { 
+                UserId = "33fddbfa-24fd-449c-8b14-47d69e31ba58",
                 RoleId = "d39c3aa3-4cce-45e5-9fe6-69c071ee6758"
             }  
         );  
