@@ -74,7 +74,11 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca el nombre."
-                }
+                },
+                {
+                    pattern: /^\S{2,}(\s\S{2,})?(\s\S{2,})?(\s\S{2,})?$/,
+                    message: 'El nombre solo puede contener letras (dos como mínimo). En caso de ser compuesto, deben estar separados por un único espacio.'
+                },
             ]
         },
         {
@@ -93,7 +97,11 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca los apellidos."
-                }
+                },
+                {
+                    pattern: /^\S{2,}(\s\S{2,})?(\s\S{2,})?(\s\S{2,})?$/,
+                    message: 'Los apellidos solo pueden contener letras (dos como mínimo) y estar separados por un único espacio.'
+                },
             ]
         },
         {
@@ -112,25 +120,10 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca el carnet de identidad."
-                }
-            ]
-        },
-        {
-            title: 'Teléfono',
-            dataIndex: 'phoneNumber',
-            editable: true,
-            dataType: 'number',
-            sorter: {
-                compare: (a, b) => a.phoneNumber - b.phoneNumber
-            },
-            rules: [
-                {
-                    required: true,
-                    message: "Introduzca el número de teléfono.",
                 },
                 {
-                    whitespace: true,
-                    message: "Introduzca el número de teléfono."
+                    pattern: /^\d{11}$/,
+                    message: 'El carnet de identidad solo puede contener números y tiene tamaño 11.'
                 }
             ]
         },
@@ -195,6 +188,21 @@ const Students = () => {
             ]
         },
         {
+            title: 'Teléfono',
+            dataIndex: 'phoneNumber',
+            editable: true,
+            dataType: 'number',
+            sorter: {
+                compare: (a, b) => a.phoneNumber - b.phoneNumber
+            },
+            rules: [
+                {
+                    whitespace: true,
+                    message: "Introduzca el número de teléfono."
+                }
+            ]
+        },
+        {
             title: 'Fondos',
             dataIndex: 'founds',
             editable: true,
@@ -242,14 +250,6 @@ const Students = () => {
                 compare: (a, b) => a.tuitorName.localeCompare(b.tuitorName)
             },
             rules: [
-                {
-                    required: true,
-                    message: "Introduzca el nombre del tutor.",
-                },
-                {
-                    whitespace: true,
-                    message: "Introduzca el nombre del tutor."
-                }
             ],
         },
         {
@@ -261,14 +261,6 @@ const Students = () => {
                 compare: (a, b) => a.tuitorPhoneNumber - b.tuitorPhoneNumber
             },
             rules: [
-                {
-                    required: true,
-                    message: "Introduzca el teléfono del tutor",
-                },
-                {
-                    whitespace: true,
-                    message: "Introduzca el teléfono del tutor"
-                }
             ]
         }        
     ];

@@ -134,11 +134,11 @@ const StudentDetails = () => {
     const debtsColumns = [
         {
             title: 'Grupo',
-            dataIndex: 'group',
+            dataIndex: 'groupName',
             editable: true,
             dataType: 'text',
             sorter: {
-                compare: (a, b) => a.group.localeCompare(b.group)
+                compare: (a, b) => a.groupName.localeCompare(b.groupName)
             },
             rules: [
                 {
@@ -207,10 +207,6 @@ const StudentDetails = () => {
     if (!loggedIn)
         window.location.replace("http://localhost:3000/");
 
-    //<Divider type="vertical" />
-    //Tutor: {info.tuitor.name} <Divider type="vertical" />
-    //Teléfono (tutor): {info.tuitor.phoneNumber}
-
     return (
         <div>
             <NavBar></NavBar>
@@ -222,7 +218,9 @@ const StudentDetails = () => {
                 Dirección: {info.address} <Divider type="vertical" />
                 Nivel escolar: {info.scholarityLevel} <Divider type="vertical" />
                 Fecha de inicio en la sede: {info.dateBecomedMember} <Divider type="vertical" />
-                Fondo: {info.founds}
+                Fondo: {info.founds} <Divider type="vertical" />
+                Tutor: {info.tuitorName} <Divider type="vertical" />
+                Teléfono (tutor): {info.tuitorPhoneNumber}
             </Divider>
             <Tabs centered defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="Cursos actuales" key="1">
@@ -251,7 +249,7 @@ const StudentDetails = () => {
                     <CRUD_Table title={"Deudas"}
                                 columns={debtsColumns}
                                 operations={[]}
-                                url={"https://localhost:5001/api/StudentPayCourseRecord/" + `${id}`}
+                                url={"https://localhost:5001/api/Debtors/" + `${id}`}
                                 tableID={debtsTableID}
                                 searchboxID={debtsSearchboxID}
                                 FormsInitialValues={{ key: "string" }}

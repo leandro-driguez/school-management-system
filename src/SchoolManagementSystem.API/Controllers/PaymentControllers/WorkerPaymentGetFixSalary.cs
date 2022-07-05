@@ -21,15 +21,20 @@ public class WorkerPaymentGetFixSalaryController : Controller
         _service = service;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult Get(string id)
+    [HttpGet("{id}/{date}")]
+    public IActionResult Get(string id,string date)
     {
-        System.Console.WriteLine(id);
+        var Date = DateTime.Parse(date);
+        if(date == "now")
+            Date = DateTime.Now;
+        else
+            Date = DateTime.Parse(date);
+
         var worker = _service.Query().SingleOrDefault(c => c.Id == id);
         if (worker == null)
             NotFound();
 
-        return Ok(_service.GetWorkerPaymentInfo(id).InfoByDate[0].InfoByPosition.Select(mapper.Map<InfoByPositionDto>));
+        return Ok(_service.GetWorkerPaymentInfo(id, Date).InfoByDate[0].InfoByPosition.Select(mapper.Map<InfoByPositionDto>));
     }
 
 }

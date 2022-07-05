@@ -20,10 +20,10 @@ public class SchoolMemberDto : IDto
         public string Name { get; set; }
         
         [Required]
-        [MaxLength(30)]
+        [MaxLength(40)]
         public string LastName { get; set; }
         
-        [Required]
+        // [Required]
         public int PhoneNumber{ get; set; }
         
         [Required]

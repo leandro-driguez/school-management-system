@@ -31,6 +31,22 @@ public class TeachersController : CrudController<Teacher, TeacherDto>
         return Ok();
     }
 
+    [HttpPost]
+    public override IActionResult Post([FromBody] TeacherDto dto_model)
+    {
+        var inact = _service.QueryInactives().SingleOrDefault(c => c.IDCardNo == dto_model.IDCardNo
+                                                            && c.Name == dto_model.Name);        
+        if(inact != null)
+        {
+            inact.Active = true;
+            _service.Update(inact);
+            _service.CommitAsync();
+            return Ok(_mapperToDto.Map<TeacherDto>(inact));
+        }
+        
+        return Ok(dto_model);
+    }
+
 
     [HttpDelete]
     public override IActionResult Delete(string id)

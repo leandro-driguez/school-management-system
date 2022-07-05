@@ -341,7 +341,14 @@ const CRUD_Table = (props) => {
                    onCancel={() => setIsEditingModalVisible(false)}
                    footer={null}
             >
-                <Form name="hey" autoComplete={"off"}>
+                <Form name="hey"
+                      autoComplete={"off"}
+                      onFinish={async ()=>{
+                          await axios.post(props.url, newItem).catch((resp) => console.log(resp.data));
+                          console.log(props.url, newItem);
+                          await getData();
+                          setIsEditingModalVisible(false);
+                }}>
 
                     {props.thereIsDropdown && 
                         <Dropdown
@@ -367,22 +374,14 @@ const CRUD_Table = (props) => {
                             (header) => { return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); }
                         )
                     }
-                    
-                    
-                    <Button type="primary" 
-                            onClick={ async ()=>{ 
 
-                                await axios.post(props.url, newItem).catch((resp) => console.log(resp.data));
-
-                                console.log(props.url, newItem);
-
-                                getData();
-
-                                setIsEditingModalVisible(false);
-                            }} 
-                            htmlType="submit"
+                    <Form.Item style={{float: "left", marginRight: "10px"}}>
+                    <Button type="primary" htmlType="submit"
                     >Guardar</Button>
+                    </Form.Item>
+                    <Form.Item>
                     <Button onClick={()=>{setIsEditingModalVisible(false);}}>Cancelar</Button>
+                    </Form.Item>
                 </Form>
             </Modal>
         );

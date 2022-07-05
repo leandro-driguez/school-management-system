@@ -17,7 +17,7 @@ public interface IDoWorkersPaymentService : IRecordService<Worker>
     public IRepository<WorkerPositionRelation> GetWorkerPositionRelationRepo();
     public void DoPositionPayment(DateTime Date, string WorkerId);
     public void DoCoursePayment(DateTime Date, string WorkerId);
-    public WorkerPaymentInfo GetWorkerPaymentInfo(string id);
+    public WorkerPaymentInfo GetWorkerPaymentInfo(string id, DateTime Date);
     // public IRepository<StudentCourseGroupRelation> GetStudentCourseGroupRelationRepo(string id);
     // public IQueryable<TeacherCourseGroupRelation> GetWorkerCoursePorcentualSalaries(string id);
     // public IQueryable<WorkerPayRecordByPosition> GetWorkerFixSalaries(string id);
