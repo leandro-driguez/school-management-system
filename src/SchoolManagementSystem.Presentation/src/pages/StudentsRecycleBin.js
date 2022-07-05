@@ -4,6 +4,7 @@ import CRUD_Table from "../components/Table/CRUD_Table";
 import Login from "../components/Login/Login";
 import {useState} from 'react';
 import axios from "axios";
+import {Divider} from "antd";
 
 const Students = () => {
 
@@ -15,16 +16,16 @@ const Students = () => {
 
         const JWT = JSON.parse(localStorage['token']);
 
-        axios.get("https://localhost:5001/api/Authenticate/loggedIn", 
-                    { headers: { "Authorization": `Bearer ${JWT.token}` } })
-                .catch((err) => {
+        axios.get("https://localhost:5001/api/Authenticate/loggedIn",
+            { headers: { "Authorization": `Bearer ${JWT.token}` } })
+            .catch((err) => {
                 respOk = false;
                 console.log(err.response);
             });
 
         return respOk;
     });
-         
+
     if (!loggedIn)
         window.location.replace("http://localhost:3000/");
 
@@ -218,26 +219,23 @@ const Students = () => {
                     message: "Introduzca el teléfono del tutor"
                 }
             ]
-        }        
+        }
     ];
 
-    const tableID = 'StudentsTable';
-    const searchboxID = 'StudentsSearchbox';
+    const tableID = 'RecycleBinStudentsTable';
+    const searchboxID = 'RecycleBinStudentsSearchbox';
 
     return (
         <div>
             <NavBar></NavBar>
-            <CRUD_Table 
-                title={"Estudiantes"} 
-                columns={columns} 
-                operations={["edit","delete","add","details","trash"]}
+            <CRUD_Table
+                title={"Estudiantes Bajas de la Sede"}
+                columns={columns}
+                operations={["restore"]}
                 url={"https://localhost:5001/api/Students"}
                 tableID={tableID}
                 searchboxID={searchboxID}
-                link={"../StudentDetails"}
-                recycle_link={"../StudentsRecycleBin"}
-            thereIsDropdown={false}
-                        FormsInitialValues={{ key: "string" }}
+                FormsInitialValues={{ key: "string" }}
             >
             </CRUD_Table>
         </div>

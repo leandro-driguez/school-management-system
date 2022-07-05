@@ -5,7 +5,9 @@ import {
     SaveTwoTone,
     CloseSquareTwoTone,
     ExclamationCircleTwoTone,
-    EllipsisOutlined
+    EllipsisOutlined,
+    DeleteRowOutlined,
+    RedoOutlined, EditOutlined, SaveOutlined, CloseSquareOutlined
 } from "@ant-design/icons";
 import {useContext, useEffect, useRef, createContext, useState} from 'react';
 import "./CRUD_Table.css";
@@ -59,6 +61,8 @@ const CRUD_Table = (props) => {
     const [headers] = useState(props.columns);
     const [editingKey, setEditingKey] = useState('');
 
+    var showAdd, showDelete, showTrash;
+
     const columns = [];
 
     const temp = props.columns;
@@ -83,20 +87,23 @@ const CRUD_Table = (props) => {
                             marginRight: 8,
                         }}
                     >
-                      <SaveTwoTone />
+                      <SaveOutlined style={{color: "black"}}/>
                     </Typography.Link>
                     <Popconfirm title="¿Está seguro que quiere cancelar?" onConfirm={cancel}>
-                      <a><CloseSquareTwoTone /></a>
+                      <a><CloseSquareOutlined style={{color: "black"}}/></a>
                     </Popconfirm>
                   </span>
                         ) : (
                             <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                                <EditTwoTone />
+                                <EditOutlined style={{color: "black"}}/>
                             </Typography.Link>
                         );
                     },
                 },
             );
+        }
+        if (props.operations[i] === 'add'){
+            showAdd = true;
         }
         if (props.operations[i] === 'delete'){
             columns.push(
@@ -109,11 +116,12 @@ const CRUD_Table = (props) => {
                             <Popconfirm title="¿Está seguro de que quiere eliminar esta fila?" cancelText={"Cancelar"}
                                         okText={"Aceptar"} onConfirm={() => Delete(record.key)}
                                         icon={<ExclamationCircleTwoTone twoToneColor="#eb2f96"/>}>
-                                <DeleteTwoTone/>
+                                <DeleteRowOutlined />
                             </Popconfirm>
                         ) : null,
                 }
             );
+            showDelete = true;
         }
         if (props.operations[i] === 'details'){
             columns.push(
@@ -122,12 +130,32 @@ const CRUD_Table = (props) => {
                     dataIndex: 'operation',
                     width: "1%",
                     render: (_, record) =>
-                        <a href={props.link + `/${record.key}`}><EllipsisOutlined style={{color:"blue"}}/></a>
+                        <a href={props.link + `/${record.key}`}><EllipsisOutlined /></a>
+                }
+            );
+        }
+        if (props.operations[i] === 'trash'){
+            showTrash = true;
+        }
+        if (props.operations[i] === 'restore'){
+            columns.push(
+                {
+                    title: 'Restaurar',
+                    dataIndex: 'operation',
+                    width: "1%",
+                    render: (_, record) =>
+                        <Popconfirm title="¿Está seguro de que quiere restaurar esta fila?" cancelText={"Cancelar"}
+                                    okText={"Aceptar"} onConfirm={() => console.log("add")}
+                                    icon={<ExclamationCircleTwoTone twoToneColor="orange"/>}>
+                            <RedoOutlined />
+                        </Popconfirm>
                 }
             );
         }
     }
-    
+
+    const showOpBox = showAdd || showDelete;
+
     const [isEditingModalVisible, setIsEditingModalVisible] = useState(false);
 
     const isEditing = (record) => record.key === editingKey;
@@ -377,33 +405,51 @@ const CRUD_Table = (props) => {
                     />
                 </div>
 
-                <div className="box">
-                    <a className="table_options">
-                        <i className="fa fa-plus-square-o"
-                           aria-hidden="true"
-                           onClick={() => {
-                               for (let i = 0; i < props.operations.length; i++) {
-                                   if(props.operations[i] === 'add'){
-                                       setIsEditingModalVisible(true);
-                                   }
-                               }
-                               }}>
-                        </i>
-                    </a>
+                {showTrash &&
+                    <div className="box">
+                        <a className="table_options" href={props.recycle_link}>
+                            <i className="fa fa-trash-o"
+                               style={{fontSize: "18px"}}
+                               aria-hidden="true"
+                            >
+                            </i>
+                        </a>
+                    </div>
+                }
 
-                    <a className="table_options">
-                        <i className="fa fa-minus-square-o"
-                           aria-hidden="true"
-                           onClick={() => {
-                               for (let i = 0; i < props.operations.length; i++) {
-                                   if(props.operations[i] === 'delete'){
-                                        DeleteMultipleRows(selectedRowKeys);
-                                   }
-                               }
-                           }}>
-                        </i>
-                    </a>
-                </div>
+                {showOpBox &&
+                    <div className="box">
+                        {showAdd &&
+                            <a className="table_options">
+                                <i className="fa fa-plus-square-o"
+                                   aria-hidden="true"
+                                   onClick={() => {
+                                       for (let i = 0; i < props.operations.length; i++) {
+                                           if (props.operations[i] === 'add') {
+                                               setIsEditingModalVisible(true);
+                                           }
+                                       }
+                                   }}>
+                                </i>
+                            </a>
+                        }
+
+                        {showDelete &&
+                            <a className="table_options">
+                                <i className="fa fa-minus-square-o"
+                                   aria-hidden="true"
+                                   onClick={() => {
+                                       for (let i = 0; i < props.operations.length; i++) {
+                                           if (props.operations[i] === 'delete') {
+                                               DeleteMultipleRows(selectedRowKeys);
+                                           }
+                                       }
+                                   }}>
+                                </i>
+                            </a>
+                        }
+                    </div>
+                }
 
                 <div className="box">
                     <p><strong>Total:</strong> {data.length}</p>
@@ -411,27 +457,49 @@ const CRUD_Table = (props) => {
             </div>
 
         <Form form={form} component={false}>
-            <Table
-                id={props.tableID}
-                components={{
-                    body: {
-                        cell: EditableCell,
-                    },
-                }}
-                rowSelection={{
-                    ...rowSelection,
-                }}
-                bordered
-                dataSource={data}
-                columns={mergedColumns}
-                rowClassName="editable-row"
-                pagination={{
-                    position: ["bottomCenter"],
-                    pageSizeOptions: ["5", "10", "20", "50", "100"],
-                    showQuickJumper: true,
-                    onChange: cancel,
-                }}
-            />
+            {showDelete &&
+                <Table
+                    id={props.tableID}
+                    components={{
+                        body: {
+                            cell: EditableCell,
+                        },
+                    }}
+                    rowSelection={{
+                        ...rowSelection,
+                    }}
+                    bordered
+                    dataSource={data}
+                    columns={mergedColumns}
+                    rowClassName="editable-row"
+                    pagination={{
+                        position: ["bottomCenter"],
+                        pageSizeOptions: ["5", "10", "20", "50", "100"],
+                        showQuickJumper: true,
+                        onChange: cancel,
+                    }}
+                />
+            }
+            {!showDelete &&
+                <Table
+                    id={props.tableID}
+                    components={{
+                        body: {
+                            cell: EditableCell,
+                        },
+                    }}
+                    bordered
+                    dataSource={data}
+                    columns={mergedColumns}
+                    rowClassName="editable-row"
+                    pagination={{
+                        position: ["bottomCenter"],
+                        pageSizeOptions: ["5", "10", "20", "50", "100"],
+                        showQuickJumper: true,
+                        onChange: cancel,
+                    }}
+                />
+            }
         </Form>
 
         <Forms

@@ -22,6 +22,7 @@ import Positions from './pages/Positions';
 import Classrooms from './pages/Classrooms';
 import LoginPage from  './pages/Login';
 import Dropdown from  './components/Dropdown/Dropdown';
+import StudentsRecycleBin from "./pages/StudentsRecycleBin";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path='/' element={<LoginPage/>}/>
                 <Route path='/Home' element={<Home/>}/>
                 <Route path='/Students' element={<Students/>}/>
+                <Route path='/StudentsRecycleBin' element={<StudentsRecycleBin/>}/>
                 <Route path='/StudentDetails/:id' element={<StudentDetails/>}/>
                 <Route path='/Workers' element={<Workers/>}/>
                 <Route path='/WorkerDetails/:id' element={<WorkerDetails/>}/>
