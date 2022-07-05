@@ -12,10 +12,10 @@ namespace SchoolManagementSystem.API.Controllers;
 [Route("api/[controller]")]
 public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity where TDTO : IDto
 {
-    public readonly IService<TEntity> _service;
+    public readonly IActiveService<TEntity> _service;
     public readonly IMapper _mapperToDto;
     
-    public CrudController(IService<TEntity> service, 
+    public CrudController(IActiveService<TEntity> service, 
         IMapper mapperToDto)
     {
         _service = service;
@@ -45,7 +45,7 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         {
             return NotFound(id);
         }        
-        return Ok(entity);
+        return Ok(_mapperToDto.Map<TDTO>(entity));
     }
 
     [HttpPost]
@@ -90,7 +90,8 @@ public class CrudController<TEntity, TDTO> : Controller where TEntity :  Entity 
         if(entity == null)
             return NotFound(id);
         
-        _service.Remove(entity);
+        entity.Active = false;
+        _service.Update(entity);
         _service.CommitAsync();
         
         return Ok();

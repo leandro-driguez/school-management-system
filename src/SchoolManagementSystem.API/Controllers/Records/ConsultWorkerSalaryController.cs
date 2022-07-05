@@ -24,7 +24,7 @@ public class ConsultWorkerSalaryController : Controller
     {
         var worker = _service.Query().SingleOrDefault(c => c.Id == id);
         if( worker == null)
-            NotFound();
+            return NotFound();
 
         var dto = new ConsultWorkerSalaryGetSingleDto
             {
@@ -76,7 +76,7 @@ public class ConsultWorkerSalaryController : Controller
                                                     .Include(c => c.CourseGroup.StudentCourseGroupRelations);
                 foreach (var group in _querytcgr)
                 {
-                    var income = group.CourseGroup.StudentCourseGroupRelations.Count() * row.Course.Price;
+                    var income = group.CourseGroup.StudentCourseGroupRelations.Where(c => c.StartDate <= info.Date && c.EndDate >= info.Date).Count() * row.Course.Price;
                     course.InfoByCourseGroup.Add(new InfoByCourseGroupDto()
                     {
                         CourseGroupId = group.CourseGroup.Id

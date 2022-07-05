@@ -2,7 +2,7 @@ namespace SchoolManagementSystem.API;
 
 class PeriodicHostedService : BackgroundService
 {
-    private readonly TimeSpan _period = TimeSpan.FromDays(1);
+    private readonly TimeSpan _period = TimeSpan.FromHours(5);
     private readonly ILogger<PeriodicHostedService> _logger;
     private readonly IServiceScopeFactory _factory;
     private int _executionCount = 0;

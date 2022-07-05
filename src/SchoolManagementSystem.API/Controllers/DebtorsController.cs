@@ -33,23 +33,38 @@ public class DebtorsController : Controller
         List<DebtorDto> debtors = new List<DebtorDto>();
         foreach (Student student in _servicePayment.GetStudentRepo().Query())
         {
-            foreach(var payment in GroupCurseNoPaid(_servicePayment,student.Id).Where(s => DateTime.Now.Date > s.DatePaid.Date))
-            {
-                debtors.Add(new DebtorDto
-                {
-                    GroupId = payment.GroupId,
-                    GroupName = payment.GroupName,
-                    IDCardNo = student.IDCardNo,
-                    StudentId = student.Id,
-                    StudentName = student.Name,
-                    StudentLastName = student.LastName,
-                    Debt = payment.CoursePrice,
-                    Dealy = (DateTime.Now.Date - payment.DatePaid).Days
-                });
-            }
+            var a = from debt in GroupCurseNoPaid(_servicePayment, student.Id)
+                    where DateTime.Now.Date > debt.DatePaid.Date
+                    group debt by debt.StudentId into g
+                    select new DebtorDto
+                    {
+                        GroupId = g.First().GroupId,
+                        GroupName = g.First().GroupName,
+                        IDCardNo = student.IDCardNo,
+                        StudentId = student.Id,
+                        StudentName = student.Name,
+                        StudentLastName = student.LastName,
+                        Debt = g.Sum(s => s.CoursePrice),
+                        Dealy = (DateTime.Now.Date - g.Min(s => s.DatePaid).Date).Days
+                    };
+            debtors.AddRange(a);
         }
         return Ok(debtors);        
     }
+
+    [HttpGet("{id}")]
+    public IActionResult GetDebtById(string id)
+    {
+        return Ok(GroupCurseNoPaid(_servicePayment, id)
+                    .Select(r => new
+                    {
+                        GroupId = r.GroupId,
+                        GroupName = r.GroupName,                        
+                        Debt = r.CoursePrice,
+                        Delay = (DateTime.Now.Date - r.DatePaid.Date).Days
+                    }));
+    }
+
 
     public static IQueryable<StudentGroupPaymentDto> GroupCurseNoPaid(IDoStudentPaymentService servicePayment, string studentId) 
     {

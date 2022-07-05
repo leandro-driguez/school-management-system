@@ -18,5 +18,24 @@ public class WorkersController : CrudController<Worker, WorkerDto>
     {
     }
 
+    public override IActionResult Delete(string id)
+    {
+        var workers = _service.Query()
+            .AsNoTrackingWithIdentityResolution().Include(c => c.WorkerPositionRelations);
+        var Worker = workers.FirstOrDefault(c => Equals(c.Id, id));
+        
+        if(Worker == null)
+            return NotFound(id);
+
+        foreach(var rel in Worker.WorkerPositionRelations)
+        {
+            if (DateTime.Now <  rel.EndDate)
+            {
+                rel.EndDate = DateTime.Now;
+            }
+        }
+
+        return base.Delete(id);
+    }
 
 }
