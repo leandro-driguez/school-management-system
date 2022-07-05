@@ -53,6 +53,8 @@ public class StudentsController : CrudController<Student, StudentDto>
         {
             tuitor = studentTuitor.Tuitor;
         }
+        if(tuitor.Name == "")
+            tuitor = null;
 
         var scholarityLevel = _mapperToDto.Map<Education>(dto_model.ScholarityLevel);
 
@@ -111,5 +113,4 @@ public class StudentsController : CrudController<Student, StudentDto>
 
         return base.Delete(id);
     }
-
 }
