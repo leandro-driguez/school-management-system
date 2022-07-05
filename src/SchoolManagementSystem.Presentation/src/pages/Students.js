@@ -178,7 +178,7 @@ const Students = () => {
                     message: "Introduzca el nombre."
                 },
                 {
-                    pattern: /^\S{2,}(\s\S{2,})?(\s\S{2,})?(\s\S{2,})?$/,
+                    pattern: /^[a-zA-Z]{2,}(\s[a-zA-Z]{2,})?(\s[a-zA-Z]{2,})?(\s[a-zA-Z]{2,})?$/,
                     message: 'El nombre solo puede contener letras (dos como mínimo). En caso de ser compuesto, deben estar separados por un único espacio.'
                 },
             ],
@@ -202,7 +202,7 @@ const Students = () => {
                     message: "Introduzca los apellidos."
                 },
                 {
-                    pattern: /^\S{2,}(\s\S{2,})?(\s\S{2,})?(\s\S{2,})?$/,
+                    pattern: /^[a-zA-Z]{2,}(\s[a-zA-Z]{2,})?(\s[a-zA-Z]{2,})?(\s[a-zA-Z]{2,})?$/,
                     message: 'Los apellidos solo pueden contener letras (dos como mínimo) y estar separados por un único espacio.'
                 },
             ],
@@ -248,6 +248,10 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca la dirección."
+                },
+                {
+                    pattern: /^[a-zA-Z0-9,#/&\-.\s]{1,100}$/,
+                    message: "La dirección debe tener máximo 100 caracteres."
                 }
             ],
             ...getColumnSearchProps('address')
@@ -268,6 +272,11 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca el grado de escolaridad."
+                },
+                {
+                    pattern: /^\bPrimaria|Secundaria|EscuelaOficios|TecnicoMedio|Preuniversitario|Universidad|Posgrado\b$/,
+                    message: "El nivel escolar debe ser de uno de los siguientes tipos: Primaria, Secundaria, EscuelaOficios, " +
+                        "TecnicoMedio, Preuniversitario, Universidad, Posgrado."
                 }
             ],
             filters: levels(),            
@@ -290,6 +299,11 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca la fecha de inicio en la sede."
+                },
+                {
+                    //pattern: /^(0[1-9]|1[0-2])[-/.](0[1-9]|[12][0-9]|3[01])[-/.]\d{4}$/,
+                    pattern: /^\b1[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19[0-9][0-9]|20[0-2][0-2])|2[-/.](0[1-9]|[12][0-9]|2[08])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|3[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|4[-/.](0[1-9]|[12][0-9]|3[00])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|5[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|6[-/.](0[1-9]|[12][0-9]|3[00])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|7[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|8[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|9[-/.](0[1-9]|[12][0-9]|3[00])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|10[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|11[-/.](0[1-9]|[12][0-9]|3[00])[-/.](19[0-9][0-9]|20[01][0-9]|2022)|12[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19[0-9][0-9]|20[01][0-9]|2022)\b$/,
+                    message: "El formato de la fecha debe ser M/d/yyyy. Ej: 4/22/2021."
                 }
             ],
             ...getColumnSearchProps('dateBecomeMember')
@@ -306,6 +320,10 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca el número de teléfono."
+                },
+                {
+                    pattern: /^\d$/,
+                    message: 'El teléfono solo puede contener números.'
                 }
             ],
             ...getColumnSearchProps('phoneNumber')
@@ -326,6 +344,10 @@ const Students = () => {
                 {
                     whitespace: true,
                     message: "Introduzca los fondos."
+                },
+                {
+                    pattern: /^\d$/,
+                    message: 'Los fondos solo pueden contener números.'
                 }
             ],
             filters: [
@@ -347,7 +369,7 @@ const Students = () => {
                 } else {
                     return record.founds <= value[1];
                 }
-            }
+            }            
         },
         {
             title: 'Nombre del tutor',
@@ -358,6 +380,10 @@ const Students = () => {
                 compare: (a, b) => a.tuitorName.localeCompare(b.tuitorName)
             },
             rules: [
+                {
+                    pattern: /^[a-zA-Z]{2,}(\s[a-zA-Z]{2,})?(\s[a-zA-Z]{2,})?(\s[a-zA-Z]{2,})?$/,
+                    message: 'El nombre solo puede contener letras (dos como mínimo). En caso de ser compuesto, deben estar separados por un único espacio.'
+                }
             ],
             ...getColumnSearchProps('tuitorName')
         },
