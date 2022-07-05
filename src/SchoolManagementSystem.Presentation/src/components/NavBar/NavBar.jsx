@@ -195,14 +195,15 @@ const NavBar = (props) => {
             itemLayout="horizontal"            
             dataSource={data}
             renderItem={(item) => (
-            <List.Item>                
+            <List.Item>
+                <a href="http://localhost:3000/Debtors">
                 <Alert
                 message={item.title}
                 description={item.descrpition}
                 type="warning"
                 showIcon
-                closable
-                />               
+                />
+                </a>             
             </List.Item>
             )}
         />    
