@@ -21,9 +21,15 @@ public class WorkerPaymentGetSalaryPerCourseController : Controller
         _service = service;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult Get(string id)
+    [HttpGet("{id}/{date}")]
+    public IActionResult Get(string id,string date)
     {
+        var Date = DateTime.Parse(date);
+        if(date == "now")
+            Date = DateTime.Now;
+        else
+            Date = DateTime.Parse(date);
+
         string[] ids = id.Split("$$");
         var workerid = ids[0];var courseid = ids[1];
 
@@ -31,7 +37,7 @@ public class WorkerPaymentGetSalaryPerCourseController : Controller
         if (worker == null)
             NotFound();
 
-        return Ok(_service.GetWorkerPaymentInfo(workerid).InfoByDate[0]
+        return Ok(_service.GetWorkerPaymentInfo(workerid, Date).InfoByDate[0]
                     .InfoByCourse
                     .Single(c => c.CourseId == courseid)
                     .InfoByCourseGroup

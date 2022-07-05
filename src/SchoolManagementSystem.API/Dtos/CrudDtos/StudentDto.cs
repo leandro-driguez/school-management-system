@@ -8,6 +8,10 @@ namespace SchoolManagementSystem.API.Dtos;
 
 public class StudentDto : SchoolMemberDto
 {
+
+    
+    public string TuitorId { get; set; }
+
     // [Required]
     public string TuitorName { get; set; }
     
@@ -15,7 +19,7 @@ public class StudentDto : SchoolMemberDto
     public int TuitorPhoneNumber { get; set; }
 
     // [Required]
-    public int Founds { get; set; }
+    public int Founds { get; set; } = 0;
 
     [Required]
     public string ScholarityLevel { get; set; }
