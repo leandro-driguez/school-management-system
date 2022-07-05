@@ -4,7 +4,8 @@ import CRUD_Table from "../components/Table/CRUD_Table";
 import Login from "../components/Login/Login";
 import {useState} from 'react';
 import axios from "axios";
-
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
 const Courses = () => {
 
@@ -25,9 +26,28 @@ const Courses = () => {
 
         return respOk;
     });
+
+    const [isSecretary, setIsSecretary] = useState(false);
+
+    useEffect(()=>{
+        if (localStorage['token'] == null)
+            return false;
+
+        var decoded = jwt_decode(localStorage['token']);
+            
+        const roles = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+        for (let i = 0; i < roles.length; i++) {
+            console.log(roles[i]);
+
+            if (roles[i] === 'Secretary')
+                setIsSecretary(true);
+        }
+    },[]);
+
          
     if (!loggedIn)
-        window.location.replace("https://localhost:3000/");
+        window.location.replace("https://localhost:44441/");
 
     const columns = [
         {
@@ -94,6 +114,10 @@ const Courses = () => {
 
     const tableID = 'CoursesTable';
     const searchboxID = 'CoursesSearchbox';
+    var operation = ["edit","delete","add","details"];
+
+    if (isSecretary)
+        operation = ["details"];
 
     return (
         <div>
@@ -101,7 +125,7 @@ const Courses = () => {
             <CRUD_Table 
                 title={"Cursos"} 
                 columns={columns} 
-                operations={["edit","delete","add","details"]}
+                operations={operation}
                 url={"https://localhost:5001/api/Courses"}
                 tableID={tableID}
                 searchboxID={searchboxID}

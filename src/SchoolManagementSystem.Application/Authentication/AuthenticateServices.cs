@@ -103,6 +103,36 @@ public class AuthenticateServices : IAuthenticateService
         return new Response { Status = "Successful", Message = "User created successfully!" };
     }
 
+    public async Task<Response> RegisterSecretary(string userName, string email, string password)
+    {
+        var userExists = await _userManagerRepository.FindByName(userName);
+        if (userExists != null)
+            return new Response { Status = "Error", Message = "User already exists!" };
+
+        IdentityUser user = new()
+        {
+            Email = email,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            UserName = userName
+        };
+        var result = await _userManagerRepository.Create(user, password);
+        if (!result.Succeeded)
+            return new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." };
+
+        if (!await _roleManagerRepository.RoleExists(UserRoles.Secretary))
+            await _roleManagerRepository.Create(new IdentityRole(UserRoles.Secretary));
+        if (!await _roleManagerRepository.RoleExists(UserRoles.User))
+            await _roleManagerRepository.Create(new IdentityRole(UserRoles.User));
+
+        if (await _roleManagerRepository.RoleExists(UserRoles.Secretary))
+            await _userManagerRepository.AddToRole(user, UserRoles.Secretary);
+        if (await _roleManagerRepository.RoleExists(UserRoles.User))
+            await _userManagerRepository.AddToRole(user, UserRoles.User);
+
+        return new Response { Status = "Successful", Message = "User created successfully!" };
+    }
+
+
     public async Task<Response> GeneratePasswordResetToken(string username)
     {
         var user = await _userManagerRepository.FindByName(username);
@@ -131,6 +161,25 @@ public class AuthenticateServices : IAuthenticateService
         await _userManagerRepository.ChangePassword(user, currentPassword, newPassword);
 
         return new Response { Status="Successful", Message="Password changed successfully!" };
+    }
+
+    public async Task<Response> CreateRole(string role)
+    {
+        if (! await _roleManagerRepository.RoleExists(role))
+        {
+            var newRole = new IdentityRole
+            {
+                Name = role,
+                NormalizedName = role.ToUpper()
+            };
+
+            if ((await _roleManagerRepository.Create(newRole)).Succeeded)
+            {
+                return new Response { Status="Successful", Message="Role added successfully!" };
+            }
+        }
+
+        return new Response { Status="Error", Message="Something was wrong." };
     }
 
     private JwtSecurityToken GetToken(List<Claim> authClaims)
