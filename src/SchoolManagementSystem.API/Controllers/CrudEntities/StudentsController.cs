@@ -57,4 +57,24 @@ public class StudentsController : CrudController<Student, StudentDto>
         return Ok(dto_model);
     }
 
+    public override IActionResult Delete(string id)
+    {
+        var students = _service.Query()
+            .AsNoTrackingWithIdentityResolution().Include(c => c.StudentCourseGroupRelations);
+        var student = students.FirstOrDefault(c => Equals(c.Id, id));
+        
+        if(student == null)
+            return NotFound(id);
+
+        foreach(var rel in student.StudentCourseGroupRelations)
+        {
+            if (DateTime.Now <  rel.EndDate)
+            {
+                rel.EndDate = DateTime.Now;
+            }
+        }
+
+        return base.Delete(id);
+    }
+
 }
