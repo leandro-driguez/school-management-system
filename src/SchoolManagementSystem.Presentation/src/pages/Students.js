@@ -7,6 +7,22 @@ import axios from "axios";
 
 const Students = () => {
 
+    
+    function levels(){
+        var list = [];
+        //var arr = [list];
+        axios.get("https://localhost:5001/api/EducationEnum")
+            .then(resp=>{
+                resp.data.forEach(element => {
+                   list.push({
+                    text: element,
+                    value: element,
+                   })
+                });
+            });
+        console.log(list);
+        return list;
+    }
     const [loggedIn] = useState(()=>{
         if (localStorage['token'] == null)
             return false;
@@ -142,6 +158,9 @@ const Students = () => {
                     message: "Introduzca el grado de escolaridad."
                 }
             ],
+            filters: levels(),            
+            onFilter: (value, record) => record.scholarityLevel
+                                    .toUpperCase().indexOf(value.toUpperCase()) === 0,
         },
         {
             title: 'Fecha de inicio en la sede',
