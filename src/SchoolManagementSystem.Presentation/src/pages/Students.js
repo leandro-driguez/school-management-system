@@ -338,14 +338,6 @@ const Students = () => {
             },
             rules: [
                 {
-                    required: true,
-                    message: "Introduzca los fondos.",
-                },
-                {
-                    whitespace: true,
-                    message: "Introduzca los fondos."
-                },
-                {
                     pattern: /^[0-9]+$/,
                     message: 'Los fondos solo pueden contener números.'
                 }
