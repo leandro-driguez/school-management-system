@@ -55,7 +55,14 @@ public class DebtorsController : Controller
     [HttpGet("{id}")]
     public IActionResult GetDebtById(string id)
     {
-        return Ok(GroupCurseNoPaid(_servicePayment, id).ToList());
+        return Ok(GroupCurseNoPaid(_servicePayment, id)
+                    .Select(r => new
+                    {
+                        GroupId = r.GroupId,
+                        GroupName = r.GroupName,                        
+                        Debt = r.CoursePrice,
+                        Dealy = (DateTime.Now.Date - r.DatePaid.Date).Days
+                    }));
     }
 
 
