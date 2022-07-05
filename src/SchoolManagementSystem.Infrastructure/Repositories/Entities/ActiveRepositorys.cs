@@ -15,7 +15,7 @@ public class ActiveRepository<TEntity> : CrudRepository<TEntity> where TEntity :
     {
         return base.Query().Where(c => c.Active == true);
     }
-    public IQueryable<TEntity> QueryInactive()
+    public IQueryable<TEntity> QueryInactives()
     {
         return base.Query().Where(c => c.Active == false);
     }
