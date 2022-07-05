@@ -32,6 +32,7 @@ public static class SchoolInitializer
         Name = "Frank",
         PhoneNumber = 57881239,
     };
+    static Tuitor roger = new Tuitor { Name = "Roger", PhoneNumber = 54444444 };
 
     #region Students
     static Student sasha = new Student{
@@ -89,6 +90,27 @@ public static class SchoolInitializer
         ScholarityLevel = Domain.Enums.Education.Preuniversitario,
         Tuitor = frank
     };
+    static Student Jorgito = new Student { 
+        IDCardNo = "14253681562", 
+        Name = "Jorgito", 
+        LastName = "Gonzalez Gutierrez",
+        PhoneNumber = 54763443,
+        Address = "Test Direccion de jorgito",
+        DateBecomedMember = new DateTime(2022, 3, 5),
+        ScholarityLevel = Domain.Enums.Education.Primaria
+};
+    static Student Guillermo = new Student
+    {
+        IDCardNo = "99111165645",
+        Name = "Guillermo",
+        LastName = "Rodriguez de Vivar",
+        PhoneNumber = 53545515,
+        Address = "Test Direccion de Guillermo",
+        DateBecomedMember = new DateTime(2020, 11, 25),
+        Tuitor = roger,
+        Founds = 2,
+        ScholarityLevel = Domain.Enums.Education.Universidad
+    };
         
     #endregion
 
@@ -105,6 +127,7 @@ public static class SchoolInitializer
     #endregion
 
     #region Courses
+    static Course aleman = new Course { Name = "Aleman 1", Price = 55, Type = "Idioma" };
     static Course algebra = new Course{
         Name = "Algebra",
         Price =  200,
@@ -163,7 +186,25 @@ public static class SchoolInitializer
         StartDate = new DateTime(2020,01,01),
         EndDate = new DateTime(2020,11,09),
     };
-        
+    static CourseGroup Aleman = new CourseGroup
+    {
+        Course = aleman,
+        Name = "Aula T2",
+        Capacity = 14,
+        StartDate = new DateTime(2022, 3, 12),
+        EndDate = new DateTime(2022, 5, 12),
+        Teacher = new Teacher
+        {
+            IDCardNo = "00523573122",
+            Name = "Leo",
+            LastName = "LLosa",
+            PhoneNumber = 55555555,
+            Address = "Calle Berlin",
+            DateBecomedMember = new DateTime(2020, 5, 14),
+            CourseGroups = new List<CourseGroup>()
+        }
+    };
+
     #endregion
 
     #endregion
@@ -526,11 +567,12 @@ public static class SchoolInitializer
                 DateBecomedMember = new DateTime(2020, 2, 1),
                 Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
                 ScholarityLevel = Domain.Enums.Education.Posgrado },
-            new Student { IDCardNo = "123456789012", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
-                Address = "Pocitos No.23 e/ Czda de Vento y ALmendares", 
+            new Student { IDCardNo = "12312312312", Name = "Pablito", LastName = "Curbelito Paecito", PhoneNumber = 56784555,
+                Address = "Se mudo", 
                 DateBecomedMember = new DateTime(2020, 2, 1),
                 Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
                 ScholarityLevel = Domain.Enums.Education.Primaria },
+                   
         };
     }
     
@@ -540,6 +582,7 @@ public static class SchoolInitializer
         {
             new Tuitor { Name = "Josefa", PhoneNumber = 54674982 }, 
             new Tuitor { Name = "Mari", PhoneNumber = 54637121 },
+            new Tuitor{ Name = "Roger", PhoneNumber = 54444444 },
         };
     }
     
@@ -620,11 +663,11 @@ public static class SchoolInitializer
             }
         };
     }
-    
+
     private static StudentPaymentRecordPerCourseGroup[] GetStudentPaymentRecordPerCourseGroups()
     {
         var course = new Course { Name = "Transito 101", Price = 16, Type = "Transito" };
-        
+
         var courseGroup = new CourseGroup
         {
             Course = course,
@@ -637,6 +680,7 @@ public static class SchoolInitializer
                 CourseGroups = new List<CourseGroup>() }
         };
 
+
         var student = new Student 
         { 
             IDCardNo = "93084574542", Name = "Pablo", LastName = "Curbelo Paez", PhoneNumber = 56784392,
@@ -645,8 +689,7 @@ public static class SchoolInitializer
             Tuitor = new Tuitor { Name = "Elena", PhoneNumber = 54637721 }, Founds = 3, 
             ScholarityLevel = Domain.Enums.Education.Posgrado 
         };
-        
-        return new []
+        return new StudentPaymentRecordPerCourseGroup[]
         {
             new StudentPaymentRecordPerCourseGroup
             {
@@ -661,16 +704,27 @@ public static class SchoolInitializer
 
             new StudentPaymentRecordPerCourseGroup
             {
-                CourseGroup = courseGroup,
-                CourseGroupCourseId = course.Id,
-                CourseGroupId = courseGroup.Id,
+                CourseGroup = Aleman,
+                CourseGroupCourseId = Aleman.Id,
+                CourseGroupId = Aleman.Id,
                 Date = new DateTime(2017,8,20),
-                DatePaid = new DateTime(2017,9, 14),
-                StudentId = student.Id,
-                Student = student
+                DatePaid = new DateTime(2022, 5, 12),
+                StudentId = Guillermo.Id,
+                Student = Guillermo
+            },
+             new StudentPaymentRecordPerCourseGroup
+            {
+                CourseGroup = Aleman,
+                CourseGroupCourseId = Aleman.Id,
+                CourseGroupId = Aleman.Id,
+                Date = new DateTime(2017,8,20),
+                DatePaid = new DateTime(2022, 5, 12),
+                StudentId = Jorgito.Id,
+                Student = Jorgito
             }
         };
     }
+    // agregar mas
 
     private static WorkerPayRecordByPosition[] GetWorkerPayRecordByPositions()
     {        
@@ -750,7 +804,7 @@ public static class SchoolInitializer
             },
             Founds = 3, ScholarityLevel = Domain.Enums.Education.Posgrado
         };
-        return new []
+        return new StudentCourseGroupRelation[]
         {
             new StudentCourseGroupRelation
             {
@@ -830,8 +884,27 @@ public static class SchoolInitializer
                 StartDate = historiaDelArte.StartDate,
                 Student = Carlos,
                 StudentId = Carlos.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = Aleman,
+                CourseGroupCourseId = Aleman.Id,
+                CourseGroupId = Aleman.Id,
+                EndDate = Aleman.EndDate,
+                StartDate = Aleman.StartDate,
+                Student = Guillermo,
+                StudentId = Guillermo.Id
+            },
+            new StudentCourseGroupRelation
+            {
+                CourseGroup = Aleman ,
+                CourseGroupCourseId = Aleman.Id,
+                CourseGroupId = Aleman.Id,
+                EndDate = Aleman.EndDate,
+                StartDate = Aleman.StartDate,
+                Student = Jorgito,
+                StudentId = Jorgito.Id
             }
-            
         };
     }
     
