@@ -6,7 +6,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class ResourceService : BaseService<Resource>, IResourceService
+public class ResourceService : ActiveService<Resource>, IResourceService
 {
     public ResourceService(IResourceRepository repository) : base(repository)
     {

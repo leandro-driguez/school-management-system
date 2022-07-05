@@ -5,7 +5,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class ClassroomService : BaseService<Classroom>, IClassroomService
+public class ClassroomService : ActiveService<Classroom>, IClassroomService
 {
     public ClassroomService(IClassroomRepository repository) : base(repository)
     {

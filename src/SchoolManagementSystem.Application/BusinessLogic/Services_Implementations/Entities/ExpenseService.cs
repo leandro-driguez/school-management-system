@@ -6,7 +6,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class ExpenseService : BaseService<Expense>, IExpenseService
+public class ExpenseService : ActiveService<Expense>, IExpenseService
 {
     public ExpenseService(IExpenseRepository repository) : base(repository)
     {

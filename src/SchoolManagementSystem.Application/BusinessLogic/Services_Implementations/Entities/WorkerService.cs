@@ -6,7 +6,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class WorkerService : BaseService<Worker>, IWorkerService
+public class WorkerService : ActiveService<Worker>, IWorkerService
 {
     public WorkerService(IWorkerRepository repository) : base(repository)
     {

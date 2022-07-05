@@ -6,7 +6,7 @@ using SchoolManagementSystem.Domain.Services;
 
 namespace SchoolManagementSystem.Application.Services_Implementations;
 
-public class CourseService : BaseService<Course>, ICourseService
+public class CourseService : ActiveService<Course>, ICourseService
 {
     public CourseService(ICourseRepository repository) : base(repository)
     {
