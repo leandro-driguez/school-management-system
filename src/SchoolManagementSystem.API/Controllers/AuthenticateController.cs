@@ -12,8 +12,8 @@ using SchoolManagementSystem.API.Dtos;
 
 namespace SchoolManagementSystem.API.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class AuthenticateController : ControllerBase
 {
     private readonly IAuthenticateService _services;
@@ -63,9 +63,28 @@ public class AuthenticateController : ControllerBase
         return Ok(resp);
     }
 
+    [HttpPost]
+    [Route("register-secretary")]
+    public async Task<IActionResult> RegisterSecretary([FromBody] RegisterDto registerDto)
+    {
+        var resp = await _services.RegisterSecretary(registerDto.Username, registerDto.Email, registerDto.Password);
+
+        if (resp.Status == "Error")
+            return StatusCode(StatusCodes.Status500InternalServerError, resp);
+
+        return Ok(resp);
+    }
+
     [Authorize]
     [HttpGet("loggedIn")]
     public IActionResult LoggedIn()
+    {
+        return Ok();
+    }
+
+    [Authorize(Roles = "Secretary")]
+    [HttpGet("IsSecretary")]
+    public IActionResult IsSecretary()
     {
         return Ok();
     }
