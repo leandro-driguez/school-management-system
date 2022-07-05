@@ -140,11 +140,13 @@ const NavBar = (props) => {
     
     return (
         <nav>
-            <img
-                className="navb_left"
-                src={Logo}
-                alt="Logo y nombre D'Clase"
-                />
+            <a href="http://localhost:3000/Home">
+                <img
+                    className="navb_left"
+                    src={Logo}
+                    alt="Logo y nombre D'Clase"                
+                    />
+            </a>
 
                 <a onClick={showDrawerFAQ}>
                     <img
