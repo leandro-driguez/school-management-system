@@ -329,21 +329,6 @@ const Students = () => {
             ...getColumnSearchProps('phoneNumber')
         },
         {
-            title: 'Teléfono',
-            dataIndex: 'phoneNumber',
-            editable: true,
-            dataType: 'number',
-            sorter: {
-                compare: (a, b) => a.phoneNumber - b.phoneNumber
-            },
-            rules: [
-                {
-                    whitespace: true,
-                    message: "Introduzca el número de teléfono."
-                }
-            ]
-        },
-        {
             title: 'Fondos',
             dataIndex: 'founds',
             editable: true,
