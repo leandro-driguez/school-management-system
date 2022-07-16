@@ -44,6 +44,30 @@ public class StudentCourseGroupRelationController : Controller
         }
         return Ok(output);
     }
+
+    [HttpGet("{courseId}/{groupId}")]
+    public IActionResult GetBygroup(string courseId, string groupId)
+    {
+        var _query = _service.Query().Where(c => c.CourseGroupCourseId == courseId && c.CourseGroupId == groupId).Include(c => c.CourseGroup.Course).Include(c => c.Student);
+        List<StudentCourseGroupRelationDto> output = new List<StudentCourseGroupRelationDto>();   
+        foreach (var item in _query)
+        {
+            StudentCourseGroupRelationDto dto = new StudentCourseGroupRelationDto(){
+               CourseGroupCourseId = item.CourseGroupCourseId,
+               CourseGroupCourseName = item.CourseGroup.Course.Name,
+               CourseType = item.CourseGroup.Course.Type,
+               CourseGroupName = item.CourseGroup.Name,
+               StudentName = item.Student.Name,
+               StudentId = item.StudentId,
+               CourseGroupId = item.CourseGroupId,
+               EndDate = item.EndDate,
+               StartDate = item.StartDate               
+            };
+            output.Add(dto);
+        }
+        return Ok(output);
+    }
+
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
