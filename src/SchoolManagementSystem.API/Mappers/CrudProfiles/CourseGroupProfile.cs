@@ -9,6 +9,8 @@ public class CourseGroupProfile : Profile
 {
     public CourseGroupProfile()
     {
+        CreateMap<CourseGroup, CourseCourseGroupRelationDto>();
+        CreateMap<CourseCourseGroupRelationDto, CourseGroup>();
         CreateMap<CourseGroup, CourseGroupDto>();
         CreateMap<CourseGroupDto, CourseGroup>();
     }

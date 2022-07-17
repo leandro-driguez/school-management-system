@@ -34,7 +34,7 @@ public class CourseCourseGroupRelationController : Controller
     [HttpGet("{id}")]
     public IActionResult Get(string id)
     {
-        List<CourseGroupDto> list = new List<CourseGroupDto>();
+        List<CourseCourseGroupRelationDto> list = new List<CourseCourseGroupRelationDto>();
         
         var _query = _service.Query()
             .Where(c => c.CourseId == id)
@@ -43,8 +43,9 @@ public class CourseCourseGroupRelationController : Controller
         
         foreach (var item in _query)
         {
-            var single  = mapper.Map<CourseGroupDto>(item);
+            var single  = mapper.Map<CourseCourseGroupRelationDto>(item);
             single.TotalStudents = item.StudentCourseGroupRelations.Count();
+            single.CouresANDCourseGroupId = item.CourseId + "&" + item.Id;
             list.Add(single);
         }
 
