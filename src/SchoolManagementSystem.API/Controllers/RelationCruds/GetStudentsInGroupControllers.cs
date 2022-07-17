@@ -28,8 +28,6 @@ public class GetStudentsInGroupController : Controller
     {
         var ids = coursePLUSgroupId.Split('&');
         var courseId = ids[0]; var groupId = ids[1];
-        System.Console.WriteLine(courseId);
-        System.Console.WriteLine(groupId);
         var _query = _service.Query().Where(c => c.CourseGroupCourseId == courseId && c.CourseGroupId == groupId).Include(c => c.CourseGroup.Course).Include(c => c.Student);
         List<StudentCourseGroupRelationDto> output = new List<StudentCourseGroupRelationDto>();   
         foreach (var item in _query)
