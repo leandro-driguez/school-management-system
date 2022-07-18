@@ -131,6 +131,7 @@ const CRUD_Table = (props) => {
                     width: "1%",
                     render: (_, record) =>
                         <a href={props.link + `/${record.key}`}><EllipsisOutlined /></a>
+                    
                 }
             );
         }
@@ -367,7 +368,6 @@ const CRUD_Table = (props) => {
                     {props.thereIsDropdown &&
                         headers.map(
                             (header) => {
-                                // console.log(header.dataIndex, props.dropDownHeaders, props.dropDownHeaders.some((h) => (h === header.dataIndex)));
                                 if (! props.dropDownHeaders.some((h) => (h === header.dataIndex)))
                                     return (<FormInput header={header} onChange={(e) =>{ updateValue(header, e); } } />); 
                             }
