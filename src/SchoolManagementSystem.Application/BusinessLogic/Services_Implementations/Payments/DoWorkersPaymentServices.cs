@@ -79,7 +79,14 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
 
     public WorkerPaymentInfo GetWorkerPaymentInfo(string id, DateTime Date)
     {
-        var worker = this.Query().SingleOrDefault(c => c.Id == id);
+        var workers = this.Query();
+        var worker = workers.SingleOrDefault(c => c.Id == id);
+        // foreach (var item in workers)
+        // {
+        //     System.Console.WriteLine(item.Id);
+        // }
+        // System.Console.WriteLine(id);
+        // System.Console.WriteLine(worker.Id);
         var workerPaymentInfo = new WorkerPaymentInfo
         {
             Id = id,

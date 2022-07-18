@@ -24,18 +24,20 @@ public class DoWorkersPaymentController : Controller
     [HttpGet("{id}/{date}")]
     public IActionResult Get(string id,string date)
     {
-        var Date = DateTime.Parse(date);
-        if(date == "now")
-            Date = DateTime.Now;
-        else
+        var Date = DateTime.Now;
+        try{
+
             Date = DateTime.Parse(date);
+        }
+        catch{};
         System.Console.WriteLine(Date);
+
         var worker = _service.Query().SingleOrDefault(c => c.Id == id);
         if (worker == null)
             NotFound();
 
 
-        return Ok(mapper.Map<ConsultWorkerSalaryGetSingleDto>(_service.GetWorkerPaymentInfo(id, Date)));
+        return Ok(mapper.Map<InfoByDateDto>(_service.GetWorkerPaymentInfo(id, Date).InfoByDate[0]));
     }
     
 
