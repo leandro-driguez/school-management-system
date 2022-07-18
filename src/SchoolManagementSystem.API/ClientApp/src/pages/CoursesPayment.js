@@ -51,6 +51,8 @@ const CoursesPayment = () => {
 
     const [studentSelected, setStudentSelected] = useState();
 
+    console.log(studentSelected);
+
     const getData = async () =>
         await axios.get('https://localhost:5001/api/Students')
             .then(resp=>{

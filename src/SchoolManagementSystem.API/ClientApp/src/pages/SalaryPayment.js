@@ -28,7 +28,7 @@ const SalaryPayment = () => {
 
     const [courseSelected, setCourseSelected] = useState();
 
-    const [dateSelected, setDateSelected] = useState();
+    const [dateSelected, setDateSelected] = useState(moment().format("YYYY-MM-DD"));
 
     console.log(`selected ${courseSelected}`);
 
@@ -86,6 +86,19 @@ const SalaryPayment = () => {
 
     const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false);
 
+    const [urlFixSalaryTable, setUrlFixSalaryTable] = useState("https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}` + `/${dateSelected}`);
+
+    // setUrlFixSalaryTable("https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}` + `/${dateSelected}`);
+
+    const [urlSalaryPerCourseTable, setUrlSalaryPerCourseTable] = useState("https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `/${courseSelected}` + `/${dateSelected}`);
+
+    // setUrlSalaryPerCourseTable("https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `/${courseSelected}` + `/${dateSelected}`)
+
+    const [totalFixedSalary, setTotalFixedSalary] = useState(0);
+    const [totalPercentageSalary, setTotalPercentageSalary] = useState(0);
+    const [totalSalary, setTotalSalary] = useState(0);
+
+
     const getWorkers = async () => 
         await axios.get('https://localhost:5001/api/Workers')
             .then(resp=>{ 
@@ -98,86 +111,119 @@ const SalaryPayment = () => {
                 setCourses(resp.data);
             });
 
+    const getSalary = async () =>
+        await axios.get('https://localhost:5001/api/DoWorkersPayment' + `/${workerSelected}`+ `/${dateSelected}`)
+            .then(resp=>{
+                setTotalSalary(resp.data['total']);
+                setTotalFixedSalary(resp.data['totalFixSalary']);
+                setTotalPercentageSalary(resp.data['totalCoursesPorcentualPayment']);
+            }); 
+
+    const makePayment = async () =>
+        await axios.post('https://localhost:5001/api/DoWorkersPayment' + `/${workerSelected}`+ `/${dateSelected}`);
+
     useEffect(()=>{
             getWorkers();
             getCourses();
+            getSalary();
         },[]);
+
+
+    console.log(urlFixSalaryTable);
+    console.log(urlSalaryPerCourseTable);
 
     return (
         <div>
             <NavBar />
 
             <div style={{marginBottom: "10px"}}>
-            
                 <Dropdown
                     title={"Trabajador"}
                     options={workers}
-                    onChange={setWorkerSelected}
-                    print={(student) => (student.name + ' ' + student.lastName)}
+                    onChange={worker => {
+                        setWorkerSelected(worker); 
+                        setUrlFixSalaryTable("https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${worker}` + `/${dateSelected}`);
+                        setUrlSalaryPerCourseTable("https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${worker}` + `/${courseSelected}` + `/${dateSelected}`);
+                        getSalary();
+                    }}
+                    print={(teacher) => (teacher.name + ' ' + teacher.lastName)}
                 />
                 
-            <Dropdown
-                title={"Curso"}
-                options={courses}
-                onChange={setCourseSelected}
-                print={(course) => (course.name)}
-            />
+                <Dropdown
+                    title={"Curso"}
+                    options={courses}
+                    onChange={course => {
+                        setCourseSelected(course);
+                        setUrlSalaryPerCourseTable("https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `/${course}` + `/${dateSelected}`);
+                        getSalary();
+                    }}
+                    print={(course) => (course.name)}
+                />
+
                 <DatePicker placeholder={"Seleccione la fecha"}
-                            disabledDate={disabledDate}
-                            defaultValue={moment()}
-                            format={"YYYY.MM.DD"}
-                            onChange={setDateSelected}
-                            style={{
-                                float: "right",
-                                marginRight: "5%",
-                            }}
+                    disabledDate={disabledDate}
+                    defaultValue={moment()}
+                    format={"YYYY.MM.DD"}
+                    onChange={date => {
+                        setDateSelected(date.format("YYYY-MM-DD"));
+                        setUrlFixSalaryTable("https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}` + `/${dateSelected}`);
+                        setUrlSalaryPerCourseTable("https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `/${courseSelected}` + `/${date.format("YYYY-MM-DD")}`);
+                        getSalary();
+                    }}
+                    style={{
+                        float: "right",
+                        marginRight: "5%",
+                    }}
                 />
             </div>
 
             <Collapse onChange={(key) => console.log(key)} ghost>
-                <Panel header="Salario fijo: $___" key="1">
+                <Panel header={"Salario fijo: $" + `${totalFixedSalary}`} key="1">
                     <CRUD_Table title={""}
-                                columns={fixedSalaryPaymentColumns}
-                                operations={[]}
-                                url={"https://localhost:5001/api/WorkerPaymentGetFixSalary" + `/${workerSelected}` + `/${dateSelected}`}
-                                tableID={fixedSalaryPaymentColumnsTableID}
-                                searchboxID={fixedSalaryPaymentColumnsSearchboxID}
-                    thereIsDropdown={false}
+                        columns={fixedSalaryPaymentColumns}
+                        operations={[]}
+                        url={urlFixSalaryTable}
+                        tableID={fixedSalaryPaymentColumnsTableID}
+                        searchboxID={fixedSalaryPaymentColumnsSearchboxID}
+                        thereIsDropdown={false}
                         FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </Panel>
 
-                <Panel header="Salario porcentual: $___" key="2">
+                <Panel header={"Salario porcentual: $" + `${totalPercentageSalary}`} key="2">
 
                     <CRUD_Table title={""}
-                                columns={percentageSalaryPaymentColumns}
-                                operations={[]}
-                                url={"https://localhost:5001/api/WorkerPaymentGetSalaryPerCourse" + `/${workerSelected}` + `/${courseSelected}` + `/${dateSelected}`}
-                                tableID={percentageSalaryPaymentColumnsTableID}
-                                searchboxID={percentageSalaryPaymentColumnsSearchboxID}
-                    thereIsDropdown={false}
+                        columns={percentageSalaryPaymentColumns}
+                        operations={[]}
+                        url={urlSalaryPerCourseTable}
+                        tableID={percentageSalaryPaymentColumnsTableID}
+                        searchboxID={percentageSalaryPaymentColumnsSearchboxID}
+                        thereIsDropdown={false}
                         FormsInitialValues={{ key: "string" }}
                     ></CRUD_Table>
                 </Panel>
             </Collapse>
             <div className={"checkout"}>
-            <p className={"total"}><strong>Total: $___</strong></p>
+            <p className={"total"}><strong>Total: $ {totalSalary} </strong></p>
                 <Button className={"checkout_button"} onClick={()=>setIsConfirmationModalVisible(true)}>
                     <strong>Registrar pago</strong>
                 </Button>
             </div>
             <Modal title={"Confirmar registro de pago"}
-                   visible={isConfirmationModalVisible}
-                   centered={true}
-                   cancelText={"Cancelar"}
-                   onCancel={() => setIsConfirmationModalVisible(false)}
-                   okText={"Aceptar"}
-                   onOk={() => setIsConfirmationModalVisible(false)}
+                visible={isConfirmationModalVisible}
+                centered={true}
+                cancelText={"Cancelar"}
+                onCancel={() => setIsConfirmationModalVisible(false)}
+                okText={"Aceptar"}
+                onOk={() => {
+                    setIsConfirmationModalVisible(false);
+                    makePayment();
+                }}
             >
             <p>
-                ¿Está seguro de que quiere registar el pago de salario en la fecha _________ al trabajador
+                ¿Está seguro de que quiere registar el pago de salario en la fecha {dateSelected} al trabajador
 
-                con un importe de $___?
+                con un importe de $ {totalSalary} ?
             </p>
             </Modal>
         </div>

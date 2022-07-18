@@ -16,6 +16,9 @@ const onChange = (key) => {
 };
 
 const GroupDetails = () => {
+
+    const { id } = useParams();
+
     const groupStudentsColumns = [
         {
             title: 'Carnet de identidad',
@@ -129,7 +132,7 @@ const GroupDetails = () => {
                     <CRUD_Table title={"Estudiantes"}
                                 columns={groupStudentsColumns}
                                 operations={["edit","delete","add","details"]}
-                                url={"https://localhost:5001/api/TeacherCourseRelation"}
+                                url={"https://localhost:5001/api/GetStudentsInGroup/"  + `${id}`}
                                 tableID={groupStudentsTableID}
                                 searchboxID={groupStudentsSearchboxID}
                                 link={"../StudentDetails"}
