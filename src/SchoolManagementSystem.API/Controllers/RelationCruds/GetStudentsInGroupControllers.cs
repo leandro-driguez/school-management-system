@@ -33,16 +33,10 @@ public class GetStudentsInGroupController : Controller
         foreach (var item in _query)
         {
             var dto = new {
-                StudentIdCardNo = item.Student.IDCardNo,
-                StudentLastName = item.Student.LastName,
-                CourseGroupCourseId = item.CourseGroupCourseId,
-                CourseGroupCourseName = item.CourseGroup.Course.Name,
-                CourseType = item.CourseGroup.Course.Type,
-                CourseGroupName = item.CourseGroup.Name,
-                StudentName = item.Student.Name,
                 StudentId = item.StudentId,
-                CourseGroupId = item.CourseGroupId,
-                EndDate = item.EndDate,
+                StudentName = item.Student.Name,
+                StudentLastName = item.Student.LastName,
+                StudentIdCardNo = item.Student.IDCardNo,
                 StartDate = item.StartDate               
             };
             output.Add(dto);
