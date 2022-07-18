@@ -48,7 +48,12 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
     public void DoPositionPayment(DateTime Date, string WorkerId)
     {
         var _query = repoWorkerPositionR.Query().Where(c => c.WorkerId == WorkerId && c.StartDate < Date
-                                                                              && c.EndDate >= Date);
+                                                                            && c.EndDate >= Date);
+        
+        var CountPositionPayment = repoPositionPayments.Query().Where(c => c.Date.Month == Date.Month).Count();
+        if(CountPositionPayment > 0)
+            return;
+
         foreach (var row in _query)
         {
             repoPositionPayments.Add(new WorkerPayRecordByPosition()
@@ -64,6 +69,11 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
     public void DoCoursePayment(DateTime Date, string WorkerId)
     {
         var _query = repoTeacherCourseRel.Query().Where(c => c.TeacherId== WorkerId);
+        
+        var CountTeacherPayment = repoTeacherPayments.Query().Where(c => c.Date.Month == Date.Month).Count();
+        if (CountTeacherPayment > 0)
+            return;
+
         foreach (var row in _query)
         {
             repoTeacherPayments.Add(new TeacherPayRecordPerCourse()
@@ -81,12 +91,6 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
     {
         var workers = this.Query();
         var worker = workers.SingleOrDefault(c => c.Id == id);
-        // foreach (var item in workers)
-        // {
-        //     System.Console.WriteLine(item.Id);
-        // }
-        // System.Console.WriteLine(id);
-        // System.Console.WriteLine(worker.Id);
         var workerPaymentInfo = new WorkerPaymentInfo
         {
             Id = id,
@@ -102,17 +106,26 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
                                                                                                     && c.EndDate >= workerPaymentInfo.InfoByDate[0].Date)
                      select new { wPR.PositionId, salary = wPR.FixedSalary, Name = wPR.Position.Name };
 
-        foreach (var row in _query)
+        var CountPositionPayment = repoPositionPayments.Query().Where(c => c.Date.Month == Date.Month).Count();
+        if(CountPositionPayment == 0)
         {
-            workerPaymentInfo.InfoByDate[0].InfoByPosition.Add(
-                new InfoByPosition
-                {
-                    Position = row.Name,
-                    PositionId = row.PositionId,
-                    FixSalaryPosition = row.salary
-                }
-            );
+            foreach (var row in _query)
+            {
+                workerPaymentInfo.InfoByDate[0].InfoByPosition.Add(
+                    new InfoByPosition
+                    {
+                        Position = row.Name,
+                        PositionId = row.PositionId,
+                        FixSalaryPosition = row.salary
+                    }
+                );
+            }
         }
+
+        var CountTeacherPayment = repoTeacherPayments.Query().Where(c => c.Date.Month == Date.Month).Count();
+        if (CountTeacherPayment > 0)
+            return workerPaymentInfo;
+     
         foreach (var info in workerPaymentInfo.InfoByDate)
         {
             var _querytcr = repoTeacherCourseRel.Query().Where(c => c.TeacherId == id).Include(c => c.Course);
@@ -127,8 +140,8 @@ public class DoWorkersPaymentService : BaseRecordService<Worker>, IDoWorkersPaym
                 };
                 var _querytcgr = repoTeacherCGREl.Query().Where(c => c.TeacherId == id 
                                                             && c.CourseGroupCourseId == course.CourseId
-                                                            && c.StartDate <= Date
-                                                            && c.EndDate >= Date
+                                                            && c.StartDate <= info.Date
+                                                            && c.EndDate >= info.Date
                                                             )
                                                     .Include(c => c.CourseGroup.StudentCourseGroupRelations);
                 foreach (var group in _querytcgr)
